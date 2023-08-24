@@ -6,6 +6,10 @@ Burmese Jewellery Server
 ## Development
 - Golang HTTP Server
 
+#### Server
+- Framework - Gin Server - https://github.com/gin-gonic/gin
+- ORM - SQL Boiler - https://github.com/volatiletech/sqlboiler
+- Swagger OpenAPI generator - https://github.com/deepmap/oapi-codegen
 #### API Documentation
 - Swagger
 #### Database
