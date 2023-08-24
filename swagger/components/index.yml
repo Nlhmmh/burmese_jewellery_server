@@ -1,0 +1,5 @@
+parameters:
+  $ref: "./parameters.yml"
+
+schemas:
+  $ref: "./schemas.yml"

@@ -1,0 +1,46 @@
+/api/health_check:
+  get:
+    summary: Health Check
+    responses:
+      200:
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  default: OK
+              required:
+                - message
+
+/api/jewellery:
+  get:
+    summary: Jewellery List
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Jewellery"
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Jewellery"
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorMessage"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorMessage"
