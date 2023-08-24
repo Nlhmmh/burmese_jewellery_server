@@ -1,0 +1,7 @@
+package: client
+additional-imports:
+  - package: burmese_jewellery/models
+    alias: .
+generate:
+  client: true
+output: ../client/client.gen.go

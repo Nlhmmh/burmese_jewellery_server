@@ -1,0 +1,50 @@
+JewelleryID:
+  description: Jewellery ID
+  type: string
+  format: uuid
+Jewellery:
+  type: object
+  properties:
+    jewellery_id:
+      $ref: "#/components/schemas/JewelleryID"
+      x-oapi-codegen-extra-tags:
+        db: jewellery_id
+    name:
+      type: string
+      maxLength: 255
+      x-oapi-codegen-extra-tags:
+        db: name
+      example: Wedding Forever
+    description:
+      type: string
+      maxLength: 255
+      x-oapi-codegen-extra-tags:
+        db: description
+      example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm
+    quantity:
+      type: integer
+      format: int64
+      x-oapi-codegen-extra-tags:
+        db: quantity
+      example: 100
+    price:
+      type: integer
+      format: float64
+      x-oapi-codegen-extra-tags:
+        db: price
+      example: 10000
+    image_url:
+      type: string
+      x-oapi-codegen-extra-tags:
+        db: image_url
+      example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp
+
+ErrorMessage:
+  description: Error Message
+  properties:
+    version:
+      type: string
+      description: Application Version
+    message:
+      type: string
+      description: Error MEssage

@@ -1,0 +1,26 @@
+services:
+  server:
+    container_name: burmese-jewellery
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env.local
+    depends_on:
+      - database
+    ports:
+      - "8077:8077"
+    restart: on-failure
+
+  database:
+    image: postgres:latest
+    container_name: burmese-jewellery-database
+    volumes:
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: burmese_jewellery
+    restart: always

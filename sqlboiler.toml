@@ -1,0 +1,11 @@
+output   = "orm"
+wipe     = true
+no-tests = true
+
+[psql]
+  dbname = "burmese_jewellery"
+  user = "postgres"
+  pass = "postgres"
+  host = "localhost"
+  port = 5432
+  sslmode = "disable"

@@ -1,0 +1,9 @@
+package: handler
+additional-imports:
+  - package: burmese_jewellery/models
+    alias: .
+generate:
+  gin-server: true
+  strict-server: true
+  embedded-spec: true
+output: ../handler/handler.gen.go

@@ -1,0 +1,7 @@
+JewelleryIDParam:
+  name: jewellery_id
+  in: path
+  description: Jewellery ID
+  required: true
+  schema:
+    $ref: "#/components/schemas/JewelleryID"

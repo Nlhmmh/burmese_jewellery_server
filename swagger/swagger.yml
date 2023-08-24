@@ -1,0 +1,134 @@
+openapi: 3.0.2
+info:
+  title: Kikumemo API
+  description: API For Kikumemo.
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://api.kikumemo.nouslagus.com
+    description: プロダクション環境
+  - url: https://api.stg.kikumemo.nouslagus.com
+    description: ステージング環境
+  - url: https://api.dev.kikumemo.nouslagus.com
+    description: デベロッパー環境
+  - url: http://api.local.kikumemo.nouslagus.com:8081
+    description: ローカル環境
+  - url: http://localhost:8081
+    description: ローカル環境
+tags:
+  - name: system_admin
+    description: システム管理者のみ使用できるエンドポイント
+  - name: operator
+    description: operatorとシステム管理者が使用できるエンドポイント
+  - name: backlog
+    description: 未実装のエンドポイント
+  - name: etc
+    description: その他
+paths:
+  /api/health_check:
+    get:
+      summary: Health Check
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    default: OK
+                required:
+                  - message
+  /api/jewellery:
+    get:
+      summary: Jewellery List
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Jewellery'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Jewellery'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+components:
+  parameters:
+    JewelleryIDParam:
+      name: jewellery_id
+      in: path
+      description: Jewellery ID
+      required: true
+      schema:
+        $ref: '#/components/schemas/JewelleryID'
+  schemas:
+    JewelleryID:
+      description: Jewellery ID
+      type: string
+      format: uuid
+    Jewellery:
+      type: object
+      properties:
+        jewellery_id:
+          $ref: '#/components/schemas/JewelleryID'
+          x-oapi-codegen-extra-tags:
+            db: jewellery_id
+        name:
+          type: string
+          maxLength: 255
+          x-oapi-codegen-extra-tags:
+            db: name
+          example: Wedding Forever
+        description:
+          type: string
+          maxLength: 255
+          x-oapi-codegen-extra-tags:
+            db: description
+          example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2
+            mm
+        quantity:
+          type: integer
+          format: int64
+          x-oapi-codegen-extra-tags:
+            db: quantity
+          example: 100
+        price:
+          type: integer
+          format: float64
+          x-oapi-codegen-extra-tags:
+            db: price
+          example: 10000
+        image_url:
+          type: string
+          x-oapi-codegen-extra-tags:
+            db: image_url
+          example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp
+    ErrorMessage:
+      description: Error Message
+      properties:
+        version:
+          type: string
+          description: Application Version
+        message:
+          type: string
+          description: Error MEssage

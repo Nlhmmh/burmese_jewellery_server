@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS jewelleries (
+	jewellery_id UUID NOT NULL,
+	name         VARCHAR(255) NOT NULL,
+	description  VARCHAR(255) NOT NULL,
+	quantity     INTEGER NOT NULL,
+	price        FLOAT NOT NULL,
+	image_url    VARCHAR(255) NOT NULL,
+	created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (jewellery_id)
+);
