@@ -2,10 +2,13 @@ GO_GENERATE_FILE := $(CURDIR)/generate/generate.go
 
 .PHONY: help
 help: ## Help
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
+	@echo 'Usage:'
+	@echo "  make [command]"
+	@echo 'Commands:'
+	@grep -E '^[a-zA-Z_0-9%-]+:.*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?##"}; {printf "  \033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: init
-init: ## 開発環境セットアップ
+init: ## Prepare Environment
 	pip install -r requirements.txt
 	go install github.com/cosmtrek/air@latest
 	go install github.com/volatiletech/sqlboiler/v4@latest
@@ -14,7 +17,7 @@ init: ## 開発環境セットアップ
 
 .PHONY: run
 run: ## Run server
-	make docker-up-db
+	make dk-up-db
 	sh ./tools/server_run.sh
 
 .PHONY: merge
@@ -32,34 +35,30 @@ boil: ## Generate sqlboiler code (mac)
 
 # Docker
 
-.PHONY: docker-up
-docker-up: ## Docker Up
+.PHONY: dk-up
+dk-up: ## Docker Up
 	docker compose up --build -d
 
-.PHONY: docker-down
-docker-down: ## Docker Up
+.PHONY: dk-down
+dk-down: ## Docker Down
 	docker compose down
 
-.PHONY: docker-tail
-docker-tail: ## Docker tail
-	docker compose logs -f
+.PHONY: dk-tail-%
+dk-tail-%: ## Docker tail (server, db)
+	docker compose logs ${@:dk-tail-%=%} -f
 
-.PHONY: docker-up-server
-docker-up-server: ## Docker Up Server
-	docker compose up --build -d server
+.PHONY: dk-up-%
+dk-up-%: ## Docker Up (server, db)
+	docker compose up --build -d ${@:dk-up-%=%}
 
-.PHONY: docker-down-server
-docker-down-server: ## Docker Down Server
-	docker compose down server
+.PHONY: dk-down-%
+dk-down-%: ## Docker Down (server, db)
+	docker compose down ${@:dk-down-%=%}
 
-.PHONY: docker-up-db
-docker-up-db: ## Docker up DB
-	docker compose up --build -d database
-	
-.PHONY: docker-down-db
-docker-down-db: ## Docker Down DB
-	docker compose down database
+.PHONY: dk-exec-%
+dk-exec-%: ## docker compose exec (server, db) bash
+	docker compose exec ${@:dk-exec-%=%} bash
 
-.PHONY: docker-exec-server
-docker-exec-server: ## docker compose exec server bash を実行する
-	docker compose exec burmese-jewellery bash
+.PHONY: dk-connect-db
+dk-connect-db: ## Docker Connect DB
+	docker compose exec db psql -U postgres -p 5432 -d burmese_jewellery

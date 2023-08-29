@@ -7,25 +7,15 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: https://api.kikumemo.nouslagus.com
-    description: プロダクション環境
-  - url: https://api.stg.kikumemo.nouslagus.com
-    description: ステージング環境
-  - url: https://api.dev.kikumemo.nouslagus.com
-    description: デベロッパー環境
-  - url: http://api.local.kikumemo.nouslagus.com:8081
-    description: ローカル環境
-  - url: http://localhost:8081
-    description: ローカル環境
+  - url: http://localhost:8077
+    description: Local environment
 tags:
-  - name: system_admin
-    description: システム管理者のみ使用できるエンドポイント
-  - name: operator
-    description: operatorとシステム管理者が使用できるエンドポイント
-  - name: backlog
-    description: 未実装のエンドポイント
-  - name: etc
-    description: その他
+  - name: admin
+    description: Admin
+  - name: user
+    description: User
+  - name: others
+    description: Others
 paths:
   /api/health_check:
     get:

@@ -1,18 +1,5 @@
 services:
-  server:
-    container_name: burmese-jewellery
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    env_file:
-      - .env.local
-    depends_on:
-      - database
-    ports:
-      - "8077:8077"
-    restart: on-failure
-
-  database:
+  db:
     image: postgres:latest
     container_name: burmese-jewellery-database
     volumes:
@@ -24,3 +11,16 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: burmese_jewellery
     restart: always
+
+  server:
+    container_name: burmese-jewellery-server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env.local
+    depends_on:
+      - db
+    ports:
+      - "8077:8077"
+    restart: on-failure

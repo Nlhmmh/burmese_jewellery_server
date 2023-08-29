@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	svc := server.Init()
+	svc := server.NewServer()
 	go func() {
 		if err := svc.Run(); err != nil {
 			panic(err)

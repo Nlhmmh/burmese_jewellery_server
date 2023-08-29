@@ -32,5 +32,5 @@ curl --insecure https://localhost:8077/api/health_check
 ---
 
 ## Git Branch Strategy
-![Git Branch Strategy](https://raw.githubusercontent.com/Nlhmmh/burmese_jewellery/main/git_branch_strategy.png?token=GHSAT0AAAAAACGEKCVQVCVNYBXKUASSR2L4ZHHBDZQ)
+![Git Branch Strategy](https://github.com/Nlhmmh/howto/blob/master/git_branch_strategy.png)
 

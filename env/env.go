@@ -16,6 +16,7 @@ type Env struct {
 		Port int64 `env:"HTTP_PORT" envDefault:"8081"`
 	}
 	AllowOrigins []string `env:"ALLOW_ORIGINS" envDefault:"[]"`
+	Debug        bool     `env:"DEBUG" envDefault:"false"`
 }
 
 var (
