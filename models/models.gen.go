@@ -34,5 +34,14 @@ type JewelleryID = openapi_types.UUID
 // JewelleryIDParam Jewellery ID
 type JewelleryIDParam = JewelleryID
 
+// GetApiAuthGoogleCallbackParams defines parameters for GetApiAuthGoogleCallback.
+type GetApiAuthGoogleCallbackParams struct {
+	// State OAuth2 state parameter
+	State string `form:"state" json:"state"`
+
+	// Code OAuth2 code parameter
+	Code string `form:"code" json:"code"`
+}
+
 // GetApiJewelleryJSONRequestBody defines body for GetApiJewellery for application/json ContentType.
 type GetApiJewelleryJSONRequestBody = Jewellery

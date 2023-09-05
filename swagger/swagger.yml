@@ -62,6 +62,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+  /api:
+    get:
+      summary: Display the main page
+      responses:
+        200:
+          description: Main page displayed successfully
+  /api/auth/google/login:
+    get:
+      summary: Initiate Google OAuth2 login
+      responses:
+        302:
+          description: Redirect to Google OAuth2 login page
+  /api/auth/google/callback:
+    get:
+      summary: Handle Google OAuth2 callback
+      parameters:
+        - name: state
+          in: query
+          required: true
+          schema:
+            type: string
+          description: OAuth2 state parameter
+        - name: code
+          in: query
+          required: true
+          schema:
+            type: string
+          description: OAuth2 code parameter
+      responses:
+        302:
+          description: Redirect to the main page after handling the callback
 components:
   parameters:
     JewelleryIDParam:

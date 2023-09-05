@@ -24,6 +24,9 @@ import (
 // Jewellery is an object representing the database table.
 type Jewellery struct {
 	JewelleryID string    `boil:"jewellery_id" json:"jewelleryID" toml:"jewelleryID" yaml:"jewelleryID"`
+	CategoryID  string    `boil:"category_id" json:"categoryID" toml:"categoryID" yaml:"categoryID"`
+	GemID       string    `boil:"gem_id" json:"gemID" toml:"gemID" yaml:"gemID"`
+	MaterialID  string    `boil:"material_id" json:"materialID" toml:"materialID" yaml:"materialID"`
 	Name        string    `boil:"name" json:"name" toml:"name" yaml:"name"`
 	Description string    `boil:"description" json:"description" toml:"description" yaml:"description"`
 	Quantity    int       `boil:"quantity" json:"quantity" toml:"quantity" yaml:"quantity"`
@@ -38,6 +41,9 @@ type Jewellery struct {
 
 var JewelleryColumns = struct {
 	JewelleryID string
+	CategoryID  string
+	GemID       string
+	MaterialID  string
 	Name        string
 	Description string
 	Quantity    string
@@ -47,6 +53,9 @@ var JewelleryColumns = struct {
 	UpdatedAt   string
 }{
 	JewelleryID: "jewellery_id",
+	CategoryID:  "category_id",
+	GemID:       "gem_id",
+	MaterialID:  "material_id",
 	Name:        "name",
 	Description: "description",
 	Quantity:    "quantity",
@@ -58,6 +67,9 @@ var JewelleryColumns = struct {
 
 var JewelleryTableColumns = struct {
 	JewelleryID string
+	CategoryID  string
+	GemID       string
+	MaterialID  string
 	Name        string
 	Description string
 	Quantity    string
@@ -67,6 +79,9 @@ var JewelleryTableColumns = struct {
 	UpdatedAt   string
 }{
 	JewelleryID: "jewelleries.jewellery_id",
+	CategoryID:  "jewelleries.category_id",
+	GemID:       "jewelleries.gem_id",
+	MaterialID:  "jewelleries.material_id",
 	Name:        "jewelleries.name",
 	Description: "jewelleries.description",
 	Quantity:    "jewelleries.quantity",
@@ -77,33 +92,6 @@ var JewelleryTableColumns = struct {
 }
 
 // Generated where
-
-type whereHelperstring struct{ field string }
-
-func (w whereHelperstring) EQ(x string) qm.QueryMod     { return qmhelper.Where(w.field, qmhelper.EQ, x) }
-func (w whereHelperstring) NEQ(x string) qm.QueryMod    { return qmhelper.Where(w.field, qmhelper.NEQ, x) }
-func (w whereHelperstring) LT(x string) qm.QueryMod     { return qmhelper.Where(w.field, qmhelper.LT, x) }
-func (w whereHelperstring) LTE(x string) qm.QueryMod    { return qmhelper.Where(w.field, qmhelper.LTE, x) }
-func (w whereHelperstring) GT(x string) qm.QueryMod     { return qmhelper.Where(w.field, qmhelper.GT, x) }
-func (w whereHelperstring) GTE(x string) qm.QueryMod    { return qmhelper.Where(w.field, qmhelper.GTE, x) }
-func (w whereHelperstring) LIKE(x string) qm.QueryMod   { return qm.Where(w.field+" LIKE ?", x) }
-func (w whereHelperstring) NLIKE(x string) qm.QueryMod  { return qm.Where(w.field+" NOT LIKE ?", x) }
-func (w whereHelperstring) ILIKE(x string) qm.QueryMod  { return qm.Where(w.field+" ILIKE ?", x) }
-func (w whereHelperstring) NILIKE(x string) qm.QueryMod { return qm.Where(w.field+" NOT ILIKE ?", x) }
-func (w whereHelperstring) IN(slice []string) qm.QueryMod {
-	values := make([]interface{}, 0, len(slice))
-	for _, value := range slice {
-		values = append(values, value)
-	}
-	return qm.WhereIn(fmt.Sprintf("%s IN ?", w.field), values...)
-}
-func (w whereHelperstring) NIN(slice []string) qm.QueryMod {
-	values := make([]interface{}, 0, len(slice))
-	for _, value := range slice {
-		values = append(values, value)
-	}
-	return qm.WhereNotIn(fmt.Sprintf("%s NOT IN ?", w.field), values...)
-}
 
 type whereHelperint struct{ field string }
 
@@ -157,29 +145,11 @@ func (w whereHelperfloat64) NIN(slice []float64) qm.QueryMod {
 	return qm.WhereNotIn(fmt.Sprintf("%s NOT IN ?", w.field), values...)
 }
 
-type whereHelpertime_Time struct{ field string }
-
-func (w whereHelpertime_Time) EQ(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.EQ, x)
-}
-func (w whereHelpertime_Time) NEQ(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.NEQ, x)
-}
-func (w whereHelpertime_Time) LT(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.LT, x)
-}
-func (w whereHelpertime_Time) LTE(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.LTE, x)
-}
-func (w whereHelpertime_Time) GT(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.GT, x)
-}
-func (w whereHelpertime_Time) GTE(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.GTE, x)
-}
-
 var JewelleryWhere = struct {
 	JewelleryID whereHelperstring
+	CategoryID  whereHelperstring
+	GemID       whereHelperstring
+	MaterialID  whereHelperstring
 	Name        whereHelperstring
 	Description whereHelperstring
 	Quantity    whereHelperint
@@ -189,6 +159,9 @@ var JewelleryWhere = struct {
 	UpdatedAt   whereHelpertime_Time
 }{
 	JewelleryID: whereHelperstring{field: "\"jewelleries\".\"jewellery_id\""},
+	CategoryID:  whereHelperstring{field: "\"jewelleries\".\"category_id\""},
+	GemID:       whereHelperstring{field: "\"jewelleries\".\"gem_id\""},
+	MaterialID:  whereHelperstring{field: "\"jewelleries\".\"material_id\""},
 	Name:        whereHelperstring{field: "\"jewelleries\".\"name\""},
 	Description: whereHelperstring{field: "\"jewelleries\".\"description\""},
 	Quantity:    whereHelperint{field: "\"jewelleries\".\"quantity\""},
@@ -200,10 +173,20 @@ var JewelleryWhere = struct {
 
 // JewelleryRels is where relationship names are stored.
 var JewelleryRels = struct {
-}{}
+	Category string
+	Gem      string
+	Material string
+}{
+	Category: "Category",
+	Gem:      "Gem",
+	Material: "Material",
+}
 
 // jewelleryR is where relationships are stored.
 type jewelleryR struct {
+	Category *Category `boil:"Category" json:"Category" toml:"Category" yaml:"Category"`
+	Gem      *Gem      `boil:"Gem" json:"Gem" toml:"Gem" yaml:"Gem"`
+	Material *Material `boil:"Material" json:"Material" toml:"Material" yaml:"Material"`
 }
 
 // NewStruct creates a new relationship struct
@@ -211,13 +194,34 @@ func (*jewelleryR) NewStruct() *jewelleryR {
 	return &jewelleryR{}
 }
 
+func (r *jewelleryR) GetCategory() *Category {
+	if r == nil {
+		return nil
+	}
+	return r.Category
+}
+
+func (r *jewelleryR) GetGem() *Gem {
+	if r == nil {
+		return nil
+	}
+	return r.Gem
+}
+
+func (r *jewelleryR) GetMaterial() *Material {
+	if r == nil {
+		return nil
+	}
+	return r.Material
+}
+
 // jewelleryL is where Load methods for each relationship are stored.
 type jewelleryL struct{}
 
 var (
-	jewelleryAllColumns            = []string{"jewellery_id", "name", "description", "quantity", "price", "image_url", "created_at", "updated_at"}
-	jewelleryColumnsWithoutDefault = []string{"jewellery_id", "name", "description", "quantity", "price", "image_url"}
-	jewelleryColumnsWithDefault    = []string{"created_at", "updated_at"}
+	jewelleryAllColumns            = []string{"jewellery_id", "category_id", "gem_id", "material_id", "name", "description", "quantity", "price", "image_url", "created_at", "updated_at"}
+	jewelleryColumnsWithoutDefault = []string{"category_id", "gem_id", "material_id", "name", "description", "quantity", "price", "image_url"}
+	jewelleryColumnsWithDefault    = []string{"jewellery_id", "created_at", "updated_at"}
 	jewelleryPrimaryKeyColumns     = []string{"jewellery_id"}
 	jewelleryGeneratedColumns      = []string{}
 )
@@ -518,6 +522,510 @@ func (q jewelleryQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (
 	}
 
 	return count > 0, nil
+}
+
+// Category pointed to by the foreign key.
+func (o *Jewellery) Category(mods ...qm.QueryMod) categoryQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"category_id\" = ?", o.CategoryID),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	return Categories(queryMods...)
+}
+
+// Gem pointed to by the foreign key.
+func (o *Jewellery) Gem(mods ...qm.QueryMod) gemQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"gem_id\" = ?", o.GemID),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	return Gems(queryMods...)
+}
+
+// Material pointed to by the foreign key.
+func (o *Jewellery) Material(mods ...qm.QueryMod) materialQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"material_id\" = ?", o.MaterialID),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	return Materials(queryMods...)
+}
+
+// LoadCategory allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for an N-1 relationship.
+func (jewelleryL) LoadCategory(ctx context.Context, e boil.ContextExecutor, singular bool, maybeJewellery interface{}, mods queries.Applicator) error {
+	var slice []*Jewellery
+	var object *Jewellery
+
+	if singular {
+		var ok bool
+		object, ok = maybeJewellery.(*Jewellery)
+		if !ok {
+			object = new(Jewellery)
+			ok = queries.SetFromEmbeddedStruct(&object, &maybeJewellery)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", object, maybeJewellery))
+			}
+		}
+	} else {
+		s, ok := maybeJewellery.(*[]*Jewellery)
+		if ok {
+			slice = *s
+		} else {
+			ok = queries.SetFromEmbeddedStruct(&slice, maybeJewellery)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", slice, maybeJewellery))
+			}
+		}
+	}
+
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &jewelleryR{}
+		}
+		args = append(args, object.CategoryID)
+
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &jewelleryR{}
+			}
+
+			for _, a := range args {
+				if a == obj.CategoryID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.CategoryID)
+
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`categories`),
+		qm.WhereIn(`categories.category_id in ?`, args...),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load Category")
+	}
+
+	var resultSlice []*Category
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice Category")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for categories")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for categories")
+	}
+
+	if len(categoryAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.Category = foreign
+		return nil
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.CategoryID == foreign.CategoryID {
+				local.R.Category = foreign
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
+// LoadGem allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for an N-1 relationship.
+func (jewelleryL) LoadGem(ctx context.Context, e boil.ContextExecutor, singular bool, maybeJewellery interface{}, mods queries.Applicator) error {
+	var slice []*Jewellery
+	var object *Jewellery
+
+	if singular {
+		var ok bool
+		object, ok = maybeJewellery.(*Jewellery)
+		if !ok {
+			object = new(Jewellery)
+			ok = queries.SetFromEmbeddedStruct(&object, &maybeJewellery)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", object, maybeJewellery))
+			}
+		}
+	} else {
+		s, ok := maybeJewellery.(*[]*Jewellery)
+		if ok {
+			slice = *s
+		} else {
+			ok = queries.SetFromEmbeddedStruct(&slice, maybeJewellery)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", slice, maybeJewellery))
+			}
+		}
+	}
+
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &jewelleryR{}
+		}
+		args = append(args, object.GemID)
+
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &jewelleryR{}
+			}
+
+			for _, a := range args {
+				if a == obj.GemID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.GemID)
+
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`gems`),
+		qm.WhereIn(`gems.gem_id in ?`, args...),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load Gem")
+	}
+
+	var resultSlice []*Gem
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice Gem")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for gems")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for gems")
+	}
+
+	if len(gemAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.Gem = foreign
+		return nil
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.GemID == foreign.GemID {
+				local.R.Gem = foreign
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
+// LoadMaterial allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for an N-1 relationship.
+func (jewelleryL) LoadMaterial(ctx context.Context, e boil.ContextExecutor, singular bool, maybeJewellery interface{}, mods queries.Applicator) error {
+	var slice []*Jewellery
+	var object *Jewellery
+
+	if singular {
+		var ok bool
+		object, ok = maybeJewellery.(*Jewellery)
+		if !ok {
+			object = new(Jewellery)
+			ok = queries.SetFromEmbeddedStruct(&object, &maybeJewellery)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", object, maybeJewellery))
+			}
+		}
+	} else {
+		s, ok := maybeJewellery.(*[]*Jewellery)
+		if ok {
+			slice = *s
+		} else {
+			ok = queries.SetFromEmbeddedStruct(&slice, maybeJewellery)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", slice, maybeJewellery))
+			}
+		}
+	}
+
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &jewelleryR{}
+		}
+		args = append(args, object.MaterialID)
+
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &jewelleryR{}
+			}
+
+			for _, a := range args {
+				if a == obj.MaterialID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.MaterialID)
+
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`materials`),
+		qm.WhereIn(`materials.material_id in ?`, args...),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load Material")
+	}
+
+	var resultSlice []*Material
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice Material")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for materials")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for materials")
+	}
+
+	if len(materialAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.Material = foreign
+		return nil
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.MaterialID == foreign.MaterialID {
+				local.R.Material = foreign
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
+// SetCategoryG of the jewellery to the related item.
+// Sets o.R.Category to related.
+// Uses the global database handle.
+func (o *Jewellery) SetCategoryG(ctx context.Context, insert bool, related *Category) error {
+	return o.SetCategory(ctx, boil.GetContextDB(), insert, related)
+}
+
+// SetCategory of the jewellery to the related item.
+// Sets o.R.Category to related.
+func (o *Jewellery) SetCategory(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Category) error {
+	var err error
+	if insert {
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
+	}
+
+	updateQuery := fmt.Sprintf(
+		"UPDATE \"jewelleries\" SET %s WHERE %s",
+		strmangle.SetParamNames("\"", "\"", 1, []string{"category_id"}),
+		strmangle.WhereClause("\"", "\"", 2, jewelleryPrimaryKeyColumns),
+	)
+	values := []interface{}{related.CategoryID, o.JewelleryID}
+
+	if boil.IsDebug(ctx) {
+		writer := boil.DebugWriterFrom(ctx)
+		fmt.Fprintln(writer, updateQuery)
+		fmt.Fprintln(writer, values)
+	}
+	if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+		return errors.Wrap(err, "failed to update local table")
+	}
+
+	o.CategoryID = related.CategoryID
+	if o.R == nil {
+		o.R = &jewelleryR{
+			Category: related,
+		}
+	} else {
+		o.R.Category = related
+	}
+
+	return nil
+}
+
+// SetGemG of the jewellery to the related item.
+// Sets o.R.Gem to related.
+// Uses the global database handle.
+func (o *Jewellery) SetGemG(ctx context.Context, insert bool, related *Gem) error {
+	return o.SetGem(ctx, boil.GetContextDB(), insert, related)
+}
+
+// SetGem of the jewellery to the related item.
+// Sets o.R.Gem to related.
+func (o *Jewellery) SetGem(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Gem) error {
+	var err error
+	if insert {
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
+	}
+
+	updateQuery := fmt.Sprintf(
+		"UPDATE \"jewelleries\" SET %s WHERE %s",
+		strmangle.SetParamNames("\"", "\"", 1, []string{"gem_id"}),
+		strmangle.WhereClause("\"", "\"", 2, jewelleryPrimaryKeyColumns),
+	)
+	values := []interface{}{related.GemID, o.JewelleryID}
+
+	if boil.IsDebug(ctx) {
+		writer := boil.DebugWriterFrom(ctx)
+		fmt.Fprintln(writer, updateQuery)
+		fmt.Fprintln(writer, values)
+	}
+	if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+		return errors.Wrap(err, "failed to update local table")
+	}
+
+	o.GemID = related.GemID
+	if o.R == nil {
+		o.R = &jewelleryR{
+			Gem: related,
+		}
+	} else {
+		o.R.Gem = related
+	}
+
+	return nil
+}
+
+// SetMaterialG of the jewellery to the related item.
+// Sets o.R.Material to related.
+// Uses the global database handle.
+func (o *Jewellery) SetMaterialG(ctx context.Context, insert bool, related *Material) error {
+	return o.SetMaterial(ctx, boil.GetContextDB(), insert, related)
+}
+
+// SetMaterial of the jewellery to the related item.
+// Sets o.R.Material to related.
+func (o *Jewellery) SetMaterial(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Material) error {
+	var err error
+	if insert {
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
+	}
+
+	updateQuery := fmt.Sprintf(
+		"UPDATE \"jewelleries\" SET %s WHERE %s",
+		strmangle.SetParamNames("\"", "\"", 1, []string{"material_id"}),
+		strmangle.WhereClause("\"", "\"", 2, jewelleryPrimaryKeyColumns),
+	)
+	values := []interface{}{related.MaterialID, o.JewelleryID}
+
+	if boil.IsDebug(ctx) {
+		writer := boil.DebugWriterFrom(ctx)
+		fmt.Fprintln(writer, updateQuery)
+		fmt.Fprintln(writer, values)
+	}
+	if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+		return errors.Wrap(err, "failed to update local table")
+	}
+
+	o.MaterialID = related.MaterialID
+	if o.R == nil {
+		o.R = &jewelleryR{
+			Material: related,
+		}
+	} else {
+		o.R.Material = related
+	}
+
+	return nil
 }
 
 // Jewelleries retrieves all the records using an executor.

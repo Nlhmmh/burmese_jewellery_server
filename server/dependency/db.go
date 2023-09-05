@@ -1,26 +1,30 @@
-package server
+package dependency
 
 import (
 	"database/sql"
 	"time"
 )
 
+var postgresDB *sql.DB
+
 // newDB - open database
-func newDB(dbSource string) (*sql.DB, error) {
+func newDB(dbSource string) error {
 
 	db, err := sql.Open("postgres", dbSource)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	if err := db.Ping(); err != nil {
-		return nil, err
+		return err
 	}
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 	db.SetMaxOpenConns(10)
 	db.SetMaxIdleConns(10)
 
-	return db, nil
+	postgresDB = db
+
+	return nil
 
 }

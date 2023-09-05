@@ -4,7 +4,19 @@
 package boiler
 
 var TableNames = struct {
-	Jewelleries string
+	AccountAdmins   string
+	AccountProfiles string
+	Accounts        string
+	Categories      string
+	Gems            string
+	Jewelleries     string
+	Materials       string
 }{
-	Jewelleries: "jewelleries",
+	AccountAdmins:   "account_admins",
+	AccountProfiles: "account_profiles",
+	Accounts:        "accounts",
+	Categories:      "categories",
+	Gems:            "gems",
+	Jewelleries:     "jewelleries",
+	Materials:       "materials",
 }

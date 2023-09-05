@@ -24,6 +24,15 @@ import (
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
+	// Display the main page
+	// (GET /api)
+	GetApi(c *gin.Context)
+	// Handle Google OAuth2 callback
+	// (GET /api/auth/google/callback)
+	GetApiAuthGoogleCallback(c *gin.Context, params GetApiAuthGoogleCallbackParams)
+	// Initiate Google OAuth2 login
+	// (GET /api/auth/google/login)
+	GetApiAuthGoogleLogin(c *gin.Context)
 	// Health Check
 	// (GET /api/health_check)
 	GetApiHealthCheck(c *gin.Context)
@@ -40,6 +49,80 @@ type ServerInterfaceWrapper struct {
 }
 
 type MiddlewareFunc func(c *gin.Context)
+
+// GetApi operation middleware
+func (siw *ServerInterfaceWrapper) GetApi(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApi(c)
+}
+
+// GetApiAuthGoogleCallback operation middleware
+func (siw *ServerInterfaceWrapper) GetApiAuthGoogleCallback(c *gin.Context) {
+
+	var err error
+
+	// Parameter object where we will unmarshal all parameters from the context
+	var params GetApiAuthGoogleCallbackParams
+
+	// ------------- Required query parameter "state" -------------
+
+	if paramValue := c.Query("state"); paramValue != "" {
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Query argument state is required, but not found"), http.StatusBadRequest)
+		return
+	}
+
+	err = runtime.BindQueryParameter("form", true, true, "state", c.Request.URL.Query(), &params.State)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter state: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Required query parameter "code" -------------
+
+	if paramValue := c.Query("code"); paramValue != "" {
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Query argument code is required, but not found"), http.StatusBadRequest)
+		return
+	}
+
+	err = runtime.BindQueryParameter("form", true, true, "code", c.Request.URL.Query(), &params.Code)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter code: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiAuthGoogleCallback(c, params)
+}
+
+// GetApiAuthGoogleLogin operation middleware
+func (siw *ServerInterfaceWrapper) GetApiAuthGoogleLogin(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiAuthGoogleLogin(c)
+}
 
 // GetApiHealthCheck operation middleware
 func (siw *ServerInterfaceWrapper) GetApiHealthCheck(c *gin.Context) {
@@ -94,8 +177,57 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 		ErrorHandler:       errorHandler,
 	}
 
+	router.GET(options.BaseURL+"/api", wrapper.GetApi)
+	router.GET(options.BaseURL+"/api/auth/google/callback", wrapper.GetApiAuthGoogleCallback)
+	router.GET(options.BaseURL+"/api/auth/google/login", wrapper.GetApiAuthGoogleLogin)
 	router.GET(options.BaseURL+"/api/health_check", wrapper.GetApiHealthCheck)
 	router.GET(options.BaseURL+"/api/jewellery", wrapper.GetApiJewellery)
+}
+
+type GetApiRequestObject struct {
+}
+
+type GetApiResponseObject interface {
+	VisitGetApiResponse(w http.ResponseWriter) error
+}
+
+type GetApi200Response struct {
+}
+
+func (response GetApi200Response) VisitGetApiResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type GetApiAuthGoogleCallbackRequestObject struct {
+	Params GetApiAuthGoogleCallbackParams
+}
+
+type GetApiAuthGoogleCallbackResponseObject interface {
+	VisitGetApiAuthGoogleCallbackResponse(w http.ResponseWriter) error
+}
+
+type GetApiAuthGoogleCallback302Response struct {
+}
+
+func (response GetApiAuthGoogleCallback302Response) VisitGetApiAuthGoogleCallbackResponse(w http.ResponseWriter) error {
+	w.WriteHeader(302)
+	return nil
+}
+
+type GetApiAuthGoogleLoginRequestObject struct {
+}
+
+type GetApiAuthGoogleLoginResponseObject interface {
+	VisitGetApiAuthGoogleLoginResponse(w http.ResponseWriter) error
+}
+
+type GetApiAuthGoogleLogin302Response struct {
+}
+
+func (response GetApiAuthGoogleLogin302Response) VisitGetApiAuthGoogleLoginResponse(w http.ResponseWriter) error {
+	w.WriteHeader(302)
+	return nil
 }
 
 type GetApiHealthCheckRequestObject struct {
@@ -153,6 +285,15 @@ func (response GetApiJewellery500JSONResponse) VisitGetApiJewelleryResponse(w ht
 
 // StrictServerInterface represents all server handlers.
 type StrictServerInterface interface {
+	// Display the main page
+	// (GET /api)
+	GetApi(ctx context.Context, request GetApiRequestObject) (GetApiResponseObject, error)
+	// Handle Google OAuth2 callback
+	// (GET /api/auth/google/callback)
+	GetApiAuthGoogleCallback(ctx context.Context, request GetApiAuthGoogleCallbackRequestObject) (GetApiAuthGoogleCallbackResponseObject, error)
+	// Initiate Google OAuth2 login
+	// (GET /api/auth/google/login)
+	GetApiAuthGoogleLogin(ctx context.Context, request GetApiAuthGoogleLoginRequestObject) (GetApiAuthGoogleLoginResponseObject, error)
 	// Health Check
 	// (GET /api/health_check)
 	GetApiHealthCheck(ctx context.Context, request GetApiHealthCheckRequestObject) (GetApiHealthCheckResponseObject, error)
@@ -171,6 +312,83 @@ func NewStrictHandler(ssi StrictServerInterface, middlewares []StrictMiddlewareF
 type strictHandler struct {
 	ssi         StrictServerInterface
 	middlewares []StrictMiddlewareFunc
+}
+
+// GetApi operation middleware
+func (sh *strictHandler) GetApi(ctx *gin.Context) {
+	var request GetApiRequestObject
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApi(ctx, request.(GetApiRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApi")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiResponseObject); ok {
+		if err := validResponse.VisitGetApiResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("Unexpected response type: %T", response))
+	}
+}
+
+// GetApiAuthGoogleCallback operation middleware
+func (sh *strictHandler) GetApiAuthGoogleCallback(ctx *gin.Context, params GetApiAuthGoogleCallbackParams) {
+	var request GetApiAuthGoogleCallbackRequestObject
+
+	request.Params = params
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiAuthGoogleCallback(ctx, request.(GetApiAuthGoogleCallbackRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiAuthGoogleCallback")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiAuthGoogleCallbackResponseObject); ok {
+		if err := validResponse.VisitGetApiAuthGoogleCallbackResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("Unexpected response type: %T", response))
+	}
+}
+
+// GetApiAuthGoogleLogin operation middleware
+func (sh *strictHandler) GetApiAuthGoogleLogin(ctx *gin.Context) {
+	var request GetApiAuthGoogleLoginRequestObject
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiAuthGoogleLogin(ctx, request.(GetApiAuthGoogleLoginRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiAuthGoogleLogin")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiAuthGoogleLoginResponseObject); ok {
+		if err := validResponse.VisitGetApiAuthGoogleLoginResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("Unexpected response type: %T", response))
+	}
 }
 
 // GetApiHealthCheck operation middleware
@@ -234,26 +452,25 @@ func (sh *strictHandler) GetApiJewellery(ctx *gin.Context) {
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/7xWXW8bRRf+K6t5e7neXbtxGq0UvUpJSk0/RRFclMoa755dT7Izs52ZTWJVlmqvKCBA",
-	"AoRASFR8Sq2oGir1oiCK+mOmJf0ZaGbtOI7dFBfEhbUfc85znnn2nGd8A0Wc5pwBUxKFN5CMukCxvd0Q",
-	"gosLICVOwTzHICNBckU4Q2G16oyXXZQLnoNQBGwufUnaxjhN9XJAIZJKEJaivou2QUgbejRzLc8zEmHz",
-	"5Lw9CprJ7/dd9AbsQJaB6BmMaVpTiDcQ7GKaZyb/HYhjwlLnDBewDcIhzLmcYUVYQZ0doroOds7iLKlF",
-	"REQZODxx1gmmnMXSdRpew6EUuYji3fPAUtVFYaPZPMrNRbs1jnNSi3gMKbAa7CqBawqnFbUOCqf4ma0Q",
-	"ilNoFyKbZttVKpeh71OICfYUSRLMel7EqU+kb3P8t6qX/kbEaUsBPd/wR3G1pNpjB7O4ZpjV6svNU0vL",
-	"J5vterDUbJ5caW+sty94m3n6/3eLIGgs87xdSLpa90413boXuMteUC2ciATPL64GXt2tfivmV63FkOAi",
-	"Uy3DZvUit9e1bUwy3MmgxRQIhrMqdOGEhKrVHejk6FU0nmhqFN4cN0ubxCbkhIAEheh//mQs/NFM+AeN",
-	"1Vo3ncowhWO76F9pCVvFMM0Fiabr1YMgCFyUcEGxQiFKMo7V8tJEFcIUpJbHy+tU8KbQ9QIzRVTvaK1D",
-	"lQh75ToH6HZWRwC8swmRQoeHt7U+awEHi05rHR2iUxQknu8FsFv1zTqPZg0AnSEsdnihHMoFOLhjbq/s",
-	"4LTaix07O2uh78vqtUe4YUlYwuc41OWW+fTOObJVUKDcM5yIsq0xfuesXW6hQy6H6l7gBQaT58BwTlCI",
-	"TnqB1zCWilXXsvZxTvwu4Ex121EXoi3zMgVlLsberCm2YhSi10Gt5eSsDX3NRrpIgMw5k5UDNoLAXCLO",
-	"FDALgCe+6m/Kyhirjp/1zylbt+OKQnTp3BztTdnrBREQo/DqQd61mS9uIqdVvFJEEUiZFJkzZm7xZEEp",
-	"NqaOqu051f7MktVn87DtHyPO5HioOIJUp3ncW0iVv+USZnP9fyg/UUDlAhUP9MVC4N48eS+dM1FLC/I4",
-	"rvzU/4Q5FU/j2HmzEtqUbv6HpcfHhnMFhDnWbfyRbpqYynkiRx0pbbhE4dWjM67Lr3R5X5c39fAXPXyk",
-	"yzu6fLj/+YNnP5RTlmGOZ5wTb2vsBYwXMsNpIc05jfruDPDwN13e0uVjPfxVlw/18MExqFKlCyCX7+vy",
-	"a8u61OVnunx8DHIM24sg37eE7+ny3hzMEWTGI5y9ADRcCVbqr4RsUbtcqhGEsRZ7zsx+suGjsbjf7e99",
-	"v//prec339ODPT148vSPJ/tf3NWDO3rwiR5+pId3jfTlh7q8rYc/2fsP0PikR7InFdA2jilhczhXZsOF",
-	"Htx9QcmPF6s3BpxT689vfn629+3zH+0+jkfp4Ggr4+k8kQe39WDv6e9fToJBRah/rf9XAAAA//9zD3ed",
-	"FgwAAA==",
+	"H4sIAAAAAAAC/7xWW2/bOBP9KwS/PsqS7MRJISD4kNZp6216QbuXh25hjKWRxJQXlaSSGIH/+2Io3+1N",
+	"6u5iHwxL4hnOmQsP54HnRjVGo/aOZw/c5TUqCI9X1hr7Dp2DCum9QJdb0XhhNM+6VbZcjnhjTYPWCwy2",
+	"6gmzq6WZnzXIM+68Fbri84jfonUBumt52TRS5EBv7PcFaM9+Po/4L3iHUqKd0R7btLZ2fOB4D6qRZP8H",
+	"FoXQFXtlLN6iZUKzjxK80K1id8LXDNgbkGUvFzaXyEzJRgKU0YWL2CAeMKV4xBXcX6OufM2zwXC4yy3i",
+	"9z0DjejlpsAKdQ/vvYWeh6qjNuXZFj8KRSiocNJauc229r5xWZIoLATEXpQl6FmcG5UIlwSb5NfuY3KV",
+	"GzX2qK4HyQLXK7sYp6CLHjHr9c+G56dnJ8NJPz0dDk+eT65Gk3fxTVP9/882TQdnppm0Tl304/Nh1I/T",
+	"6CxOu4VnuTXN+4s07kfd7zn9urUCS2ilHxObi/cm/F/egpAwlTjWHq0G2UGPNiiVv7jDacN/JsfrnFKG",
+	"b5bNMhEFQZ5ZLHnG/5esj0WyOBPJqrHGI+pUDQof7aJ/pSWCF2LaWJFv++unaZpGvDRWgecZL6UBf3a6",
+	"zorQHqvA42k/3fbk6HsL2gs/2/W14Unon/az2j2c1cUGZnqDueebh3c82peA1SIbj/gGnbYVxWEtwPuu",
+	"b0Ym3xcA/krogpnWM2UsMpjS4+c7qLpYwrELZy1LEtd9joUhlkKX5oBCfRxT6dlb8a1VqExMnIQPrbH8",
+	"xi4/jvmGyvF+nMYp7Wka1NAInvGTOI0HJKng68A6Cd8feIWe/kjRgg6OC57x1+gvG8EjbtE1RrtO6QZp",
+	"uk/wHQjNGqiQFcI1EmZYMNfmOTpXtlLOQvldqxSQePJRB2K+RqaWpgFDhBJofZ1UxlQSkxyknEL+7QmW",
+	"l62vXweLl0sDCtOCQo/W8ezLLuUPZDJgzoNHtkJyKkFoJpL55VHkARUy8b0VFgueedtitLjUiNRui0R/",
+	"448a+El3BDrK29edIp2kg/0ifcJCWMw982Y78wxKj5bVoAtJKkOLq7xvV+4NYZB1qWbLmDaxexWUphL6",
+	"h8t3HdDHhrPNJ3hc99Sa/VgLL6jeB/Br8jWC9PUkr/HJtnsToC8D8vA5yY32qMMGsJ4zkhvXDQrrkj4y",
+	"5oTri1ro7QEt2myTLyu7r3sKSMjtBH5eHVC2ZL5b7RAe6+Jb5edmcwx6JDnrcanjiM6/MMXsqKz80K1J",
+	"wc3/YfqFR+WO8LjKL1gLs0Pp/fCWUKdH8njM/dbcfMDjCyjYpy7R5Hr4H7pejlHsM1oacwN+p5vWl+y1",
+	"cIuOdAF+SJ+vTQ6Sob4V1mhFAexcnJIAtXE+e56en3PSwG4e2NvqslBBUxbqCuF1X6F/c0GQF6iW3g7I",
+	"uK+J7wpmuvf51/lfAQAA//8jUyPT8QwAAA==",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

@@ -13,7 +13,9 @@ type Env struct {
 		Database string `env:"DB_DATABASE" envDefault:"kikumemodb"`
 	}
 	Http struct {
-		Port int64 `env:"HTTP_PORT" envDefault:"8081"`
+		Protocol string `env:"HTTP_PROTOCOL" envDefault:"http"`
+		Domain   string `env:"HTTP_DOMAIN" envDefault:"localhost"`
+		Port     int64  `env:"HTTP_PORT" envDefault:"8081"`
 	}
 	AllowOrigins []string `env:"ALLOW_ORIGINS" envDefault:"[]"`
 	Debug        bool     `env:"DEBUG" envDefault:"false"`

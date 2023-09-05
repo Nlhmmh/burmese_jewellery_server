@@ -1,7 +1,8 @@
 package config
 
 import (
-	"io/ioutil"
+	"fmt"
+	"os"
 
 	"gopkg.in/yaml.v3"
 )
@@ -11,12 +12,18 @@ var (
 )
 
 type Config struct {
-	PortNo int64 `yaml:"port_no"`
+	Google struct {
+		Oauth2Config struct {
+			ClientID     string `yaml:"client_id"`
+			ClientSecret string `yaml:"client_secret"`
+			RedirectURL  string `env:"redirect_url"`
+		} `yaml:"oauth2_config"`
+	} `yaml:"google"`
 }
 
 func init() {
 
-	configFile, err := ioutil.ReadFile("config.yaml")
+	configFile, err := os.ReadFile("config.yaml")
 	if err != nil {
 		panic(err)
 	}
@@ -24,6 +31,8 @@ func init() {
 	if err := yaml.Unmarshal(configFile, &config); err != nil {
 		panic(err)
 	}
+
+	fmt.Println(config)
 
 }
 

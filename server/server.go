@@ -3,16 +3,17 @@ package server
 import (
 	"burmese_jewellery/env"
 	"burmese_jewellery/handler"
+	"burmese_jewellery/server/dependency"
 	"context"
 	"fmt"
 	"net/http"
 	"time"
 
+	oapi_middleware "github.com/deepmap/oapi-codegen/pkg/gin-middleware"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 	"github.com/rs/zerolog/log"
-	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
 const (
@@ -28,23 +29,10 @@ func NewServer() *server {
 	// Logging
 	newLog(true)
 
-	// Open Postgres DB
-	db, err := newDB(fmt.Sprintf(
-		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		env.Get().DB.Host,
-		env.Get().DB.Port,
-		env.Get().DB.User,
-		env.Get().DB.Password,
-		env.Get().DB.Database,
-	))
-	if err != nil {
+	// Dependency
+	if err := dependency.NewDependency(); err != nil {
 		panic(err)
 	}
-
-	// Boiler
-	boil.SetDB(db)
-	boil.DebugMode = true
-	boil.DebugWriter = log.Logger
 
 	// Set Server
 	if !env.Get().Debug {
@@ -68,15 +56,14 @@ func NewServer() *server {
 	// }
 	router.Use(cors.New(routerConfig))
 
-	// TODO: Comment out swagger because of openAPI check error
 	// Swagger
-	// swagger, err := handler.GetSwagger()
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// router.Use(oapi_middleware.OapiRequestValidatorWithOptions(swagger, &oapi_middleware.Options{
-	// 	SilenceServersWarning: true,
-	// }))
+	swagger, err := handler.GetSwagger()
+	if err != nil {
+		panic(err)
+	}
+	router.Use(oapi_middleware.OapiRequestValidatorWithOptions(swagger, &oapi_middleware.Options{
+		SilenceServersWarning: true,
+	}))
 
 	// Handler
 	handler.RegisterHandlers(router, handler.NewHandler())
