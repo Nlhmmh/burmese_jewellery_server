@@ -1,7 +1,7 @@
 -- Account
 
 CREATE TYPE login_type AS ENUM ('email', 'phone', 'google', 'facebook');
-CREATE TYPE account_status AS ENUM ('unregistered', 'registered', 'locked', 'deactivated');
+CREATE TYPE account_status AS ENUM ('pending', 'active', 'locked', 'deactivated');
 
 CREATE TABLE IF NOT EXISTS accounts (
 	account_id     UUID NOT NULL DEFAULT gen_random_uuid(),
@@ -31,11 +31,11 @@ CREATE TABLE IF NOT EXISTS account_profiles (
 );
 
 CREATE TYPE account_admin_role AS ENUM ('admin', 'staff');
-CREATE TYPE account_admin_status AS ENUM ('unregistered', 'registered', 'locked', 'deactivated');
+CREATE TYPE account_admin_status AS ENUM ('active', 'locked', 'deactivated');
 
 CREATE TABLE IF NOT EXISTS account_admins (
 	account_admins_id    UUID NOT NULL DEFAULT gen_random_uuid(),
-	mail                 VARCHAR(255),
+	mail                 VARCHAR(255) NOT NULL,
 	password             VARCHAR(255) NOT NULL,
 	account_admin_role   account_admin_role NOT NULL,
 	account_admin_status account_admin_status NOT NULL,

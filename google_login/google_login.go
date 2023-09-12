@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	oauth2State            = "burmese_jewellery"
+	oauth2State            = "burmese_jewellery" // TODO: Think Secure State
 	oauth2UserInfoEndPoint = "https://www.googleapis.com/oauth2/v2/userinfo"
 )
 

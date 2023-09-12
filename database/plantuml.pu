@@ -1,35 +1,126 @@
-@startuml test
+@startuml burmese_jewellery
 
 !define MASTER F9DFD5
 !define TRANSACTION CAE7F2
+!define PRIMARY_KEY <color:#b8861b><&key></color>
+!define FOREIGN_KEY <color:#aaaaaa><&key></color>
+!define column(x) <color:#efefef><&media-record></color> x
+!define table(x) entity x << (T, white) >>
 
-entity users as "users\nユーザー" <<T,TRANSACTION>> {
-  + id INT(10) [PK]
-  --
-  name VARCHAR(30) [名前]
-  # country_id [FK]
-  created_at TIMESTAMP
-  updated_at TIMESTAMP
+' Zero or One  |o--
+' Exactly One  ||--
+' Zero or Many }o--
+' One or Many  }|--
+
+folder account {
+
+  enum login_type {
+    email
+    phone
+    google
+    facebook
+  }
+
+  enum account_status {
+    pending
+    active
+    locked
+    deactivated
+  }
+
+  entity accounts <<T,TRANSACTION>> {
+    * account_id: UUID PRIMARY_KEY
+    * login_type: login_type
+    login_id: VARCHAR(255)
+    mail: VARCHAR(255)
+    password: VARCHAR(255)
+    phone: VARCHAR(255)
+    * account_status: account_status
+    --
+  }
+  accounts -> login_type
+  accounts -> account_status
+
+  enum gender {
+    male
+    female
+    unspecified
+  }
+
+  entity account_profiles <<T,TRANSACTION>> {
+    * account_id: UUID PRIMARY_KEY
+    * first_name: VARCHAR(255)
+    * last_name: VARCHAR(255)
+    birthday: DATE
+    gender: gender
+    --
+  }
+  account_profiles -> gender
+  account_profiles ||--|| accounts
+
+  enum account_admin_role {
+    admin
+    staff
+  }
+
+  enum account_admin_status {
+    active
+    locked
+    deactivated
+  }
+
+  entity account_admins <<T,TRANSACTION>> {
+    * account_admins_id: UUID PRIMARY_KEY
+    * mail: VARCHAR(255)
+    * password: VARCHAR(255)
+    * account_admin_role: account_admin_role
+    * account_admin_status: account_admin_status
+    --
+  }
+  account_admins -> account_admin_role
+  account_admins -> account_admin_status
+
 }
 
 
-entity posts as "posts\n記事" <<T,TRANSACTION>> {
-  + id INT(10) [PK]
-  --
-  title VARCHAR(30) [タイトル]
-  body VARCHAR(255) [記事]
-  # user_id [FK]
-  created_at TIMESTAMP
-  updated_at TIMESTAMP
-}
+folder jewellery {
 
+  entity categories <<T,TRANSACTION>> {
+    * category_id: UUID PRIMARY_KEY
+    * name: VARCHAR(255)
+    * description: VARCHAR(255)
+    * image_url: VARCHAR(255)
+    --
+  }
 
-entity countries as "countries\n国" <<M,MASTER>> {
-  + id INT(10) [PK]
-  --
-  name VARCHAR(50) [国名]
-  created_at TIMESTAMP
-  updated_at TIMESTAMP
+  entity gems <<T,TRANSACTION>> {
+    * gem_id: UUID PRIMARY_KEY
+    * name: VARCHAR(255)
+    --
+  }
+
+  entity materials <<T,TRANSACTION>> {
+    * material_id: UUID PRIMARY_KEY
+    * name: VARCHAR(255)
+    --
+  }
+
+  entity jewelleries <<T,TRANSACTION>> {
+    * jewellery_id: UUID PRIMARY_KEY
+    * category_id: UUID FOREIGN_KEY
+    * gem_id: UUID FOREIGN_KEY
+    * material_id: UUID FOREIGN_KEY
+    * name: VARCHAR(255)
+    * description: VARCHAR(255)
+    * quantity: INTEGER
+    * price: FLOAT
+    * image_url: VARCHAR(255)
+    --
+  }
+  jewelleries ||--|| categories
+  jewelleries ||--|| gems
+  jewelleries ||--|| materials
+
 }
 
 @enduml
