@@ -1,8 +1,9 @@
 @startuml burmese_jewellery
 
 !define MASTER F9DFD5
-!define TRANSACTION CAE7F2
+!define TRANSACTION <<T,CAE7F2>>
 !define PRIMARY_KEY <color:#b8861b><&key></color>
+!define PK <color:#b8861b><&key></color>
 !define FOREIGN_KEY <color:#aaaaaa><&key></color>
 !define column(x) <color:#efefef><&media-record></color> x
 !define table(x) entity x << (T, white) >>
@@ -28,15 +29,15 @@ folder account {
     deactivated
   }
 
-  entity accounts <<T,TRANSACTION>> {
-    * account_id: UUID PRIMARY_KEY
-    * login_type: login_type
-    login_id: VARCHAR(255)
-    mail: VARCHAR(255)
-    password: VARCHAR(255)
-    phone: VARCHAR(255)
-    * account_status: account_status
+  entity accounts TRANSACTION {
+    * account_id: uuid [PK]  
     --
+    * login_type : login_type  
+    login_id : VARCHAR(255)  
+    mail : VARCHAR(255)  
+    password : VARCHAR(255)  
+    phone : VARCHAR(255)  
+    * account_status : account_status  
   }
   accounts -> login_type
   accounts -> account_status
@@ -47,13 +48,13 @@ folder account {
     unspecified
   }
 
-  entity account_profiles <<T,TRANSACTION>> {
-    * account_id: UUID PRIMARY_KEY
-    * first_name: VARCHAR(255)
-    * last_name: VARCHAR(255)
-    birthday: DATE
-    gender: gender
+  entity account_profiles TRANSACTION {
+    * account_id: uuid [PK] [FK] 
     --
+    * first_name : VARCHAR(255)  
+    * last_name : VARCHAR(255)  
+    birthday : date  
+    gender : gender  
   }
   account_profiles -> gender
   account_profiles ||--|| accounts
@@ -69,14 +70,15 @@ folder account {
     deactivated
   }
 
-  entity account_admins <<T,TRANSACTION>> {
-    * account_admins_id: UUID PRIMARY_KEY
-    * mail: VARCHAR(255)
-    * password: VARCHAR(255)
-    * account_admin_role: account_admin_role
-    * account_admin_status: account_admin_status
+  entity account_admins TRANSACTION {
+    * account_admins_id: uuid [PK]  
     --
+    * mail : VARCHAR(255)  
+    * password : VARCHAR(255)  
+    * account_admin_role : account_admin_role  
+    * account_admin_status : account_admin_status  
   }
+
   account_admins -> account_admin_role
   account_admins -> account_admin_status
 
@@ -85,41 +87,41 @@ folder account {
 
 folder jewellery {
 
-  entity categories <<T,TRANSACTION>> {
-    * category_id: UUID PRIMARY_KEY
-    * name: VARCHAR(255)
-    * description: VARCHAR(255)
-    * image_url: VARCHAR(255)
+  entity categories TRANSACTION {
+    * category_id: uuid [PK]  
     --
+    * name : VARCHAR(255)  
+    * description : VARCHAR(255)  
+    * image_url : VARCHAR(255)  
   }
 
-  entity gems <<T,TRANSACTION>> {
-    * gem_id: UUID PRIMARY_KEY
-    * name: VARCHAR(255)
+  entity gems TRANSACTION {
+    * gem_id: uuid [PK]  
     --
+    * name : VARCHAR(255)  
   }
 
-  entity materials <<T,TRANSACTION>> {
-    * material_id: UUID PRIMARY_KEY
-    * name: VARCHAR(255)
+  entity materials TRANSACTION {
+    * material_id: uuid [PK]  
     --
+    * name : VARCHAR(255)  
   }
 
-  entity jewelleries <<T,TRANSACTION>> {
-    * jewellery_id: UUID PRIMARY_KEY
-    * category_id: UUID FOREIGN_KEY
-    * gem_id: UUID FOREIGN_KEY
-    * material_id: UUID FOREIGN_KEY
-    * name: VARCHAR(255)
-    * description: VARCHAR(255)
-    * quantity: INTEGER
-    * price: FLOAT
-    * image_url: VARCHAR(255)
+  entity jewelleries TRANSACTION {
+    * jewellery_id: uuid [PK]  
     --
+    * category_id : uuid [FK] 
+    * gem_id : uuid [FK] 
+    * material_id : uuid [FK] 
+    * name : VARCHAR(255)  
+    * description : VARCHAR(255)  
+    * quantity : integer  
+    * price : double precision  
+    * image_url : VARCHAR(255)  
   }
-  jewelleries ||--|| categories
-  jewelleries ||--|| gems
-  jewelleries ||--|| materials
+  jewelleries }|--|| categories
+  jewelleries }|--|| gems
+  jewelleries }|--|| materials
 
 }
 

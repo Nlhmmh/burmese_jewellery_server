@@ -30,6 +30,10 @@ gen: ## Generate go code from Swagger
 	go get github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.13.4
 	go generate $(GO_GENERATE_FILE)
 
+.PHONY: gen-er
+gen-er: ## Generate temporary plantuml from db
+	./tools/planter "host=localhost port=5432 user=postgres password=postgres dbname=burmese_jewellery sslmode=disable" -T burmese_jewellery -o ./database/plantuml/burmese_jewellery.pu.tmp
+
 .PHONY: boil
 boil: ## Generate sqlboiler code (mac)
 	sqlboiler --wipe --add-global-variants --add-enum-types --no-tests --no-back-referencing --add-soft-deletes --struct-tag-casing=camel -p boiler psql
@@ -45,19 +49,24 @@ dk-down: ## Docker Down
 	docker compose down
 
 .PHONY: dk-tail-%
-dk-tail-%: ## Docker tail (server, db)
+dk-tail-%: ## Docker tail (server, db, pgadmin)
 	docker compose logs ${@:dk-tail-%=%} -f
 
+.PHONY: dk-reload-%
+dk-reload-%: ## Docker Reload (server, db, pgadmin)
+	make dk-down-${@:dk-reload-%=%}
+	make dk-up-${@:dk-reload-%=%}
+
 .PHONY: dk-up-%
-dk-up-%: ## Docker Up (server, db)
+dk-up-%: ## Docker Up (server, db, pgadmin)
 	docker compose up --build -d ${@:dk-up-%=%}
 
 .PHONY: dk-down-%
-dk-down-%: ## Docker Down (server, db)
+dk-down-%: ## Docker Down (server, db, pgadmin)
 	docker compose down ${@:dk-down-%=%}
 
 .PHONY: dk-exec-%
-dk-exec-%: ## docker compose exec (server, db) bash
+dk-exec-%: ## docker compose exec (server, db, pgadmin) bash
 	docker compose exec ${@:dk-exec-%=%} bash
 
 .PHONY: dk-connect-db

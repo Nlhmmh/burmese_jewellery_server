@@ -3,7 +3,7 @@ services:
     image: postgres:latest
     container_name: burmese-jewellery-database
     volumes:
-      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./database/migrations:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
     environment:
@@ -11,6 +11,23 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: burmese_jewellery
     restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@example.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_DEFAULT_SERVER: burmese_jewellery_server
+      PGADMIN_DEFAULT_SERVER_HOST: db
+      PGADMIN_DEFAULT_SERVER_PORT: 5432
+      PGADMIN_DEFAULT_SERVER_MAINTENANCE_DB: burmese_jewellery
+      PGADMIN_DEFAULT_SERVER_USERNAME: postgres
+      PGADMIN_DEFAULT_SERVER_PASSWORD: postgres
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
 
   server:
     container_name: burmese-jewellery-server
