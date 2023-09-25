@@ -1,9 +1,9 @@
 package server
 
 import (
+	"burmese_jewellery/dependency"
 	"burmese_jewellery/env"
 	"burmese_jewellery/handler"
-	"burmese_jewellery/server/dependency"
 	"context"
 	"fmt"
 	"net/http"
