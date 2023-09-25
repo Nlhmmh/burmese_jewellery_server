@@ -3,13 +3,23 @@ CREATE TYPE order_status AS ENUM ('proceeding', 'shipped', 'delivered', 'returne
 CREATE TABLE IF NOT EXISTS account_orders (
 	order_id     UUID NOT NULL DEFAULT gen_random_uuid(),
 	account_id   UUID NOT NULL,
-	cart_id      UUID NOT NULL,
 	order_status order_status NOT NULL,
 	created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT pk_account_orders PRIMARY KEY (order_id),
-	CONSTRAINT fk_account_orders_account_id FOREIGN KEY(account_id) REFERENCES accounts(account_id),
-	CONSTRAINT fk_account_orders_cart_id FOREIGN KEY(cart_id) REFERENCES account_carts(cart_id)
+	CONSTRAINT fk_account_orders_account_id FOREIGN KEY(account_id) REFERENCES accounts(account_id)
+);
+
+CREATE TABLE IF NOT EXISTS account_order_jewelleries (
+	order_id     UUID NOT NULL,
+	jewellery_id UUID NOT NULL,
+	quantity     INTEGER NOT NULL,
+	price        INTEGER NOT NULL,
+	created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT pk_account_order_jewelleries PRIMARY KEY (order_id, jewellery_id),
+	CONSTRAINT fk_account_order_jewelleries_order_id FOREIGN KEY(order_id) REFERENCES account_orders(order_id),
+	CONSTRAINT fk_account_order_jewelleries_jewellery_id FOREIGN KEY(jewellery_id) REFERENCES jewelleries(jewellery_id)
 );
 
 CREATE TABLE IF NOT EXISTS account_order_addresses (
