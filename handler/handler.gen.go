@@ -27,6 +27,24 @@ type ServerInterface interface {
 	// Display the main page
 	// (GET /api)
 	GetApi(c *gin.Context)
+
+	// (GET /api/admin/account_admin)
+	GetApiAdminAccountAdmin(c *gin.Context)
+
+	// (POST /api/admin/account_admin)
+	PostApiAdminAccountAdmin(c *gin.Context)
+
+	// (DELETE /api/admin/account_admin/{account_admins_id})
+	DeleteApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId AccountAdminID)
+
+	// (GET /api/admin/account_admin/{account_admins_id})
+	GetApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId AccountAdminID)
+
+	// (PUT /api/admin/account_admin/{account_admins_id})
+	PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId AccountAdminID)
+
+	// (POST /api/admin/login)
+	PostApiAdminLogin(c *gin.Context)
 	// Handle Google OAuth2 callback
 	// (GET /api/auth/google/callback)
 	GetApiAuthGoogleCallback(c *gin.Context, params GetApiAuthGoogleCallbackParams)
@@ -36,7 +54,7 @@ type ServerInterface interface {
 	// Health Check
 	// (GET /api/health_check)
 	GetApiHealthCheck(c *gin.Context)
-	// Jewellery List
+
 	// (GET /api/jewellery)
 	GetApiJewellery(c *gin.Context)
 }
@@ -61,6 +79,117 @@ func (siw *ServerInterfaceWrapper) GetApi(c *gin.Context) {
 	}
 
 	siw.Handler.GetApi(c)
+}
+
+// GetApiAdminAccountAdmin operation middleware
+func (siw *ServerInterfaceWrapper) GetApiAdminAccountAdmin(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiAdminAccountAdmin(c)
+}
+
+// PostApiAdminAccountAdmin operation middleware
+func (siw *ServerInterfaceWrapper) PostApiAdminAccountAdmin(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiAdminAccountAdmin(c)
+}
+
+// DeleteApiAdminAccountAdminAccountAdminsId operation middleware
+func (siw *ServerInterfaceWrapper) DeleteApiAdminAccountAdminAccountAdminsId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "account_admins_id" -------------
+	var accountAdminsId AccountAdminID
+
+	err = runtime.BindStyledParameter("simple", false, "account_admins_id", c.Param("account_admins_id"), &accountAdminsId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter account_admins_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.DeleteApiAdminAccountAdminAccountAdminsId(c, accountAdminsId)
+}
+
+// GetApiAdminAccountAdminAccountAdminsId operation middleware
+func (siw *ServerInterfaceWrapper) GetApiAdminAccountAdminAccountAdminsId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "account_admins_id" -------------
+	var accountAdminsId AccountAdminID
+
+	err = runtime.BindStyledParameter("simple", false, "account_admins_id", c.Param("account_admins_id"), &accountAdminsId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter account_admins_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiAdminAccountAdminAccountAdminsId(c, accountAdminsId)
+}
+
+// PutApiAdminAccountAdminAccountAdminsId operation middleware
+func (siw *ServerInterfaceWrapper) PutApiAdminAccountAdminAccountAdminsId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "account_admins_id" -------------
+	var accountAdminsId AccountAdminID
+
+	err = runtime.BindStyledParameter("simple", false, "account_admins_id", c.Param("account_admins_id"), &accountAdminsId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter account_admins_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PutApiAdminAccountAdminAccountAdminsId(c, accountAdminsId)
+}
+
+// PostApiAdminLogin operation middleware
+func (siw *ServerInterfaceWrapper) PostApiAdminLogin(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiAdminLogin(c)
 }
 
 // GetApiAuthGoogleCallback operation middleware
@@ -178,6 +307,12 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	}
 
 	router.GET(options.BaseURL+"/api", wrapper.GetApi)
+	router.GET(options.BaseURL+"/api/admin/account_admin", wrapper.GetApiAdminAccountAdmin)
+	router.POST(options.BaseURL+"/api/admin/account_admin", wrapper.PostApiAdminAccountAdmin)
+	router.DELETE(options.BaseURL+"/api/admin/account_admin/:account_admins_id", wrapper.DeleteApiAdminAccountAdminAccountAdminsId)
+	router.GET(options.BaseURL+"/api/admin/account_admin/:account_admins_id", wrapper.GetApiAdminAccountAdminAccountAdminsId)
+	router.PUT(options.BaseURL+"/api/admin/account_admin/:account_admins_id", wrapper.PutApiAdminAccountAdminAccountAdminsId)
+	router.POST(options.BaseURL+"/api/admin/login", wrapper.PostApiAdminLogin)
 	router.GET(options.BaseURL+"/api/auth/google/callback", wrapper.GetApiAuthGoogleCallback)
 	router.GET(options.BaseURL+"/api/auth/google/login", wrapper.GetApiAuthGoogleLogin)
 	router.GET(options.BaseURL+"/api/health_check", wrapper.GetApiHealthCheck)
@@ -197,6 +332,296 @@ type GetApi200Response struct {
 func (response GetApi200Response) VisitGetApiResponse(w http.ResponseWriter) error {
 	w.WriteHeader(200)
 	return nil
+}
+
+type GetApiAdminAccountAdminRequestObject struct {
+}
+
+type GetApiAdminAccountAdminResponseObject interface {
+	VisitGetApiAdminAccountAdminResponse(w http.ResponseWriter) error
+}
+
+type GetApiAdminAccountAdmin200JSONResponse []AccountAdmin
+
+func (response GetApiAdminAccountAdmin200JSONResponse) VisitGetApiAdminAccountAdminResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type GetApiAdminAccountAdmin400JSONResponse ErrMsg
+
+func (response GetApiAdminAccountAdmin400JSONResponse) VisitGetApiAdminAccountAdminResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(400)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type GetApiAdminAccountAdmin401JSONResponse ErrMsg
+
+func (response GetApiAdminAccountAdmin401JSONResponse) VisitGetApiAdminAccountAdminResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(401)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type GetApiAdminAccountAdmin500JSONResponse ErrMsg
+
+func (response GetApiAdminAccountAdmin500JSONResponse) VisitGetApiAdminAccountAdminResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(500)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostApiAdminAccountAdminRequestObject struct {
+	Body *PostApiAdminAccountAdminJSONRequestBody
+}
+
+type PostApiAdminAccountAdminResponseObject interface {
+	VisitPostApiAdminAccountAdminResponse(w http.ResponseWriter) error
+}
+
+type PostApiAdminAccountAdmin200Response struct {
+}
+
+func (response PostApiAdminAccountAdmin200Response) VisitPostApiAdminAccountAdminResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type PostApiAdminAccountAdmin400JSONResponse ErrMsg
+
+func (response PostApiAdminAccountAdmin400JSONResponse) VisitPostApiAdminAccountAdminResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(400)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostApiAdminAccountAdmin401JSONResponse ErrMsg
+
+func (response PostApiAdminAccountAdmin401JSONResponse) VisitPostApiAdminAccountAdminResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(401)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostApiAdminAccountAdmin500JSONResponse ErrMsg
+
+func (response PostApiAdminAccountAdmin500JSONResponse) VisitPostApiAdminAccountAdminResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(500)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type DeleteApiAdminAccountAdminAccountAdminsIdRequestObject struct {
+	AccountAdminsId AccountAdminID `json:"account_admins_id"`
+}
+
+type DeleteApiAdminAccountAdminAccountAdminsIdResponseObject interface {
+	VisitDeleteApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error
+}
+
+type DeleteApiAdminAccountAdminAccountAdminsId204Response struct {
+}
+
+func (response DeleteApiAdminAccountAdminAccountAdminsId204Response) VisitDeleteApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(204)
+	return nil
+}
+
+type DeleteApiAdminAccountAdminAccountAdminsId400JSONResponse ErrMsg
+
+func (response DeleteApiAdminAccountAdminAccountAdminsId400JSONResponse) VisitDeleteApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(400)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type DeleteApiAdminAccountAdminAccountAdminsId401JSONResponse ErrMsg
+
+func (response DeleteApiAdminAccountAdminAccountAdminsId401JSONResponse) VisitDeleteApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(401)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type DeleteApiAdminAccountAdminAccountAdminsId404JSONResponse ErrMsg
+
+func (response DeleteApiAdminAccountAdminAccountAdminsId404JSONResponse) VisitDeleteApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(404)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type DeleteApiAdminAccountAdminAccountAdminsId500JSONResponse ErrMsg
+
+func (response DeleteApiAdminAccountAdminAccountAdminsId500JSONResponse) VisitDeleteApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(500)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type GetApiAdminAccountAdminAccountAdminsIdRequestObject struct {
+	AccountAdminsId AccountAdminID `json:"account_admins_id"`
+}
+
+type GetApiAdminAccountAdminAccountAdminsIdResponseObject interface {
+	VisitGetApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error
+}
+
+type GetApiAdminAccountAdminAccountAdminsId200JSONResponse AccountAdmin
+
+func (response GetApiAdminAccountAdminAccountAdminsId200JSONResponse) VisitGetApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type GetApiAdminAccountAdminAccountAdminsId400JSONResponse ErrMsg
+
+func (response GetApiAdminAccountAdminAccountAdminsId400JSONResponse) VisitGetApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(400)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type GetApiAdminAccountAdminAccountAdminsId401JSONResponse ErrMsg
+
+func (response GetApiAdminAccountAdminAccountAdminsId401JSONResponse) VisitGetApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(401)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type GetApiAdminAccountAdminAccountAdminsId404JSONResponse ErrMsg
+
+func (response GetApiAdminAccountAdminAccountAdminsId404JSONResponse) VisitGetApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(404)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type GetApiAdminAccountAdminAccountAdminsId500JSONResponse ErrMsg
+
+func (response GetApiAdminAccountAdminAccountAdminsId500JSONResponse) VisitGetApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(500)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PutApiAdminAccountAdminAccountAdminsIdRequestObject struct {
+	AccountAdminsId AccountAdminID `json:"account_admins_id"`
+	Body            *PutApiAdminAccountAdminAccountAdminsIdJSONRequestBody
+}
+
+type PutApiAdminAccountAdminAccountAdminsIdResponseObject interface {
+	VisitPutApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error
+}
+
+type PutApiAdminAccountAdminAccountAdminsId200Response struct {
+}
+
+func (response PutApiAdminAccountAdminAccountAdminsId200Response) VisitPutApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type PutApiAdminAccountAdminAccountAdminsId400JSONResponse ErrMsg
+
+func (response PutApiAdminAccountAdminAccountAdminsId400JSONResponse) VisitPutApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(400)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PutApiAdminAccountAdminAccountAdminsId401JSONResponse ErrMsg
+
+func (response PutApiAdminAccountAdminAccountAdminsId401JSONResponse) VisitPutApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(401)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PutApiAdminAccountAdminAccountAdminsId404JSONResponse ErrMsg
+
+func (response PutApiAdminAccountAdminAccountAdminsId404JSONResponse) VisitPutApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(404)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PutApiAdminAccountAdminAccountAdminsId500JSONResponse ErrMsg
+
+func (response PutApiAdminAccountAdminAccountAdminsId500JSONResponse) VisitPutApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(500)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostApiAdminLoginRequestObject struct {
+	Body *PostApiAdminLoginJSONRequestBody
+}
+
+type PostApiAdminLoginResponseObject interface {
+	VisitPostApiAdminLoginResponse(w http.ResponseWriter) error
+}
+
+type PostApiAdminLogin200JSONResponse struct {
+	Token *string `json:"token,omitempty"`
+}
+
+func (response PostApiAdminLogin200JSONResponse) VisitPostApiAdminLoginResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostApiAdminLogin400JSONResponse ErrMsg
+
+func (response PostApiAdminLogin400JSONResponse) VisitPostApiAdminLoginResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(400)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostApiAdminLogin401JSONResponse ErrMsg
+
+func (response PostApiAdminLogin401JSONResponse) VisitPostApiAdminLoginResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(401)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostApiAdminLogin500JSONResponse ErrMsg
+
+func (response PostApiAdminLogin500JSONResponse) VisitPostApiAdminLoginResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(500)
+
+	return json.NewEncoder(w).Encode(response)
 }
 
 type GetApiAuthGoogleCallbackRequestObject struct {
@@ -265,7 +690,7 @@ func (response GetApiJewellery200JSONResponse) VisitGetApiJewelleryResponse(w ht
 	return json.NewEncoder(w).Encode(response)
 }
 
-type GetApiJewellery400JSONResponse ErrorMessage
+type GetApiJewellery400JSONResponse ErrMsg
 
 func (response GetApiJewellery400JSONResponse) VisitGetApiJewelleryResponse(w http.ResponseWriter) error {
 	w.Header().Set("Content-Type", "application/json")
@@ -274,7 +699,7 @@ func (response GetApiJewellery400JSONResponse) VisitGetApiJewelleryResponse(w ht
 	return json.NewEncoder(w).Encode(response)
 }
 
-type GetApiJewellery500JSONResponse ErrorMessage
+type GetApiJewellery500JSONResponse ErrMsg
 
 func (response GetApiJewellery500JSONResponse) VisitGetApiJewelleryResponse(w http.ResponseWriter) error {
 	w.Header().Set("Content-Type", "application/json")
@@ -288,6 +713,24 @@ type StrictServerInterface interface {
 	// Display the main page
 	// (GET /api)
 	GetApi(ctx context.Context, request GetApiRequestObject) (GetApiResponseObject, error)
+
+	// (GET /api/admin/account_admin)
+	GetApiAdminAccountAdmin(ctx context.Context, request GetApiAdminAccountAdminRequestObject) (GetApiAdminAccountAdminResponseObject, error)
+
+	// (POST /api/admin/account_admin)
+	PostApiAdminAccountAdmin(ctx context.Context, request PostApiAdminAccountAdminRequestObject) (PostApiAdminAccountAdminResponseObject, error)
+
+	// (DELETE /api/admin/account_admin/{account_admins_id})
+	DeleteApiAdminAccountAdminAccountAdminsId(ctx context.Context, request DeleteApiAdminAccountAdminAccountAdminsIdRequestObject) (DeleteApiAdminAccountAdminAccountAdminsIdResponseObject, error)
+
+	// (GET /api/admin/account_admin/{account_admins_id})
+	GetApiAdminAccountAdminAccountAdminsId(ctx context.Context, request GetApiAdminAccountAdminAccountAdminsIdRequestObject) (GetApiAdminAccountAdminAccountAdminsIdResponseObject, error)
+
+	// (PUT /api/admin/account_admin/{account_admins_id})
+	PutApiAdminAccountAdminAccountAdminsId(ctx context.Context, request PutApiAdminAccountAdminAccountAdminsIdRequestObject) (PutApiAdminAccountAdminAccountAdminsIdResponseObject, error)
+
+	// (POST /api/admin/login)
+	PostApiAdminLogin(ctx context.Context, request PostApiAdminLoginRequestObject) (PostApiAdminLoginResponseObject, error)
 	// Handle Google OAuth2 callback
 	// (GET /api/auth/google/callback)
 	GetApiAuthGoogleCallback(ctx context.Context, request GetApiAuthGoogleCallbackRequestObject) (GetApiAuthGoogleCallbackResponseObject, error)
@@ -297,7 +740,7 @@ type StrictServerInterface interface {
 	// Health Check
 	// (GET /api/health_check)
 	GetApiHealthCheck(ctx context.Context, request GetApiHealthCheckRequestObject) (GetApiHealthCheckResponseObject, error)
-	// Jewellery List
+
 	// (GET /api/jewellery)
 	GetApiJewellery(ctx context.Context, request GetApiJewelleryRequestObject) (GetApiJewelleryResponseObject, error)
 }
@@ -332,6 +775,186 @@ func (sh *strictHandler) GetApi(ctx *gin.Context) {
 		ctx.Status(http.StatusInternalServerError)
 	} else if validResponse, ok := response.(GetApiResponseObject); ok {
 		if err := validResponse.VisitGetApiResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("Unexpected response type: %T", response))
+	}
+}
+
+// GetApiAdminAccountAdmin operation middleware
+func (sh *strictHandler) GetApiAdminAccountAdmin(ctx *gin.Context) {
+	var request GetApiAdminAccountAdminRequestObject
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiAdminAccountAdmin(ctx, request.(GetApiAdminAccountAdminRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiAdminAccountAdmin")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiAdminAccountAdminResponseObject); ok {
+		if err := validResponse.VisitGetApiAdminAccountAdminResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("Unexpected response type: %T", response))
+	}
+}
+
+// PostApiAdminAccountAdmin operation middleware
+func (sh *strictHandler) PostApiAdminAccountAdmin(ctx *gin.Context) {
+	var request PostApiAdminAccountAdminRequestObject
+
+	var body PostApiAdminAccountAdminJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiAdminAccountAdmin(ctx, request.(PostApiAdminAccountAdminRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiAdminAccountAdmin")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiAdminAccountAdminResponseObject); ok {
+		if err := validResponse.VisitPostApiAdminAccountAdminResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("Unexpected response type: %T", response))
+	}
+}
+
+// DeleteApiAdminAccountAdminAccountAdminsId operation middleware
+func (sh *strictHandler) DeleteApiAdminAccountAdminAccountAdminsId(ctx *gin.Context, accountAdminsId AccountAdminID) {
+	var request DeleteApiAdminAccountAdminAccountAdminsIdRequestObject
+
+	request.AccountAdminsId = accountAdminsId
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.DeleteApiAdminAccountAdminAccountAdminsId(ctx, request.(DeleteApiAdminAccountAdminAccountAdminsIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "DeleteApiAdminAccountAdminAccountAdminsId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(DeleteApiAdminAccountAdminAccountAdminsIdResponseObject); ok {
+		if err := validResponse.VisitDeleteApiAdminAccountAdminAccountAdminsIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("Unexpected response type: %T", response))
+	}
+}
+
+// GetApiAdminAccountAdminAccountAdminsId operation middleware
+func (sh *strictHandler) GetApiAdminAccountAdminAccountAdminsId(ctx *gin.Context, accountAdminsId AccountAdminID) {
+	var request GetApiAdminAccountAdminAccountAdminsIdRequestObject
+
+	request.AccountAdminsId = accountAdminsId
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiAdminAccountAdminAccountAdminsId(ctx, request.(GetApiAdminAccountAdminAccountAdminsIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiAdminAccountAdminAccountAdminsId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiAdminAccountAdminAccountAdminsIdResponseObject); ok {
+		if err := validResponse.VisitGetApiAdminAccountAdminAccountAdminsIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("Unexpected response type: %T", response))
+	}
+}
+
+// PutApiAdminAccountAdminAccountAdminsId operation middleware
+func (sh *strictHandler) PutApiAdminAccountAdminAccountAdminsId(ctx *gin.Context, accountAdminsId AccountAdminID) {
+	var request PutApiAdminAccountAdminAccountAdminsIdRequestObject
+
+	request.AccountAdminsId = accountAdminsId
+
+	var body PutApiAdminAccountAdminAccountAdminsIdJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PutApiAdminAccountAdminAccountAdminsId(ctx, request.(PutApiAdminAccountAdminAccountAdminsIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PutApiAdminAccountAdminAccountAdminsId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PutApiAdminAccountAdminAccountAdminsIdResponseObject); ok {
+		if err := validResponse.VisitPutApiAdminAccountAdminAccountAdminsIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("Unexpected response type: %T", response))
+	}
+}
+
+// PostApiAdminLogin operation middleware
+func (sh *strictHandler) PostApiAdminLogin(ctx *gin.Context) {
+	var request PostApiAdminLoginRequestObject
+
+	var body PostApiAdminLoginJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiAdminLogin(ctx, request.(PostApiAdminLoginRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiAdminLogin")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiAdminLoginResponseObject); ok {
+		if err := validResponse.VisitPostApiAdminLoginResponse(ctx.Writer); err != nil {
 			ctx.Error(err)
 		}
 	} else if response != nil {
@@ -452,25 +1075,31 @@ func (sh *strictHandler) GetApiJewellery(ctx *gin.Context) {
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/7xWW2/bOBP9KwS/PsqS7MRJISD4kNZp6216QbuXh25hjKWRxJQXlaSSGIH/+2Io3+1N",
-	"6u5iHwxL4hnOmQsP54HnRjVGo/aOZw/c5TUqCI9X1hr7Dp2DCum9QJdb0XhhNM+6VbZcjnhjTYPWCwy2",
-	"6gmzq6WZnzXIM+68Fbri84jfonUBumt52TRS5EBv7PcFaM9+Po/4L3iHUqKd0R7btLZ2fOB4D6qRZP8H",
-	"FoXQFXtlLN6iZUKzjxK80K1id8LXDNgbkGUvFzaXyEzJRgKU0YWL2CAeMKV4xBXcX6OufM2zwXC4yy3i",
-	"9z0DjejlpsAKdQ/vvYWeh6qjNuXZFj8KRSiocNJauc229r5xWZIoLATEXpQl6FmcG5UIlwSb5NfuY3KV",
-	"GzX2qK4HyQLXK7sYp6CLHjHr9c+G56dnJ8NJPz0dDk+eT65Gk3fxTVP9/882TQdnppm0Tl304/Nh1I/T",
-	"6CxOu4VnuTXN+4s07kfd7zn9urUCS2ilHxObi/cm/F/egpAwlTjWHq0G2UGPNiiVv7jDacN/JsfrnFKG",
-	"b5bNMhEFQZ5ZLHnG/5esj0WyOBPJqrHGI+pUDQof7aJ/pSWCF2LaWJFv++unaZpGvDRWgecZL6UBf3a6",
-	"zorQHqvA42k/3fbk6HsL2gs/2/W14Unon/az2j2c1cUGZnqDueebh3c82peA1SIbj/gGnbYVxWEtwPuu",
-	"b0Ym3xcA/krogpnWM2UsMpjS4+c7qLpYwrELZy1LEtd9joUhlkKX5oBCfRxT6dlb8a1VqExMnIQPrbH8",
-	"xi4/jvmGyvF+nMYp7Wka1NAInvGTOI0HJKng68A6Cd8feIWe/kjRgg6OC57x1+gvG8EjbtE1RrtO6QZp",
-	"uk/wHQjNGqiQFcI1EmZYMNfmOTpXtlLOQvldqxSQePJRB2K+RqaWpgFDhBJofZ1UxlQSkxyknEL+7QmW",
-	"l62vXweLl0sDCtOCQo/W8ezLLuUPZDJgzoNHtkJyKkFoJpL55VHkARUy8b0VFgueedtitLjUiNRui0R/",
-	"448a+El3BDrK29edIp2kg/0ifcJCWMw982Y78wxKj5bVoAtJKkOLq7xvV+4NYZB1qWbLmDaxexWUphL6",
-	"h8t3HdDHhrPNJ3hc99Sa/VgLL6jeB/Br8jWC9PUkr/HJtnsToC8D8vA5yY32qMMGsJ4zkhvXDQrrkj4y",
-	"5oTri1ro7QEt2myTLyu7r3sKSMjtBH5eHVC2ZL5b7RAe6+Jb5edmcwx6JDnrcanjiM6/MMXsqKz80K1J",
-	"wc3/YfqFR+WO8LjKL1gLs0Pp/fCWUKdH8njM/dbcfMDjCyjYpy7R5Hr4H7pejlHsM1oacwN+p5vWl+y1",
-	"cIuOdAF+SJ+vTQ6Sob4V1mhFAexcnJIAtXE+e56en3PSwG4e2NvqslBBUxbqCuF1X6F/c0GQF6iW3g7I",
-	"uK+J7wpmuvf51/lfAQAA//8jUyPT8QwAAA==",
+	"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",
+	"MXZhNWPw9Hz6dwAAAP//nQISYGEfAAA=",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

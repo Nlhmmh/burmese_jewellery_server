@@ -7,9 +7,47 @@ import (
 	openapi_types "github.com/deepmap/oapi-codegen/pkg/types"
 )
 
-// ErrorMessage Error Message
-type ErrorMessage struct {
-	// Message Error MEssage
+// Defines values for AccountAdminAccountAdminRole.
+const (
+	Admin AccountAdminAccountAdminRole = "admin"
+	Staff AccountAdminAccountAdminRole = "staff"
+)
+
+// Defines values for AccountAdminAccountAdminStatus.
+const (
+	Active      AccountAdminAccountAdminStatus = "active"
+	Deactivated AccountAdminAccountAdminStatus = "deactivated"
+	Locked      AccountAdminAccountAdminStatus = "locked"
+)
+
+// AccountAdmin defines model for AccountAdmin.
+type AccountAdmin struct {
+	// AccountAdminId Account Admin ID
+	AccountAdminId     *AccountAdminID                 `json:"account_admin_id,omitempty"`
+	AccountAdminRole   *AccountAdminAccountAdminRole   `db:"password" json:"account_admin_role,omitempty"`
+	AccountAdminStatus *AccountAdminAccountAdminStatus `db:"account_admin_status" json:"account_admin_status,omitempty"`
+	Mail               *openapi_types.Email            `db:"mail" json:"mail,omitempty"`
+	Password           *string                         `db:"password" json:"password,omitempty"`
+}
+
+// AccountAdminAccountAdminRole defines model for AccountAdmin.AccountAdminRole.
+type AccountAdminAccountAdminRole string
+
+// AccountAdminAccountAdminStatus defines model for AccountAdmin.AccountAdminStatus.
+type AccountAdminAccountAdminStatus string
+
+// AccountAdminID Account Admin ID
+type AccountAdminID = openapi_types.UUID
+
+// AccountAdminLoginParam defines model for AccountAdminLoginParam.
+type AccountAdminLoginParam struct {
+	Mail     *openapi_types.Email `db:"mail" json:"mail,omitempty"`
+	Password *string              `db:"password" json:"password,omitempty"`
+}
+
+// ErrMsg Error Message
+type ErrMsg struct {
+	// Message Error Message
 	Message *string `json:"message,omitempty"`
 
 	// Version Application Version
@@ -42,6 +80,15 @@ type GetApiAuthGoogleCallbackParams struct {
 	// Code OAuth2 code parameter
 	Code string `form:"code" json:"code"`
 }
+
+// PostApiAdminAccountAdminJSONRequestBody defines body for PostApiAdminAccountAdmin for application/json ContentType.
+type PostApiAdminAccountAdminJSONRequestBody = AccountAdmin
+
+// PutApiAdminAccountAdminAccountAdminsIdJSONRequestBody defines body for PutApiAdminAccountAdminAccountAdminsId for application/json ContentType.
+type PutApiAdminAccountAdminAccountAdminsIdJSONRequestBody = AccountAdmin
+
+// PostApiAdminLoginJSONRequestBody defines body for PostApiAdminLogin for application/json ContentType.
+type PostApiAdminLoginJSONRequestBody = AccountAdminLoginParam
 
 // GetApiJewelleryJSONRequestBody defines body for GetApiJewellery for application/json ContentType.
 type GetApiJewelleryJSONRequestBody = Jewellery

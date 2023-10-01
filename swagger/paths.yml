@@ -1,5 +1,7 @@
 /api/health_check:
   get:
+    tags:
+      - others
     summary: Health Check
     responses:
       200:
@@ -17,7 +19,8 @@
 
 /api/jewellery:
   get:
-    summary: Jewellery List
+    tags:
+      - app
     requestBody:
       content:
         application/json:
@@ -33,32 +36,37 @@
               items:
                 $ref: "#/components/schemas/Jewellery"
       400:
-        description: Bad Request
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorMessage"
+              $ref: "#/components/schemas/ErrMsg"
       500:
-        description: Internal Server Error
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorMessage"
+              $ref: "#/components/schemas/ErrMsg"
 
 /api:
   get:
+    tags:
+      - app
     summary: Display the main page
     responses:
       200:
         description: Main page displayed successfully
+
 /api/auth/google/login:
   get:
+    tags:
+      - app
     summary: Initiate Google OAuth2 login
     responses:
       302:
         description: Redirect to Google OAuth2 login page
 /api/auth/google/callback:
   get:
+    tags:
+      - app
     summary: Handle Google OAuth2 callback
     parameters:
       - name: state
@@ -76,3 +84,202 @@
     responses:
       302:
         description: Redirect to the main page after handling the callback
+
+/api/admin/login:
+  post:
+    tags:
+      - admin
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AccountAdminLoginParam"
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      400:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      500:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      401:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+
+/api/admin/account_admin:
+  get:
+    tags:
+      - admin
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountAdmin"
+      400:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      500:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      401:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+  post:
+    tags:
+      - admin
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AccountAdmin"
+    responses:
+      200:
+        description: OK
+      400:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      500:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      401:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+/api/admin/account_admin/{account_admins_id}:
+  get:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: account_admins_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/AccountAdminID"
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountAdmin"
+      400:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      500:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      401:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      404:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+  put:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: account_admins_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/AccountAdminID"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AccountAdmin"
+    responses:
+      200:
+        description: OK
+      400:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      500:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      401:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      404:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+  delete:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: account_admins_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/AccountAdminID"
+    responses:
+      204:
+        description: Deleted
+      400:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      500:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      401:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"
+      404:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrMsg"

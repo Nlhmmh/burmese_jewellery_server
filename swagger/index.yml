@@ -15,8 +15,8 @@ servers:
 tags:
   - name: admin
     description: Admin
-  - name: user
-    description: User
+  - name: app
+    description: App
   - name: others
     description: Others
 

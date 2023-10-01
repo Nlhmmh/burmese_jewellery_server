@@ -39,7 +39,67 @@ Jewellery:
         db: image_url
       example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp
 
-ErrorMessage:
+AccountAdminID:
+  description: Account Admin ID
+  type: string
+  format: uuid
+AccountAdmin:
+  type: object
+  properties:
+    account_admin_id:
+      $ref: "#/components/schemas/AccountAdminID"
+      x-oapi-codegen-extra-tags:
+        db: account_admin_id
+    mail:
+      type: string
+      maxLength: 255
+      format: email
+      x-oapi-codegen-extra-tags:
+        db: mail
+      example: test@gmail.com
+    password:
+      type: string
+      maxLength: 255
+      x-oapi-codegen-extra-tags:
+        db: password
+      example: "*****"
+    account_admin_role:
+      type: string
+      maxLength: 255
+      x-oapi-codegen-extra-tags:
+        db: password
+      example: staff
+      enum:
+        - admin
+        - staff
+    account_admin_status:
+      type: string
+      maxLength: 255
+      enum:
+        - active
+        - locked
+        - deactivated
+      x-oapi-codegen-extra-tags:
+        db: account_admin_status
+      example: active
+AccountAdminLoginParam:
+  type: object
+  properties:
+    mail:
+      type: string
+      maxLength: 255
+      format: email
+      x-oapi-codegen-extra-tags:
+        db: mail
+      example: test@gmail.com
+    password:
+      type: string
+      maxLength: 255
+      x-oapi-codegen-extra-tags:
+        db: password
+      example: "*****"
+
+ErrMsg:
   description: Error Message
   properties:
     version:
@@ -47,4 +107,4 @@ ErrorMessage:
       description: Application Version
     message:
       type: string
-      description: Error MEssage
+      description: Error Message
