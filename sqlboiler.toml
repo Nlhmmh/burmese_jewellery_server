@@ -1,6 +1,7 @@
 output   = "orm"
 wipe     = true
 no-tests = true
+pkgname  = "orm"
 
 [psql]
   dbname = "burmese_jewellery"

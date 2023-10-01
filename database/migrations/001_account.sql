@@ -4,14 +4,14 @@ CREATE TYPE account_admin_role AS ENUM ('admin', 'staff');
 CREATE TYPE account_admin_status AS ENUM ('active', 'locked', 'deactivated');
 
 CREATE TABLE IF NOT EXISTS account_admins (
-	account_admins_id    UUID NOT NULL DEFAULT gen_random_uuid(),
+	account_admin_id    UUID NOT NULL DEFAULT gen_random_uuid(),
 	mail                 TEXT NOT NULL,
 	password             TEXT NOT NULL,
 	account_admin_role   account_admin_role NOT NULL,
 	account_admin_status account_admin_status NOT NULL,
 	created_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT pk_account_admins_account_admins_id PRIMARY KEY (account_admins_id)
+	CONSTRAINT pk_account_admins PRIMARY KEY (account_admin_id)
 );
 
 CREATE TYPE login_type AS ENUM ('email', 'phone', 'google', 'facebook');
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS accounts (
 	account_status account_status NOT NULL,
 	created_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT pk_accounts_account_id PRIMARY KEY (account_id)
+	CONSTRAINT pk_accounts PRIMARY KEY (account_id)
 );
 
 CREATE TYPE gender AS ENUM ('male', 'female', 'unspecified');
@@ -40,6 +40,6 @@ CREATE TABLE IF NOT EXISTS account_profiles (
 	gender     gender,
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT pk_account_profiles_account_id PRIMARY KEY (account_id),
+	CONSTRAINT pk_account_profiles PRIMARY KEY (account_id),
 	CONSTRAINT fk_account_profiles_account_id FOREIGN KEY(account_id) REFERENCES accounts(account_id)
 );

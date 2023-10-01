@@ -71,7 +71,7 @@ folder account {
   }
 
   entity account_admins TRANSACTION {
-    * account_admins_id: uuid [PK]  
+    * account_admin_id: uuid [PK]  
     --
     * mail : VARCHAR(255)  
     * password : VARCHAR(255)  
