@@ -3,3 +3,4 @@ google:
     client_id: 972519204877-a0qnrktv6njp31v595s9qpnq7p9tsjlv.apps.googleusercontent.com
     client_secret: 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
     redirect_url: api/auth/google/callback
+jwt_expired_hours: 48

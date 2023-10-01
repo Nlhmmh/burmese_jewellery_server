@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"os"
 
 	"gopkg.in/yaml.v3"
@@ -19,11 +18,13 @@ type Config struct {
 			RedirectURL  string `env:"redirect_url"`
 		} `yaml:"oauth2_config"`
 	} `yaml:"google"`
+
+	JWTExpiredHours int64 `yaml:"jwt_expired_hours"`
 }
 
 func init() {
 
-	configFile, err := os.ReadFile("config.yaml")
+	configFile, err := os.ReadFile(configFilePath)
 	if err != nil {
 		panic(err)
 	}
@@ -31,8 +32,6 @@ func init() {
 	if err := yaml.Unmarshal(configFile, &config); err != nil {
 		panic(err)
 	}
-
-	fmt.Println(config)
 
 }
 

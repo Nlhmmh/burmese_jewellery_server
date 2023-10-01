@@ -4,6 +4,7 @@ import (
 	"burmese_jewellery/dependency"
 	"burmese_jewellery/env"
 	"burmese_jewellery/handler"
+	"burmese_jewellery/server/middleware"
 	"context"
 	"fmt"
 	"net/http"
@@ -42,6 +43,7 @@ func NewServer() *server {
 	router.Use(
 		gin.RecoveryWithWriter(log.Logger),
 		gin.LoggerWithConfig(gin.LoggerConfig{Output: log.Logger}),
+		middleware.Auth(),
 	)
 	router.SetTrustedProxies(nil)
 	routerConfig := cors.DefaultConfig()
@@ -85,6 +87,7 @@ func (s *server) Run() error {
 		return err
 	}
 
+	// For Later
 	// if err := s.srv.ListenAndServeTLS(
 	// 	utils.CertsFile,
 	// 	utils.CertsKeyFile,
