@@ -5,6 +5,11 @@ Burmese Jewellery Server
 
 ## Development
 - Golang HTTP Server
+```
+make dk-up-db
+make dk-up-pgadmin
+make run
+```
 
 #### Server
 - Framework - Gin Server - https://github.com/gin-gonic/gin

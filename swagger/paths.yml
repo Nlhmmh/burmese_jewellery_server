@@ -36,11 +36,13 @@
               items:
                 $ref: "#/components/schemas/Jewellery"
       400:
+        description: Bad Request
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       500:
+        description: Internal Server Error
         content:
           application/json:
             schema:
@@ -106,16 +108,19 @@
                 token:
                   type: string
       400:
+        description: Bad Request
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       500:
+        description: Internal Server Error
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       401:
+        description: Unauthorized
         content:
           application/json:
             schema:
@@ -135,16 +140,19 @@
               items:
                 $ref: "#/components/schemas/AccountAdmin"
       400:
+        description: Bad Request
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       500:
+        description: Internal Server Error
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       401:
+        description: Unauthorized
         content:
           application/json:
             schema:
@@ -162,16 +170,19 @@
       200:
         description: OK
       400:
+        description: Bad Request
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       500:
+        description: Internal Server Error
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       401:
+        description: Unauthorized
         content:
           application/json:
             schema:
@@ -194,21 +205,25 @@
             schema:
               $ref: "#/components/schemas/AccountAdmin"
       400:
+        description: Bad Request
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       500:
+        description: Internal Server Error
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       401:
+        description: Unauthorized
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       404:
+        description: Not Found
         content:
           application/json:
             schema:
@@ -232,21 +247,25 @@
       200:
         description: OK
       400:
+        description: Bad Request
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       500:
+        description: Internal Server Error
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       401:
+        description: Unauthorized
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       404:
+        description: Not Found
         content:
           application/json:
             schema:
@@ -264,21 +283,25 @@
       204:
         description: Deleted
       400:
+        description: Bad Request
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       500:
+        description: Internal Server Error
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       401:
+        description: Unauthorized
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrMsg"
       404:
+        description: Not Found
         content:
           application/json:
             schema:

@@ -98,6 +98,9 @@ AccountAdminLoginParam:
       x-oapi-codegen-extra-tags:
         db: password
       example: "*****"
+  required:
+    - mail
+    - password
 
 ErrMsg:
   description: Error Message

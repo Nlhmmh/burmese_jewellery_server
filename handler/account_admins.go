@@ -12,20 +12,18 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
-	"golang.org/x/crypto/bcrypt"
 )
 
 // (POST /api/admin/login)
 func (h *Handler) PostApiAdminLogin(c *gin.Context) {
-
-	var resq models.AccountAdminLoginParam
-	if err := c.ShouldBindJSON(&resq); err != nil {
+	var req models.AccountAdminLoginParam
+	if err := c.ShouldBindJSON(&req); err != nil {
 		ers.BadRequest.New(err).Abort(c)
 		return
 	}
 
 	aa, err := orm.AccountAdmins(
-		qm.Where("mail=?", *resq.Mail),
+		qm.Where("mail=?", req.Mail),
 	).OneG(c)
 	if err != nil && errors.Is(err, sql.ErrNoRows) {
 		ers.UserWithEmailNotExist.New(err).Abort(c)
@@ -36,16 +34,11 @@ func (h *Handler) PostApiAdminLogin(c *gin.Context) {
 		return
 	}
 
-	// Check Password
-	if err := bcrypt.CompareHashAndPassword(
-		[]byte(aa.Password),
-		[]byte(*resq.Password),
-	); err != nil {
+	if err := auth.CompareHashAndPassword(aa.Password, req.Password); err != nil {
 		ers.PasswordWrong.New(err).Abort(c)
 		return
 	}
 
-	// Generate Token
 	token, err := auth.GenerateToken(aa.AccountAdminID, aa.AccountAdminRole)
 	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
@@ -53,7 +46,6 @@ func (h *Handler) PostApiAdminLogin(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, token)
-
 }
 
 // (GET /api/admin/account_admin)

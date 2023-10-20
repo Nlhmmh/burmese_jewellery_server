@@ -9,10 +9,11 @@ import (
 )
 
 var (
-	BadRequest                = ErrResp{statusCode: http.StatusBadRequest, Code: 4, Message: "Bad Request"}
-	InternalServer            = ErrResp{statusCode: http.StatusInternalServerError, Code: 5, Message: "Internal Server Error"}
-	NotFound                  = ErrResp{statusCode: http.StatusNotFound, Code: 10, Message: "Not Found"}
-	UnAuthorized              = ErrResp{statusCode: http.StatusUnauthorized, Code: 10, Message: "UnAuthorized"}
+	BadRequest     = ErrResp{statusCode: http.StatusBadRequest, Code: 4, Message: "Bad Request"}
+	InternalServer = ErrResp{statusCode: http.StatusInternalServerError, Code: 5, Message: "Internal Server Error"}
+	NotFound       = ErrResp{statusCode: http.StatusNotFound, Code: 10, Message: "Not Found"}
+	UnAuthorized   = ErrResp{statusCode: http.StatusUnauthorized, Code: 10, Message: "UnAuthorized"}
+
 	UserWithEmailNotExist     = ErrResp{statusCode: http.StatusNotFound, Code: 11, Message: "User with email does not exists"}
 	UserWithEmailAlreadyExist = ErrResp{statusCode: http.StatusConflict, Code: 12, Message: "User with email already exists"}
 	PasswordWrong             = ErrResp{statusCode: http.StatusBadRequest, Code: 13, Message: "Password is wrong"}

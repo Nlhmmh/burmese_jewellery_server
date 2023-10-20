@@ -41,8 +41,8 @@ type AccountAdminID = openapi_types.UUID
 
 // AccountAdminLoginParam defines model for AccountAdminLoginParam.
 type AccountAdminLoginParam struct {
-	Mail     *openapi_types.Email `db:"mail" json:"mail,omitempty"`
-	Password *string              `db:"password" json:"password,omitempty"`
+	Mail     openapi_types.Email `db:"mail" json:"mail"`
+	Password string              `db:"password" json:"password"`
 }
 
 // ErrMsg Error Message

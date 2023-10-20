@@ -35,9 +35,6 @@ func NewServer() *server {
 	}
 
 	// Set Server
-	if !env.Get().Debug {
-		gin.SetMode(gin.ReleaseMode)
-	}
 	router := gin.New()
 	router.Use(
 		gin.RecoveryWithWriter(log.Logger),
