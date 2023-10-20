@@ -23,8 +23,6 @@ type claims struct {
 
 // GenerateToken - Generate Tokens
 func GenerateToken(userID string, role orm.AccountAdminRole) (string, error) {
-
-	// Create Token
 	createdToken := jwt.NewWithClaims(
 		jwt.SigningMethodHS256,
 		claims{
@@ -37,20 +35,16 @@ func GenerateToken(userID string, role orm.AccountAdminRole) (string, error) {
 		},
 	)
 
-	// Sign Token
 	token, err := createdToken.SignedString([]byte(jwtSecureKey))
 	if err != nil {
 		return "", err
 	}
 
 	return token, nil
-
 }
 
 // ValidateToken - Validate Token
 func ValidateToken(encodedToken string) (*claims, error) {
-
-	// Parse JWT
 	token, err := jwt.ParseWithClaims(
 		encodedToken,
 		&claims{},
@@ -62,17 +56,14 @@ func ValidateToken(encodedToken string) (*claims, error) {
 		return nil, err
 	}
 
-	// IF token is invalid
 	if !token.Valid {
 		return nil, errors.New("token is invalid")
 	}
 
 	return token.Claims.(*claims), nil
-
 }
 
 func GetBearerToken(c *gin.Context) (string, error) {
-
 	authHeader := c.GetHeader("Authorization")
 	splittedTokenList := strings.Split(authHeader, " ")
 	if len(splittedTokenList) < 2 {
@@ -80,5 +71,4 @@ func GetBearerToken(c *gin.Context) (string, error) {
 	}
 
 	return splittedTokenList[1], nil
-
 }

@@ -9,8 +9,6 @@ import (
 )
 
 func NewDependency() error {
-
-	// Open Postgres DB
 	if err := newDB(fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		env.Get().DB.Host,
@@ -22,11 +20,9 @@ func NewDependency() error {
 		return err
 	}
 
-	// Boiler
 	boil.SetDB(postgresDB)
 	boil.DebugMode = true
 	boil.DebugWriter = log.Logger
 
 	return nil
-
 }

@@ -23,10 +23,18 @@ func Test_ValidateToken(t *testing.T) {
 	token, err := GenerateToken("testUserID", orm.AccountAdminRoleStaff)
 	assert.Nil(t, err)
 
-	claims, err := ValidateToken(token)
-	assert.Nil(t, err)
-	assert.Equal(t, "testUserID", claims.UserID)
-	assert.Equal(t, orm.AccountAdminRoleStaff.String(), claims.Role)
-	assert.Equal(t, time.Now().Add(time.Hour*time.Duration(config.Get().JWTExpiredHours)).Unix(), claims.ExpiresAt)
+	t.Run("ok", func(t *testing.T) {
+		claims, err := ValidateToken(token)
+		assert.Nil(t, err)
+		assert.Equal(t, "testUserID", claims.UserID)
+		assert.Equal(t, orm.AccountAdminRoleStaff.String(), claims.Role)
+		assert.Equal(t, time.Now().Add(time.Hour*time.Duration(config.Get().JWTExpiredHours)).Unix(), claims.ExpiresAt)
+	})
+
+	t.Run("error", func(t *testing.T) {
+		_, err := ValidateToken("invalidToken")
+		assert.NotNil(t, err)
+		assert.EqualError(t, err, "token contains an invalid number of segments")
+	})
 
 }

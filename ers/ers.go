@@ -21,12 +21,11 @@ var (
 )
 
 type ErrResp struct {
-	Code    int    `json:"code"`
-	Message string `json:"message"`
-	Error   string `json:"error"`
-
-	statusCode int   `json:"-"`
-	error      error `json:"-"`
+	Code       int    `json:"code"`
+	Message    string `json:"message"`
+	Error      string `json:"error"`
+	statusCode int    `json:"-"`
+	error      error  `json:"-"`
 }
 
 func (e ErrResp) New(err error) *ErrResp {

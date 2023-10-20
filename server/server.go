@@ -26,7 +26,6 @@ type server struct {
 }
 
 func NewServer() *server {
-
 	// Logging
 	newLog(true)
 
@@ -76,31 +75,28 @@ func NewServer() *server {
 			Handler: router,
 		},
 	}
-
 }
 
 func (s *server) Run() error {
-
 	log.Info().Msgf("Server listening on %s", s.srv.Addr)
 
-	if err := s.srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		return err
+	if env.Get().UseTLS {
+		if err := s.srv.ListenAndServeTLS(
+			certsFile,
+			certsKeyFile,
+		); err != nil && err != http.ErrServerClosed {
+			return err
+		}
+	} else {
+		if err := s.srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			return err
+		}
 	}
 
-	// For Later
-	// if err := s.srv.ListenAndServeTLS(
-	// 	utils.CertsFile,
-	// 	utils.CertsKeyFile,
-	// ); err != nil && err != http.ErrServerClosed {
-	// 	return err
-	// }
-
 	return nil
-
 }
 
 func (s *server) Shutdown() {
-
 	log.Info().Msg("Server shutting down...")
 
 	ctx, cancel := context.WithTimeout(context.Background(), serverTimeOut)
@@ -111,5 +107,4 @@ func (s *server) Shutdown() {
 	}
 
 	log.Info().Msg("Server terminated")
-
 }

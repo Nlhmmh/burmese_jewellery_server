@@ -19,6 +19,7 @@ type Env struct {
 	}
 	AllowOrigins []string `env:"ALLOW_ORIGINS" envDefault:"[]"`
 	Debug        bool     `env:"DEBUG" envDefault:"false"`
+	UseTLS       bool     `env:"USE_TLS" envDefault:"false"`
 }
 
 var (
@@ -26,11 +27,9 @@ var (
 )
 
 func init() {
-
 	if err := env_v9.Parse(&env); err != nil {
 		panic(err)
 	}
-
 }
 
 func Get() Env {

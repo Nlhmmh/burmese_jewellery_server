@@ -23,7 +23,6 @@ type Config struct {
 }
 
 func init() {
-
 	configFile, err := os.ReadFile(configFilePath)
 	if err != nil {
 		panic(err)
@@ -32,7 +31,6 @@ func init() {
 	if err := yaml.Unmarshal(configFile, &config); err != nil {
 		panic(err)
 	}
-
 }
 
 func Get() Config {

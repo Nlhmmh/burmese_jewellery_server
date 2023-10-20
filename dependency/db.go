@@ -7,9 +7,7 @@ import (
 
 var postgresDB *sql.DB
 
-// newDB - open database
 func newDB(dbSource string) error {
-
 	db, err := sql.Open("postgres", dbSource)
 	if err != nil {
 		return err
@@ -26,5 +24,4 @@ func newDB(dbSource string) error {
 	postgresDB = db
 
 	return nil
-
 }

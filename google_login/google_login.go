@@ -49,7 +49,6 @@ func GetLoginURL() string {
 }
 
 func Callback(ctx context.Context, state string, code string) (*UserInfo, error) {
-
 	if state != oauth2State {
 		return nil, errors.New("oauth state does not match")
 	}
@@ -71,5 +70,4 @@ func Callback(ctx context.Context, state string, code string) (*UserInfo, error)
 	defer resp.Body.Close()
 
 	return userInfo, err
-
 }

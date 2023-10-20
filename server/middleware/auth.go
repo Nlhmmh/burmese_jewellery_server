@@ -12,7 +12,6 @@ import (
 // Auth - Auth JWT MiddleWare
 func Auth() gin.HandlerFunc {
 	return func(c *gin.Context) {
-
 		fullPath := c.FullPath()
 
 		// Check White List
@@ -52,6 +51,5 @@ func Auth() gin.HandlerFunc {
 		}
 
 		c.Next()
-
 	}
 }
