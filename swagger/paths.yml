@@ -89,6 +89,7 @@
 
 /api/admin/login:
   post:
+    summary: Login as admin user
     tags:
       - admin
     requestBody:
@@ -128,6 +129,7 @@
 
 /api/admin/account_admin:
   get:
+    summary: List admin user
     tags:
       - admin
     responses:
@@ -189,6 +191,7 @@
               $ref: "#/components/schemas/ErrMsg"
 /api/admin/account_admin/{account_admins_id}:
   get:
+    summary: Get admin user
     tags:
       - admin
     parameters:
@@ -229,6 +232,7 @@
             schema:
               $ref: "#/components/schemas/ErrMsg"
   put:
+    summary: Edit admin user
     tags:
       - admin
     parameters:
@@ -271,6 +275,7 @@
             schema:
               $ref: "#/components/schemas/ErrMsg"
   delete:
+    summary: Delete admin user
     tags:
       - admin
     parameters:

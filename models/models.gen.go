@@ -23,11 +23,10 @@ const (
 // AccountAdmin defines model for AccountAdmin.
 type AccountAdmin struct {
 	// AccountAdminId Account Admin ID
-	AccountAdminId     *AccountAdminID                 `json:"account_admin_id,omitempty"`
-	AccountAdminRole   *AccountAdminAccountAdminRole   `db:"password" json:"account_admin_role,omitempty"`
-	AccountAdminStatus *AccountAdminAccountAdminStatus `db:"account_admin_status" json:"account_admin_status,omitempty"`
-	Mail               *openapi_types.Email            `db:"mail" json:"mail,omitempty"`
-	Password           *string                         `db:"password" json:"password,omitempty"`
+	AccountAdminId     AccountAdminID                 `json:"account_admin_id"`
+	AccountAdminRole   AccountAdminAccountAdminRole   `db:"password" json:"account_admin_role"`
+	AccountAdminStatus AccountAdminAccountAdminStatus `db:"account_admin_status" json:"account_admin_status"`
+	Mail               openapi_types.Email            `db:"mail" json:"mail"`
 }
 
 // AccountAdminAccountAdminRole defines model for AccountAdmin.AccountAdminRole.

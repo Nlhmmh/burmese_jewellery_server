@@ -4,7 +4,7 @@ CREATE TYPE account_admin_role AS ENUM ('admin', 'staff');
 CREATE TYPE account_admin_status AS ENUM ('active', 'locked', 'deactivated');
 
 CREATE TABLE IF NOT EXISTS account_admins (
-	account_admin_id    UUID NOT NULL DEFAULT gen_random_uuid(),
+	account_admin_id     UUID NOT NULL DEFAULT gen_random_uuid(),
 	mail                 TEXT NOT NULL,
 	password             TEXT NOT NULL,
 	account_admin_role   account_admin_role NOT NULL,

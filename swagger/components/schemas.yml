@@ -57,12 +57,12 @@ AccountAdmin:
       x-oapi-codegen-extra-tags:
         db: mail
       example: test@gmail.com
-    password:
-      type: string
-      maxLength: 255
-      x-oapi-codegen-extra-tags:
-        db: password
-      example: "*****"
+    # password:
+    #   type: string
+    #   maxLength: 255
+    #   x-oapi-codegen-extra-tags:
+    #     db: password
+    #   example: "*****"
     account_admin_role:
       type: string
       maxLength: 255
@@ -82,6 +82,12 @@ AccountAdmin:
       x-oapi-codegen-extra-tags:
         db: account_admin_status
       example: active
+  required:
+    - account_admin_id
+    - mail
+    # - password
+    - account_admin_role
+    - account_admin_status
 AccountAdminLoginParam:
   type: object
   properties:

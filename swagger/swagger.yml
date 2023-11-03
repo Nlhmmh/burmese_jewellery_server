@@ -104,6 +104,7 @@ paths:
           description: Redirect to the main page after handling the callback
   /api/admin/login:
     post:
+      summary: Login as admin user
       tags:
         - admin
       requestBody:
@@ -142,6 +143,7 @@ paths:
                 $ref: '#/components/schemas/ErrMsg'
   /api/admin/account_admin:
     get:
+      summary: List admin user
       tags:
         - admin
       responses:
@@ -203,6 +205,7 @@ paths:
                 $ref: '#/components/schemas/ErrMsg'
   /api/admin/account_admin/{account_admins_id}:
     get:
+      summary: Get admin user
       tags:
         - admin
       parameters:
@@ -243,6 +246,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrMsg'
     put:
+      summary: Edit admin user
       tags:
         - admin
       parameters:
@@ -285,6 +289,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrMsg'
     delete:
+      summary: Delete admin user
       tags:
         - admin
       parameters:
@@ -389,12 +394,6 @@ components:
           x-oapi-codegen-extra-tags:
             db: mail
           example: test@gmail.com
-        password:
-          type: string
-          maxLength: 255
-          x-oapi-codegen-extra-tags:
-            db: password
-          example: '*****'
         account_admin_role:
           type: string
           maxLength: 255
@@ -414,6 +413,11 @@ components:
           x-oapi-codegen-extra-tags:
             db: account_admin_status
           example: active
+      required:
+        - account_admin_id
+        - mail
+        - account_admin_role
+        - account_admin_status
     AccountAdminLoginParam:
       type: object
       properties:

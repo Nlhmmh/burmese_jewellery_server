@@ -49,10 +49,39 @@ func (h *Handler) PostApiAdminLogin(c *gin.Context) {
 }
 
 // (GET /api/admin/account_admin)
-func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context) {}
+func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context) {
+	aaList, err := orm.AccountAdmins().AllG(c)
+	if err != nil {
+		ers.InternalServer.New(err).Abort(c)
+		return
+	}
+
+	resp, err := models.MapAccountAdminListFromORM(aaList)
+	if err != nil {
+		ers.InternalServer.New(err).Abort(c)
+		return
+	}
+
+	c.JSON(http.StatusOK, resp)
+}
 
 // (GET /api/admin/account_admin/{account_admins_id})
 func (h *Handler) GetApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.AccountAdminID) {
+	aa, err := orm.AccountAdmins(
+		qm.Where("account_admin_id=?", accountAdminsId),
+	).OneG(c)
+	if err != nil {
+		ers.InternalServer.New(err).Abort(c)
+		return
+	}
+
+	resp := &models.AccountAdmin{}
+	if err := resp.MapFromORM(aa); err != nil {
+		ers.InternalServer.New(err).Abort(c)
+		return
+	}
+
+	c.JSON(http.StatusOK, resp)
 }
 
 // (POST /api/admin/account_admin)

@@ -27,22 +27,22 @@ type ServerInterface interface {
 	// Display the main page
 	// (GET /api)
 	GetApi(c *gin.Context)
-
+	// List admin user
 	// (GET /api/admin/account_admin)
 	GetApiAdminAccountAdmin(c *gin.Context)
 
 	// (POST /api/admin/account_admin)
 	PostApiAdminAccountAdmin(c *gin.Context)
-
+	// Delete admin user
 	// (DELETE /api/admin/account_admin/{account_admins_id})
 	DeleteApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId AccountAdminID)
-
+	// Get admin user
 	// (GET /api/admin/account_admin/{account_admins_id})
 	GetApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId AccountAdminID)
-
+	// Edit admin user
 	// (PUT /api/admin/account_admin/{account_admins_id})
 	PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId AccountAdminID)
-
+	// Login as admin user
 	// (POST /api/admin/login)
 	PostApiAdminLogin(c *gin.Context)
 	// Handle Google OAuth2 callback
@@ -713,22 +713,22 @@ type StrictServerInterface interface {
 	// Display the main page
 	// (GET /api)
 	GetApi(ctx context.Context, request GetApiRequestObject) (GetApiResponseObject, error)
-
+	// List admin user
 	// (GET /api/admin/account_admin)
 	GetApiAdminAccountAdmin(ctx context.Context, request GetApiAdminAccountAdminRequestObject) (GetApiAdminAccountAdminResponseObject, error)
 
 	// (POST /api/admin/account_admin)
 	PostApiAdminAccountAdmin(ctx context.Context, request PostApiAdminAccountAdminRequestObject) (PostApiAdminAccountAdminResponseObject, error)
-
+	// Delete admin user
 	// (DELETE /api/admin/account_admin/{account_admins_id})
 	DeleteApiAdminAccountAdminAccountAdminsId(ctx context.Context, request DeleteApiAdminAccountAdminAccountAdminsIdRequestObject) (DeleteApiAdminAccountAdminAccountAdminsIdResponseObject, error)
-
+	// Get admin user
 	// (GET /api/admin/account_admin/{account_admins_id})
 	GetApiAdminAccountAdminAccountAdminsId(ctx context.Context, request GetApiAdminAccountAdminAccountAdminsIdRequestObject) (GetApiAdminAccountAdminAccountAdminsIdResponseObject, error)
-
+	// Edit admin user
 	// (PUT /api/admin/account_admin/{account_admins_id})
 	PutApiAdminAccountAdminAccountAdminsId(ctx context.Context, request PutApiAdminAccountAdminAccountAdminsIdRequestObject) (PutApiAdminAccountAdminAccountAdminsIdResponseObject, error)
-
+	// Login as admin user
 	// (POST /api/admin/login)
 	PostApiAdminLogin(ctx context.Context, request PostApiAdminLoginRequestObject) (PostApiAdminLoginResponseObject, error)
 	// Handle Google OAuth2 callback
@@ -1075,32 +1075,33 @@ func (sh *strictHandler) GetApiJewellery(ctx *gin.Context) {
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
-	"9mcAAAD//8lB8TFKIgAA",
+	"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",
+	"AA==",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

@@ -9,6 +9,8 @@ Burmese Jewellery Server
 make dk-up-db
 make dk-up-pgadmin
 make run
+
+go mod edit -go=1.21
 ```
 
 #### Server
@@ -60,10 +62,10 @@ cp ./planter /Users/naylinhtet/.goenv/shims
 ## Tasks
 
 ### Admin Screen
-- [ ] /api/admin/login - POST
+- [x] /api/admin/login - POST
 >>
-- [ ] /api/admin/account_admin - GET
-- [ ] /api/admin/account_admin/[id] - GET
+- [x] /api/admin/account_admin - GET
+- [x] /api/admin/account_admin/[id] - GET
 - [ ] /api/admin/account_admin/[id] - PUT
 - [ ] /api/admin/account_admin/[id] - DELETE
 >>
