@@ -43,7 +43,7 @@ java -jar plantuml.jar -verbose example.uml
 ```
 ```
 go build . &&  ./planter "host=localhost port=5432 user=postgres password=postgres dbname=burmese_jewellery sslmode=disable" -T burmese_jewellery -o ./burmese_jewellery.uml
-cp ./planter /Users/naylinhtet/.goenv/shims  
+cp ./planter /Users/naylinhtet/.goenv/shims
 ```
 
 ---
@@ -62,7 +62,6 @@ cp ./planter /Users/naylinhtet/.goenv/shims
 ## Tasks
 
 ### Admin Screen
-
 - [x] /api/admin/login - POST
 >>
 - [x] /api/admin/account_admin - GET
