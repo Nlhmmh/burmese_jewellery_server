@@ -20,6 +20,11 @@ run: ## Run server
 	make dk-up-db
 	sh ./tools/server_run.sh
 
+.PHONY: lint
+lint: ## Lint
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
+	golangci-lint run ./...
+
 .PHONY: merge
 merge: ## Merge swagger into single file
 	cd ./swagger && merger -f index.yml -o swagger.yml

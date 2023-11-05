@@ -41,7 +41,9 @@ func NewServer() *server {
 		gin.LoggerWithConfig(gin.LoggerConfig{Output: log.Logger}),
 		middleware.Auth(),
 	)
-	router.SetTrustedProxies(nil)
+	if err := router.SetTrustedProxies(nil); err != nil {
+		panic(err)
+	}
 	routerConfig := cors.DefaultConfig()
 	routerConfig.AllowOrigins = env.Get().AllowOrigins
 	// config.AllowHeaders = []string{

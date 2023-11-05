@@ -25,7 +25,10 @@ const (
 // Display the main page
 // (GET /api)
 func (*Handler) GetApi(c *gin.Context) {
-	c.Writer.WriteString(testGoogleLoginHTML)
+	if _, err := c.Writer.WriteString(testGoogleLoginHTML); err != nil {
+		log.Error().Err(err)
+		c.Redirect(http.StatusTemporaryRedirect, "/api")
+	}
 }
 
 // Initiate Google OAuth2 login
