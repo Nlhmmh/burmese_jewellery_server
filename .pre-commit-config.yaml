@@ -12,7 +12,7 @@ repos:
       - id: go-lint
         name: go-lint
         language: system
-        entry: make lint
+        entry: golangci-lint run ./...
         stages: [commit, manual]
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
     rev: v8.0.0
