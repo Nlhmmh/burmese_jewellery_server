@@ -82,12 +82,26 @@ AccountAdmin:
       x-oapi-codegen-extra-tags:
         db: account_admin_status
       example: active
+    created_at:
+      type: string
+      format: date-time
+      x-oapi-codegen-extra-tags:
+        db: created_at
+      example: 2020-01-01T00:00:00Z
+    updated_at:
+      type: string
+      format: date-time
+      x-oapi-codegen-extra-tags:
+        db: updated_at
+      example: 2020-01-01T00:00:00Z
   required:
     - account_admin_id
     - mail
     # - password
     - account_admin_role
     - account_admin_status
+    - created_at
+    - updated_at
 AccountAdminLoginParam:
   type: object
   properties:
@@ -107,6 +121,79 @@ AccountAdminLoginParam:
   required:
     - mail
     - password
+AccountAdminPostParam:
+  type: object
+  properties:
+    account_admin_id:
+      $ref: "#/components/schemas/AccountAdminID"
+      x-oapi-codegen-extra-tags:
+        db: account_admin_id
+    mail:
+      type: string
+      maxLength: 255
+      format: email
+      x-oapi-codegen-extra-tags:
+        db: mail
+      example: test@gmail.com
+    password:
+      type: string
+      maxLength: 255
+      x-oapi-codegen-extra-tags:
+        db: password
+      example: "*****"
+    account_admin_role:
+      type: string
+      maxLength: 255
+      x-oapi-codegen-extra-tags:
+        db: password
+      example: staff
+      enum:
+        - admin
+        - staff
+    account_admin_status:
+      type: string
+      maxLength: 255
+      enum:
+        - active
+        - locked
+        - deactivated
+      x-oapi-codegen-extra-tags:
+        db: account_admin_status
+      example: active
+  required:
+    - account_admin_id
+    - mail
+    - password
+    - account_admin_role
+    - account_admin_status
+AccountAdminPutParam:
+  type: object
+  properties:
+    password:
+      type: string
+      maxLength: 255
+      x-oapi-codegen-extra-tags:
+        db: password
+      example: "*****"
+    account_admin_role:
+      type: string
+      maxLength: 255
+      x-oapi-codegen-extra-tags:
+        db: password
+      example: staff
+      enum:
+        - admin
+        - staff
+    account_admin_status:
+      type: string
+      maxLength: 255
+      enum:
+        - active
+        - locked
+        - deactivated
+      x-oapi-codegen-extra-tags:
+        db: account_admin_status
+      example: active
 
 ErrMsg:
   description: Error Message

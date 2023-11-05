@@ -8,13 +8,12 @@ var (
 	}
 
 	adminList = []string{
-		"/api/admin/account_admin",
-		"/api/admin/account_admin/:user_id",
+		"/api/admin/account_admin/:account_admins_id",
 	}
 
 	adminRoleAdminOnlyList = []string{
 		"/api/admin/account_admin",
-		"/api/admin/account_admin/:user_id",
+		"/api/admin/account_admin/:account_admins_id",
 	}
 
 	containWhiteList = []string{

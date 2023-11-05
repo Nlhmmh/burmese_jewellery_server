@@ -167,7 +167,7 @@
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/AccountAdmin"
+            $ref: "#/components/schemas/AccountAdminPostParam"
     responses:
       200:
         description: OK
@@ -246,7 +246,7 @@
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/AccountAdmin"
+            $ref: "#/components/schemas/AccountAdminPutParam"
     responses:
       200:
         description: OK

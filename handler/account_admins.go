@@ -5,12 +5,14 @@ import (
 	"burmese_jewellery/ers"
 	"burmese_jewellery/models"
 	"burmese_jewellery/orm"
+	"time"
 
 	"database/sql"
 	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/volatiletech/sqlboiler/v4/boil"
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
@@ -56,7 +58,7 @@ func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context) {
 		return
 	}
 
-	resp, err := models.MapAccountAdminListFromORM(aaList)
+	resp, err := models.ConvAccountAdminListFromORM(aaList)
 	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
@@ -71,12 +73,12 @@ func (h *Handler) GetApiAdminAccountAdminAccountAdminsId(c *gin.Context, account
 		qm.Where("account_admin_id=?", accountAdminsId),
 	).OneG(c)
 	if err != nil {
-		ers.InternalServer.New(err).Abort(c)
+		ers.NotFound.New(err).Abort(c)
 		return
 	}
 
 	resp := &models.AccountAdmin{}
-	if err := resp.MapFromORM(aa); err != nil {
+	if err := resp.ConvFromORM(aa); err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
 	}
@@ -85,12 +87,82 @@ func (h *Handler) GetApiAdminAccountAdminAccountAdminsId(c *gin.Context, account
 }
 
 // (POST /api/admin/account_admin)
-func (h *Handler) PostApiAdminAccountAdmin(c *gin.Context) {}
+func (h *Handler) PostApiAdminAccountAdmin(c *gin.Context) {
+	var req models.AccountAdminPostParam
+	if err := c.ShouldBindJSON(&req); err != nil {
+		ers.BadRequest.New(err).Abort(c)
+		return
+	}
+
+	aa := &orm.AccountAdmin{
+		AccountAdminID:     req.AccountAdminId.String(),
+		Mail:               string(req.Mail),
+		Password:           req.Password,
+		AccountAdminRole:   orm.AccountAdminRole(req.AccountAdminRole),
+		AccountAdminStatus: orm.AccountAdminStatus(req.AccountAdminStatus),
+		CreatedAt:          time.Now(),
+		UpdatedAt:          time.Now(),
+	}
+	if err := aa.InsertG(c, boil.Infer()); err != nil {
+		ers.InternalServer.New(err).Abort(c)
+		return
+	}
+
+	c.Status(http.StatusOK)
+}
 
 // (PUT /api/admin/account_admin/{account_admins_id})
 func (h *Handler) PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.AccountAdminID) {
+	var req models.AccountAdminPutParam
+	if err := c.ShouldBindJSON(&req); err != nil {
+		ers.BadRequest.New(err).Abort(c)
+		return
+	}
+
+	aa, err := orm.AccountAdmins(
+		qm.Where("account_admin_id=?", accountAdminsId),
+	).OneG(c)
+	if err != nil {
+		ers.NotFound.New(err).Abort(c)
+		return
+	}
+
+	if v := req.Password; v != nil {
+		newPW, err := auth.HashPassword(*v)
+		if err != nil {
+			ers.PasswordWrong.New(err).Abort(c)
+			return
+		}
+		aa.Password = newPW
+	}
+	if v := req.AccountAdminRole; v != nil {
+		aa.AccountAdminRole = orm.AccountAdminRole(*v)
+	}
+	if v := req.AccountAdminStatus; v != nil {
+		aa.AccountAdminStatus = orm.AccountAdminStatus(*v)
+	}
+	if _, err := aa.UpdateG(c, boil.Infer()); err != nil {
+		ers.InternalServer.New(err).Abort(c)
+		return
+	}
+
+	c.Status(http.StatusOK)
 }
 
 // (DELETE /api/admin/account_admin/{account_admins_id})
 func (h *Handler) DeleteApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.AccountAdminID) {
+	aa, err := orm.AccountAdmins(
+		qm.Where("account_admin_id=?", accountAdminsId),
+	).OneG(c)
+	if err != nil {
+		ers.NotFound.New(err).Abort(c)
+		return
+	}
+
+	if _, err := aa.DeleteG(c); err != nil {
+		ers.InternalServer.New(err).Abort(c)
+		return
+	}
+
+	c.Status(http.StatusNoContent)
 }

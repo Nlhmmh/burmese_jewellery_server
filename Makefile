@@ -27,7 +27,7 @@ merge: ## Merge swagger into single file
 .PHONY: gen
 gen: ## Generate go code from Swagger
 	make merge
-	go get github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.13.4
+	go get github.com/deepmap/oapi-codegen/cmd/oapi-codegen@latest
 	go generate $(GO_GENERATE_FILE)
 
 .PHONY: gen-er

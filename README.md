@@ -66,8 +66,8 @@ cp ./planter /Users/naylinhtet/.goenv/shims
 >>
 - [x] /api/admin/account_admin - GET
 - [x] /api/admin/account_admin/[id] - GET
-- [ ] /api/admin/account_admin/[id] - PUT
-- [ ] /api/admin/account_admin/[id] - DELETE
+- [x] /api/admin/account_admin/[id] - PUT
+- [x] /api/admin/account_admin/[id] - DELETE
 >>
 - [ ] /api/admin/account - GET
 - [ ] /api/admin/account/[id] - GET

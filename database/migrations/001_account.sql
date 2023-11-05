@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS account_admins (
 	account_admin_status account_admin_status NOT NULL,
 	created_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT pk_account_admins PRIMARY KEY (account_admin_id)
+	CONSTRAINT pk_account_admins PRIMARY KEY (account_admin_id),
+	CONSTRAINT unique_account_admins_email UNIQUE (mail)
 );
 
 CREATE TYPE login_type AS ENUM ('email', 'phone', 'google', 'facebook');
