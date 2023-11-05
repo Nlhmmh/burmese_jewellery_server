@@ -13,6 +13,7 @@ require (
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/google/uuid v1.3.1
 	github.com/lib/pq v1.10.9
+	github.com/oapi-codegen/gin-middleware v1.0.1
 	github.com/oapi-codegen/runtime v1.0.0
 	github.com/rs/zerolog v1.30.0
 	github.com/stretchr/testify v1.8.4

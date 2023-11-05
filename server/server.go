@@ -10,10 +10,10 @@ import (
 	"net/http"
 	"time"
 
-	oapi_middleware "github.com/deepmap/oapi-codegen/pkg/gin-middleware"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
+	gin_middleware "github.com/oapi-codegen/gin-middleware"
 	"github.com/rs/zerolog/log"
 )
 
@@ -61,7 +61,7 @@ func NewServer() *server {
 	if err != nil {
 		panic(err)
 	}
-	router.Use(oapi_middleware.OapiRequestValidatorWithOptions(swagger, &oapi_middleware.Options{
+	router.Use(gin_middleware.OapiRequestValidatorWithOptions(swagger, &gin_middleware.Options{
 		SilenceServersWarning: true,
 	}))
 
