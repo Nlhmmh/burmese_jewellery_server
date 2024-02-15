@@ -71,14 +71,17 @@ https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
 - [x] /api/admin/login - POST
 >>
 - [x] /api/admin/account_admin - GET
+- [x] /api/admin/account_admin - POST
 - [x] /api/admin/account_admin/[id] - GET
 - [x] /api/admin/account_admin/[id] - PUT
 - [x] /api/admin/account_admin/[id] - DELETE
 >>
-- [ ] /api/admin/account - GET
-- [ ] /api/admin/account/[id] - GET
+- [x] /api/admin/account - GET
+- [x] /api/admin/account/[id] - GET
+- [x] /api/admin/account/[id] - PUT
 >>
 - [ ] /api/admin/jewellery - GET
+- [ ] /api/admin/jewellery - POST
 - [ ] /api/admin/jewellery/[id] - GET
 - [ ] /api/admin/jewellery/[id] - PUT
 - [ ] /api/admin/jewellery/[id] - DELETE

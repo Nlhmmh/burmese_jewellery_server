@@ -5,6 +5,7 @@ import (
 	"burmese_jewellery/google_login"
 	"burmese_jewellery/models"
 	"burmese_jewellery/orm"
+	"burmese_jewellery/tx"
 	"database/sql"
 	"errors"
 	"net/http"
@@ -53,41 +54,48 @@ func (*Handler) GetApiAuthGoogleCallback(c *gin.Context, params models.GetApiAut
 		return
 	}
 
-	a, err := orm.Accounts(
-		orm.AccountWhere.Mail.EQ(null.StringFrom(userInfo.Email)),
-	).OneG(c)
-	if err != nil && !errors.Is(err, sql.ErrNoRows) {
-		ers.InternalServer.New(err).Abort(c)
-		return
-	}
-	if err != nil && errors.Is(err, sql.ErrNoRows) {
-		a = &orm.Account{
-			AccountID:     uuid.New().String(),
-			LoginType:     orm.LoginTypeGoogle,
-			LoginID:       null.StringFrom(userInfo.ID),
-			Mail:          null.StringFrom(userInfo.Email),
-			AccountStatus: orm.AccountStatusActive,
-		}
-		if err := a.InsertG(c, boil.Infer()); err != nil {
-			ers.InternalServer.New(err).Abort(c)
-			return
-		}
-	}
+	var account *models.Account
+	var isRegistered bool
 
-	apExists, err := orm.AccountProfileExistsG(c, a.AccountID)
-	if err != nil {
-		ers.InternalServer.New(err).Abort(c)
-		return
-	}
+	if err := tx.Write(c, func(tx *sql.Tx) *ers.ErrResp {
+		a, err := orm.Accounts(
+			orm.AccountWhere.Mail.EQ(null.StringFrom(userInfo.Email)),
+		).OneG(c)
+		if err != nil && !errors.Is(err, sql.ErrNoRows) {
+			return ers.InternalServer.New(err)
 
-	resp := &models.Account{}
-	if err := resp.ConvFromORM(a); err != nil {
-		ers.InternalServer.New(err).Abort(c)
+		}
+		if err != nil && errors.Is(err, sql.ErrNoRows) {
+			a = &orm.Account{
+				AccountID:     uuid.New().String(),
+				LoginType:     orm.LoginTypeGoogle,
+				LoginID:       null.StringFrom(userInfo.ID),
+				Mail:          null.StringFrom(userInfo.Email),
+				AccountStatus: orm.AccountStatusActive,
+			}
+			if err := a.InsertG(c, boil.Infer()); err != nil {
+				return ers.InternalServer.New(err)
+
+			}
+		}
+
+		apExists, err := orm.AccountProfileExistsG(c, a.AccountID)
+		if err != nil {
+			return ers.InternalServer.New(err)
+		}
+		isRegistered = apExists
+
+		if err := account.ConvFromORM(a); err != nil {
+			return ers.InternalServer.New(err)
+		}
+
+		return nil
+	}); err != nil {
 		return
 	}
 
 	c.JSON(http.StatusOK, &models.AuthGoogleCallbackResp{
-		Account:      resp,
-		IsRegistered: apExists,
+		Account:      account,
+		IsRegistered: isRegistered,
 	})
 }

@@ -64,6 +64,14 @@ const (
 	AccountAdminPutParamAccountAdminStatusLocked      AccountAdminPutParamAccountAdminStatus = "locked"
 )
 
+// Defines values for AccountStatusPutParamAccountStatus.
+const (
+	Active      AccountStatusPutParamAccountStatus = "active"
+	Deactivated AccountStatusPutParamAccountStatus = "deactivated"
+	Locked      AccountStatusPutParamAccountStatus = "locked"
+	Pending     AccountStatusPutParamAccountStatus = "pending"
+)
+
 // Account defines model for Account.
 type Account struct {
 	AccountId     openapi_types.UUID   `json:"account_id"`
@@ -98,9 +106,6 @@ type AccountAdminAccountAdminRole string
 // AccountAdminAccountAdminStatus defines model for AccountAdmin.AccountAdminStatus.
 type AccountAdminAccountAdminStatus string
 
-// AccountAdminID defines model for AccountAdminID.
-type AccountAdminID = openapi_types.UUID
-
 // AccountAdminLoginParam defines model for AccountAdminLoginParam.
 type AccountAdminLoginParam struct {
 	Mail     openapi_types.Email `json:"mail"`
@@ -134,6 +139,14 @@ type AccountAdminPutParamAccountAdminRole string
 // AccountAdminPutParamAccountAdminStatus defines model for AccountAdminPutParam.AccountAdminStatus.
 type AccountAdminPutParamAccountAdminStatus string
 
+// AccountStatusPutParam defines model for AccountStatusPutParam.
+type AccountStatusPutParam struct {
+	AccountStatus AccountStatusPutParamAccountStatus `json:"account_status"`
+}
+
+// AccountStatusPutParamAccountStatus defines model for AccountStatusPutParam.AccountStatus.
+type AccountStatusPutParamAccountStatus string
+
 // AuthGoogleCallbackResp defines model for AuthGoogleCallbackResp.
 type AuthGoogleCallbackResp struct {
 	Account      *Account `json:"account,omitempty"`
@@ -142,21 +155,44 @@ type AuthGoogleCallbackResp struct {
 
 // ErrMsg Error Message
 type ErrMsg struct {
-	// Message Error Message
+	// Message Error message
 	Message *string `json:"message,omitempty"`
 
 	// Version Application Version
 	Version *string `json:"version,omitempty"`
 }
 
+// ID defines model for ID.
+type ID = openapi_types.UUID
+
 // Jewellery defines model for Jewellery.
 type Jewellery struct {
-	Description *string             `json:"description,omitempty"`
-	ImageUrl    *string             `json:"image_url,omitempty"`
-	JewelleryId *openapi_types.UUID `json:"jewellery_id,omitempty"`
-	Name        *string             `json:"name,omitempty"`
-	Price       *int                `json:"price,omitempty"`
-	Quantity    *int64              `json:"quantity,omitempty"`
+	CategoryId  openapi_types.UUID `json:"category_id"`
+	CreatedAt   time.Time          `json:"created_at"`
+	Description string             `json:"description"`
+	GemId       openapi_types.UUID `json:"gem_id"`
+	ImageUrl    string             `json:"image_url"`
+	IsPublished bool               `json:"is_published"`
+	JewelleryId openapi_types.UUID `json:"jewellery_id"`
+	MaterialId  openapi_types.UUID `json:"material_id"`
+	Name        string             `json:"name"`
+	Price       int                `json:"price"`
+	Quantity    int64              `json:"quantity"`
+	UpdatedAt   time.Time          `json:"updated_at"`
+}
+
+// JewelleryPostParam defines model for JewelleryPostParam.
+type JewelleryPostParam struct {
+	CategoryId  openapi_types.UUID `json:"category_id"`
+	Description string             `json:"description"`
+	GemId       openapi_types.UUID `json:"gem_id"`
+	ImageUrl    string             `json:"image_url"`
+	IsPublished bool               `json:"is_published"`
+	JewelleryId openapi_types.UUID `json:"jewellery_id"`
+	MaterialId  openapi_types.UUID `json:"material_id"`
+	Name        string             `json:"name"`
+	Price       int                `json:"price"`
+	Quantity    int64              `json:"quantity"`
 }
 
 // GetApiAuthGoogleCallbackParams defines parameters for GetApiAuthGoogleCallback.
@@ -168,6 +204,9 @@ type GetApiAuthGoogleCallbackParams struct {
 	Code string `form:"code" json:"code"`
 }
 
+// PutApiAdminAccountAccountIdJSONRequestBody defines body for PutApiAdminAccountAccountId for application/json ContentType.
+type PutApiAdminAccountAccountIdJSONRequestBody = AccountStatusPutParam
+
 // PostApiAdminAccountAdminJSONRequestBody defines body for PostApiAdminAccountAdmin for application/json ContentType.
 type PostApiAdminAccountAdminJSONRequestBody = AccountAdminPostParam
 
@@ -177,5 +216,5 @@ type PutApiAdminAccountAdminAccountAdminsIdJSONRequestBody = AccountAdminPutPara
 // PostApiAdminLoginJSONRequestBody defines body for PostApiAdminLogin for application/json ContentType.
 type PostApiAdminLoginJSONRequestBody = AccountAdminLoginParam
 
-// GetApiJewelleryJSONRequestBody defines body for GetApiJewellery for application/json ContentType.
-type GetApiJewelleryJSONRequestBody = Jewellery
+// PostApiJewelleryJSONRequestBody defines body for PostApiJewellery for application/json ContentType.
+type PostApiJewelleryJSONRequestBody = JewelleryPostParam

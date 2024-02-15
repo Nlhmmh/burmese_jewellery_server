@@ -19,9 +19,3 @@ func NewHandler() *Handler {
 func (*Handler) GetApiHealthCheck(c *gin.Context) {
 	c.JSON(http.StatusOK, "OK")
 }
-
-// Jewellery List
-// (GET /api/jewellery)
-func (*Handler) GetApiJewellery(c *gin.Context) {
-	panic("unimplemented")
-}

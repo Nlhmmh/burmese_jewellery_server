@@ -1,3 +1,11 @@
+/api:
+  get:
+    tags:
+      - app
+    summary: Display the main page
+    responses:
+      200:
+        description: Main page displayed successfully
 /api/health_check:
   get:
     tags:
@@ -16,46 +24,6 @@
                   default: OK
               required:
                 - message
-
-/api/jewellery:
-  get:
-    tags:
-      - app
-    requestBody:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Jewellery"
-    responses:
-      200:
-        description: OK
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/Jewellery"
-      400:
-        description: Bad Request
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      500:
-        description: Internal Server Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-
-/api:
-  get:
-    tags:
-      - app
-    summary: Display the main page
-    responses:
-      200:
-        description: Main page displayed successfully
 
 /api/auth/google/login:
   get:
@@ -112,24 +80,6 @@
               properties:
                 token:
                   type: string
-      400:
-        description: Bad Request
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      500:
-        description: Internal Server Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      401:
-        description: Unauthorized
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
 
 /api/admin/account_admin:
   get:
@@ -145,24 +95,6 @@
               type: array
               items:
                 $ref: "#/components/schemas/AccountAdmin"
-      400:
-        description: Bad Request
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      500:
-        description: Internal Server Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      401:
-        description: Unauthorized
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
   post:
     tags:
       - admin
@@ -175,24 +107,6 @@
     responses:
       200:
         description: OK
-      400:
-        description: Bad Request
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      500:
-        description: Internal Server Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      401:
-        description: Unauthorized
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
 /api/admin/account_admin/{account_admins_id}:
   get:
     summary: Get admin user
@@ -203,7 +117,7 @@
         name: account_admins_id
         required: true
         schema:
-          $ref: "#/components/schemas/AccountAdminID"
+          $ref: "#/components/schemas/ID"
     responses:
       200:
         description: OK
@@ -211,30 +125,6 @@
           application/json:
             schema:
               $ref: "#/components/schemas/AccountAdmin"
-      400:
-        description: Bad Request
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      500:
-        description: Internal Server Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      401:
-        description: Unauthorized
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      404:
-        description: Not Found
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
   put:
     summary: Edit admin user
     tags:
@@ -244,7 +134,7 @@
         name: account_admins_id
         required: true
         schema:
-          $ref: "#/components/schemas/AccountAdminID"
+          $ref: "#/components/schemas/ID"
     requestBody:
       required: true
       content:
@@ -254,30 +144,6 @@
     responses:
       200:
         description: OK
-      400:
-        description: Bad Request
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      500:
-        description: Internal Server Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      401:
-        description: Unauthorized
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
-      404:
-        description: Not Found
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
   delete:
     summary: Delete admin user
     tags:
@@ -287,31 +153,82 @@
         name: account_admins_id
         required: true
         schema:
-          $ref: "#/components/schemas/AccountAdminID"
+          $ref: "#/components/schemas/ID"
     responses:
       204:
         description: Deleted
-      400:
-        description: Bad Request
+
+/api/admin/account:
+  get:
+    summary: List user
+    tags:
+      - admin
+    responses:
+      200:
+        description: OK
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrMsg"
-      500:
-        description: Internal Server Error
+              type: array
+              items:
+                $ref: "#/components/schemas/Account"
+/api/admin/account/{account_id}:
+  get:
+    summary: Get user
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    responses:
+      200:
+        description: OK
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrMsg"
-      401:
-        description: Unauthorized
+              $ref: "#/components/schemas/Account"
+  put:
+    summary: Update user status
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AccountStatusPutParam"
+
+/api/jewellery:
+  get:
+    tags:
+      - app
+    responses:
+      200:
+        description: OK
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrMsg"
-      404:
-        description: Not Found
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrMsg"
+              type: array
+              items:
+                $ref: "#/components/schemas/Jewellery"
+  post:
+    tags:
+      - admin
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JewelleryPostParam"
+    responses:
+      200:
+        description: OK

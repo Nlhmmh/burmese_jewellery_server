@@ -17,6 +17,14 @@ tags:
   - name: others
     description: Others
 paths:
+  /api:
+    get:
+      tags:
+        - app
+      summary: Display the main page
+      responses:
+        200:
+          description: Main page displayed successfully
   /api/health_check:
     get:
       tags:
@@ -35,44 +43,6 @@ paths:
                     default: OK
                 required:
                   - message
-  /api/jewellery:
-    get:
-      tags:
-        - app
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Jewellery'
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Jewellery'
-        400:
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-  /api:
-    get:
-      tags:
-        - app
-      summary: Display the main page
-      responses:
-        200:
-          description: Main page displayed successfully
   /api/auth/google/login:
     get:
       tags:
@@ -127,24 +97,6 @@ paths:
                 properties:
                   token:
                     type: string
-        400:
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        401:
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
   /api/admin/account_admin:
     get:
       summary: List admin user
@@ -159,24 +111,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AccountAdmin'
-        400:
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        401:
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
     post:
       tags:
         - admin
@@ -189,24 +123,6 @@ paths:
       responses:
         200:
           description: OK
-        400:
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        401:
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
   /api/admin/account_admin/{account_admins_id}:
     get:
       summary: Get admin user
@@ -217,7 +133,7 @@ paths:
           name: account_admins_id
           required: true
           schema:
-            $ref: '#/components/schemas/AccountAdminID'
+            $ref: '#/components/schemas/ID'
       responses:
         200:
           description: OK
@@ -225,30 +141,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccountAdmin'
-        400:
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        401:
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        404:
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
     put:
       summary: Edit admin user
       tags:
@@ -258,7 +150,7 @@ paths:
           name: account_admins_id
           required: true
           schema:
-            $ref: '#/components/schemas/AccountAdminID'
+            $ref: '#/components/schemas/ID'
       requestBody:
         required: true
         content:
@@ -268,30 +160,6 @@ paths:
       responses:
         200:
           description: OK
-        400:
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        401:
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
-        404:
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
     delete:
       summary: Delete admin user
       tags:
@@ -301,64 +169,108 @@ paths:
           name: account_admins_id
           required: true
           schema:
-            $ref: '#/components/schemas/AccountAdminID'
+            $ref: '#/components/schemas/ID'
       responses:
         204:
           description: Deleted
-        400:
-          description: Bad Request
+  /api/admin/account:
+    get:
+      summary: List user
+      tags:
+        - admin
+      responses:
+        200:
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrMsg'
-        500:
-          description: Internal Server Error
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+  /api/admin/account/{account_id}:
+    get:
+      summary: Get user
+      tags:
+        - admin
+      parameters:
+        - in: path
+          name: account_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      responses:
+        200:
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrMsg'
-        401:
-          description: Unauthorized
+                $ref: '#/components/schemas/Account'
+    put:
+      summary: Update user status
+      tags:
+        - admin
+      parameters:
+        - in: path
+          name: account_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountStatusPutParam'
+  /api/jewellery:
+    get:
+      tags:
+        - app
+      responses:
+        200:
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrMsg'
-        404:
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrMsg'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Jewellery'
+    post:
+      tags:
+        - admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JewelleryPostParam'
+      responses:
+        200:
+          description: OK
 components:
   parameters: null
   schemas:
-    Jewellery:
+    AuthGoogleCallbackResp:
       type: object
       properties:
-        jewellery_id:
+        account:
+          $ref: '#/components/schemas/Account'
+        is_registered:
+          type: boolean
+          example: true
+      required:
+        - is_registered
+    ErrMsg:
+      description: Error Message
+      properties:
+        version:
           type: string
-          format: uuid
-          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        name:
+          description: Application Version
+        message:
           type: string
-          maxLength: 255
-          example: Wedding Forever
-        description:
-          type: string
-          maxLength: 255
-          example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2
-            mm
-        quantity:
-          type: integer
-          format: int64
-          example: 100
-        price:
-          type: integer
-          format: float64
-          example: 10000
-        image_url:
-          type: string
-          example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp
+          description: Error message
+    ID:
+      type: string
+      format: uuid
     AccountAdmin:
       type: object
       properties:
@@ -401,9 +313,6 @@ components:
         - account_admin_status
         - created_at
         - updated_at
-    AccountAdminID:
-      type: string
-      format: uuid
     AccountAdminLoginParam:
       type: object
       properties:
@@ -525,22 +434,133 @@ components:
         - account_status
         - created_at
         - updated_at
-    AuthGoogleCallbackResp:
+    AccountStatusPutParam:
       type: object
       properties:
-        account:
-          $ref: '#/components/schemas/Account'
-        is_registered:
+        account_status:
+          type: string
+          maxLength: 255
+          example: active
+          enum:
+            - pending
+            - active
+            - locked
+            - deactivated
+      required:
+        - account_status
+    Jewellery:
+      type: object
+      properties:
+        jewellery_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        category_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        gem_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        material_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        name:
+          type: string
+          maxLength: 255
+          example: Wedding Forever
+        description:
+          type: string
+          maxLength: 255
+          example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2
+            mm
+        quantity:
+          type: integer
+          format: int64
+          example: 100
+        price:
+          type: integer
+          format: float64
+          example: 10000
+        image_url:
+          type: string
+          example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp
+        is_published:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        updated_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+      required:
+        - jewellery_id
+        - category_id
+        - gem_id
+        - material_id
+        - name
+        - description
+        - quantity
+        - price
+        - image_url
+        - is_published
+        - created_at
+        - updated_at
+    JewelleryPostParam:
+      type: object
+      properties:
+        jewellery_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        category_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        gem_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        material_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        name:
+          type: string
+          maxLength: 255
+          example: Wedding Forever
+        description:
+          type: string
+          maxLength: 255
+          example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2
+            mm
+        quantity:
+          type: integer
+          format: int64
+          example: 100
+        price:
+          type: integer
+          format: float64
+          example: 10000
+        image_url:
+          type: string
+          example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp
+        is_published:
           type: boolean
           example: true
       required:
-        - is_registered
-    ErrMsg:
-      description: Error Message
-      properties:
-        version:
-          type: string
-          description: Application Version
-        message:
-          type: string
-          description: Error Message
+        - jewellery_id
+        - category_id
+        - gem_id
+        - material_id
+        - name
+        - description
+        - quantity
+        - price
+        - image_url
+        - is_published

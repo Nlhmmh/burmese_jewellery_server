@@ -68,7 +68,7 @@ func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context) {
 }
 
 // (GET /api/admin/account_admin/{account_admins_id})
-func (h *Handler) GetApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.AccountAdminID) {
+func (h *Handler) GetApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.ID) {
 	aa, err := orm.AccountAdmins(
 		qm.Where("account_admin_id=?", accountAdminsId),
 	).OneG(c)
@@ -110,7 +110,7 @@ func (h *Handler) PostApiAdminAccountAdmin(c *gin.Context) {
 }
 
 // (PUT /api/admin/account_admin/{account_admins_id})
-func (h *Handler) PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.AccountAdminID) {
+func (h *Handler) PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.ID) {
 	var req models.AccountAdminPutParam
 	if err := c.ShouldBindJSON(&req); err != nil {
 		ers.BadRequest.New(err).Abort(c)
@@ -148,7 +148,7 @@ func (h *Handler) PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, account
 }
 
 // (DELETE /api/admin/account_admin/{account_admins_id})
-func (h *Handler) DeleteApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.AccountAdminID) {
+func (h *Handler) DeleteApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.ID) {
 	aa, err := orm.AccountAdmins(
 		qm.Where("account_admin_id=?", accountAdminsId),
 	).OneG(c)
