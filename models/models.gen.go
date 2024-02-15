@@ -76,8 +76,6 @@ type AccountAdminLoginParam struct {
 
 // AccountAdminPostParam defines model for AccountAdminPostParam.
 type AccountAdminPostParam struct {
-	// AccountAdminId Account Admin ID
-	AccountAdminId     AccountAdminID                          `json:"account_admin_id"`
 	AccountAdminRole   AccountAdminPostParamAccountAdminRole   `db:"password" json:"account_admin_role"`
 	AccountAdminStatus AccountAdminPostParamAccountAdminStatus `db:"account_admin_status" json:"account_admin_status"`
 	Mail               openapi_types.Email                     `db:"mail" json:"mail"`

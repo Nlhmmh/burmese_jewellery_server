@@ -15,7 +15,7 @@ type Config struct {
 		Oauth2Config struct {
 			ClientID     string `yaml:"client_id"`
 			ClientSecret string `yaml:"client_secret"`
-			RedirectURL  string `env:"redirect_url"`
+			RedirectURL  string `yaml:"redirect_url"`
 		} `yaml:"oauth2_config"`
 	} `yaml:"google"`
 

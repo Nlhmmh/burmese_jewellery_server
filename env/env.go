@@ -10,12 +10,12 @@ type Env struct {
 		Password string `env:"DB_PASSWORD" envDefault:"postgres"`
 		Host     string `env:"DB_HOST" envDefault:"127.0.0.1"`
 		Port     int64  `env:"DB_PORT" envDefault:"5432"`
-		Database string `env:"DB_DATABASE" envDefault:"kikumemodb"`
+		Database string `env:"DB_DATABASE" envDefault:"burmese_jewellery"`
 	}
 	Http struct {
 		Protocol string `env:"HTTP_PROTOCOL" envDefault:"http"`
 		Domain   string `env:"HTTP_DOMAIN" envDefault:"localhost"`
-		Port     int64  `env:"HTTP_PORT" envDefault:"8081"`
+		Port     int64  `env:"HTTP_PORT" envDefault:"8077"`
 	}
 	AllowOrigins []string `env:"ALLOW_ORIGINS" envDefault:"[]"`
 	Debug        bool     `env:"DEBUG" envDefault:"false"`

@@ -11,8 +11,9 @@ import (
 var (
 	BadRequest     = ErrResp{statusCode: http.StatusBadRequest, Code: 4, Message: "Bad Request"}
 	InternalServer = ErrResp{statusCode: http.StatusInternalServerError, Code: 5, Message: "Internal Server Error"}
-	NotFound       = ErrResp{statusCode: http.StatusNotFound, Code: 10, Message: "Not Found"}
-	UnAuthorized   = ErrResp{statusCode: http.StatusUnauthorized, Code: 10, Message: "UnAuthorized"}
+	NotFound       = ErrResp{statusCode: http.StatusNotFound, Code: 6, Message: "Not Found"}
+	UnAuthorized   = ErrResp{statusCode: http.StatusUnauthorized, Code: 7, Message: "UnAuthorized"}
+	TmpRedirect    = ErrResp{statusCode: http.StatusTemporaryRedirect, Code: 8, Message: "Redirect"}
 
 	UserWithEmailNotExist     = ErrResp{statusCode: http.StatusNotFound, Code: 11, Message: "User with email does not exists"}
 	UserWithEmailAlreadyExist = ErrResp{statusCode: http.StatusConflict, Code: 12, Message: "User with email already exists"}
@@ -46,4 +47,9 @@ func (e ErrResp) Rollback(c *gin.Context, tx *sql.Tx) {
 		return
 	}
 	e.Abort(c)
+}
+
+func (e ErrResp) TmpRedirect(c *gin.Context, redirectURL string) {
+	log.Error().Err(wrap(e.error))
+	c.Redirect(http.StatusTemporaryRedirect, "/api")
 }

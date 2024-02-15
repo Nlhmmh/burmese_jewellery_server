@@ -18,6 +18,8 @@ var (
 
 	containWhiteList = []string{
 		"/api/file/media",
+		"/api/health_check",
+		// "/api", // TODO: remove after google testing
 	}
 )
 

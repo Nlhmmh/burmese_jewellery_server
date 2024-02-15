@@ -1,13 +1,16 @@
 package handler
 
 import (
+	"burmese_jewellery/ers"
 	"burmese_jewellery/google_login"
 	"burmese_jewellery/models"
-	"fmt"
+	"burmese_jewellery/orm"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rs/zerolog/log"
+	"github.com/google/uuid"
+	"github.com/volatiletech/null/v8"
+	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
 const (
@@ -26,8 +29,7 @@ const (
 // (GET /api)
 func (*Handler) GetApi(c *gin.Context) {
 	if _, err := c.Writer.WriteString(testGoogleLoginHTML); err != nil {
-		log.Error().Err(err)
-		c.Redirect(http.StatusTemporaryRedirect, "/api")
+		ers.TmpRedirect.New(err).TmpRedirect(c, "/api")
 	}
 }
 
@@ -40,19 +42,26 @@ func (*Handler) GetApiAuthGoogleLogin(c *gin.Context) {
 // Handle Google OAuth2 callback
 // (GET /api/auth/google/callback)
 func (*Handler) GetApiAuthGoogleCallback(c *gin.Context, params models.GetApiAuthGoogleCallbackParams) {
-
 	userInfo, err := google_login.Callback(c,
 		params.State,
 		params.Code,
 	)
 	if err != nil {
-		log.Error().Err(err)
-		c.Redirect(http.StatusTemporaryRedirect, "/api")
+		ers.TmpRedirect.New(err).TmpRedirect(c, "/api")
+		return
 	}
 
-	// TODO: Insert Accounts
-	fmt.Println(userInfo)
+	aa := &orm.Account{
+		AccountID:     uuid.New().String(),
+		LoginType:     orm.LoginTypeGoogle,
+		LoginID:       null.StringFrom(userInfo.ID),
+		Mail:          null.StringFrom(userInfo.Email),
+		AccountStatus: orm.AccountStatusActive,
+	}
+	if err := aa.InsertG(c, boil.Infer()); err != nil {
+		ers.InternalServer.New(err).Abort(c)
+		return
+	}
 
-	c.Redirect(http.StatusTemporaryRedirect, "/api")
-
+	c.JSON(http.StatusOK, aa)
 }

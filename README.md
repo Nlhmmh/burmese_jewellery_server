@@ -59,6 +59,12 @@ cp ./planter /Users/naylinhtet/.goenv/shims
 
 ---
 
+## TODO
+Implement go-migration
+https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
+
+---
+
 ## Tasks
 
 ### Admin Screen
@@ -100,8 +106,8 @@ cp ./planter /Users/naylinhtet/.goenv/shims
 - [ ] /api/auth/phone/login - POST
 - [ ] /api/auth/phone/otp - POST
 >>
-- [ ] /api/auth/google/login - POST
-- [ ] /api/auth/google/callback - POST
+- [x] /api/auth/google/login - POST
+- [x] /api/auth/google/callback - POST
 >>
 - [ ] /api/auth/facebook/login - POST
 - [ ] /api/auth/facebook/callback - POST
