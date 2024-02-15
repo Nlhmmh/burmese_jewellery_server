@@ -100,8 +100,12 @@ paths:
             type: string
           description: OAuth2 code parameter
       responses:
-        302:
-          description: Redirect to the main page after handling the callback
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthGoogleCallbackResp'
   /api/admin/login:
     post:
       summary: Login as admin user
@@ -326,79 +330,50 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrMsg'
 components:
-  parameters:
-    JewelleryIDParam:
-      name: jewellery_id
-      in: path
-      description: Jewellery ID
-      required: true
-      schema:
-        $ref: '#/components/schemas/JewelleryID'
+  parameters: null
   schemas:
-    JewelleryID:
-      description: Jewellery ID
-      type: string
-      format: uuid
     Jewellery:
       type: object
       properties:
         jewellery_id:
-          $ref: '#/components/schemas/JewelleryID'
-          x-oapi-codegen-extra-tags:
-            db: jewellery_id
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
         name:
           type: string
           maxLength: 255
-          x-oapi-codegen-extra-tags:
-            db: name
           example: Wedding Forever
         description:
           type: string
           maxLength: 255
-          x-oapi-codegen-extra-tags:
-            db: description
           example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2
             mm
         quantity:
           type: integer
           format: int64
-          x-oapi-codegen-extra-tags:
-            db: quantity
           example: 100
         price:
           type: integer
           format: float64
-          x-oapi-codegen-extra-tags:
-            db: price
           example: 10000
         image_url:
           type: string
-          x-oapi-codegen-extra-tags:
-            db: image_url
           example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp
-    AccountAdminID:
-      description: Account Admin ID
-      type: string
-      format: uuid
     AccountAdmin:
       type: object
       properties:
         account_admin_id:
-          $ref: '#/components/schemas/AccountAdminID'
-          x-oapi-codegen-extra-tags:
-            db: account_admin_id
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
         mail:
           type: string
           maxLength: 255
           format: email
-          x-oapi-codegen-extra-tags:
-            db: mail
           example: test@gmail.com
         account_admin_role:
           type: string
           maxLength: 255
-          x-oapi-codegen-extra-tags:
-            db: password
           example: staff
           enum:
             - admin
@@ -410,20 +385,14 @@ components:
             - active
             - locked
             - deactivated
-          x-oapi-codegen-extra-tags:
-            db: account_admin_status
           example: active
         created_at:
           type: string
           format: date-time
-          x-oapi-codegen-extra-tags:
-            db: created_at
           example: 2020-01-01 00:00:00+00:00
         updated_at:
           type: string
           format: date-time
-          x-oapi-codegen-extra-tags:
-            db: updated_at
           example: 2020-01-01 00:00:00+00:00
       required:
         - account_admin_id
@@ -432,6 +401,9 @@ components:
         - account_admin_status
         - created_at
         - updated_at
+    AccountAdminID:
+      type: string
+      format: uuid
     AccountAdminLoginParam:
       type: object
       properties:
@@ -439,14 +411,10 @@ components:
           type: string
           maxLength: 255
           format: email
-          x-oapi-codegen-extra-tags:
-            db: mail
           example: test@gmail.com
         password:
           type: string
           maxLength: 255
-          x-oapi-codegen-extra-tags:
-            db: password
           example: '*****'
       required:
         - mail
@@ -458,20 +426,14 @@ components:
           type: string
           maxLength: 255
           format: email
-          x-oapi-codegen-extra-tags:
-            db: mail
           example: test@gmail.com
         password:
           type: string
           maxLength: 255
-          x-oapi-codegen-extra-tags:
-            db: password
           example: '*****'
         account_admin_role:
           type: string
           maxLength: 255
-          x-oapi-codegen-extra-tags:
-            db: password
           example: staff
           enum:
             - admin
@@ -483,8 +445,6 @@ components:
             - active
             - locked
             - deactivated
-          x-oapi-codegen-extra-tags:
-            db: account_admin_status
           example: active
       required:
         - mail
@@ -497,14 +457,10 @@ components:
         password:
           type: string
           maxLength: 255
-          x-oapi-codegen-extra-tags:
-            db: password
           example: '*****'
         account_admin_role:
           type: string
           maxLength: 255
-          x-oapi-codegen-extra-tags:
-            db: password
           example: staff
           enum:
             - admin
@@ -516,9 +472,69 @@ components:
             - active
             - locked
             - deactivated
-          x-oapi-codegen-extra-tags:
-            db: account_admin_status
           example: active
+    Account:
+      type: object
+      properties:
+        account_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        login_type:
+          type: string
+          maxLength: 255
+          example: email
+          enum:
+            - email
+            - phone
+            - google
+            - facebook
+        login_id:
+          type: string
+          maxLength: 255
+          example: 101176734510758999999
+        mail:
+          type: string
+          maxLength: 255
+          format: email
+          example: test@gmail.com
+        phone:
+          type: string
+          maxLength: 255
+          example: 08088889999
+        account_status:
+          type: string
+          maxLength: 255
+          example: active
+          enum:
+            - pending
+            - active
+            - locked
+            - deactivated
+        created_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        updated_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+      required:
+        - account_id
+        - login_type
+        - account_status
+        - created_at
+        - updated_at
+    AuthGoogleCallbackResp:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/Account'
+        is_registered:
+          type: boolean
+          example: true
+      required:
+        - is_registered
     ErrMsg:
       description: Error Message
       properties:

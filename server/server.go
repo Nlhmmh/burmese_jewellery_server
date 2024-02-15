@@ -102,7 +102,7 @@ func (s *server) Shutdown() {
 	defer cancel()
 
 	if err := s.srv.Shutdown(ctx); err != nil {
-		log.Fatal().Err(err).Msg("error")
+		log.Fatal().Err(err).Msg("")
 	}
 
 	log.Info().Msg("Server terminated")

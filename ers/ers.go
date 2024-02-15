@@ -37,7 +37,7 @@ func (e ErrResp) New(err error) *ErrResp {
 }
 
 func (e ErrResp) Abort(c *gin.Context) {
-	log.Error().Err(wrap(e.error))
+	log.Error().Err(wrap(e.error)).Msg("")
 	c.AbortWithStatusJSON(e.statusCode, e)
 }
 
@@ -50,6 +50,6 @@ func (e ErrResp) Rollback(c *gin.Context, tx *sql.Tx) {
 }
 
 func (e ErrResp) TmpRedirect(c *gin.Context, redirectURL string) {
-	log.Error().Err(wrap(e.error))
+	log.Error().Err(wrap(e.error)).Msg("")
 	c.Redirect(http.StatusTemporaryRedirect, "/api")
 }

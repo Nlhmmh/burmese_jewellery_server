@@ -9,6 +9,22 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
+// Defines values for AccountAccountStatus.
+const (
+	AccountAccountStatusActive      AccountAccountStatus = "active"
+	AccountAccountStatusDeactivated AccountAccountStatus = "deactivated"
+	AccountAccountStatusLocked      AccountAccountStatus = "locked"
+	AccountAccountStatusPending     AccountAccountStatus = "pending"
+)
+
+// Defines values for AccountLoginType.
+const (
+	Email    AccountLoginType = "email"
+	Facebook AccountLoginType = "facebook"
+	Google   AccountLoginType = "google"
+	Phone    AccountLoginType = "phone"
+)
+
 // Defines values for AccountAdminAccountAdminRole.
 const (
 	AccountAdminAccountAdminRoleAdmin AccountAdminAccountAdminRole = "admin"
@@ -43,20 +59,37 @@ const (
 
 // Defines values for AccountAdminPutParamAccountAdminStatus.
 const (
-	Active      AccountAdminPutParamAccountAdminStatus = "active"
-	Deactivated AccountAdminPutParamAccountAdminStatus = "deactivated"
-	Locked      AccountAdminPutParamAccountAdminStatus = "locked"
+	AccountAdminPutParamAccountAdminStatusActive      AccountAdminPutParamAccountAdminStatus = "active"
+	AccountAdminPutParamAccountAdminStatusDeactivated AccountAdminPutParamAccountAdminStatus = "deactivated"
+	AccountAdminPutParamAccountAdminStatusLocked      AccountAdminPutParamAccountAdminStatus = "locked"
 )
+
+// Account defines model for Account.
+type Account struct {
+	AccountId     openapi_types.UUID   `json:"account_id"`
+	AccountStatus AccountAccountStatus `json:"account_status"`
+	CreatedAt     time.Time            `json:"created_at"`
+	LoginId       *string              `json:"login_id,omitempty"`
+	LoginType     AccountLoginType     `json:"login_type"`
+	Mail          *openapi_types.Email `json:"mail,omitempty"`
+	Phone         *string              `json:"phone,omitempty"`
+	UpdatedAt     time.Time            `json:"updated_at"`
+}
+
+// AccountAccountStatus defines model for Account.AccountStatus.
+type AccountAccountStatus string
+
+// AccountLoginType defines model for Account.LoginType.
+type AccountLoginType string
 
 // AccountAdmin defines model for AccountAdmin.
 type AccountAdmin struct {
-	// AccountAdminId Account Admin ID
-	AccountAdminId     AccountAdminID                 `json:"account_admin_id"`
-	AccountAdminRole   AccountAdminAccountAdminRole   `db:"password" json:"account_admin_role"`
-	AccountAdminStatus AccountAdminAccountAdminStatus `db:"account_admin_status" json:"account_admin_status"`
-	CreatedAt          time.Time                      `db:"created_at" json:"created_at"`
-	Mail               openapi_types.Email            `db:"mail" json:"mail"`
-	UpdatedAt          time.Time                      `db:"updated_at" json:"updated_at"`
+	AccountAdminId     openapi_types.UUID             `json:"account_admin_id"`
+	AccountAdminRole   AccountAdminAccountAdminRole   `json:"account_admin_role"`
+	AccountAdminStatus AccountAdminAccountAdminStatus `json:"account_admin_status"`
+	CreatedAt          time.Time                      `json:"created_at"`
+	Mail               openapi_types.Email            `json:"mail"`
+	UpdatedAt          time.Time                      `json:"updated_at"`
 }
 
 // AccountAdminAccountAdminRole defines model for AccountAdmin.AccountAdminRole.
@@ -65,21 +98,21 @@ type AccountAdminAccountAdminRole string
 // AccountAdminAccountAdminStatus defines model for AccountAdmin.AccountAdminStatus.
 type AccountAdminAccountAdminStatus string
 
-// AccountAdminID Account Admin ID
+// AccountAdminID defines model for AccountAdminID.
 type AccountAdminID = openapi_types.UUID
 
 // AccountAdminLoginParam defines model for AccountAdminLoginParam.
 type AccountAdminLoginParam struct {
-	Mail     openapi_types.Email `db:"mail" json:"mail"`
-	Password string              `db:"password" json:"password"`
+	Mail     openapi_types.Email `json:"mail"`
+	Password string              `json:"password"`
 }
 
 // AccountAdminPostParam defines model for AccountAdminPostParam.
 type AccountAdminPostParam struct {
-	AccountAdminRole   AccountAdminPostParamAccountAdminRole   `db:"password" json:"account_admin_role"`
-	AccountAdminStatus AccountAdminPostParamAccountAdminStatus `db:"account_admin_status" json:"account_admin_status"`
-	Mail               openapi_types.Email                     `db:"mail" json:"mail"`
-	Password           string                                  `db:"password" json:"password"`
+	AccountAdminRole   AccountAdminPostParamAccountAdminRole   `json:"account_admin_role"`
+	AccountAdminStatus AccountAdminPostParamAccountAdminStatus `json:"account_admin_status"`
+	Mail               openapi_types.Email                     `json:"mail"`
+	Password           string                                  `json:"password"`
 }
 
 // AccountAdminPostParamAccountAdminRole defines model for AccountAdminPostParam.AccountAdminRole.
@@ -90,9 +123,9 @@ type AccountAdminPostParamAccountAdminStatus string
 
 // AccountAdminPutParam defines model for AccountAdminPutParam.
 type AccountAdminPutParam struct {
-	AccountAdminRole   *AccountAdminPutParamAccountAdminRole   `db:"password" json:"account_admin_role,omitempty"`
-	AccountAdminStatus *AccountAdminPutParamAccountAdminStatus `db:"account_admin_status" json:"account_admin_status,omitempty"`
-	Password           *string                                 `db:"password" json:"password,omitempty"`
+	AccountAdminRole   *AccountAdminPutParamAccountAdminRole   `json:"account_admin_role,omitempty"`
+	AccountAdminStatus *AccountAdminPutParamAccountAdminStatus `json:"account_admin_status,omitempty"`
+	Password           *string                                 `json:"password,omitempty"`
 }
 
 // AccountAdminPutParamAccountAdminRole defines model for AccountAdminPutParam.AccountAdminRole.
@@ -100,6 +133,12 @@ type AccountAdminPutParamAccountAdminRole string
 
 // AccountAdminPutParamAccountAdminStatus defines model for AccountAdminPutParam.AccountAdminStatus.
 type AccountAdminPutParamAccountAdminStatus string
+
+// AuthGoogleCallbackResp defines model for AuthGoogleCallbackResp.
+type AuthGoogleCallbackResp struct {
+	Account      *Account `json:"account,omitempty"`
+	IsRegistered bool     `json:"is_registered"`
+}
 
 // ErrMsg Error Message
 type ErrMsg struct {
@@ -112,21 +151,13 @@ type ErrMsg struct {
 
 // Jewellery defines model for Jewellery.
 type Jewellery struct {
-	Description *string `db:"description" json:"description,omitempty"`
-	ImageUrl    *string `db:"image_url" json:"image_url,omitempty"`
-
-	// JewelleryId Jewellery ID
-	JewelleryId *JewelleryID `json:"jewellery_id,omitempty"`
-	Name        *string      `db:"name" json:"name,omitempty"`
-	Price       *int         `db:"price" json:"price,omitempty"`
-	Quantity    *int64       `db:"quantity" json:"quantity,omitempty"`
+	Description *string             `json:"description,omitempty"`
+	ImageUrl    *string             `json:"image_url,omitempty"`
+	JewelleryId *openapi_types.UUID `json:"jewellery_id,omitempty"`
+	Name        *string             `json:"name,omitempty"`
+	Price       *int                `json:"price,omitempty"`
+	Quantity    *int64              `json:"quantity,omitempty"`
 }
-
-// JewelleryID Jewellery ID
-type JewelleryID = openapi_types.UUID
-
-// JewelleryIDParam Jewellery ID
-type JewelleryIDParam = JewelleryID
 
 // GetApiAuthGoogleCallbackParams defines parameters for GetApiAuthGoogleCallback.
 type GetApiAuthGoogleCallbackParams struct {

@@ -84,8 +84,12 @@
           type: string
         description: OAuth2 code parameter
     responses:
-      302:
-        description: Redirect to the main page after handling the callback
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthGoogleCallbackResp"
 
 /api/admin/login:
   post:
