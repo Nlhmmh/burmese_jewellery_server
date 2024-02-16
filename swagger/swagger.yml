@@ -221,10 +221,50 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AccountStatusPutParam'
+      responses:
+        200:
+          description: OK
   /api/jewellery:
     get:
       tags:
         - app
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          required: true
+          default: 0
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: true
+          default: 30
+        - in: query
+          name: id
+          schema:
+            $ref: '#/components/schemas/ID'
+        - in: query
+          name: category_id
+          schema:
+            $ref: '#/components/schemas/ID'
+        - in: query
+          name: gem_id
+          schema:
+            $ref: '#/components/schemas/ID'
+        - in: query
+          name: material_id
+          schema:
+            $ref: '#/components/schemas/ID'
+        - in: query
+          name: name
+          schema:
+            type: string
+        - in: query
+          name: is_published
+          schema:
+            type: boolean
       responses:
         200:
           description: OK
@@ -234,6 +274,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Jewellery'
+  /api/jewellery/{jewellery_id}:
+    get:
+      tags:
+        - app
+      parameters:
+        - in: path
+          name: jewellery_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Jewellery'
+  /api/admin/jewellery:
     post:
       tags:
         - admin
@@ -243,6 +301,25 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/JewelleryPostParam'
+      responses:
+        200:
+          description: OK
+  /api/admin/jewellery/{jewellery_id}:
+    put:
+      tags:
+        - admin
+      parameters:
+        - in: path
+          name: jewellery_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JewelleryPutParam'
       responses:
         200:
           description: OK
@@ -555,6 +632,54 @@ components:
           example: true
       required:
         - jewellery_id
+        - category_id
+        - gem_id
+        - material_id
+        - name
+        - description
+        - quantity
+        - price
+        - image_url
+        - is_published
+    JewelleryPutParam:
+      type: object
+      properties:
+        category_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        gem_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        material_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        name:
+          type: string
+          maxLength: 255
+          example: Wedding Forever
+        description:
+          type: string
+          maxLength: 255
+          example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2
+            mm
+        quantity:
+          type: integer
+          format: int64
+          example: 100
+        price:
+          type: integer
+          format: float64
+          example: 10000
+        image_url:
+          type: string
+          example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp
+        is_published:
+          type: boolean
+          example: true
+      required:
         - category_id
         - gem_id
         - material_id

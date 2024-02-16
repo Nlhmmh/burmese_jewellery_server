@@ -13,7 +13,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/volatiletech/sqlboiler/v4/boil"
-	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
 // (POST /api/admin/login)
@@ -25,7 +24,7 @@ func (h *Handler) PostApiAdminLogin(c *gin.Context) {
 	}
 
 	aa, err := orm.AccountAdmins(
-		qm.Where("mail=?", req.Mail),
+		orm.AccountAdminWhere.Mail.EQ(string(req.Mail)),
 	).OneG(c)
 	if err != nil && errors.Is(err, sql.ErrNoRows) {
 		ers.UserWithEmailNotExist.New(err).Abort(c)
@@ -52,13 +51,13 @@ func (h *Handler) PostApiAdminLogin(c *gin.Context) {
 
 // (GET /api/admin/account_admin)
 func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context) {
-	aaList, err := orm.AccountAdmins().AllG(c)
+	list, err := orm.AccountAdmins().AllG(c)
 	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
 	}
 
-	resp, err := models.ConvAccountAdminListFromORM(aaList)
+	resp, err := models.ConvAccountAdminListFromORM(list)
 	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
@@ -69,16 +68,14 @@ func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context) {
 
 // (GET /api/admin/account_admin/{account_admins_id})
 func (h *Handler) GetApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.ID) {
-	aa, err := orm.AccountAdmins(
-		qm.Where("account_admin_id=?", accountAdminsId),
-	).OneG(c)
+	record, err := orm.FindAccountAdminG(c, accountAdminsId.String())
 	if err != nil {
 		ers.NotFound.New(err).Abort(c)
 		return
 	}
 
 	resp := &models.AccountAdmin{}
-	if err := resp.ConvFromORM(aa); err != nil {
+	if err := resp.ConvFromORM(record); err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
 	}
@@ -94,14 +91,14 @@ func (h *Handler) PostApiAdminAccountAdmin(c *gin.Context) {
 		return
 	}
 
-	aa := &orm.AccountAdmin{
+	record := &orm.AccountAdmin{
 		AccountAdminID:     uuid.New().String(),
 		Mail:               string(req.Mail),
 		Password:           req.Password,
 		AccountAdminRole:   orm.AccountAdminRole(req.AccountAdminRole),
 		AccountAdminStatus: orm.AccountAdminStatus(req.AccountAdminStatus),
 	}
-	if err := aa.InsertG(c, boil.Infer()); err != nil {
+	if err := record.InsertG(c, boil.Infer()); err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
 	}
@@ -117,9 +114,7 @@ func (h *Handler) PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, account
 		return
 	}
 
-	aa, err := orm.AccountAdmins(
-		qm.Where("account_admin_id=?", accountAdminsId),
-	).OneG(c)
+	record, err := orm.FindAccountAdminG(c, accountAdminsId.String())
 	if err != nil {
 		ers.NotFound.New(err).Abort(c)
 		return
@@ -131,15 +126,15 @@ func (h *Handler) PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, account
 			ers.PasswordWrong.New(err).Abort(c)
 			return
 		}
-		aa.Password = newPW
+		record.Password = newPW
 	}
 	if v := req.AccountAdminRole; v != nil {
-		aa.AccountAdminRole = orm.AccountAdminRole(*v)
+		record.AccountAdminRole = orm.AccountAdminRole(*v)
 	}
 	if v := req.AccountAdminStatus; v != nil {
-		aa.AccountAdminStatus = orm.AccountAdminStatus(*v)
+		record.AccountAdminStatus = orm.AccountAdminStatus(*v)
 	}
-	if _, err := aa.UpdateG(c, boil.Infer()); err != nil {
+	if _, err := record.UpdateG(c, boil.Infer()); err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
 	}
@@ -149,15 +144,13 @@ func (h *Handler) PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, account
 
 // (DELETE /api/admin/account_admin/{account_admins_id})
 func (h *Handler) DeleteApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.ID) {
-	aa, err := orm.AccountAdmins(
-		qm.Where("account_admin_id=?", accountAdminsId),
-	).OneG(c)
+	record, err := orm.FindAccountAdminG(c, accountAdminsId.String())
 	if err != nil {
 		ers.NotFound.New(err).Abort(c)
 		return
 	}
 
-	if _, err := aa.DeleteG(c); err != nil {
+	if _, err := record.DeleteG(c); err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
 	}

@@ -325,3 +325,50 @@ JewelleryPostParam:
     - price
     - image_url
     - is_published
+JewelleryPutParam:
+  type: object
+  properties:
+    category_id:
+      type: string
+      format: uuid
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    gem_id:
+      type: string
+      format: uuid
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    material_id:
+      type: string
+      format: uuid
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    name:
+      type: string
+      maxLength: 255
+      example: Wedding Forever
+    description:
+      type: string
+      maxLength: 255
+      example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm
+    quantity:
+      type: integer
+      format: int64
+      example: 100
+    price:
+      type: integer
+      format: float64
+      example: 10000
+    image_url:
+      type: string
+      example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp
+    is_published:
+      type: boolean
+      example: true
+  required:
+    - category_id
+    - gem_id
+    - material_id
+    - name
+    - description
+    - quantity
+    - price
+    - image_url
+    - is_published

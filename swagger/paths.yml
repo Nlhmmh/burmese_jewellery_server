@@ -206,11 +206,51 @@
         application/json:
           schema:
             $ref: "#/components/schemas/AccountStatusPutParam"
+    responses:
+      200:
+        description: OK
 
 /api/jewellery:
   get:
     tags:
       - app
+    parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+        required: true
+        default: 0
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        required: true
+        default: 30
+      - in: query
+        name: id
+        schema:
+          $ref: "#/components/schemas/ID"
+      - in: query
+        name: category_id
+        schema:
+          $ref: "#/components/schemas/ID"
+      - in: query
+        name: gem_id
+        schema:
+          $ref: "#/components/schemas/ID"
+      - in: query
+        name: material_id
+        schema:
+          $ref: "#/components/schemas/ID"
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: is_published
+        schema:
+          type: boolean
     responses:
       200:
         description: OK
@@ -220,6 +260,24 @@
               type: array
               items:
                 $ref: "#/components/schemas/Jewellery"
+/api/jewellery/{jewellery_id}:
+  get:
+    tags:
+      - app
+    parameters:
+      - in: path
+        name: jewellery_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Jewellery"
+/api/admin/jewellery:
   post:
     tags:
       - admin
@@ -229,6 +287,25 @@
         application/json:
           schema:
             $ref: "#/components/schemas/JewelleryPostParam"
+    responses:
+      200:
+        description: OK
+/api/admin/jewellery/{jewellery_id}:
+  put:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: jewellery_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JewelleryPutParam"
     responses:
       200:
         description: OK

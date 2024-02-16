@@ -11,7 +11,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/volatiletech/sqlboiler/v4/boil"
-	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
 // (GET /api/admin/account)
@@ -33,16 +32,14 @@ func (h *Handler) GetApiAdminAccount(c *gin.Context) {
 
 // (GET /api/admin/account/{account_id})
 func (h *Handler) GetApiAdminAccountAccountId(c *gin.Context, accountId models.ID) {
-	a, err := orm.Accounts(
-		qm.Where("account_id=?", accountId),
-	).OneG(c)
+	record, err := orm.FindAccountG(c, accountId.String())
 	if err != nil {
 		ers.NotFound.New(err).Abort(c)
 		return
 	}
 
 	resp := &models.Account{}
-	if err := resp.ConvFromORM(a); err != nil {
+	if err := resp.ConvFromORM(record); err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
 	}
@@ -59,13 +56,13 @@ func (h *Handler) PutApiAdminAccountAccountId(c *gin.Context, accountId models.I
 	}
 
 	if err := tx.Write(c, func(tx *sql.Tx) *ers.ErrResp {
-		a, err := orm.FindAccount(c, tx, accountId.String())
+		record, err := orm.FindAccount(c, tx, accountId.String())
 		if err != nil {
 			return ers.InternalServer.New(err)
 		}
 
-		a.AccountStatus = orm.AccountStatus(req.AccountStatus)
-		if _, err := a.Update(c, tx, boil.Infer()); err != nil {
+		record.AccountStatus = orm.AccountStatus(req.AccountStatus)
+		if _, err := record.Update(c, tx, boil.Infer()); err != nil {
 			return ers.InternalServer.New(err)
 		}
 

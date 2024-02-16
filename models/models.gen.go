@@ -195,6 +195,19 @@ type JewelleryPostParam struct {
 	Quantity    int64              `json:"quantity"`
 }
 
+// JewelleryPutParam defines model for JewelleryPutParam.
+type JewelleryPutParam struct {
+	CategoryId  openapi_types.UUID `json:"category_id"`
+	Description string             `json:"description"`
+	GemId       openapi_types.UUID `json:"gem_id"`
+	ImageUrl    string             `json:"image_url"`
+	IsPublished bool               `json:"is_published"`
+	MaterialId  openapi_types.UUID `json:"material_id"`
+	Name        string             `json:"name"`
+	Price       int                `json:"price"`
+	Quantity    int64              `json:"quantity"`
+}
+
 // GetApiAuthGoogleCallbackParams defines parameters for GetApiAuthGoogleCallback.
 type GetApiAuthGoogleCallbackParams struct {
 	// State OAuth2 state parameter
@@ -202,6 +215,18 @@ type GetApiAuthGoogleCallbackParams struct {
 
 	// Code OAuth2 code parameter
 	Code string `form:"code" json:"code"`
+}
+
+// GetApiJewelleryParams defines parameters for GetApiJewellery.
+type GetApiJewelleryParams struct {
+	Offset      int     `form:"offset" json:"offset"`
+	Limit       int     `form:"limit" json:"limit"`
+	Id          *ID     `form:"id,omitempty" json:"id,omitempty"`
+	CategoryId  *ID     `form:"category_id,omitempty" json:"category_id,omitempty"`
+	GemId       *ID     `form:"gem_id,omitempty" json:"gem_id,omitempty"`
+	MaterialId  *ID     `form:"material_id,omitempty" json:"material_id,omitempty"`
+	Name        *string `form:"name,omitempty" json:"name,omitempty"`
+	IsPublished *bool   `form:"is_published,omitempty" json:"is_published,omitempty"`
 }
 
 // PutApiAdminAccountAccountIdJSONRequestBody defines body for PutApiAdminAccountAccountId for application/json ContentType.
@@ -213,8 +238,11 @@ type PostApiAdminAccountAdminJSONRequestBody = AccountAdminPostParam
 // PutApiAdminAccountAdminAccountAdminsIdJSONRequestBody defines body for PutApiAdminAccountAdminAccountAdminsId for application/json ContentType.
 type PutApiAdminAccountAdminAccountAdminsIdJSONRequestBody = AccountAdminPutParam
 
+// PostApiAdminJewelleryJSONRequestBody defines body for PostApiAdminJewellery for application/json ContentType.
+type PostApiAdminJewelleryJSONRequestBody = JewelleryPostParam
+
+// PutApiAdminJewelleryJewelleryIdJSONRequestBody defines body for PutApiAdminJewelleryJewelleryId for application/json ContentType.
+type PutApiAdminJewelleryJewelleryIdJSONRequestBody = JewelleryPutParam
+
 // PostApiAdminLoginJSONRequestBody defines body for PostApiAdminLogin for application/json ContentType.
 type PostApiAdminLoginJSONRequestBody = AccountAdminLoginParam
-
-// PostApiJewelleryJSONRequestBody defines body for PostApiJewellery for application/json ContentType.
-type PostApiJewelleryJSONRequestBody = JewelleryPostParam

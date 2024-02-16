@@ -52,6 +52,12 @@ type ServerInterface interface {
 	// Edit admin user
 	// (PUT /api/admin/account_admin/{account_admins_id})
 	PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId ID)
+
+	// (POST /api/admin/jewellery)
+	PostApiAdminJewellery(c *gin.Context)
+
+	// (PUT /api/admin/jewellery/{jewellery_id})
+	PutApiAdminJewelleryJewelleryId(c *gin.Context, jewelleryId ID)
 	// Login as admin user
 	// (POST /api/admin/login)
 	PostApiAdminLogin(c *gin.Context)
@@ -66,10 +72,10 @@ type ServerInterface interface {
 	GetApiHealthCheck(c *gin.Context)
 
 	// (GET /api/jewellery)
-	GetApiJewellery(c *gin.Context)
+	GetApiJewellery(c *gin.Context, params GetApiJewelleryParams)
 
-	// (POST /api/jewellery)
-	PostApiJewellery(c *gin.Context)
+	// (GET /api/jewellery/{jewellery_id})
+	GetApiJewelleryJewelleryId(c *gin.Context, jewelleryId ID)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -253,6 +259,43 @@ func (siw *ServerInterfaceWrapper) PutApiAdminAccountAdminAccountAdminsId(c *gin
 	siw.Handler.PutApiAdminAccountAdminAccountAdminsId(c, accountAdminsId)
 }
 
+// PostApiAdminJewellery operation middleware
+func (siw *ServerInterfaceWrapper) PostApiAdminJewellery(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiAdminJewellery(c)
+}
+
+// PutApiAdminJewelleryJewelleryId operation middleware
+func (siw *ServerInterfaceWrapper) PutApiAdminJewelleryJewelleryId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "jewellery_id" -------------
+	var jewelleryId ID
+
+	err = runtime.BindStyledParameter("simple", false, "jewellery_id", c.Param("jewellery_id"), &jewelleryId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter jewellery_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PutApiAdminJewelleryJewelleryId(c, jewelleryId)
+}
+
 // PostApiAdminLogin operation middleware
 func (siw *ServerInterfaceWrapper) PostApiAdminLogin(c *gin.Context) {
 
@@ -343,6 +386,89 @@ func (siw *ServerInterfaceWrapper) GetApiHealthCheck(c *gin.Context) {
 // GetApiJewellery operation middleware
 func (siw *ServerInterfaceWrapper) GetApiJewellery(c *gin.Context) {
 
+	var err error
+
+	// Parameter object where we will unmarshal all parameters from the context
+	var params GetApiJewelleryParams
+
+	// ------------- Required query parameter "offset" -------------
+
+	if paramValue := c.Query("offset"); paramValue != "" {
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Query argument offset is required, but not found"), http.StatusBadRequest)
+		return
+	}
+
+	err = runtime.BindQueryParameter("form", true, true, "offset", c.Request.URL.Query(), &params.Offset)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter offset: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Required query parameter "limit" -------------
+
+	if paramValue := c.Query("limit"); paramValue != "" {
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Query argument limit is required, but not found"), http.StatusBadRequest)
+		return
+	}
+
+	err = runtime.BindQueryParameter("form", true, true, "limit", c.Request.URL.Query(), &params.Limit)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter limit: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "id" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "id", c.Request.URL.Query(), &params.Id)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "category_id" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "category_id", c.Request.URL.Query(), &params.CategoryId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter category_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "gem_id" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "gem_id", c.Request.URL.Query(), &params.GemId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter gem_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "material_id" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "material_id", c.Request.URL.Query(), &params.MaterialId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter material_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "name" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "name", c.Request.URL.Query(), &params.Name)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter name: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "is_published" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "is_published", c.Request.URL.Query(), &params.IsPublished)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter is_published: %w", err), http.StatusBadRequest)
+		return
+	}
+
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
 		if c.IsAborted() {
@@ -350,11 +476,22 @@ func (siw *ServerInterfaceWrapper) GetApiJewellery(c *gin.Context) {
 		}
 	}
 
-	siw.Handler.GetApiJewellery(c)
+	siw.Handler.GetApiJewellery(c, params)
 }
 
-// PostApiJewellery operation middleware
-func (siw *ServerInterfaceWrapper) PostApiJewellery(c *gin.Context) {
+// GetApiJewelleryJewelleryId operation middleware
+func (siw *ServerInterfaceWrapper) GetApiJewelleryJewelleryId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "jewellery_id" -------------
+	var jewelleryId ID
+
+	err = runtime.BindStyledParameter("simple", false, "jewellery_id", c.Param("jewellery_id"), &jewelleryId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter jewellery_id: %w", err), http.StatusBadRequest)
+		return
+	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
@@ -363,7 +500,7 @@ func (siw *ServerInterfaceWrapper) PostApiJewellery(c *gin.Context) {
 		}
 	}
 
-	siw.Handler.PostApiJewellery(c)
+	siw.Handler.GetApiJewelleryJewelleryId(c, jewelleryId)
 }
 
 // GinServerOptions provides options for the Gin server.
@@ -402,12 +539,14 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.DELETE(options.BaseURL+"/api/admin/account_admin/:account_admins_id", wrapper.DeleteApiAdminAccountAdminAccountAdminsId)
 	router.GET(options.BaseURL+"/api/admin/account_admin/:account_admins_id", wrapper.GetApiAdminAccountAdminAccountAdminsId)
 	router.PUT(options.BaseURL+"/api/admin/account_admin/:account_admins_id", wrapper.PutApiAdminAccountAdminAccountAdminsId)
+	router.POST(options.BaseURL+"/api/admin/jewellery", wrapper.PostApiAdminJewellery)
+	router.PUT(options.BaseURL+"/api/admin/jewellery/:jewellery_id", wrapper.PutApiAdminJewelleryJewelleryId)
 	router.POST(options.BaseURL+"/api/admin/login", wrapper.PostApiAdminLogin)
 	router.GET(options.BaseURL+"/api/auth/google/callback", wrapper.GetApiAuthGoogleCallback)
 	router.GET(options.BaseURL+"/api/auth/google/login", wrapper.GetApiAuthGoogleLogin)
 	router.GET(options.BaseURL+"/api/health_check", wrapper.GetApiHealthCheck)
 	router.GET(options.BaseURL+"/api/jewellery", wrapper.GetApiJewellery)
-	router.POST(options.BaseURL+"/api/jewellery", wrapper.PostApiJewellery)
+	router.GET(options.BaseURL+"/api/jewellery/:jewellery_id", wrapper.GetApiJewelleryJewelleryId)
 }
 
 type GetApiRequestObject struct {
@@ -465,6 +604,14 @@ type PutApiAdminAccountAccountIdRequestObject struct {
 
 type PutApiAdminAccountAccountIdResponseObject interface {
 	VisitPutApiAdminAccountAccountIdResponse(w http.ResponseWriter) error
+}
+
+type PutApiAdminAccountAccountId200Response struct {
+}
+
+func (response PutApiAdminAccountAccountId200Response) VisitPutApiAdminAccountAccountIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
 }
 
 type GetApiAdminAccountAdminRequestObject struct {
@@ -549,6 +696,39 @@ func (response PutApiAdminAccountAdminAccountAdminsId200Response) VisitPutApiAdm
 	return nil
 }
 
+type PostApiAdminJewelleryRequestObject struct {
+	Body *PostApiAdminJewelleryJSONRequestBody
+}
+
+type PostApiAdminJewelleryResponseObject interface {
+	VisitPostApiAdminJewelleryResponse(w http.ResponseWriter) error
+}
+
+type PostApiAdminJewellery200Response struct {
+}
+
+func (response PostApiAdminJewellery200Response) VisitPostApiAdminJewelleryResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type PutApiAdminJewelleryJewelleryIdRequestObject struct {
+	JewelleryId ID `json:"jewellery_id"`
+	Body        *PutApiAdminJewelleryJewelleryIdJSONRequestBody
+}
+
+type PutApiAdminJewelleryJewelleryIdResponseObject interface {
+	VisitPutApiAdminJewelleryJewelleryIdResponse(w http.ResponseWriter) error
+}
+
+type PutApiAdminJewelleryJewelleryId200Response struct {
+}
+
+func (response PutApiAdminJewelleryJewelleryId200Response) VisitPutApiAdminJewelleryJewelleryIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
 type PostApiAdminLoginRequestObject struct {
 	Body *PostApiAdminLoginJSONRequestBody
 }
@@ -619,6 +799,7 @@ func (response GetApiHealthCheck200JSONResponse) VisitGetApiHealthCheckResponse(
 }
 
 type GetApiJewelleryRequestObject struct {
+	Params GetApiJewelleryParams
 }
 
 type GetApiJewelleryResponseObject interface {
@@ -634,20 +815,21 @@ func (response GetApiJewellery200JSONResponse) VisitGetApiJewelleryResponse(w ht
 	return json.NewEncoder(w).Encode(response)
 }
 
-type PostApiJewelleryRequestObject struct {
-	Body *PostApiJewelleryJSONRequestBody
+type GetApiJewelleryJewelleryIdRequestObject struct {
+	JewelleryId ID `json:"jewellery_id"`
 }
 
-type PostApiJewelleryResponseObject interface {
-	VisitPostApiJewelleryResponse(w http.ResponseWriter) error
+type GetApiJewelleryJewelleryIdResponseObject interface {
+	VisitGetApiJewelleryJewelleryIdResponse(w http.ResponseWriter) error
 }
 
-type PostApiJewellery200Response struct {
-}
+type GetApiJewelleryJewelleryId200JSONResponse Jewellery
 
-func (response PostApiJewellery200Response) VisitPostApiJewelleryResponse(w http.ResponseWriter) error {
+func (response GetApiJewelleryJewelleryId200JSONResponse) VisitGetApiJewelleryJewelleryIdResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
-	return nil
+
+	return json.NewEncoder(w).Encode(response)
 }
 
 // StrictServerInterface represents all server handlers.
@@ -679,6 +861,12 @@ type StrictServerInterface interface {
 	// Edit admin user
 	// (PUT /api/admin/account_admin/{account_admins_id})
 	PutApiAdminAccountAdminAccountAdminsId(ctx context.Context, request PutApiAdminAccountAdminAccountAdminsIdRequestObject) (PutApiAdminAccountAdminAccountAdminsIdResponseObject, error)
+
+	// (POST /api/admin/jewellery)
+	PostApiAdminJewellery(ctx context.Context, request PostApiAdminJewelleryRequestObject) (PostApiAdminJewelleryResponseObject, error)
+
+	// (PUT /api/admin/jewellery/{jewellery_id})
+	PutApiAdminJewelleryJewelleryId(ctx context.Context, request PutApiAdminJewelleryJewelleryIdRequestObject) (PutApiAdminJewelleryJewelleryIdResponseObject, error)
 	// Login as admin user
 	// (POST /api/admin/login)
 	PostApiAdminLogin(ctx context.Context, request PostApiAdminLoginRequestObject) (PostApiAdminLoginResponseObject, error)
@@ -695,8 +883,8 @@ type StrictServerInterface interface {
 	// (GET /api/jewellery)
 	GetApiJewellery(ctx context.Context, request GetApiJewelleryRequestObject) (GetApiJewelleryResponseObject, error)
 
-	// (POST /api/jewellery)
-	PostApiJewellery(ctx context.Context, request PostApiJewelleryRequestObject) (PostApiJewelleryResponseObject, error)
+	// (GET /api/jewellery/{jewellery_id})
+	GetApiJewelleryJewelleryId(ctx context.Context, request GetApiJewelleryJewelleryIdRequestObject) (GetApiJewelleryJewelleryIdResponseObject, error)
 }
 
 type StrictHandlerFunc = strictgin.StrictGinHandlerFunc
@@ -970,6 +1158,74 @@ func (sh *strictHandler) PutApiAdminAccountAdminAccountAdminsId(ctx *gin.Context
 	}
 }
 
+// PostApiAdminJewellery operation middleware
+func (sh *strictHandler) PostApiAdminJewellery(ctx *gin.Context) {
+	var request PostApiAdminJewelleryRequestObject
+
+	var body PostApiAdminJewelleryJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiAdminJewellery(ctx, request.(PostApiAdminJewelleryRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiAdminJewellery")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiAdminJewelleryResponseObject); ok {
+		if err := validResponse.VisitPostApiAdminJewelleryResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// PutApiAdminJewelleryJewelleryId operation middleware
+func (sh *strictHandler) PutApiAdminJewelleryJewelleryId(ctx *gin.Context, jewelleryId ID) {
+	var request PutApiAdminJewelleryJewelleryIdRequestObject
+
+	request.JewelleryId = jewelleryId
+
+	var body PutApiAdminJewelleryJewelleryIdJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PutApiAdminJewelleryJewelleryId(ctx, request.(PutApiAdminJewelleryJewelleryIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PutApiAdminJewelleryJewelleryId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PutApiAdminJewelleryJewelleryIdResponseObject); ok {
+		if err := validResponse.VisitPutApiAdminJewelleryJewelleryIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
 // PostApiAdminLogin operation middleware
 func (sh *strictHandler) PostApiAdminLogin(ctx *gin.Context) {
 	var request PostApiAdminLoginRequestObject
@@ -1081,8 +1337,10 @@ func (sh *strictHandler) GetApiHealthCheck(ctx *gin.Context) {
 }
 
 // GetApiJewellery operation middleware
-func (sh *strictHandler) GetApiJewellery(ctx *gin.Context) {
+func (sh *strictHandler) GetApiJewellery(ctx *gin.Context, params GetApiJewelleryParams) {
 	var request GetApiJewelleryRequestObject
+
+	request.Params = params
 
 	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
 		return sh.ssi.GetApiJewellery(ctx, request.(GetApiJewelleryRequestObject))
@@ -1105,23 +1363,17 @@ func (sh *strictHandler) GetApiJewellery(ctx *gin.Context) {
 	}
 }
 
-// PostApiJewellery operation middleware
-func (sh *strictHandler) PostApiJewellery(ctx *gin.Context) {
-	var request PostApiJewelleryRequestObject
+// GetApiJewelleryJewelleryId operation middleware
+func (sh *strictHandler) GetApiJewelleryJewelleryId(ctx *gin.Context, jewelleryId ID) {
+	var request GetApiJewelleryJewelleryIdRequestObject
 
-	var body PostApiJewelleryJSONRequestBody
-	if err := ctx.ShouldBind(&body); err != nil {
-		ctx.Status(http.StatusBadRequest)
-		ctx.Error(err)
-		return
-	}
-	request.Body = &body
+	request.JewelleryId = jewelleryId
 
 	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
-		return sh.ssi.PostApiJewellery(ctx, request.(PostApiJewelleryRequestObject))
+		return sh.ssi.GetApiJewelleryJewelleryId(ctx, request.(GetApiJewelleryJewelleryIdRequestObject))
 	}
 	for _, middleware := range sh.middlewares {
-		handler = middleware(handler, "PostApiJewellery")
+		handler = middleware(handler, "GetApiJewelleryJewelleryId")
 	}
 
 	response, err := handler(ctx, request)
@@ -1129,8 +1381,8 @@ func (sh *strictHandler) PostApiJewellery(ctx *gin.Context) {
 	if err != nil {
 		ctx.Error(err)
 		ctx.Status(http.StatusInternalServerError)
-	} else if validResponse, ok := response.(PostApiJewelleryResponseObject); ok {
-		if err := validResponse.VisitPostApiJewelleryResponse(ctx.Writer); err != nil {
+	} else if validResponse, ok := response.(GetApiJewelleryJewelleryIdResponseObject); ok {
+		if err := validResponse.VisitGetApiJewelleryJewelleryIdResponse(ctx.Writer); err != nil {
 			ctx.Error(err)
 		}
 	} else if response != nil {
@@ -1141,36 +1393,38 @@ func (sh *strictHandler) PostApiJewellery(ctx *gin.Context) {
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
