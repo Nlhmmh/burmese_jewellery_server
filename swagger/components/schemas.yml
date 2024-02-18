@@ -240,7 +240,7 @@ Jewellery:
       example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm
     quantity:
       type: integer
-      format: int64
+      format: int
       example: 100
     price:
       type: integer
@@ -276,10 +276,6 @@ Jewellery:
 JewelleryPostParam:
   type: object
   properties:
-    jewellery_id:
-      type: string
-      format: uuid
-      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
     category_id:
       type: string
       format: uuid
@@ -302,7 +298,7 @@ JewelleryPostParam:
       example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm
     quantity:
       type: integer
-      format: int64
+      format: int
       example: 100
     price:
       type: integer
@@ -315,7 +311,6 @@ JewelleryPostParam:
       type: boolean
       example: true
   required:
-    - jewellery_id
     - category_id
     - gem_id
     - material_id
@@ -350,7 +345,7 @@ JewelleryPutParam:
       example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm
     quantity:
       type: integer
-      format: int64
+      format: int
       example: 100
     price:
       type: integer
@@ -372,3 +367,159 @@ JewelleryPutParam:
     - price
     - image_url
     - is_published
+
+Category:
+  type: object
+  properties:
+    category_id:
+      type: string
+      format: uuid
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    name:
+      type: string
+      maxLength: 255
+      example: Engagement Rings
+    description:
+      type: string
+      maxLength: 255
+      example: Engagement Rings
+    image_url:
+      type: string
+      example: https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp
+    created_at:
+      type: string
+      format: date-time
+      example: 2020-01-01T00:00:00Z
+    updated_at:
+      type: string
+      format: date-time
+      example: 2020-01-01T00:00:00Z
+  required:
+    - category_id
+    - name
+    - description
+    - image_url
+    - created_at
+    - updated_at
+CategoryPostParam:
+  type: object
+  properties:
+    name:
+      type: string
+      maxLength: 255
+      example: Engagement Rings
+    description:
+      type: string
+      maxLength: 255
+      example: Engagement Rings
+    image_url:
+      type: string
+      example: https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp
+  required:
+    - name
+    - description
+    - image_url
+CategoryPutParam:
+  type: object
+  properties:
+    name:
+      type: string
+      maxLength: 255
+      example: Engagement Rings
+    description:
+      type: string
+      maxLength: 255
+      example: Engagement Rings
+    image_url:
+      type: string
+      example: https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp
+  required:
+    - name
+    - description
+    - image_url
+
+Gem:
+  type: object
+  properties:
+    gem_id:
+      type: string
+      format: uuid
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    name:
+      type: string
+      maxLength: 255
+      example: Diamond
+    created_at:
+      type: string
+      format: date-time
+      example: 2020-01-01T00:00:00Z
+    updated_at:
+      type: string
+      format: date-time
+      example: 2020-01-01T00:00:00Z
+  required:
+    - gem_id
+    - name
+    - created_at
+    - updated_at
+GemPostParam:
+  type: object
+  properties:
+    name:
+      type: string
+      maxLength: 255
+      example: Diamond
+  required:
+    - name
+GemPutParam:
+  type: object
+  properties:
+    name:
+      type: string
+      maxLength: 255
+      example: Diamond
+  required:
+    - name
+
+Material:
+  type: object
+  properties:
+    material_id:
+      type: string
+      format: uuid
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    name:
+      type: string
+      maxLength: 255
+      example: Gold
+    created_at:
+      type: string
+      format: date-time
+      example: 2020-01-01T00:00:00Z
+    updated_at:
+      type: string
+      format: date-time
+      example: 2020-01-01T00:00:00Z
+  required:
+    - material_id
+    - name
+    - created_at
+    - updated_at
+MaterialPostParam:
+  type: object
+  properties:
+    name:
+      type: string
+      maxLength: 255
+      example: Gold
+  required:
+    - name
+MaterialPutParam:
+  type: object
+  properties:
+    name:
+      type: string
+      maxLength: 255
+      example: Gold
+  required:
+    - name

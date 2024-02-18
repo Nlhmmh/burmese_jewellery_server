@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
-  title: Kikumemo API
-  description: API For Kikumemo.
+  title: Burmese Jewellery
+  description: API documentaion for Burmese Jewellery.
   version: 1.0.0
 externalDocs:
   description: Find out more about Swagger
@@ -323,6 +323,189 @@ paths:
       responses:
         200:
           description: OK
+    delete:
+      tags:
+        - admin
+      parameters:
+        - in: path
+          name: jewellery_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      responses:
+        204:
+          description: Deleted
+  /api/category:
+    get:
+      tags:
+        - app
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+  /api/admin/category:
+    post:
+      tags:
+        - admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryPostParam'
+      responses:
+        200:
+          description: OK
+  /api/admin/category/{category_id}:
+    put:
+      tags:
+        - admin
+      parameters:
+        - in: path
+          name: category_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryPutParam'
+      responses:
+        200:
+          description: OK
+    delete:
+      tags:
+        - admin
+      parameters:
+        - in: path
+          name: category_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      responses:
+        204:
+          description: Deleted
+  /api/gem:
+    get:
+      tags:
+        - app
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Gem'
+  /api/admin/gem:
+    post:
+      tags:
+        - admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GemPostParam'
+      responses:
+        200:
+          description: OK
+  /api/admin/gem/{gem_id}:
+    put:
+      tags:
+        - admin
+      parameters:
+        - in: path
+          name: gem_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GemPutParam'
+      responses:
+        200:
+          description: OK
+    delete:
+      tags:
+        - admin
+      parameters:
+        - in: path
+          name: gem_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      responses:
+        204:
+          description: Deleted
+  /api/material:
+    get:
+      tags:
+        - app
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Material'
+  /api/admin/material:
+    post:
+      tags:
+        - admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaterialPostParam'
+      responses:
+        200:
+          description: OK
+  /api/admin/material/{material_id}:
+    put:
+      tags:
+        - admin
+      parameters:
+        - in: path
+          name: material_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaterialPutParam'
+      responses:
+        200:
+          description: OK
+    delete:
+      tags:
+        - admin
+      parameters:
+        - in: path
+          name: material_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      responses:
+        204:
+          description: Deleted
 components:
   parameters: null
   schemas:
@@ -555,7 +738,7 @@ components:
             mm
         quantity:
           type: integer
-          format: int64
+          format: int
           example: 100
         price:
           type: integer
@@ -591,10 +774,6 @@ components:
     JewelleryPostParam:
       type: object
       properties:
-        jewellery_id:
-          type: string
-          format: uuid
-          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
         category_id:
           type: string
           format: uuid
@@ -618,7 +797,7 @@ components:
             mm
         quantity:
           type: integer
-          format: int64
+          format: int
           example: 100
         price:
           type: integer
@@ -631,7 +810,6 @@ components:
           type: boolean
           example: true
       required:
-        - jewellery_id
         - category_id
         - gem_id
         - material_id
@@ -667,7 +845,7 @@ components:
             mm
         quantity:
           type: integer
-          format: int64
+          format: int
           example: 100
         price:
           type: integer
@@ -689,3 +867,156 @@ components:
         - price
         - image_url
         - is_published
+    Category:
+      type: object
+      properties:
+        category_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        name:
+          type: string
+          maxLength: 255
+          example: Engagement Rings
+        description:
+          type: string
+          maxLength: 255
+          example: Engagement Rings
+        image_url:
+          type: string
+          example: https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp
+        created_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        updated_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+      required:
+        - category_id
+        - name
+        - description
+        - image_url
+        - created_at
+        - updated_at
+    CategoryPostParam:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          example: Engagement Rings
+        description:
+          type: string
+          maxLength: 255
+          example: Engagement Rings
+        image_url:
+          type: string
+          example: https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp
+      required:
+        - name
+        - description
+        - image_url
+    CategoryPutParam:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          example: Engagement Rings
+        description:
+          type: string
+          maxLength: 255
+          example: Engagement Rings
+        image_url:
+          type: string
+          example: https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp
+      required:
+        - name
+        - description
+        - image_url
+    Gem:
+      type: object
+      properties:
+        gem_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        name:
+          type: string
+          maxLength: 255
+          example: Diamond
+        created_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        updated_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+      required:
+        - gem_id
+        - name
+        - created_at
+        - updated_at
+    GemPostParam:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          example: Diamond
+      required:
+        - name
+    GemPutParam:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          example: Diamond
+      required:
+        - name
+    Material:
+      type: object
+      properties:
+        material_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        name:
+          type: string
+          maxLength: 255
+          example: Gold
+        created_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        updated_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+      required:
+        - material_id
+        - name
+        - created_at
+        - updated_at
+    MaterialPostParam:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          example: Gold
+      required:
+        - name
+    MaterialPutParam:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          example: Gold
+      required:
+        - name

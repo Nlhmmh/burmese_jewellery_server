@@ -5,6 +5,7 @@ import (
 	"burmese_jewellery/ers"
 	"burmese_jewellery/models"
 	"burmese_jewellery/orm"
+	"burmese_jewellery/tx"
 
 	"database/sql"
 	"errors"
@@ -57,7 +58,7 @@ func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context) {
 		return
 	}
 
-	resp, err := models.ConvAccountAdminListFromORM(list)
+	resp, err := models.ConvListFromORM(list, models.ConvAccountAdminFromORM)
 	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
@@ -74,8 +75,8 @@ func (h *Handler) GetApiAdminAccountAdminAccountAdminsId(c *gin.Context, account
 		return
 	}
 
-	resp := &models.AccountAdmin{}
-	if err := resp.ConvFromORM(record); err != nil {
+	resp, err := models.ConvAccountAdminFromORM(record)
+	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
 	}
@@ -144,14 +145,18 @@ func (h *Handler) PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, account
 
 // (DELETE /api/admin/account_admin/{account_admins_id})
 func (h *Handler) DeleteApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId models.ID) {
-	record, err := orm.FindAccountAdminG(c, accountAdminsId.String())
-	if err != nil {
-		ers.NotFound.New(err).Abort(c)
-		return
-	}
+	if err := tx.Write(c, func(tx *sql.Tx) *ers.ErrResp {
+		record, err := orm.FindAccountAdmin(c, tx, accountAdminsId.String())
+		if err != nil {
+			return ers.NotFound.New(err)
+		}
 
-	if _, err := record.DeleteG(c); err != nil {
-		ers.InternalServer.New(err).Abort(c)
+		if _, err := record.Delete(c, tx); err != nil {
+			return ers.InternalServer.New(err)
+		}
+
+		return nil
+	}); err != nil {
 		return
 	}
 

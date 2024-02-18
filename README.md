@@ -20,6 +20,7 @@ go mod edit -go=1.21
 - Hot Reload - air - https://github.com/cosmtrek/air
 #### API Documentation
 - Swagger
+- https://swagger.io/docs/specification/basic-structure/
 #### Database
 - Postgres
 - PlantUML ER Diagram
@@ -45,6 +46,9 @@ java -jar plantuml.jar -verbose example.uml
 go build . &&  ./planter "host=localhost port=5432 user=postgres password=postgres dbname=burmese_jewellery sslmode=disable" -T burmese_jewellery -o ./burmese_jewellery.uml
 cp ./planter /Users/naylinhtet/.goenv/shims
 ```
+#### Load Testing
+https://locust.io/
+[Run with Makefile](load_testing/Makefile)
 
 ---
 
@@ -80,26 +84,39 @@ https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
 - [x] /api/admin/account/[id] - GET
 - [x] /api/admin/account/[id] - PUT
 >>
-- [ ] /api/admin/jewellery - GET
+- [ ] /api/admin/category/[id] - POST
+- [ ] /api/admin/category/[id] - PUT
+- [ ] /api/admin/category/[id] - DELETE
+>>
+- [ ] /api/admin/gem/[id] - POST
+- [ ] /api/admin/gem/[id] - PUT
+- [ ] /api/admin/gem/[id] - DELETE
+>>
+- [ ] /api/admin/material/[id] - POST
+- [ ] /api/admin/material/[id] - PUT
+- [ ] /api/admin/material/[id] - DELETE
+>>
 - [ ] /api/admin/jewellery - POST
-- [ ] /api/admin/jewellery/[id] - GET
 - [ ] /api/admin/jewellery/[id] - PUT
 - [ ] /api/admin/jewellery/[id] - DELETE
 >>
 - [ ] /api/admin/currency - GET
-- [ ] /api/admin/currency/[id] - GET
+- [ ] /api/admin/currency/[id] - POST
 - [ ] /api/admin/currency/[id] - PUT
 - [ ] /api/admin/currency/[id] - DELETE
 >>
 - [ ] /api/admin/country - GET
-- [ ] /api/admin/country/[id] - GET
+- [ ] /api/admin/country/[id] - POST
 - [ ] /api/admin/country/[id] - PUT
 - [ ] /api/admin/country/[id] - DELETE
 >>
 - [ ] /api/admin/faq - GET
-- [ ] /api/admin/faq/[id] - GET
+- [ ] /api/admin/faq/[id] - POST
 - [ ] /api/admin/faq/[id] - PUT
 - [ ] /api/admin/faq/[id] - DELETE
+>>
+- [ ] /api/admin/order - GET
+- [ ] /api/admin/order/[id] - GET
 
 ### App
 - [ ] /api/auth/email/register - POST
@@ -119,6 +136,12 @@ https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
 - [ ] /api/profile - PUT - edit profile
 - [ ] /api/profile - GET
 >>
+- [ ] /api/category - GET
+>>
+- [ ] /api/gem - GET
+>>
+- [ ] /api/material - GET
+>>
 - [ ] /api/jewellery - GET
 - [ ] /api/jewellery/[id] - GET
 >>
@@ -134,3 +157,4 @@ https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
 - [ ] /api/order/cancel - POST - cancel order
 >>
 - [ ] /api/faq - GET
+- [ ] /api/faq/[id] - GET

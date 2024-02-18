@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
-  title: Kikumemo API
-  description: API For Kikumemo.
+  title: Burmese Jewellery
+  description: API documentaion for Burmese Jewellery.
   version: 1.0.0
 
 externalDocs:

@@ -85,9 +85,11 @@ func (*Handler) GetApiAuthGoogleCallback(c *gin.Context, params models.GetApiAut
 		}
 		isRegistered = apExists
 
-		if err := account.ConvFromORM(a); err != nil {
+		acc, err := models.ConvAccountFromORM(a)
+		if err != nil {
 			return ers.InternalServer.New(err)
 		}
+		account = acc
 
 		return nil
 	}); err != nil {

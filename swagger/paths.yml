@@ -309,3 +309,189 @@
     responses:
       200:
         description: OK
+  delete:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: jewellery_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    responses:
+      204:
+        description: Deleted
+
+/api/category:
+  get:
+    tags:
+      - app
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Category"
+/api/admin/category:
+  post:
+    tags:
+      - admin
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CategoryPostParam"
+    responses:
+      200:
+        description: OK
+/api/admin/category/{category_id}:
+  put:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: category_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CategoryPutParam"
+    responses:
+      200:
+        description: OK
+  delete:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: category_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    responses:
+      204:
+        description: Deleted
+
+/api/gem:
+  get:
+    tags:
+      - app
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Gem"
+/api/admin/gem:
+  post:
+    tags:
+      - admin
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GemPostParam"
+    responses:
+      200:
+        description: OK
+/api/admin/gem/{gem_id}:
+  put:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: gem_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GemPutParam"
+    responses:
+      200:
+        description: OK
+  delete:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: gem_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    responses:
+      204:
+        description: Deleted
+
+/api/material:
+  get:
+    tags:
+      - app
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Material"
+/api/admin/material:
+  post:
+    tags:
+      - admin
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/MaterialPostParam"
+    responses:
+      200:
+        description: OK
+/api/admin/material/{material_id}:
+  put:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: material_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/MaterialPutParam"
+    responses:
+      200:
+        description: OK
+  delete:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: material_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    responses:
+      204:
+        description: Deleted

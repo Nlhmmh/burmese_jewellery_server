@@ -32,6 +32,7 @@ type Jewellery struct {
 	Price       int       `boil:"price" json:"price" toml:"price" yaml:"price"`
 	ImageURL    string    `boil:"image_url" json:"imageURL" toml:"imageURL" yaml:"imageURL"`
 	IsPublished bool      `boil:"is_published" json:"isPublished" toml:"isPublished" yaml:"isPublished"`
+	Quantity    int       `boil:"quantity" json:"quantity" toml:"quantity" yaml:"quantity"`
 	CreatedAt   time.Time `boil:"created_at" json:"createdAt" toml:"createdAt" yaml:"createdAt"`
 	UpdatedAt   time.Time `boil:"updated_at" json:"updatedAt" toml:"updatedAt" yaml:"updatedAt"`
 
@@ -49,6 +50,7 @@ var JewelleryColumns = struct {
 	Price       string
 	ImageURL    string
 	IsPublished string
+	Quantity    string
 	CreatedAt   string
 	UpdatedAt   string
 }{
@@ -61,6 +63,7 @@ var JewelleryColumns = struct {
 	Price:       "price",
 	ImageURL:    "image_url",
 	IsPublished: "is_published",
+	Quantity:    "quantity",
 	CreatedAt:   "created_at",
 	UpdatedAt:   "updated_at",
 }
@@ -75,6 +78,7 @@ var JewelleryTableColumns = struct {
 	Price       string
 	ImageURL    string
 	IsPublished string
+	Quantity    string
 	CreatedAt   string
 	UpdatedAt   string
 }{
@@ -87,6 +91,7 @@ var JewelleryTableColumns = struct {
 	Price:       "jewelleries.price",
 	ImageURL:    "jewelleries.image_url",
 	IsPublished: "jewelleries.is_published",
+	Quantity:    "jewelleries.quantity",
 	CreatedAt:   "jewelleries.created_at",
 	UpdatedAt:   "jewelleries.updated_at",
 }
@@ -103,6 +108,7 @@ var JewelleryWhere = struct {
 	Price       whereHelperint
 	ImageURL    whereHelperstring
 	IsPublished whereHelperbool
+	Quantity    whereHelperint
 	CreatedAt   whereHelpertime_Time
 	UpdatedAt   whereHelpertime_Time
 }{
@@ -115,6 +121,7 @@ var JewelleryWhere = struct {
 	Price:       whereHelperint{field: "\"jewelleries\".\"price\""},
 	ImageURL:    whereHelperstring{field: "\"jewelleries\".\"image_url\""},
 	IsPublished: whereHelperbool{field: "\"jewelleries\".\"is_published\""},
+	Quantity:    whereHelperint{field: "\"jewelleries\".\"quantity\""},
 	CreatedAt:   whereHelpertime_Time{field: "\"jewelleries\".\"created_at\""},
 	UpdatedAt:   whereHelpertime_Time{field: "\"jewelleries\".\"updated_at\""},
 }
@@ -197,9 +204,9 @@ func (r *jewelleryR) GetAccountOrderJewelleries() AccountOrderJewellerySlice {
 type jewelleryL struct{}
 
 var (
-	jewelleryAllColumns            = []string{"jewellery_id", "category_id", "gem_id", "material_id", "name", "description", "price", "image_url", "is_published", "created_at", "updated_at"}
+	jewelleryAllColumns            = []string{"jewellery_id", "category_id", "gem_id", "material_id", "name", "description", "price", "image_url", "is_published", "quantity", "created_at", "updated_at"}
 	jewelleryColumnsWithoutDefault = []string{"category_id", "gem_id", "material_id", "name", "description", "price", "image_url", "is_published"}
-	jewelleryColumnsWithDefault    = []string{"jewellery_id", "created_at", "updated_at"}
+	jewelleryColumnsWithDefault    = []string{"jewellery_id", "quantity", "created_at", "updated_at"}
 	jewelleryPrimaryKeyColumns     = []string{"jewellery_id"}
 	jewelleryGeneratedColumns      = []string{}
 )

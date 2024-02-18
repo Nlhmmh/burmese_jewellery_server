@@ -53,20 +53,56 @@ type ServerInterface interface {
 	// (PUT /api/admin/account_admin/{account_admins_id})
 	PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId ID)
 
+	// (POST /api/admin/category)
+	PostApiAdminCategory(c *gin.Context)
+
+	// (DELETE /api/admin/category/{category_id})
+	DeleteApiAdminCategoryCategoryId(c *gin.Context, categoryId ID)
+
+	// (PUT /api/admin/category/{category_id})
+	PutApiAdminCategoryCategoryId(c *gin.Context, categoryId ID)
+
+	// (POST /api/admin/gem)
+	PostApiAdminGem(c *gin.Context)
+
+	// (DELETE /api/admin/gem/{gem_id})
+	DeleteApiAdminGemGemId(c *gin.Context, gemId ID)
+
+	// (PUT /api/admin/gem/{gem_id})
+	PutApiAdminGemGemId(c *gin.Context, gemId ID)
+
 	// (POST /api/admin/jewellery)
 	PostApiAdminJewellery(c *gin.Context)
+
+	// (DELETE /api/admin/jewellery/{jewellery_id})
+	DeleteApiAdminJewelleryJewelleryId(c *gin.Context, jewelleryId ID)
 
 	// (PUT /api/admin/jewellery/{jewellery_id})
 	PutApiAdminJewelleryJewelleryId(c *gin.Context, jewelleryId ID)
 	// Login as admin user
 	// (POST /api/admin/login)
 	PostApiAdminLogin(c *gin.Context)
+
+	// (POST /api/admin/material)
+	PostApiAdminMaterial(c *gin.Context)
+
+	// (DELETE /api/admin/material/{material_id})
+	DeleteApiAdminMaterialMaterialId(c *gin.Context, materialId ID)
+
+	// (PUT /api/admin/material/{material_id})
+	PutApiAdminMaterialMaterialId(c *gin.Context, materialId ID)
 	// Handle Google OAuth2 callback
 	// (GET /api/auth/google/callback)
 	GetApiAuthGoogleCallback(c *gin.Context, params GetApiAuthGoogleCallbackParams)
 	// Initiate Google OAuth2 login
 	// (GET /api/auth/google/login)
 	GetApiAuthGoogleLogin(c *gin.Context)
+
+	// (GET /api/category)
+	GetApiCategory(c *gin.Context)
+
+	// (GET /api/gem)
+	GetApiGem(c *gin.Context)
 	// Health Check
 	// (GET /api/health_check)
 	GetApiHealthCheck(c *gin.Context)
@@ -76,6 +112,9 @@ type ServerInterface interface {
 
 	// (GET /api/jewellery/{jewellery_id})
 	GetApiJewelleryJewelleryId(c *gin.Context, jewelleryId ID)
+
+	// (GET /api/material)
+	GetApiMaterial(c *gin.Context)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -259,6 +298,128 @@ func (siw *ServerInterfaceWrapper) PutApiAdminAccountAdminAccountAdminsId(c *gin
 	siw.Handler.PutApiAdminAccountAdminAccountAdminsId(c, accountAdminsId)
 }
 
+// PostApiAdminCategory operation middleware
+func (siw *ServerInterfaceWrapper) PostApiAdminCategory(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiAdminCategory(c)
+}
+
+// DeleteApiAdminCategoryCategoryId operation middleware
+func (siw *ServerInterfaceWrapper) DeleteApiAdminCategoryCategoryId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "category_id" -------------
+	var categoryId ID
+
+	err = runtime.BindStyledParameter("simple", false, "category_id", c.Param("category_id"), &categoryId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter category_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.DeleteApiAdminCategoryCategoryId(c, categoryId)
+}
+
+// PutApiAdminCategoryCategoryId operation middleware
+func (siw *ServerInterfaceWrapper) PutApiAdminCategoryCategoryId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "category_id" -------------
+	var categoryId ID
+
+	err = runtime.BindStyledParameter("simple", false, "category_id", c.Param("category_id"), &categoryId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter category_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PutApiAdminCategoryCategoryId(c, categoryId)
+}
+
+// PostApiAdminGem operation middleware
+func (siw *ServerInterfaceWrapper) PostApiAdminGem(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiAdminGem(c)
+}
+
+// DeleteApiAdminGemGemId operation middleware
+func (siw *ServerInterfaceWrapper) DeleteApiAdminGemGemId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "gem_id" -------------
+	var gemId ID
+
+	err = runtime.BindStyledParameter("simple", false, "gem_id", c.Param("gem_id"), &gemId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter gem_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.DeleteApiAdminGemGemId(c, gemId)
+}
+
+// PutApiAdminGemGemId operation middleware
+func (siw *ServerInterfaceWrapper) PutApiAdminGemGemId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "gem_id" -------------
+	var gemId ID
+
+	err = runtime.BindStyledParameter("simple", false, "gem_id", c.Param("gem_id"), &gemId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter gem_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PutApiAdminGemGemId(c, gemId)
+}
+
 // PostApiAdminJewellery operation middleware
 func (siw *ServerInterfaceWrapper) PostApiAdminJewellery(c *gin.Context) {
 
@@ -270,6 +431,30 @@ func (siw *ServerInterfaceWrapper) PostApiAdminJewellery(c *gin.Context) {
 	}
 
 	siw.Handler.PostApiAdminJewellery(c)
+}
+
+// DeleteApiAdminJewelleryJewelleryId operation middleware
+func (siw *ServerInterfaceWrapper) DeleteApiAdminJewelleryJewelleryId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "jewellery_id" -------------
+	var jewelleryId ID
+
+	err = runtime.BindStyledParameter("simple", false, "jewellery_id", c.Param("jewellery_id"), &jewelleryId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter jewellery_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.DeleteApiAdminJewelleryJewelleryId(c, jewelleryId)
 }
 
 // PutApiAdminJewelleryJewelleryId operation middleware
@@ -307,6 +492,67 @@ func (siw *ServerInterfaceWrapper) PostApiAdminLogin(c *gin.Context) {
 	}
 
 	siw.Handler.PostApiAdminLogin(c)
+}
+
+// PostApiAdminMaterial operation middleware
+func (siw *ServerInterfaceWrapper) PostApiAdminMaterial(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiAdminMaterial(c)
+}
+
+// DeleteApiAdminMaterialMaterialId operation middleware
+func (siw *ServerInterfaceWrapper) DeleteApiAdminMaterialMaterialId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "material_id" -------------
+	var materialId ID
+
+	err = runtime.BindStyledParameter("simple", false, "material_id", c.Param("material_id"), &materialId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter material_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.DeleteApiAdminMaterialMaterialId(c, materialId)
+}
+
+// PutApiAdminMaterialMaterialId operation middleware
+func (siw *ServerInterfaceWrapper) PutApiAdminMaterialMaterialId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "material_id" -------------
+	var materialId ID
+
+	err = runtime.BindStyledParameter("simple", false, "material_id", c.Param("material_id"), &materialId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter material_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PutApiAdminMaterialMaterialId(c, materialId)
 }
 
 // GetApiAuthGoogleCallback operation middleware
@@ -368,6 +614,32 @@ func (siw *ServerInterfaceWrapper) GetApiAuthGoogleLogin(c *gin.Context) {
 	}
 
 	siw.Handler.GetApiAuthGoogleLogin(c)
+}
+
+// GetApiCategory operation middleware
+func (siw *ServerInterfaceWrapper) GetApiCategory(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiCategory(c)
+}
+
+// GetApiGem operation middleware
+func (siw *ServerInterfaceWrapper) GetApiGem(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiGem(c)
 }
 
 // GetApiHealthCheck operation middleware
@@ -503,6 +775,19 @@ func (siw *ServerInterfaceWrapper) GetApiJewelleryJewelleryId(c *gin.Context) {
 	siw.Handler.GetApiJewelleryJewelleryId(c, jewelleryId)
 }
 
+// GetApiMaterial operation middleware
+func (siw *ServerInterfaceWrapper) GetApiMaterial(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiMaterial(c)
+}
+
 // GinServerOptions provides options for the Gin server.
 type GinServerOptions struct {
 	BaseURL      string
@@ -539,14 +824,27 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.DELETE(options.BaseURL+"/api/admin/account_admin/:account_admins_id", wrapper.DeleteApiAdminAccountAdminAccountAdminsId)
 	router.GET(options.BaseURL+"/api/admin/account_admin/:account_admins_id", wrapper.GetApiAdminAccountAdminAccountAdminsId)
 	router.PUT(options.BaseURL+"/api/admin/account_admin/:account_admins_id", wrapper.PutApiAdminAccountAdminAccountAdminsId)
+	router.POST(options.BaseURL+"/api/admin/category", wrapper.PostApiAdminCategory)
+	router.DELETE(options.BaseURL+"/api/admin/category/:category_id", wrapper.DeleteApiAdminCategoryCategoryId)
+	router.PUT(options.BaseURL+"/api/admin/category/:category_id", wrapper.PutApiAdminCategoryCategoryId)
+	router.POST(options.BaseURL+"/api/admin/gem", wrapper.PostApiAdminGem)
+	router.DELETE(options.BaseURL+"/api/admin/gem/:gem_id", wrapper.DeleteApiAdminGemGemId)
+	router.PUT(options.BaseURL+"/api/admin/gem/:gem_id", wrapper.PutApiAdminGemGemId)
 	router.POST(options.BaseURL+"/api/admin/jewellery", wrapper.PostApiAdminJewellery)
+	router.DELETE(options.BaseURL+"/api/admin/jewellery/:jewellery_id", wrapper.DeleteApiAdminJewelleryJewelleryId)
 	router.PUT(options.BaseURL+"/api/admin/jewellery/:jewellery_id", wrapper.PutApiAdminJewelleryJewelleryId)
 	router.POST(options.BaseURL+"/api/admin/login", wrapper.PostApiAdminLogin)
+	router.POST(options.BaseURL+"/api/admin/material", wrapper.PostApiAdminMaterial)
+	router.DELETE(options.BaseURL+"/api/admin/material/:material_id", wrapper.DeleteApiAdminMaterialMaterialId)
+	router.PUT(options.BaseURL+"/api/admin/material/:material_id", wrapper.PutApiAdminMaterialMaterialId)
 	router.GET(options.BaseURL+"/api/auth/google/callback", wrapper.GetApiAuthGoogleCallback)
 	router.GET(options.BaseURL+"/api/auth/google/login", wrapper.GetApiAuthGoogleLogin)
+	router.GET(options.BaseURL+"/api/category", wrapper.GetApiCategory)
+	router.GET(options.BaseURL+"/api/gem", wrapper.GetApiGem)
 	router.GET(options.BaseURL+"/api/health_check", wrapper.GetApiHealthCheck)
 	router.GET(options.BaseURL+"/api/jewellery", wrapper.GetApiJewellery)
 	router.GET(options.BaseURL+"/api/jewellery/:jewellery_id", wrapper.GetApiJewelleryJewelleryId)
+	router.GET(options.BaseURL+"/api/material", wrapper.GetApiMaterial)
 }
 
 type GetApiRequestObject struct {
@@ -696,6 +994,104 @@ func (response PutApiAdminAccountAdminAccountAdminsId200Response) VisitPutApiAdm
 	return nil
 }
 
+type PostApiAdminCategoryRequestObject struct {
+	Body *PostApiAdminCategoryJSONRequestBody
+}
+
+type PostApiAdminCategoryResponseObject interface {
+	VisitPostApiAdminCategoryResponse(w http.ResponseWriter) error
+}
+
+type PostApiAdminCategory200Response struct {
+}
+
+func (response PostApiAdminCategory200Response) VisitPostApiAdminCategoryResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type DeleteApiAdminCategoryCategoryIdRequestObject struct {
+	CategoryId ID `json:"category_id"`
+}
+
+type DeleteApiAdminCategoryCategoryIdResponseObject interface {
+	VisitDeleteApiAdminCategoryCategoryIdResponse(w http.ResponseWriter) error
+}
+
+type DeleteApiAdminCategoryCategoryId204Response struct {
+}
+
+func (response DeleteApiAdminCategoryCategoryId204Response) VisitDeleteApiAdminCategoryCategoryIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(204)
+	return nil
+}
+
+type PutApiAdminCategoryCategoryIdRequestObject struct {
+	CategoryId ID `json:"category_id"`
+	Body       *PutApiAdminCategoryCategoryIdJSONRequestBody
+}
+
+type PutApiAdminCategoryCategoryIdResponseObject interface {
+	VisitPutApiAdminCategoryCategoryIdResponse(w http.ResponseWriter) error
+}
+
+type PutApiAdminCategoryCategoryId200Response struct {
+}
+
+func (response PutApiAdminCategoryCategoryId200Response) VisitPutApiAdminCategoryCategoryIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type PostApiAdminGemRequestObject struct {
+	Body *PostApiAdminGemJSONRequestBody
+}
+
+type PostApiAdminGemResponseObject interface {
+	VisitPostApiAdminGemResponse(w http.ResponseWriter) error
+}
+
+type PostApiAdminGem200Response struct {
+}
+
+func (response PostApiAdminGem200Response) VisitPostApiAdminGemResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type DeleteApiAdminGemGemIdRequestObject struct {
+	GemId ID `json:"gem_id"`
+}
+
+type DeleteApiAdminGemGemIdResponseObject interface {
+	VisitDeleteApiAdminGemGemIdResponse(w http.ResponseWriter) error
+}
+
+type DeleteApiAdminGemGemId204Response struct {
+}
+
+func (response DeleteApiAdminGemGemId204Response) VisitDeleteApiAdminGemGemIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(204)
+	return nil
+}
+
+type PutApiAdminGemGemIdRequestObject struct {
+	GemId ID `json:"gem_id"`
+	Body  *PutApiAdminGemGemIdJSONRequestBody
+}
+
+type PutApiAdminGemGemIdResponseObject interface {
+	VisitPutApiAdminGemGemIdResponse(w http.ResponseWriter) error
+}
+
+type PutApiAdminGemGemId200Response struct {
+}
+
+func (response PutApiAdminGemGemId200Response) VisitPutApiAdminGemGemIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
 type PostApiAdminJewelleryRequestObject struct {
 	Body *PostApiAdminJewelleryJSONRequestBody
 }
@@ -709,6 +1105,22 @@ type PostApiAdminJewellery200Response struct {
 
 func (response PostApiAdminJewellery200Response) VisitPostApiAdminJewelleryResponse(w http.ResponseWriter) error {
 	w.WriteHeader(200)
+	return nil
+}
+
+type DeleteApiAdminJewelleryJewelleryIdRequestObject struct {
+	JewelleryId ID `json:"jewellery_id"`
+}
+
+type DeleteApiAdminJewelleryJewelleryIdResponseObject interface {
+	VisitDeleteApiAdminJewelleryJewelleryIdResponse(w http.ResponseWriter) error
+}
+
+type DeleteApiAdminJewelleryJewelleryId204Response struct {
+}
+
+func (response DeleteApiAdminJewelleryJewelleryId204Response) VisitDeleteApiAdminJewelleryJewelleryIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(204)
 	return nil
 }
 
@@ -748,6 +1160,55 @@ func (response PostApiAdminLogin200JSONResponse) VisitPostApiAdminLoginResponse(
 	return json.NewEncoder(w).Encode(response)
 }
 
+type PostApiAdminMaterialRequestObject struct {
+	Body *PostApiAdminMaterialJSONRequestBody
+}
+
+type PostApiAdminMaterialResponseObject interface {
+	VisitPostApiAdminMaterialResponse(w http.ResponseWriter) error
+}
+
+type PostApiAdminMaterial200Response struct {
+}
+
+func (response PostApiAdminMaterial200Response) VisitPostApiAdminMaterialResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type DeleteApiAdminMaterialMaterialIdRequestObject struct {
+	MaterialId ID `json:"material_id"`
+}
+
+type DeleteApiAdminMaterialMaterialIdResponseObject interface {
+	VisitDeleteApiAdminMaterialMaterialIdResponse(w http.ResponseWriter) error
+}
+
+type DeleteApiAdminMaterialMaterialId204Response struct {
+}
+
+func (response DeleteApiAdminMaterialMaterialId204Response) VisitDeleteApiAdminMaterialMaterialIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(204)
+	return nil
+}
+
+type PutApiAdminMaterialMaterialIdRequestObject struct {
+	MaterialId ID `json:"material_id"`
+	Body       *PutApiAdminMaterialMaterialIdJSONRequestBody
+}
+
+type PutApiAdminMaterialMaterialIdResponseObject interface {
+	VisitPutApiAdminMaterialMaterialIdResponse(w http.ResponseWriter) error
+}
+
+type PutApiAdminMaterialMaterialId200Response struct {
+}
+
+func (response PutApiAdminMaterialMaterialId200Response) VisitPutApiAdminMaterialMaterialIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
 type GetApiAuthGoogleCallbackRequestObject struct {
 	Params GetApiAuthGoogleCallbackParams
 }
@@ -778,6 +1239,38 @@ type GetApiAuthGoogleLogin302Response struct {
 func (response GetApiAuthGoogleLogin302Response) VisitGetApiAuthGoogleLoginResponse(w http.ResponseWriter) error {
 	w.WriteHeader(302)
 	return nil
+}
+
+type GetApiCategoryRequestObject struct {
+}
+
+type GetApiCategoryResponseObject interface {
+	VisitGetApiCategoryResponse(w http.ResponseWriter) error
+}
+
+type GetApiCategory200JSONResponse []Category
+
+func (response GetApiCategory200JSONResponse) VisitGetApiCategoryResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type GetApiGemRequestObject struct {
+}
+
+type GetApiGemResponseObject interface {
+	VisitGetApiGemResponse(w http.ResponseWriter) error
+}
+
+type GetApiGem200JSONResponse []Gem
+
+func (response GetApiGem200JSONResponse) VisitGetApiGemResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
 }
 
 type GetApiHealthCheckRequestObject struct {
@@ -832,6 +1325,22 @@ func (response GetApiJewelleryJewelleryId200JSONResponse) VisitGetApiJewelleryJe
 	return json.NewEncoder(w).Encode(response)
 }
 
+type GetApiMaterialRequestObject struct {
+}
+
+type GetApiMaterialResponseObject interface {
+	VisitGetApiMaterialResponse(w http.ResponseWriter) error
+}
+
+type GetApiMaterial200JSONResponse []Material
+
+func (response GetApiMaterial200JSONResponse) VisitGetApiMaterialResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
 // StrictServerInterface represents all server handlers.
 type StrictServerInterface interface {
 	// Display the main page
@@ -862,20 +1371,56 @@ type StrictServerInterface interface {
 	// (PUT /api/admin/account_admin/{account_admins_id})
 	PutApiAdminAccountAdminAccountAdminsId(ctx context.Context, request PutApiAdminAccountAdminAccountAdminsIdRequestObject) (PutApiAdminAccountAdminAccountAdminsIdResponseObject, error)
 
+	// (POST /api/admin/category)
+	PostApiAdminCategory(ctx context.Context, request PostApiAdminCategoryRequestObject) (PostApiAdminCategoryResponseObject, error)
+
+	// (DELETE /api/admin/category/{category_id})
+	DeleteApiAdminCategoryCategoryId(ctx context.Context, request DeleteApiAdminCategoryCategoryIdRequestObject) (DeleteApiAdminCategoryCategoryIdResponseObject, error)
+
+	// (PUT /api/admin/category/{category_id})
+	PutApiAdminCategoryCategoryId(ctx context.Context, request PutApiAdminCategoryCategoryIdRequestObject) (PutApiAdminCategoryCategoryIdResponseObject, error)
+
+	// (POST /api/admin/gem)
+	PostApiAdminGem(ctx context.Context, request PostApiAdminGemRequestObject) (PostApiAdminGemResponseObject, error)
+
+	// (DELETE /api/admin/gem/{gem_id})
+	DeleteApiAdminGemGemId(ctx context.Context, request DeleteApiAdminGemGemIdRequestObject) (DeleteApiAdminGemGemIdResponseObject, error)
+
+	// (PUT /api/admin/gem/{gem_id})
+	PutApiAdminGemGemId(ctx context.Context, request PutApiAdminGemGemIdRequestObject) (PutApiAdminGemGemIdResponseObject, error)
+
 	// (POST /api/admin/jewellery)
 	PostApiAdminJewellery(ctx context.Context, request PostApiAdminJewelleryRequestObject) (PostApiAdminJewelleryResponseObject, error)
+
+	// (DELETE /api/admin/jewellery/{jewellery_id})
+	DeleteApiAdminJewelleryJewelleryId(ctx context.Context, request DeleteApiAdminJewelleryJewelleryIdRequestObject) (DeleteApiAdminJewelleryJewelleryIdResponseObject, error)
 
 	// (PUT /api/admin/jewellery/{jewellery_id})
 	PutApiAdminJewelleryJewelleryId(ctx context.Context, request PutApiAdminJewelleryJewelleryIdRequestObject) (PutApiAdminJewelleryJewelleryIdResponseObject, error)
 	// Login as admin user
 	// (POST /api/admin/login)
 	PostApiAdminLogin(ctx context.Context, request PostApiAdminLoginRequestObject) (PostApiAdminLoginResponseObject, error)
+
+	// (POST /api/admin/material)
+	PostApiAdminMaterial(ctx context.Context, request PostApiAdminMaterialRequestObject) (PostApiAdminMaterialResponseObject, error)
+
+	// (DELETE /api/admin/material/{material_id})
+	DeleteApiAdminMaterialMaterialId(ctx context.Context, request DeleteApiAdminMaterialMaterialIdRequestObject) (DeleteApiAdminMaterialMaterialIdResponseObject, error)
+
+	// (PUT /api/admin/material/{material_id})
+	PutApiAdminMaterialMaterialId(ctx context.Context, request PutApiAdminMaterialMaterialIdRequestObject) (PutApiAdminMaterialMaterialIdResponseObject, error)
 	// Handle Google OAuth2 callback
 	// (GET /api/auth/google/callback)
 	GetApiAuthGoogleCallback(ctx context.Context, request GetApiAuthGoogleCallbackRequestObject) (GetApiAuthGoogleCallbackResponseObject, error)
 	// Initiate Google OAuth2 login
 	// (GET /api/auth/google/login)
 	GetApiAuthGoogleLogin(ctx context.Context, request GetApiAuthGoogleLoginRequestObject) (GetApiAuthGoogleLoginResponseObject, error)
+
+	// (GET /api/category)
+	GetApiCategory(ctx context.Context, request GetApiCategoryRequestObject) (GetApiCategoryResponseObject, error)
+
+	// (GET /api/gem)
+	GetApiGem(ctx context.Context, request GetApiGemRequestObject) (GetApiGemResponseObject, error)
 	// Health Check
 	// (GET /api/health_check)
 	GetApiHealthCheck(ctx context.Context, request GetApiHealthCheckRequestObject) (GetApiHealthCheckResponseObject, error)
@@ -885,6 +1430,9 @@ type StrictServerInterface interface {
 
 	// (GET /api/jewellery/{jewellery_id})
 	GetApiJewelleryJewelleryId(ctx context.Context, request GetApiJewelleryJewelleryIdRequestObject) (GetApiJewelleryJewelleryIdResponseObject, error)
+
+	// (GET /api/material)
+	GetApiMaterial(ctx context.Context, request GetApiMaterialRequestObject) (GetApiMaterialResponseObject, error)
 }
 
 type StrictHandlerFunc = strictgin.StrictGinHandlerFunc
@@ -1158,6 +1706,196 @@ func (sh *strictHandler) PutApiAdminAccountAdminAccountAdminsId(ctx *gin.Context
 	}
 }
 
+// PostApiAdminCategory operation middleware
+func (sh *strictHandler) PostApiAdminCategory(ctx *gin.Context) {
+	var request PostApiAdminCategoryRequestObject
+
+	var body PostApiAdminCategoryJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiAdminCategory(ctx, request.(PostApiAdminCategoryRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiAdminCategory")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiAdminCategoryResponseObject); ok {
+		if err := validResponse.VisitPostApiAdminCategoryResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// DeleteApiAdminCategoryCategoryId operation middleware
+func (sh *strictHandler) DeleteApiAdminCategoryCategoryId(ctx *gin.Context, categoryId ID) {
+	var request DeleteApiAdminCategoryCategoryIdRequestObject
+
+	request.CategoryId = categoryId
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.DeleteApiAdminCategoryCategoryId(ctx, request.(DeleteApiAdminCategoryCategoryIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "DeleteApiAdminCategoryCategoryId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(DeleteApiAdminCategoryCategoryIdResponseObject); ok {
+		if err := validResponse.VisitDeleteApiAdminCategoryCategoryIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// PutApiAdminCategoryCategoryId operation middleware
+func (sh *strictHandler) PutApiAdminCategoryCategoryId(ctx *gin.Context, categoryId ID) {
+	var request PutApiAdminCategoryCategoryIdRequestObject
+
+	request.CategoryId = categoryId
+
+	var body PutApiAdminCategoryCategoryIdJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PutApiAdminCategoryCategoryId(ctx, request.(PutApiAdminCategoryCategoryIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PutApiAdminCategoryCategoryId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PutApiAdminCategoryCategoryIdResponseObject); ok {
+		if err := validResponse.VisitPutApiAdminCategoryCategoryIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// PostApiAdminGem operation middleware
+func (sh *strictHandler) PostApiAdminGem(ctx *gin.Context) {
+	var request PostApiAdminGemRequestObject
+
+	var body PostApiAdminGemJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiAdminGem(ctx, request.(PostApiAdminGemRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiAdminGem")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiAdminGemResponseObject); ok {
+		if err := validResponse.VisitPostApiAdminGemResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// DeleteApiAdminGemGemId operation middleware
+func (sh *strictHandler) DeleteApiAdminGemGemId(ctx *gin.Context, gemId ID) {
+	var request DeleteApiAdminGemGemIdRequestObject
+
+	request.GemId = gemId
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.DeleteApiAdminGemGemId(ctx, request.(DeleteApiAdminGemGemIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "DeleteApiAdminGemGemId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(DeleteApiAdminGemGemIdResponseObject); ok {
+		if err := validResponse.VisitDeleteApiAdminGemGemIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// PutApiAdminGemGemId operation middleware
+func (sh *strictHandler) PutApiAdminGemGemId(ctx *gin.Context, gemId ID) {
+	var request PutApiAdminGemGemIdRequestObject
+
+	request.GemId = gemId
+
+	var body PutApiAdminGemGemIdJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PutApiAdminGemGemId(ctx, request.(PutApiAdminGemGemIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PutApiAdminGemGemId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PutApiAdminGemGemIdResponseObject); ok {
+		if err := validResponse.VisitPutApiAdminGemGemIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
 // PostApiAdminJewellery operation middleware
 func (sh *strictHandler) PostApiAdminJewellery(ctx *gin.Context) {
 	var request PostApiAdminJewelleryRequestObject
@@ -1184,6 +1922,33 @@ func (sh *strictHandler) PostApiAdminJewellery(ctx *gin.Context) {
 		ctx.Status(http.StatusInternalServerError)
 	} else if validResponse, ok := response.(PostApiAdminJewelleryResponseObject); ok {
 		if err := validResponse.VisitPostApiAdminJewelleryResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// DeleteApiAdminJewelleryJewelleryId operation middleware
+func (sh *strictHandler) DeleteApiAdminJewelleryJewelleryId(ctx *gin.Context, jewelleryId ID) {
+	var request DeleteApiAdminJewelleryJewelleryIdRequestObject
+
+	request.JewelleryId = jewelleryId
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.DeleteApiAdminJewelleryJewelleryId(ctx, request.(DeleteApiAdminJewelleryJewelleryIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "DeleteApiAdminJewelleryJewelleryId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(DeleteApiAdminJewelleryJewelleryIdResponseObject); ok {
+		if err := validResponse.VisitDeleteApiAdminJewelleryJewelleryIdResponse(ctx.Writer); err != nil {
 			ctx.Error(err)
 		}
 	} else if response != nil {
@@ -1259,6 +2024,101 @@ func (sh *strictHandler) PostApiAdminLogin(ctx *gin.Context) {
 	}
 }
 
+// PostApiAdminMaterial operation middleware
+func (sh *strictHandler) PostApiAdminMaterial(ctx *gin.Context) {
+	var request PostApiAdminMaterialRequestObject
+
+	var body PostApiAdminMaterialJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiAdminMaterial(ctx, request.(PostApiAdminMaterialRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiAdminMaterial")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiAdminMaterialResponseObject); ok {
+		if err := validResponse.VisitPostApiAdminMaterialResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// DeleteApiAdminMaterialMaterialId operation middleware
+func (sh *strictHandler) DeleteApiAdminMaterialMaterialId(ctx *gin.Context, materialId ID) {
+	var request DeleteApiAdminMaterialMaterialIdRequestObject
+
+	request.MaterialId = materialId
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.DeleteApiAdminMaterialMaterialId(ctx, request.(DeleteApiAdminMaterialMaterialIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "DeleteApiAdminMaterialMaterialId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(DeleteApiAdminMaterialMaterialIdResponseObject); ok {
+		if err := validResponse.VisitDeleteApiAdminMaterialMaterialIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// PutApiAdminMaterialMaterialId operation middleware
+func (sh *strictHandler) PutApiAdminMaterialMaterialId(ctx *gin.Context, materialId ID) {
+	var request PutApiAdminMaterialMaterialIdRequestObject
+
+	request.MaterialId = materialId
+
+	var body PutApiAdminMaterialMaterialIdJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PutApiAdminMaterialMaterialId(ctx, request.(PutApiAdminMaterialMaterialIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PutApiAdminMaterialMaterialId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PutApiAdminMaterialMaterialIdResponseObject); ok {
+		if err := validResponse.VisitPutApiAdminMaterialMaterialIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
 // GetApiAuthGoogleCallback operation middleware
 func (sh *strictHandler) GetApiAuthGoogleCallback(ctx *gin.Context, params GetApiAuthGoogleCallbackParams) {
 	var request GetApiAuthGoogleCallbackRequestObject
@@ -1304,6 +2164,56 @@ func (sh *strictHandler) GetApiAuthGoogleLogin(ctx *gin.Context) {
 		ctx.Status(http.StatusInternalServerError)
 	} else if validResponse, ok := response.(GetApiAuthGoogleLoginResponseObject); ok {
 		if err := validResponse.VisitGetApiAuthGoogleLoginResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// GetApiCategory operation middleware
+func (sh *strictHandler) GetApiCategory(ctx *gin.Context) {
+	var request GetApiCategoryRequestObject
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiCategory(ctx, request.(GetApiCategoryRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiCategory")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiCategoryResponseObject); ok {
+		if err := validResponse.VisitGetApiCategoryResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// GetApiGem operation middleware
+func (sh *strictHandler) GetApiGem(ctx *gin.Context) {
+	var request GetApiGemRequestObject
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiGem(ctx, request.(GetApiGemRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiGem")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiGemResponseObject); ok {
+		if err := validResponse.VisitGetApiGemResponse(ctx.Writer); err != nil {
 			ctx.Error(err)
 		}
 	} else if response != nil {
@@ -1390,41 +2300,73 @@ func (sh *strictHandler) GetApiJewelleryJewelleryId(ctx *gin.Context, jewelleryI
 	}
 }
 
+// GetApiMaterial operation middleware
+func (sh *strictHandler) GetApiMaterial(ctx *gin.Context) {
+	var request GetApiMaterialRequestObject
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiMaterial(ctx, request.(GetApiMaterialRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiMaterial")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiMaterialResponseObject); ok {
+		if err := validResponse.VisitGetApiMaterialResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
+	"u+V/AwAA//93EyFoUUwAAA==",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

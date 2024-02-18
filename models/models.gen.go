@@ -153,6 +153,30 @@ type AuthGoogleCallbackResp struct {
 	IsRegistered bool     `json:"is_registered"`
 }
 
+// Category defines model for Category.
+type Category struct {
+	CategoryId  openapi_types.UUID `json:"category_id"`
+	CreatedAt   time.Time          `json:"created_at"`
+	Description string             `json:"description"`
+	ImageUrl    string             `json:"image_url"`
+	Name        string             `json:"name"`
+	UpdatedAt   time.Time          `json:"updated_at"`
+}
+
+// CategoryPostParam defines model for CategoryPostParam.
+type CategoryPostParam struct {
+	Description string `json:"description"`
+	ImageUrl    string `json:"image_url"`
+	Name        string `json:"name"`
+}
+
+// CategoryPutParam defines model for CategoryPutParam.
+type CategoryPutParam struct {
+	Description string `json:"description"`
+	ImageUrl    string `json:"image_url"`
+	Name        string `json:"name"`
+}
+
 // ErrMsg Error Message
 type ErrMsg struct {
 	// Message Error message
@@ -160,6 +184,24 @@ type ErrMsg struct {
 
 	// Version Application Version
 	Version *string `json:"version,omitempty"`
+}
+
+// Gem defines model for Gem.
+type Gem struct {
+	CreatedAt time.Time          `json:"created_at"`
+	GemId     openapi_types.UUID `json:"gem_id"`
+	Name      string             `json:"name"`
+	UpdatedAt time.Time          `json:"updated_at"`
+}
+
+// GemPostParam defines model for GemPostParam.
+type GemPostParam struct {
+	Name string `json:"name"`
+}
+
+// GemPutParam defines model for GemPutParam.
+type GemPutParam struct {
+	Name string `json:"name"`
 }
 
 // ID defines model for ID.
@@ -177,7 +219,7 @@ type Jewellery struct {
 	MaterialId  openapi_types.UUID `json:"material_id"`
 	Name        string             `json:"name"`
 	Price       int                `json:"price"`
-	Quantity    int64              `json:"quantity"`
+	Quantity    int                `json:"quantity"`
 	UpdatedAt   time.Time          `json:"updated_at"`
 }
 
@@ -188,11 +230,10 @@ type JewelleryPostParam struct {
 	GemId       openapi_types.UUID `json:"gem_id"`
 	ImageUrl    string             `json:"image_url"`
 	IsPublished bool               `json:"is_published"`
-	JewelleryId openapi_types.UUID `json:"jewellery_id"`
 	MaterialId  openapi_types.UUID `json:"material_id"`
 	Name        string             `json:"name"`
 	Price       int                `json:"price"`
-	Quantity    int64              `json:"quantity"`
+	Quantity    int                `json:"quantity"`
 }
 
 // JewelleryPutParam defines model for JewelleryPutParam.
@@ -205,7 +246,25 @@ type JewelleryPutParam struct {
 	MaterialId  openapi_types.UUID `json:"material_id"`
 	Name        string             `json:"name"`
 	Price       int                `json:"price"`
-	Quantity    int64              `json:"quantity"`
+	Quantity    int                `json:"quantity"`
+}
+
+// Material defines model for Material.
+type Material struct {
+	CreatedAt  time.Time          `json:"created_at"`
+	MaterialId openapi_types.UUID `json:"material_id"`
+	Name       string             `json:"name"`
+	UpdatedAt  time.Time          `json:"updated_at"`
+}
+
+// MaterialPostParam defines model for MaterialPostParam.
+type MaterialPostParam struct {
+	Name string `json:"name"`
+}
+
+// MaterialPutParam defines model for MaterialPutParam.
+type MaterialPutParam struct {
+	Name string `json:"name"`
 }
 
 // GetApiAuthGoogleCallbackParams defines parameters for GetApiAuthGoogleCallback.
@@ -238,6 +297,18 @@ type PostApiAdminAccountAdminJSONRequestBody = AccountAdminPostParam
 // PutApiAdminAccountAdminAccountAdminsIdJSONRequestBody defines body for PutApiAdminAccountAdminAccountAdminsId for application/json ContentType.
 type PutApiAdminAccountAdminAccountAdminsIdJSONRequestBody = AccountAdminPutParam
 
+// PostApiAdminCategoryJSONRequestBody defines body for PostApiAdminCategory for application/json ContentType.
+type PostApiAdminCategoryJSONRequestBody = CategoryPostParam
+
+// PutApiAdminCategoryCategoryIdJSONRequestBody defines body for PutApiAdminCategoryCategoryId for application/json ContentType.
+type PutApiAdminCategoryCategoryIdJSONRequestBody = CategoryPutParam
+
+// PostApiAdminGemJSONRequestBody defines body for PostApiAdminGem for application/json ContentType.
+type PostApiAdminGemJSONRequestBody = GemPostParam
+
+// PutApiAdminGemGemIdJSONRequestBody defines body for PutApiAdminGemGemId for application/json ContentType.
+type PutApiAdminGemGemIdJSONRequestBody = GemPutParam
+
 // PostApiAdminJewelleryJSONRequestBody defines body for PostApiAdminJewellery for application/json ContentType.
 type PostApiAdminJewelleryJSONRequestBody = JewelleryPostParam
 
@@ -246,3 +317,9 @@ type PutApiAdminJewelleryJewelleryIdJSONRequestBody = JewelleryPutParam
 
 // PostApiAdminLoginJSONRequestBody defines body for PostApiAdminLogin for application/json ContentType.
 type PostApiAdminLoginJSONRequestBody = AccountAdminLoginParam
+
+// PostApiAdminMaterialJSONRequestBody defines body for PostApiAdminMaterial for application/json ContentType.
+type PostApiAdminMaterialJSONRequestBody = MaterialPostParam
+
+// PutApiAdminMaterialMaterialIdJSONRequestBody defines body for PutApiAdminMaterialMaterialId for application/json ContentType.
+type PutApiAdminMaterialMaterialIdJSONRequestBody = MaterialPutParam

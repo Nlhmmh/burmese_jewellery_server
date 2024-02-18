@@ -1,0 +1,72 @@
+/api/admin/account_admin:
+  get:
+    tags:
+      - admin
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountAdmin"
+  post:
+    tags:
+      - admin
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AccountAdminPostParam"
+    responses:
+      200:
+        description: OK
+/api/admin/account_admin/{account_admins_id}:
+  get:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: account_admins_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountAdmin"
+  put:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: account_admins_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AccountAdminPutParam"
+    responses:
+      200:
+        description: OK
+  delete:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: account_admins_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    responses:
+      204:
+        description: Deleted

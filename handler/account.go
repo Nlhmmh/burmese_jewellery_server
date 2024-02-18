@@ -21,7 +21,7 @@ func (h *Handler) GetApiAdminAccount(c *gin.Context) {
 		return
 	}
 
-	resp, err := models.ConvAccountListFromORM(aList)
+	resp, err := models.ConvListFromORM(aList, models.ConvAccountFromORM)
 	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
@@ -38,8 +38,8 @@ func (h *Handler) GetApiAdminAccountAccountId(c *gin.Context, accountId models.I
 		return
 	}
 
-	resp := &models.Account{}
-	if err := resp.ConvFromORM(record); err != nil {
+	resp, err := models.ConvAccountFromORM(record)
+	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
 	}
