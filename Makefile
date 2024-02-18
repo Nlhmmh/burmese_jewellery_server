@@ -23,7 +23,7 @@ run: ## Run server
 .PHONY: lint
 lint: ## Lint
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
-	golangci-lint linters
+	golangci-lint run
 
 .PHONY: merge
 merge: ## Merge swagger into single file
