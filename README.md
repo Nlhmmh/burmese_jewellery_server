@@ -84,21 +84,21 @@ https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
 - [x] /api/admin/account/[id] - GET
 - [x] /api/admin/account/[id] - PUT
 >>
-- [ ] /api/admin/category/[id] - POST
-- [ ] /api/admin/category/[id] - PUT
-- [ ] /api/admin/category/[id] - DELETE
+- [x] /api/admin/category/[id] - POST
+- [x] /api/admin/category/[id] - PUT
+- [x] /api/admin/category/[id] - DELETE
 >>
-- [ ] /api/admin/gem/[id] - POST
-- [ ] /api/admin/gem/[id] - PUT
-- [ ] /api/admin/gem/[id] - DELETE
+- [x] /api/admin/gem/[id] - POST
+- [x] /api/admin/gem/[id] - PUT
+- [x] /api/admin/gem/[id] - DELETE
 >>
-- [ ] /api/admin/material/[id] - POST
-- [ ] /api/admin/material/[id] - PUT
-- [ ] /api/admin/material/[id] - DELETE
+- [x] /api/admin/material/[id] - POST
+- [x] /api/admin/material/[id] - PUT
+- [x] /api/admin/material/[id] - DELETE
 >>
-- [ ] /api/admin/jewellery - POST
-- [ ] /api/admin/jewellery/[id] - PUT
-- [ ] /api/admin/jewellery/[id] - DELETE
+- [x] /api/admin/jewellery - POST
+- [x] /api/admin/jewellery/[id] - PUT
+- [x] /api/admin/jewellery/[id] - DELETE
 >>
 - [ ] /api/admin/currency - GET
 - [ ] /api/admin/currency/[id] - POST
@@ -136,14 +136,14 @@ https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
 - [ ] /api/profile - PUT - edit profile
 - [ ] /api/profile - GET
 >>
-- [ ] /api/category - GET
+- [x] /api/category - GET
 >>
-- [ ] /api/gem - GET
+- [x] /api/gem - GET
 >>
-- [ ] /api/material - GET
+- [x] /api/material - GET
 >>
-- [ ] /api/jewellery - GET
-- [ ] /api/jewellery/[id] - GET
+- [x] /api/jewellery - GET
+- [x] /api/jewellery/[id] - GET
 >>
 - [ ] /api/cart - POST - add to cart
 - [ ] /api/cart - GET - cart jewellery list
