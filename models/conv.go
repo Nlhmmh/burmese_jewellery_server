@@ -109,7 +109,7 @@ func ConvAccountFromORM(orm *orm.Account) (*Account, error) {
 		vv := types.Email(v.String)
 		a.Mail = &vv
 	}
-	a.AccountStatus = AccountAccountStatus(orm.AccountStatus)
+	a.AccountStatus = AccountStatus(orm.AccountStatus)
 	a.CreatedAt = orm.CreatedAt
 	a.UpdatedAt = orm.UpdatedAt
 	return a, nil
@@ -123,9 +123,65 @@ func ConvAccountAdminFromORM(orm *orm.AccountAdmin) (*AccountAdmin, error) {
 	aa := &AccountAdmin{}
 	aa.AccountAdminId = id
 	aa.Mail = types.Email(orm.Mail)
-	aa.AccountAdminRole = AccountAdminAccountAdminRole(orm.AccountAdminRole)
-	aa.AccountAdminStatus = AccountAdminAccountAdminStatus(orm.AccountAdminStatus)
+	aa.AccountAdminRole = AccountAdminRole(orm.AccountAdminRole)
+	aa.AccountAdminStatus = AccountAdminStatus(orm.AccountAdminStatus)
 	aa.CreatedAt = orm.CreatedAt
 	aa.UpdatedAt = orm.UpdatedAt
 	return aa, nil
+}
+
+func ConvAccountProfileFromORM(orm *orm.AccountProfile) (*AccountProfile, error) {
+	id, err := uuid.Parse(orm.AccountID)
+	if err != nil {
+		return nil, err
+	}
+	ap := &AccountProfile{}
+	ap.AccountId = id
+	ap.FirstName = orm.FirstName
+	ap.LastName = orm.LastName
+	if v := orm.Birthday; v.Valid {
+		ap.Birthday = types.Date{Time: v.Time}
+	}
+	if v := orm.Gender; v.Valid {
+		ap.Gender = Gender(v.Val)
+	}
+	ap.CreatedAt = orm.CreatedAt
+	ap.UpdatedAt = orm.UpdatedAt
+	return ap, nil
+}
+
+func ConvAccountWithProfileFromORM(ormm *orm.AccountWithProfile) (*AccountWithProfile, error) {
+	awp := &AccountWithProfile{}
+
+	a, err := ConvAccountFromORM(&orm.Account{
+		AccountID:     ormm.AccountID,
+		LoginType:     ormm.LoginType,
+		LoginID:       ormm.LoginID,
+		Mail:          ormm.Mail,
+		Password:      ormm.Password,
+		Phone:         ormm.Phone,
+		AccountStatus: ormm.AccountStatus,
+		CreatedAt:     ormm.CreatedAt,
+		UpdatedAt:     ormm.UpdatedAt,
+	})
+	if err != nil {
+		return nil, err
+	}
+	awp.Account = *a
+
+	ap, err := ConvAccountProfileFromORM(&orm.AccountProfile{
+		AccountID: ormm.AccountID,
+		FirstName: ormm.FirstName,
+		LastName:  ormm.LastName,
+		Birthday:  ormm.Birthday,
+		Gender:    ormm.Gender,
+		CreatedAt: ormm.CreatedAt,
+		UpdatedAt: ormm.UpdatedAt,
+	})
+	if err != nil {
+		return nil, err
+	}
+	awp.AccountProfile = *ap
+
+	return awp, nil
 }

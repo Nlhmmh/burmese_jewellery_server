@@ -30,7 +30,7 @@ type ServerInterface interface {
 	GetApi(c *gin.Context)
 	// List user
 	// (GET /api/admin/account)
-	GetApiAdminAccount(c *gin.Context)
+	GetApiAdminAccount(c *gin.Context, params GetApiAdminAccountParams)
 	// Get user
 	// (GET /api/admin/account/{account_id})
 	GetApiAdminAccountAccountId(c *gin.Context, accountId ID)
@@ -39,7 +39,7 @@ type ServerInterface interface {
 	PutApiAdminAccountAccountId(c *gin.Context, accountId ID)
 	// List admin user
 	// (GET /api/admin/account_admin)
-	GetApiAdminAccountAdmin(c *gin.Context)
+	GetApiAdminAccountAdmin(c *gin.Context, params GetApiAdminAccountAdminParams)
 
 	// (POST /api/admin/account_admin)
 	PostApiAdminAccountAdmin(c *gin.Context)
@@ -142,6 +142,73 @@ func (siw *ServerInterfaceWrapper) GetApi(c *gin.Context) {
 // GetApiAdminAccount operation middleware
 func (siw *ServerInterfaceWrapper) GetApiAdminAccount(c *gin.Context) {
 
+	var err error
+
+	// Parameter object where we will unmarshal all parameters from the context
+	var params GetApiAdminAccountParams
+
+	// ------------- Required query parameter "offset" -------------
+
+	if paramValue := c.Query("offset"); paramValue != "" {
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Query argument offset is required, but not found"), http.StatusBadRequest)
+		return
+	}
+
+	err = runtime.BindQueryParameter("form", true, true, "offset", c.Request.URL.Query(), &params.Offset)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter offset: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Required query parameter "limit" -------------
+
+	if paramValue := c.Query("limit"); paramValue != "" {
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Query argument limit is required, but not found"), http.StatusBadRequest)
+		return
+	}
+
+	err = runtime.BindQueryParameter("form", true, true, "limit", c.Request.URL.Query(), &params.Limit)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter limit: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "id" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "id", c.Request.URL.Query(), &params.Id)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "first_name" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "first_name", c.Request.URL.Query(), &params.FirstName)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter first_name: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "last_name" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "last_name", c.Request.URL.Query(), &params.LastName)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter last_name: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "account_status" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "account_status", c.Request.URL.Query(), &params.AccountStatus)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter account_status: %w", err), http.StatusBadRequest)
+		return
+	}
+
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
 		if c.IsAborted() {
@@ -149,7 +216,7 @@ func (siw *ServerInterfaceWrapper) GetApiAdminAccount(c *gin.Context) {
 		}
 	}
 
-	siw.Handler.GetApiAdminAccount(c)
+	siw.Handler.GetApiAdminAccount(c, params)
 }
 
 // GetApiAdminAccountAccountId operation middleware
@@ -203,6 +270,73 @@ func (siw *ServerInterfaceWrapper) PutApiAdminAccountAccountId(c *gin.Context) {
 // GetApiAdminAccountAdmin operation middleware
 func (siw *ServerInterfaceWrapper) GetApiAdminAccountAdmin(c *gin.Context) {
 
+	var err error
+
+	// Parameter object where we will unmarshal all parameters from the context
+	var params GetApiAdminAccountAdminParams
+
+	// ------------- Required query parameter "offset" -------------
+
+	if paramValue := c.Query("offset"); paramValue != "" {
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Query argument offset is required, but not found"), http.StatusBadRequest)
+		return
+	}
+
+	err = runtime.BindQueryParameter("form", true, true, "offset", c.Request.URL.Query(), &params.Offset)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter offset: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Required query parameter "limit" -------------
+
+	if paramValue := c.Query("limit"); paramValue != "" {
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Query argument limit is required, but not found"), http.StatusBadRequest)
+		return
+	}
+
+	err = runtime.BindQueryParameter("form", true, true, "limit", c.Request.URL.Query(), &params.Limit)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter limit: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "id" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "id", c.Request.URL.Query(), &params.Id)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "mail" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "mail", c.Request.URL.Query(), &params.Mail)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter mail: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "account_admin_role" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "account_admin_role", c.Request.URL.Query(), &params.AccountAdminRole)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter account_admin_role: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "account_admin_status" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "account_admin_status", c.Request.URL.Query(), &params.AccountAdminStatus)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter account_admin_status: %w", err), http.StatusBadRequest)
+		return
+	}
+
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
 		if c.IsAborted() {
@@ -210,7 +344,7 @@ func (siw *ServerInterfaceWrapper) GetApiAdminAccountAdmin(c *gin.Context) {
 		}
 	}
 
-	siw.Handler.GetApiAdminAccountAdmin(c)
+	siw.Handler.GetApiAdminAccountAdmin(c, params)
 }
 
 // PostApiAdminAccountAdmin operation middleware
@@ -863,13 +997,14 @@ func (response GetApi200Response) VisitGetApiResponse(w http.ResponseWriter) err
 }
 
 type GetApiAdminAccountRequestObject struct {
+	Params GetApiAdminAccountParams
 }
 
 type GetApiAdminAccountResponseObject interface {
 	VisitGetApiAdminAccountResponse(w http.ResponseWriter) error
 }
 
-type GetApiAdminAccount200JSONResponse []Account
+type GetApiAdminAccount200JSONResponse []AccountWithProfile
 
 func (response GetApiAdminAccount200JSONResponse) VisitGetApiAdminAccountResponse(w http.ResponseWriter) error {
 	w.Header().Set("Content-Type", "application/json")
@@ -913,6 +1048,7 @@ func (response PutApiAdminAccountAccountId200Response) VisitPutApiAdminAccountAc
 }
 
 type GetApiAdminAccountAdminRequestObject struct {
+	Params GetApiAdminAccountAdminParams
 }
 
 type GetApiAdminAccountAdminResponseObject interface {
@@ -1473,8 +1609,10 @@ func (sh *strictHandler) GetApi(ctx *gin.Context) {
 }
 
 // GetApiAdminAccount operation middleware
-func (sh *strictHandler) GetApiAdminAccount(ctx *gin.Context) {
+func (sh *strictHandler) GetApiAdminAccount(ctx *gin.Context, params GetApiAdminAccountParams) {
 	var request GetApiAdminAccountRequestObject
+
+	request.Params = params
 
 	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
 		return sh.ssi.GetApiAdminAccount(ctx, request.(GetApiAdminAccountRequestObject))
@@ -1560,8 +1698,10 @@ func (sh *strictHandler) PutApiAdminAccountAccountId(ctx *gin.Context, accountId
 }
 
 // GetApiAdminAccountAdmin operation middleware
-func (sh *strictHandler) GetApiAdminAccountAdmin(ctx *gin.Context) {
+func (sh *strictHandler) GetApiAdminAccountAdmin(ctx *gin.Context, params GetApiAdminAccountAdminParams) {
 	var request GetApiAdminAccountAdminRequestObject
+
+	request.Params = params
 
 	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
 		return sh.ssi.GetApiAdminAccountAdmin(ctx, request.(GetApiAdminAccountAdminRequestObject))
@@ -2328,45 +2468,48 @@ func (sh *strictHandler) GetApiMaterial(ctx *gin.Context) {
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
-	"u+V/AwAA//93EyFoUUwAAA==",
+	"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",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

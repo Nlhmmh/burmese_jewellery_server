@@ -86,6 +86,35 @@
     summary: List admin user
     tags:
       - admin
+    parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+        required: true
+        default: 0
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        required: true
+        default: 30
+      - in: query
+        name: id
+        schema:
+          $ref: "#/components/schemas/ID"
+      - in: query
+        name: mail
+        schema:
+          type: string
+      - in: query
+        name: account_admin_role
+        schema:
+          $ref: "#/components/schemas/AccountAdminRole"
+      - in: query
+        name: account_admin_status
+        schema:
+          $ref: "#/components/schemas/AccountAdminStatus"
     responses:
       200:
         description: OK
@@ -163,6 +192,35 @@
     summary: List user
     tags:
       - admin
+    parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+        required: true
+        default: 0
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        required: true
+        default: 30
+      - in: query
+        name: id
+        schema:
+          $ref: "#/components/schemas/ID"
+      - in: query
+        name: first_name
+        schema:
+          type: string
+      - in: query
+        name: last_name
+        schema:
+          type: string
+      - in: query
+        name: account_status
+        schema:
+          $ref: "#/components/schemas/AccountStatus"
     responses:
       200:
         description: OK
@@ -171,7 +229,7 @@
             schema:
               type: array
               items:
-                $ref: "#/components/schemas/Account"
+                $ref: "#/components/schemas/AccountWithProfile"
 /api/admin/account/{account_id}:
   get:
     summary: Get user

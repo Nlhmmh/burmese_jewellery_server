@@ -4,24 +4,48 @@ import (
 	"burmese_jewellery/ers"
 	"burmese_jewellery/models"
 	"burmese_jewellery/orm"
+	"burmese_jewellery/query"
 	"burmese_jewellery/tx"
 	"database/sql"
+	"fmt"
 
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/volatiletech/sqlboiler/v4/boil"
+	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
 // (GET /api/admin/account)
-func (h *Handler) GetApiAdminAccount(c *gin.Context) {
-	aList, err := orm.Accounts().AllG(c)
-	if err != nil {
+func (h *Handler) GetApiAdminAccount(c *gin.Context, params models.GetApiAdminAccountParams) {
+	qList := []qm.QueryMod{
+		qm.Select("accounts.*, account_profiles.*"),
+		qm.From(orm.TableNames.Accounts),
+		qm.InnerJoin(
+			fmt.Sprintf(
+				"%s ON %s.%s = %s.%s",
+				orm.TableNames.AccountProfiles,
+				orm.TableNames.AccountProfiles,
+				orm.AccountProfileColumns.AccountID,
+				orm.TableNames.Accounts,
+				orm.AccountColumns.AccountID,
+			),
+		),
+		qm.Offset(params.Offset),
+		qm.Limit(params.Limit),
+	}
+	qList = query.EqUUID(qList, params.Id, orm.AccountColumns.AccountID)
+	qList = query.Like(qList, params.FirstName, fmt.Sprintf("%s.%s", orm.TableNames.AccountProfiles, orm.AccountProfileColumns.FirstName))
+	qList = query.Like(qList, params.LastName, fmt.Sprintf("%s.%s", orm.TableNames.AccountProfiles, orm.AccountProfileColumns.LastName))
+	qList = query.Eq(qList, params.AccountStatus, orm.AccountColumns.AccountStatus)
+
+	var list []*orm.AccountWithProfile
+	if err := orm.NewQuery(qList...).BindG(c, &list); err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return
 	}
 
-	resp, err := models.ConvListFromORM(aList, models.ConvAccountFromORM)
+	resp, err := models.ConvListFromORM(list, models.ConvAccountWithProfileFromORM)
 	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return

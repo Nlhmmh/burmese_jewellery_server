@@ -102,6 +102,35 @@ paths:
       summary: List admin user
       tags:
         - admin
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          required: true
+          default: 0
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: true
+          default: 30
+        - in: query
+          name: id
+          schema:
+            $ref: '#/components/schemas/ID'
+        - in: query
+          name: mail
+          schema:
+            type: string
+        - in: query
+          name: account_admin_role
+          schema:
+            $ref: '#/components/schemas/AccountAdminRole'
+        - in: query
+          name: account_admin_status
+          schema:
+            $ref: '#/components/schemas/AccountAdminStatus'
       responses:
         200:
           description: OK
@@ -178,6 +207,35 @@ paths:
       summary: List user
       tags:
         - admin
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          required: true
+          default: 0
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: true
+          default: 30
+        - in: query
+          name: id
+          schema:
+            $ref: '#/components/schemas/ID'
+        - in: query
+          name: first_name
+          schema:
+            type: string
+        - in: query
+          name: last_name
+          schema:
+            type: string
+        - in: query
+          name: account_status
+          schema:
+            $ref: '#/components/schemas/AccountStatus'
       responses:
         200:
           description: OK
@@ -186,7 +244,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Account'
+                  $ref: '#/components/schemas/AccountWithProfile'
   /api/admin/account/{account_id}:
     get:
       summary: Get user
@@ -531,6 +589,21 @@ components:
     ID:
       type: string
       format: uuid
+    AccountAdminRole:
+      type: string
+      maxLength: 255
+      example: staff
+      enum:
+        - admin
+        - staff
+    AccountAdminStatus:
+      type: string
+      maxLength: 255
+      enum:
+        - active
+        - locked
+        - deactivated
+      example: active
     AccountAdmin:
       type: object
       properties:
@@ -544,20 +617,9 @@ components:
           format: email
           example: test@gmail.com
         account_admin_role:
-          type: string
-          maxLength: 255
-          example: staff
-          enum:
-            - admin
-            - staff
+          $ref: '#/components/schemas/AccountAdminRole'
         account_admin_status:
-          type: string
-          maxLength: 255
-          enum:
-            - active
-            - locked
-            - deactivated
-          example: active
+          $ref: '#/components/schemas/AccountAdminStatus'
         created_at:
           type: string
           format: date-time
@@ -601,20 +663,9 @@ components:
           maxLength: 255
           example: '*****'
         account_admin_role:
-          type: string
-          maxLength: 255
-          example: staff
-          enum:
-            - admin
-            - staff
+          $ref: '#/components/schemas/AccountAdminRole'
         account_admin_status:
-          type: string
-          maxLength: 255
-          enum:
-            - active
-            - locked
-            - deactivated
-          example: active
+          $ref: '#/components/schemas/AccountAdminStatus'
       required:
         - mail
         - password
@@ -628,20 +679,18 @@ components:
           maxLength: 255
           example: '*****'
         account_admin_role:
-          type: string
-          maxLength: 255
-          example: staff
-          enum:
-            - admin
-            - staff
+          $ref: '#/components/schemas/AccountAdminRole'
         account_admin_status:
-          type: string
-          maxLength: 255
-          enum:
-            - active
-            - locked
-            - deactivated
-          example: active
+          $ref: '#/components/schemas/AccountAdminStatus'
+    AccountStatus:
+      type: string
+      maxLength: 255
+      example: active
+      enum:
+        - pending
+        - active
+        - locked
+        - deactivated
     Account:
       type: object
       properties:
@@ -672,14 +721,7 @@ components:
           maxLength: 255
           example: 08088889999
         account_status:
-          type: string
-          maxLength: 255
-          example: active
-          enum:
-            - pending
-            - active
-            - locked
-            - deactivated
+          $ref: '#/components/schemas/AccountStatus'
         created_at:
           type: string
           format: date-time
@@ -698,16 +740,64 @@ components:
       type: object
       properties:
         account_status:
-          type: string
-          maxLength: 255
-          example: active
-          enum:
-            - pending
-            - active
-            - locked
-            - deactivated
+          $ref: '#/components/schemas/AccountStatus'
       required:
         - account_status
+    AccountWithProfile:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/Account'
+        account_profile:
+          $ref: '#/components/schemas/AccountProfile'
+      required:
+        - account
+        - account_profile
+    Gender:
+      type: string
+      maxLength: 255
+      example: male
+      enum:
+        - male
+        - female
+        - unspecified
+    AccountProfile:
+      type: object
+      properties:
+        account_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        first_name:
+          type: string
+          maxLength: 255
+          example: John
+        last_name:
+          type: string
+          maxLength: 255
+          example: Wallet
+        birthday:
+          type: string
+          format: date
+          example: 1990-01-01
+        gender:
+          $ref: '#/components/schemas/Gender'
+        created_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        updated_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+      required:
+        - account_id
+        - first_name
+        - last_name
+        - birthday
+        - gender
+        - created_at
+        - updated_at
     Jewellery:
       type: object
       properties:

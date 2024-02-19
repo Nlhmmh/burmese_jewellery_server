@@ -5,6 +5,7 @@ import (
 	"burmese_jewellery/ers"
 	"burmese_jewellery/models"
 	"burmese_jewellery/orm"
+	"burmese_jewellery/query"
 	"burmese_jewellery/tx"
 
 	"database/sql"
@@ -14,6 +15,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/volatiletech/sqlboiler/v4/boil"
+	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
 // (POST /api/admin/login)
@@ -51,8 +53,17 @@ func (h *Handler) PostApiAdminLogin(c *gin.Context) {
 }
 
 // (GET /api/admin/account_admin)
-func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context) {
-	list, err := orm.AccountAdmins().AllG(c)
+func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context, params models.GetApiAdminAccountAdminParams) {
+	qList := []qm.QueryMod{
+		qm.Offset(params.Offset),
+		qm.Limit(params.Limit),
+	}
+	qList = query.EqUUID(qList, params.Id, orm.AccountAdminColumns.AccountAdminID)
+	qList = query.Like(qList, params.Mail, orm.AccountAdminColumns.Mail)
+	qList = query.Eq(qList, params.AccountAdminRole, orm.AccountAdminColumns.AccountAdminRole)
+	qList = query.Eq(qList, params.AccountAdminStatus, orm.AccountAdminColumns.AccountAdminStatus)
+
+	list, err := orm.AccountAdmins(qList...).AllG(c)
 	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return

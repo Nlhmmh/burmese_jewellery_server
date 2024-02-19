@@ -22,6 +22,21 @@ ID:
   type: string
   format: uuid
 
+AccountAdminRole:
+  type: string
+  maxLength: 255
+  example: staff
+  enum:
+    - admin
+    - staff
+AccountAdminStatus:
+  type: string
+  maxLength: 255
+  enum:
+    - active
+    - locked
+    - deactivated
+  example: active
 AccountAdmin:
   type: object
   properties:
@@ -39,20 +54,9 @@ AccountAdmin:
     #   maxLength: 255
     #   example: "*****"
     account_admin_role:
-      type: string
-      maxLength: 255
-      example: staff
-      enum:
-        - admin
-        - staff
+      $ref: "#/components/schemas/AccountAdminRole"
     account_admin_status:
-      type: string
-      maxLength: 255
-      enum:
-        - active
-        - locked
-        - deactivated
-      example: active
+      $ref: "#/components/schemas/AccountAdminStatus"
     created_at:
       type: string
       format: date-time
@@ -97,20 +101,9 @@ AccountAdminPostParam:
       maxLength: 255
       example: "*****"
     account_admin_role:
-      type: string
-      maxLength: 255
-      example: staff
-      enum:
-        - admin
-        - staff
+      $ref: "#/components/schemas/AccountAdminRole"
     account_admin_status:
-      type: string
-      maxLength: 255
-      enum:
-        - active
-        - locked
-        - deactivated
-      example: active
+      $ref: "#/components/schemas/AccountAdminStatus"
   required:
     - mail
     - password
@@ -124,21 +117,19 @@ AccountAdminPutParam:
       maxLength: 255
       example: "*****"
     account_admin_role:
-      type: string
-      maxLength: 255
-      example: staff
-      enum:
-        - admin
-        - staff
+      $ref: "#/components/schemas/AccountAdminRole"
     account_admin_status:
-      type: string
-      maxLength: 255
-      enum:
-        - active
-        - locked
-        - deactivated
-      example: active
+      $ref: "#/components/schemas/AccountAdminStatus"
 
+AccountStatus:
+  type: string
+  maxLength: 255
+  example: active
+  enum:
+    - pending
+    - active
+    - locked
+    - deactivated
 Account:
   type: object
   properties:
@@ -173,14 +164,7 @@ Account:
       maxLength: 255
       example: 08088889999
     account_status:
-      type: string
-      maxLength: 255
-      example: active
-      enum:
-        - pending
-        - active
-        - locked
-        - deactivated
+      $ref: "#/components/schemas/AccountStatus"
     created_at:
       type: string
       format: date-time
@@ -200,16 +184,65 @@ AccountStatusPutParam:
   type: object
   properties:
     account_status:
-      type: string
-      maxLength: 255
-      example: active
-      enum:
-        - pending
-        - active
-        - locked
-        - deactivated
+      $ref: "#/components/schemas/AccountStatus"
   required:
     - account_status
+AccountWithProfile:
+  type: object
+  properties:
+    account:
+      $ref: "#/components/schemas/Account"
+    account_profile:
+      $ref: "#/components/schemas/AccountProfile"
+  required:
+    - account
+    - account_profile
+
+Gender:
+  type: string
+  maxLength: 255
+  example: male
+  enum:
+    - male
+    - female
+    - unspecified
+AccountProfile:
+  type: object
+  properties:
+    account_id:
+      type: string
+      format: uuid
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    first_name:
+      type: string
+      maxLength: 255
+      example: John
+    last_name:
+      type: string
+      maxLength: 255
+      example: Wallet
+    birthday:
+      type: string
+      format: date
+      example: 1990-01-01
+    gender:
+      $ref: "#/components/schemas/Gender"
+    created_at:
+      type: string
+      format: date-time
+      example: 2020-01-01T00:00:00Z
+    updated_at:
+      type: string
+      format: date-time
+      example: 2020-01-01T00:00:00Z
+  required:
+    - account_id
+    - first_name
+    - last_name
+    - birthday
+    - gender
+    - created_at
+    - updated_at
 
 Jewellery:
   type: object

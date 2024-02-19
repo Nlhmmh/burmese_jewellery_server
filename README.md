@@ -3,6 +3,10 @@ Burmese Jewellery Server
 
 ---
 
+## Documentation
+https://naylinhtet.atlassian.net/wiki/spaces/BJ1/pages/4980744/Backend
+https://orange-moon-6960.postman.co/workspace/Burmese-Jewellery~fc558fc1-9818-4d2a-8307-4cbfb453797a/overview
+
 ## Development
 - Golang HTTP Server
 ```
@@ -18,6 +22,7 @@ go mod edit -go=1.21
 - ORM - SQL Boiler - https://github.com/volatiletech/sqlboiler
 - Swagger OpenAPI generator - https://github.com/deepmap/oapi-codegen
 - Hot Reload - air - https://github.com/cosmtrek/air
+- Load Testing - https://locust.io/
 #### API Documentation
 - Swagger
 - https://swagger.io/docs/specification/basic-structure/
@@ -47,7 +52,6 @@ go build . &&  ./planter "host=localhost port=5432 user=postgres password=postgr
 cp ./planter /Users/naylinhtet/.goenv/shims
 ```
 #### Load Testing
-https://locust.io/
 [Run with Makefile](load_testing/Makefile)
 
 ---
@@ -67,94 +71,13 @@ https://locust.io/
 Implement go-migration
 https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
 
----
 
-## Tasks
 
-### Admin Screen
-- [x] /api/admin/login - POST
->>
-- [x] /api/admin/account_admin - GET
-- [x] /api/admin/account_admin - POST
-- [x] /api/admin/account_admin/[id] - GET
-- [x] /api/admin/account_admin/[id] - PUT
-- [x] /api/admin/account_admin/[id] - DELETE
->>
-- [x] /api/admin/account - GET
-- [x] /api/admin/account/[id] - GET
-- [x] /api/admin/account/[id] - PUT
->>
-- [x] /api/admin/category/[id] - POST
-- [x] /api/admin/category/[id] - PUT
-- [x] /api/admin/category/[id] - DELETE
->>
-- [x] /api/admin/gem/[id] - POST
-- [x] /api/admin/gem/[id] - PUT
-- [x] /api/admin/gem/[id] - DELETE
->>
-- [x] /api/admin/material/[id] - POST
-- [x] /api/admin/material/[id] - PUT
-- [x] /api/admin/material/[id] - DELETE
->>
-- [x] /api/admin/jewellery - POST
-- [x] /api/admin/jewellery/[id] - PUT
-- [x] /api/admin/jewellery/[id] - DELETE
->>
-- [ ] /api/admin/currency - GET
-- [ ] /api/admin/currency/[id] - POST
-- [ ] /api/admin/currency/[id] - PUT
-- [ ] /api/admin/currency/[id] - DELETE
->>
-- [ ] /api/admin/country - GET
-- [ ] /api/admin/country/[id] - POST
-- [ ] /api/admin/country/[id] - PUT
-- [ ] /api/admin/country/[id] - DELETE
->>
-- [ ] /api/admin/faq - GET
-- [ ] /api/admin/faq/[id] - POST
-- [ ] /api/admin/faq/[id] - PUT
-- [ ] /api/admin/faq/[id] - DELETE
->>
-- [ ] /api/admin/order - GET
-- [ ] /api/admin/order/[id] - GET
 
-### App
-- [ ] /api/auth/email/register - POST
-- [ ] /api/auth/email/login - POST
-- [ ] /api/auth/email/otp - POST
->>
-- [ ] /api/auth/phone/login - POST
-- [ ] /api/auth/phone/otp - POST
->>
-- [x] /api/auth/google/login - POST
-- [x] /api/auth/google/callback - POST
->>
-- [ ] /api/auth/facebook/login - POST
-- [ ] /api/auth/facebook/callback - POST
->>
-- [ ] /api/profile - POST - register profile
-- [ ] /api/profile - PUT - edit profile
-- [ ] /api/profile - GET
->>
-- [x] /api/category - GET
->>
-- [x] /api/gem - GET
->>
-- [x] /api/material - GET
->>
-- [x] /api/jewellery - GET
-- [x] /api/jewellery/[id] - GET
->>
-- [ ] /api/cart - POST - add to cart
-- [ ] /api/cart - GET - cart jewellery list
->>
-- [ ] /api/favourite - POST - add to favourite
-- [ ] /api/favourite - GET - favourite list
->>
-- [ ] /api/order - POST - confirm order
-- [ ] /api/order - GET - order list
-- [ ] /api/order/[id] - GET - get order info
-- [ ] /api/order/cancel - POST - cancel order
->>
-- [ ] /api/faq - GET
-- [ ] /api/faq/[id] - GET
+
+10 users
+6 has matched name
+
+offset 0, limit 2 -> 1 user, 2 user
+offset 2, limit 2 -> 3 user, 4 user
+offset 4, limit 2 -> 5 user, 6 user
