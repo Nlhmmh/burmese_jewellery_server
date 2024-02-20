@@ -14,6 +14,7 @@ init: ## Prepare Environment
 	go install github.com/volatiletech/sqlboiler/v4@latest
 	go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-psql@latest
 	go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql@latest
+	brew install swagger-codegen
 
 .PHONY: run
 run: ## Run server
@@ -39,6 +40,10 @@ gen: ## Generate go code from Swagger
 .PHONY: gen-er
 gen-er: ## Generate temporary plantuml from db
 	./tools/planter "host=localhost port=5432 user=postgres password=postgres dbname=burmese_jewellery sslmode=disable" -T burmese_jewellery -o ./database/plantuml/burmese_jewellery.pu.tmp
+
+.PHONY: gen-swagger
+gen-swagger: ## Generate html from Swagger
+	cd ./swagger && swagger-codegen generate -i swagger.yml -l html -o static
 
 .PHONY: boil
 boil: ## Generate sqlboiler code (mac)

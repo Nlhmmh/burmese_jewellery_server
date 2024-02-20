@@ -1,0 +1,1914 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Burmese Jewellery</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+
+      .license-url {
+        margin-left: 20px;
+      }
+
+      .model {
+        margin: 0 0 0px 20px;
+      }
+
+      .method {
+        margin-left: 20px;
+      }
+
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+
+      .http-method {
+       text-transform: uppercase;
+      }
+
+      pre.get {
+        background-color: #0f6ab4;
+      }
+
+      pre.post {
+        background-color: #10a54a;
+      }
+
+      pre.put {
+        background-color: #c5862b;
+      }
+
+      pre.delete {
+        background-color: #a41e22;
+      }
+
+      .huge	{
+      	color: #fff;
+      }
+
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+
+      code {
+        white-space: pre;
+      }
+
+      .nickname {
+        font-weight: bold;
+      }
+
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+
+      .up {
+        float:right;
+      }
+
+      .parameter {
+        width: 500px;
+      }
+
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+
+      .param-type {
+        font-style: italic;
+      }
+
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+
+      .param-header {
+        font-weight: bold;
+      }
+
+      .method-tags {
+        text-align: right;
+      }
+
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Burmese Jewellery</h1>
+    <div class="app-desc">API documentaion for Burmese Jewellery.</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Admin">Admin</a></h4>
+  <ul>
+  <li><a href="#apiAdminAccountAccountIdGet"><code><span class="http-method">get</span> /api/admin/account/{account_id}</code></a></li>
+  <li><a href="#apiAdminAccountAccountIdPut"><code><span class="http-method">put</span> /api/admin/account/{account_id}</code></a></li>
+  <li><a href="#apiAdminAccountAdminAccountAdminsIdDelete"><code><span class="http-method">delete</span> /api/admin/account_admin/{account_admins_id}</code></a></li>
+  <li><a href="#apiAdminAccountAdminAccountAdminsIdGet"><code><span class="http-method">get</span> /api/admin/account_admin/{account_admins_id}</code></a></li>
+  <li><a href="#apiAdminAccountAdminAccountAdminsIdPut"><code><span class="http-method">put</span> /api/admin/account_admin/{account_admins_id}</code></a></li>
+  <li><a href="#apiAdminAccountAdminGet"><code><span class="http-method">get</span> /api/admin/account_admin</code></a></li>
+  <li><a href="#apiAdminAccountAdminPost"><code><span class="http-method">post</span> /api/admin/account_admin</code></a></li>
+  <li><a href="#apiAdminAccountGet"><code><span class="http-method">get</span> /api/admin/account</code></a></li>
+  <li><a href="#apiAdminCategoryCategoryIdDelete"><code><span class="http-method">delete</span> /api/admin/category/{category_id}</code></a></li>
+  <li><a href="#apiAdminCategoryCategoryIdPut"><code><span class="http-method">put</span> /api/admin/category/{category_id}</code></a></li>
+  <li><a href="#apiAdminCategoryPost"><code><span class="http-method">post</span> /api/admin/category</code></a></li>
+  <li><a href="#apiAdminGemGemIdDelete"><code><span class="http-method">delete</span> /api/admin/gem/{gem_id}</code></a></li>
+  <li><a href="#apiAdminGemGemIdPut"><code><span class="http-method">put</span> /api/admin/gem/{gem_id}</code></a></li>
+  <li><a href="#apiAdminGemPost"><code><span class="http-method">post</span> /api/admin/gem</code></a></li>
+  <li><a href="#apiAdminJewelleryJewelleryIdDelete"><code><span class="http-method">delete</span> /api/admin/jewellery/{jewellery_id}</code></a></li>
+  <li><a href="#apiAdminJewelleryJewelleryIdPut"><code><span class="http-method">put</span> /api/admin/jewellery/{jewellery_id}</code></a></li>
+  <li><a href="#apiAdminJewelleryPost"><code><span class="http-method">post</span> /api/admin/jewellery</code></a></li>
+  <li><a href="#apiAdminLoginPost"><code><span class="http-method">post</span> /api/admin/login</code></a></li>
+  <li><a href="#apiAdminMaterialMaterialIdDelete"><code><span class="http-method">delete</span> /api/admin/material/{material_id}</code></a></li>
+  <li><a href="#apiAdminMaterialMaterialIdPut"><code><span class="http-method">put</span> /api/admin/material/{material_id}</code></a></li>
+  <li><a href="#apiAdminMaterialPost"><code><span class="http-method">post</span> /api/admin/material</code></a></li>
+  </ul>
+  <h4><a href="#App">App</a></h4>
+  <ul>
+  <li><a href="#apiAuthGoogleCallbackGet"><code><span class="http-method">get</span> /api/auth/google/callback</code></a></li>
+  <li><a href="#apiAuthGoogleLoginGet"><code><span class="http-method">get</span> /api/auth/google/login</code></a></li>
+  <li><a href="#apiCategoryGet"><code><span class="http-method">get</span> /api/category</code></a></li>
+  <li><a href="#apiGemGet"><code><span class="http-method">get</span> /api/gem</code></a></li>
+  <li><a href="#apiGet"><code><span class="http-method">get</span> /api</code></a></li>
+  <li><a href="#apiJewelleryGet"><code><span class="http-method">get</span> /api/jewellery</code></a></li>
+  <li><a href="#apiJewelleryJewelleryIdGet"><code><span class="http-method">get</span> /api/jewellery/{jewellery_id}</code></a></li>
+  <li><a href="#apiMaterialGet"><code><span class="http-method">get</span> /api/material</code></a></li>
+  </ul>
+  <h4><a href="#Others">Others</a></h4>
+  <ul>
+  <li><a href="#apiHealthCheckGet"><code><span class="http-method">get</span> /api/health_check</code></a></li>
+  </ul>
+
+  <h1><a name="Admin">Admin</a></h1>
+  <div class="method"><a name="apiAdminAccountAccountIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/admin/account/{account_id}</code></pre></div>
+    <div class="method-summary">Get user (<span class="nickname">apiAdminAccountAccountIdGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">account_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Account">Account</a>
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "login_id" : "101176734510758999999",
+  "account_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "mail" : "test@gmail.com",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "login_type" : "email",
+  "phone" : "08088889999",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_status" : "active"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#Account">Account</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminAccountAccountIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/account/{account_id}</code></pre></div>
+    <div class="method-summary">Update user status (<span class="nickname">apiAdminAccountAccountIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">account_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AccountStatusPutParam">AccountStatusPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminAccountAdminAccountAdminsIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/account_admin/{account_admins_id}</code></pre></div>
+    <div class="method-summary">Delete admin user (<span class="nickname">apiAdminAccountAdminAccountAdminsIdDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">account_admins_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">204</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminAccountAdminAccountAdminsIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/admin/account_admin/{account_admins_id}</code></pre></div>
+    <div class="method-summary">Get admin user (<span class="nickname">apiAdminAccountAdminAccountAdminsIdGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">account_admins_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AccountAdmin">AccountAdmin</a>
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "mail" : "test@gmail.com",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_role" : "staff",
+  "account_admin_status" : "active",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#AccountAdmin">AccountAdmin</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminAccountAdminAccountAdminsIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/account_admin/{account_admins_id}</code></pre></div>
+    <div class="method-summary">Edit admin user (<span class="nickname">apiAdminAccountAdminAccountAdminsIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">account_admins_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AccountAdminPutParam">AccountAdminPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminAccountAdminGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/admin/account_admin</code></pre></div>
+    <div class="method-summary">List admin user (<span class="nickname">apiAdminAccountAdminGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">offset (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">limit (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">id (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">mail (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">account_admin_role (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">account_admin_status (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#AccountAdmin">AccountAdmin</a>]
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "mail" : "test@gmail.com",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_role" : "staff",
+  "account_admin_status" : "active",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}, {
+  "mail" : "test@gmail.com",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_role" : "staff",
+  "account_admin_status" : "active",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminAccountAdminPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/account_admin</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminAccountAdminPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AccountAdminPostParam">AccountAdminPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminAccountGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/admin/account</code></pre></div>
+    <div class="method-summary">List user (<span class="nickname">apiAdminAccountGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">offset (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">limit (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">id (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">first_name (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">last_name (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">account_status (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#AccountWithProfile">AccountWithProfile</a>]
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "account_profile" : {
+    "birthday" : "1990-01-01T00:00:00.000+00:00",
+    "account_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "gender" : "male",
+    "updated_at" : "2000-01-23T04:56:07.000+00:00",
+    "last_name" : "Wallet",
+    "created_at" : "2000-01-23T04:56:07.000+00:00",
+    "first_name" : "John"
+  },
+  "account" : {
+    "login_id" : "101176734510758999999",
+    "account_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "mail" : "test@gmail.com",
+    "updated_at" : "2000-01-23T04:56:07.000+00:00",
+    "login_type" : "email",
+    "phone" : "08088889999",
+    "created_at" : "2000-01-23T04:56:07.000+00:00",
+    "account_status" : "active"
+  }
+}, {
+  "account_profile" : {
+    "birthday" : "1990-01-01T00:00:00.000+00:00",
+    "account_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "gender" : "male",
+    "updated_at" : "2000-01-23T04:56:07.000+00:00",
+    "last_name" : "Wallet",
+    "created_at" : "2000-01-23T04:56:07.000+00:00",
+    "first_name" : "John"
+  },
+  "account" : {
+    "login_id" : "101176734510758999999",
+    "account_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "mail" : "test@gmail.com",
+    "updated_at" : "2000-01-23T04:56:07.000+00:00",
+    "login_type" : "email",
+    "phone" : "08088889999",
+    "created_at" : "2000-01-23T04:56:07.000+00:00",
+    "account_status" : "active"
+  }
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminCategoryCategoryIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/category/{category_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminCategoryCategoryIdDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">category_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">204</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminCategoryCategoryIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/category/{category_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminCategoryCategoryIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">category_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#CategoryPutParam">CategoryPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminCategoryPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/category</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminCategoryPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#CategoryPostParam">CategoryPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminGemGemIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/gem/{gem_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminGemGemIdDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">gem_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">204</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminGemGemIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/gem/{gem_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminGemGemIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">gem_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#GemPutParam">GemPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminGemPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/gem</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminGemPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#GemPostParam">GemPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminJewelleryJewelleryIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/jewellery/{jewellery_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminJewelleryJewelleryIdDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">jewellery_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">204</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminJewelleryJewelleryIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/jewellery/{jewellery_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminJewelleryJewelleryIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">jewellery_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#JewelleryPutParam">JewelleryPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminJewelleryPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/jewellery</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminJewelleryPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#JewelleryPostParam">JewelleryPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminLoginPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/login</code></pre></div>
+    <div class="method-summary">Login as admin user (<span class="nickname">apiAdminLoginPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AccountAdminLoginParam">AccountAdminLoginParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_1">inline_response_200_1</a>
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "token" : "token"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#inline_response_200_1">inline_response_200_1</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminMaterialMaterialIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/material/{material_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminMaterialMaterialIdDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">material_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">204</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminMaterialMaterialIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/material/{material_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminMaterialMaterialIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">material_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#MaterialPutParam">MaterialPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminMaterialPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/material</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminMaterialPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#MaterialPostParam">MaterialPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="App">App</a></h1>
+  <div class="method"><a name="apiAuthGoogleCallbackGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/auth/google/callback</code></pre></div>
+    <div class="method-summary">Handle Google OAuth2 callback (<span class="nickname">apiAuthGoogleCallbackGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">state (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; OAuth2 state parameter </div>      <div class="param">code (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; OAuth2 code parameter </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AuthGoogleCallbackResp">AuthGoogleCallbackResp</a>
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "is_registered" : true,
+  "account" : {
+    "login_id" : "101176734510758999999",
+    "account_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "mail" : "test@gmail.com",
+    "updated_at" : "2000-01-23T04:56:07.000+00:00",
+    "login_type" : "email",
+    "phone" : "08088889999",
+    "created_at" : "2000-01-23T04:56:07.000+00:00",
+    "account_status" : "active"
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#AuthGoogleCallbackResp">AuthGoogleCallbackResp</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAuthGoogleLoginGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/auth/google/login</code></pre></div>
+    <div class="method-summary">Initiate Google OAuth2 login (<span class="nickname">apiAuthGoogleLoginGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">302</h4>
+    Redirect to Google OAuth2 login page
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiCategoryGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/category</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiCategoryGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Category">Category</a>]
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "category_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "image_url" : "https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp",
+  "name" : "Engagement Rings",
+  "description" : "Engagement Rings",
+  "created_at" : "2000-01-23T04:56:07.000+00:00"
+}, {
+  "category_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "image_url" : "https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp",
+  "name" : "Engagement Rings",
+  "description" : "Engagement Rings",
+  "created_at" : "2000-01-23T04:56:07.000+00:00"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiGemGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/gem</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiGemGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Gem">Gem</a>]
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "name" : "Diamond",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "gem_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}, {
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "name" : "Diamond",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "gem_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api</code></pre></div>
+    <div class="method-summary">Display the main page (<span class="nickname">apiGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Main page displayed successfully
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiJewelleryGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/jewellery</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiJewelleryGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">offset (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">limit (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">id (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">category_id (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">gem_id (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">material_id (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">name (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">is_published (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Jewellery">Jewellery</a>]
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "jewellery_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "quantity" : 100,
+  "category_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "price" : 10000,
+  "image_url" : "https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp",
+  "is_published" : true,
+  "name" : "Wedding Forever",
+  "description" : "Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "material_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gem_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}, {
+  "jewellery_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "quantity" : 100,
+  "category_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "price" : 10000,
+  "image_url" : "https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp",
+  "is_published" : true,
+  "name" : "Wedding Forever",
+  "description" : "Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "material_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gem_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiJewelleryJewelleryIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/jewellery/{jewellery_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiJewelleryJewelleryIdGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">jewellery_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Jewellery">Jewellery</a>
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "jewellery_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "quantity" : 100,
+  "category_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "price" : 10000,
+  "image_url" : "https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp",
+  "is_published" : true,
+  "name" : "Wedding Forever",
+  "description" : "Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "material_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gem_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#Jewellery">Jewellery</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiMaterialGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/material</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiMaterialGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Material">Material</a>]
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "name" : "Gold",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "material_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}, {
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "name" : "Gold",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "material_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Others">Others</a></h1>
+  <div class="method"><a name="apiHealthCheckGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/health_check</code></pre></div>
+    <div class="method-summary">Health Check (<span class="nickname">apiHealthCheckGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "OK"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Successful response
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Account"><code>Account</code></a></li>
+    <li><a href="#AccountAdmin"><code>AccountAdmin</code></a></li>
+    <li><a href="#AccountAdminLoginParam"><code>AccountAdminLoginParam</code></a></li>
+    <li><a href="#AccountAdminPostParam"><code>AccountAdminPostParam</code></a></li>
+    <li><a href="#AccountAdminPutParam"><code>AccountAdminPutParam</code></a></li>
+    <li><a href="#AccountAdminRole"><code>AccountAdminRole</code></a></li>
+    <li><a href="#AccountAdminStatus"><code>AccountAdminStatus</code></a></li>
+    <li><a href="#AccountProfile"><code>AccountProfile</code></a></li>
+    <li><a href="#AccountStatus"><code>AccountStatus</code></a></li>
+    <li><a href="#AccountStatusPutParam"><code>AccountStatusPutParam</code></a></li>
+    <li><a href="#AccountWithProfile"><code>AccountWithProfile</code></a></li>
+    <li><a href="#AuthGoogleCallbackResp"><code>AuthGoogleCallbackResp</code></a></li>
+    <li><a href="#Category"><code>Category</code></a></li>
+    <li><a href="#CategoryPostParam"><code>CategoryPostParam</code></a></li>
+    <li><a href="#CategoryPutParam"><code>CategoryPutParam</code></a></li>
+    <li><a href="#ErrMsg"><code>ErrMsg</code></a></li>
+    <li><a href="#Gem"><code>Gem</code></a></li>
+    <li><a href="#GemPostParam"><code>GemPostParam</code></a></li>
+    <li><a href="#GemPutParam"><code>GemPutParam</code></a></li>
+    <li><a href="#Gender"><code>Gender</code></a></li>
+    <li><a href="#ID"><code>ID</code></a></li>
+    <li><a href="#Jewellery"><code>Jewellery</code></a></li>
+    <li><a href="#JewelleryPostParam"><code>JewelleryPostParam</code></a></li>
+    <li><a href="#JewelleryPutParam"><code>JewelleryPutParam</code></a></li>
+    <li><a href="#Material"><code>Material</code></a></li>
+    <li><a href="#MaterialPostParam"><code>MaterialPostParam</code></a></li>
+    <li><a href="#MaterialPutParam"><code>MaterialPutParam</code></a></li>
+    <li><a href="#inline_response_200"><code>inline_response_200</code></a></li>
+    <li><a href="#inline_response_200_1"><code>inline_response_200_1</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="Account"><code>Account</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">account_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">login_type </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">email</div><div class="param-enum">phone</div><div class="param-enum">google</div><div class="param-enum">facebook</div>
+          <div class="param-desc"><span class="param-type">example: email</span></div>
+<div class="param">login_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 101176734510758999999</span></div>
+<div class="param">mail (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: email</div>
+          <div class="param-desc"><span class="param-type">example: test@gmail.com</span></div>
+<div class="param">phone (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 08088889999</span></div>
+<div class="param">account_status </div><div class="param-desc"><span class="param-type"><a href="#AccountStatus">AccountStatus</a></span>  </div>
+<div class="param">created_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">updated_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccountAdmin"><code>AccountAdmin</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">account_admin_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">mail </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: email</div>
+          <div class="param-desc"><span class="param-type">example: test@gmail.com</span></div>
+<div class="param">account_admin_role </div><div class="param-desc"><span class="param-type"><a href="#AccountAdminRole">AccountAdminRole</a></span>  </div>
+<div class="param">account_admin_status </div><div class="param-desc"><span class="param-type"><a href="#AccountAdminStatus">AccountAdminStatus</a></span>  </div>
+<div class="param">created_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">updated_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccountAdminLoginParam"><code>AccountAdminLoginParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">mail </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: email</div>
+          <div class="param-desc"><span class="param-type">example: test@gmail.com</span></div>
+<div class="param">password </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: *****</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccountAdminPostParam"><code>AccountAdminPostParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">mail </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: email</div>
+          <div class="param-desc"><span class="param-type">example: test@gmail.com</span></div>
+<div class="param">password </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: *****</span></div>
+<div class="param">account_admin_role </div><div class="param-desc"><span class="param-type"><a href="#AccountAdminRole">AccountAdminRole</a></span>  </div>
+<div class="param">account_admin_status </div><div class="param-desc"><span class="param-type"><a href="#AccountAdminStatus">AccountAdminStatus</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccountAdminPutParam"><code>AccountAdminPutParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: *****</span></div>
+<div class="param">account_admin_role (optional)</div><div class="param-desc"><span class="param-type"><a href="#AccountAdminRole">AccountAdminRole</a></span>  </div>
+<div class="param">account_admin_status (optional)</div><div class="param-desc"><span class="param-type"><a href="#AccountAdminStatus">AccountAdminStatus</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccountAdminRole"><code>AccountAdminRole</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccountAdminStatus"><code>AccountAdminStatus</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccountProfile"><code>AccountProfile</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">account_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">first_name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: John</span></div>
+<div class="param">last_name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Wallet</span></div>
+<div class="param">birthday </div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+          <div class="param-desc"><span class="param-type">example: Mon Jan 01 09:00:00 JST 1990</span></div>
+<div class="param">gender </div><div class="param-desc"><span class="param-type"><a href="#Gender">Gender</a></span>  </div>
+<div class="param">created_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">updated_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccountStatus"><code>AccountStatus</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccountStatusPutParam"><code>AccountStatusPutParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">account_status </div><div class="param-desc"><span class="param-type"><a href="#AccountStatus">AccountStatus</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccountWithProfile"><code>AccountWithProfile</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">account </div><div class="param-desc"><span class="param-type"><a href="#Account">Account</a></span>  </div>
+<div class="param">account_profile </div><div class="param-desc"><span class="param-type"><a href="#AccountProfile">AccountProfile</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AuthGoogleCallbackResp"><code>AuthGoogleCallbackResp</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">account (optional)</div><div class="param-desc"><span class="param-type"><a href="#Account">Account</a></span>  </div>
+<div class="param">is_registered </div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Category"><code>Category</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">category_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Engagement Rings</span></div>
+<div class="param">description </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Engagement Rings</span></div>
+<div class="param">image_url </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&amp;wid&#x3D;2992&amp;fmt&#x3D;webp</span></div>
+<div class="param">created_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">updated_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CategoryPostParam"><code>CategoryPostParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Engagement Rings</span></div>
+<div class="param">description </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Engagement Rings</span></div>
+<div class="param">image_url </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&amp;wid&#x3D;2992&amp;fmt&#x3D;webp</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CategoryPutParam"><code>CategoryPutParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Engagement Rings</span></div>
+<div class="param">description </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Engagement Rings</span></div>
+<div class="param">image_url </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&amp;wid&#x3D;2992&amp;fmt&#x3D;webp</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ErrMsg"><code>ErrMsg</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Error Message</div>
+    <div class="field-items">
+      <div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Application Version </div>
+<div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Error message </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Gem"><code>Gem</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">gem_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Diamond</span></div>
+<div class="param">created_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">updated_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="GemPostParam"><code>GemPostParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Diamond</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="GemPutParam"><code>GemPutParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Diamond</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Gender"><code>Gender</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ID"><code>ID</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Jewellery"><code>Jewellery</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">jewellery_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">category_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">gem_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">material_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Wedding Forever</span></div>
+<div class="param">description </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm</span></div>
+<div class="param">quantity </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int</div>
+          <div class="param-desc"><span class="param-type">example: 100</span></div>
+<div class="param">price </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: float64</div>
+          <div class="param-desc"><span class="param-type">example: 10000</span></div>
+<div class="param">image_url </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&amp;op_usm&#x3D;1.75,1.0,6.0&amp;$cropN&#x3D;0.1,0.1,0.8,0.8&amp;defaultImage&#x3D;NoImageAvailableInternal&amp;&amp;defaultImage&#x3D;NoImageAvailableInternal&amp;fmt&#x3D;webp</span></div>
+<div class="param">is_published </div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+<div class="param">created_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">updated_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="JewelleryPostParam"><code>JewelleryPostParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">category_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">gem_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">material_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Wedding Forever</span></div>
+<div class="param">description </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm</span></div>
+<div class="param">quantity </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int</div>
+          <div class="param-desc"><span class="param-type">example: 100</span></div>
+<div class="param">price </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: float64</div>
+          <div class="param-desc"><span class="param-type">example: 10000</span></div>
+<div class="param">image_url </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&amp;op_usm&#x3D;1.75,1.0,6.0&amp;$cropN&#x3D;0.1,0.1,0.8,0.8&amp;defaultImage&#x3D;NoImageAvailableInternal&amp;&amp;defaultImage&#x3D;NoImageAvailableInternal&amp;fmt&#x3D;webp</span></div>
+<div class="param">is_published </div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="JewelleryPutParam"><code>JewelleryPutParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">category_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">gem_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">material_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Wedding Forever</span></div>
+<div class="param">description </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm</span></div>
+<div class="param">quantity </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int</div>
+          <div class="param-desc"><span class="param-type">example: 100</span></div>
+<div class="param">price </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: float64</div>
+          <div class="param-desc"><span class="param-type">example: 10000</span></div>
+<div class="param">image_url </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&amp;op_usm&#x3D;1.75,1.0,6.0&amp;$cropN&#x3D;0.1,0.1,0.8,0.8&amp;defaultImage&#x3D;NoImageAvailableInternal&amp;&amp;defaultImage&#x3D;NoImageAvailableInternal&amp;fmt&#x3D;webp</span></div>
+<div class="param">is_published </div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Material"><code>Material</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">material_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Gold</span></div>
+<div class="param">created_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">updated_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MaterialPostParam"><code>MaterialPostParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Gold</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MaterialPutParam"><code>MaterialPutParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Gold</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200"><code>inline_response_200</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">message </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_1"><code>inline_response_200_1</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">token (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
