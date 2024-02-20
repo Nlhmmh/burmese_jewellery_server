@@ -1741,7 +1741,7 @@ type GetApiProfileResponseObject interface {
 	VisitGetApiProfileResponse(w http.ResponseWriter) error
 }
 
-type GetApiProfile200JSONResponse []AccountProfile
+type GetApiProfile200JSONResponse AccountProfile
 
 func (response GetApiProfile200JSONResponse) VisitGetApiProfileResponse(w http.ResponseWriter) error {
 	w.Header().Set("Content-Type", "application/json")
@@ -2999,9 +2999,9 @@ var swaggerSpec = []string{
 	"JZ/M3KBCIYvZ9VlXNlnzc65q5ZIs0ga94vTR/iC3epjco7DtD3PTZ2db98w/OV7qvHyXzVaOXc9PPz0b",
 	"hUmOZgMK0+RM19qoeZ6rzRxQIOczZw61Me+DbvpOt3zR7TUBIRT/TXOLSkldW4ma9LtusA3/khUMGqnk",
 	"q8FDq2ek+qXmYnKuiGRpsULuYYO58kmHPSNVD1M8JXn+eFlu7CWqXvKb4+eP99SSxpVH/l6bQZeofi7z",
-	"bEpiNVlWu5S5sl8+sdPanvkcwQb7FZIDXaMlm+y5YMm96G+Dbmkd7RYruNqX7hYVrKnSymvUWT6t9ALQ",
-	"l/qeHbtQRVngd9Vfiz8yBwUG0DvMGSWgC+sLTzcEqsGcCTk9to+OTLX4kvFLzzgkVWzpjjWprSs1C8Nc",
-	"ozCsaPJnHPOX8Tj++/H68X8BAAD//4plPP8UYgAA",
+	"bEpiNVlWu5S5sl8+sdPanvkcwQb7FZIDXaMlm+y5YMm96G+DbmkdbfdVIctXCTbTo6YYKy94Z2mz0ns+",
+	"X+rrdOwpFUyB31V/+/3IHBQYQO8wZ5SArp8vPMQQqAZzJuT02D46MtUaS8YvPcqQFKulG9OkhK7ULAxz",
+	"jcKwosmfcWhfht3478frx/8FAAD//5Kab+f7YQAA",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

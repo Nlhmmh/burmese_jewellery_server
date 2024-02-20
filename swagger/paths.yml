@@ -651,9 +651,7 @@
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/AccountProfile"
+              $ref: "#/components/schemas/AccountProfile"
   post:
     tags:
       - app
