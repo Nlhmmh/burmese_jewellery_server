@@ -36,6 +36,7 @@ gen: ## Generate go code from Swagger
 	go get github.com/deepmap/oapi-codegen/cmd/oapi-codegen@latest
 	go generate $(GO_GENERATE_FILE)
 	go mod tidy
+	make gen-swagger
 
 .PHONY: gen-er
 gen-er: ## Generate temporary plantuml from db

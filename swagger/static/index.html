@@ -206,6 +206,9 @@
   <li><a href="#apiAdminCategoryCategoryIdDelete"><code><span class="http-method">delete</span> /api/admin/category/{category_id}</code></a></li>
   <li><a href="#apiAdminCategoryCategoryIdPut"><code><span class="http-method">put</span> /api/admin/category/{category_id}</code></a></li>
   <li><a href="#apiAdminCategoryPost"><code><span class="http-method">post</span> /api/admin/category</code></a></li>
+  <li><a href="#apiAdminFaqFaqIdDelete"><code><span class="http-method">delete</span> /api/admin/faq/{faq_id}</code></a></li>
+  <li><a href="#apiAdminFaqFaqIdPut"><code><span class="http-method">put</span> /api/admin/faq/{faq_id}</code></a></li>
+  <li><a href="#apiAdminFaqPost"><code><span class="http-method">post</span> /api/admin/faq</code></a></li>
   <li><a href="#apiAdminGemGemIdDelete"><code><span class="http-method">delete</span> /api/admin/gem/{gem_id}</code></a></li>
   <li><a href="#apiAdminGemGemIdPut"><code><span class="http-method">put</span> /api/admin/gem/{gem_id}</code></a></li>
   <li><a href="#apiAdminGemPost"><code><span class="http-method">post</span> /api/admin/gem</code></a></li>
@@ -222,11 +225,14 @@
   <li><a href="#apiAuthGoogleCallbackGet"><code><span class="http-method">get</span> /api/auth/google/callback</code></a></li>
   <li><a href="#apiAuthGoogleLoginGet"><code><span class="http-method">get</span> /api/auth/google/login</code></a></li>
   <li><a href="#apiCategoryGet"><code><span class="http-method">get</span> /api/category</code></a></li>
+  <li><a href="#apiFaqGet"><code><span class="http-method">get</span> /api/faq</code></a></li>
   <li><a href="#apiGemGet"><code><span class="http-method">get</span> /api/gem</code></a></li>
   <li><a href="#apiGet"><code><span class="http-method">get</span> /api</code></a></li>
   <li><a href="#apiJewelleryGet"><code><span class="http-method">get</span> /api/jewellery</code></a></li>
   <li><a href="#apiJewelleryJewelleryIdGet"><code><span class="http-method">get</span> /api/jewellery/{jewellery_id}</code></a></li>
   <li><a href="#apiMaterialGet"><code><span class="http-method">get</span> /api/material</code></a></li>
+  <li><a href="#apiProfileGet"><code><span class="http-method">get</span> /api/profile</code></a></li>
+  <li><a href="#apiProfilePost"><code><span class="http-method">post</span> /api/profile</code></a></li>
   </ul>
   <h4><a href="#Others">Others</a></h4>
   <ul>
@@ -744,6 +750,110 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
+  <div class="method"><a name="apiAdminFaqFaqIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/faq/{faq_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminFaqFaqIdDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">faq_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">204</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminFaqFaqIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/faq/{faq_id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminFaqFaqIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">faq_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#FAQPutParam">FAQPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminFaqPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/faq</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminFaqPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#FAQPostParam">FAQPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
   <div class="method"><a name="apiAdminGemGemIdDelete"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
@@ -1241,6 +1351,73 @@
 
   </div> <!-- method -->
   <hr/>
+  <div class="method"><a name="apiFaqGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/faq</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiFaqGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">offset (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">limit (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">id (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">question (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">answer (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">is_active (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#FAQ">FAQ</a>]
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "is_active" : true,
+  "question" : "Can I get refund of my order?",
+  "answer" : "Yes. We have provided a trustworthy refund system for customers.",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "faq_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}, {
+  "is_active" : true,
+  "question" : "Can I get refund of my order?",
+  "answer" : "Yes. We have provided a trustworthy refund system for customers.",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "faq_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+
+  </div> <!-- method -->
+  <hr/>
   <div class="method"><a name="apiGemGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
@@ -1500,6 +1677,95 @@
 
   </div> <!-- method -->
   <hr/>
+  <div class="method"><a name="apiProfileGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/profile</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiProfileGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#AccountProfile">AccountProfile</a>]
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "birthday" : "1990-01-01T00:00:00.000+00:00",
+  "account_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gender" : "male",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "last_name" : "Wallet",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "first_name" : "John"
+}, {
+  "birthday" : "1990-01-01T00:00:00.000+00:00",
+  "account_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gender" : "male",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "last_name" : "Wallet",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "first_name" : "John"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiProfilePost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/profile</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiProfilePost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AccountProfilePostParam">AccountProfilePostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
   <h1><a name="Others">Others</a></h1>
   <div class="method"><a name="apiHealthCheckGet"></a>
     <div class="method-path">
@@ -1555,6 +1821,7 @@
     <li><a href="#AccountAdminRole"><code>AccountAdminRole</code></a></li>
     <li><a href="#AccountAdminStatus"><code>AccountAdminStatus</code></a></li>
     <li><a href="#AccountProfile"><code>AccountProfile</code></a></li>
+    <li><a href="#AccountProfilePostParam"><code>AccountProfilePostParam</code></a></li>
     <li><a href="#AccountStatus"><code>AccountStatus</code></a></li>
     <li><a href="#AccountStatusPutParam"><code>AccountStatusPutParam</code></a></li>
     <li><a href="#AccountWithProfile"><code>AccountWithProfile</code></a></li>
@@ -1563,6 +1830,9 @@
     <li><a href="#CategoryPostParam"><code>CategoryPostParam</code></a></li>
     <li><a href="#CategoryPutParam"><code>CategoryPutParam</code></a></li>
     <li><a href="#ErrMsg"><code>ErrMsg</code></a></li>
+    <li><a href="#FAQ"><code>FAQ</code></a></li>
+    <li><a href="#FAQPostParam"><code>FAQPostParam</code></a></li>
+    <li><a href="#FAQPutParam"><code>FAQPutParam</code></a></li>
     <li><a href="#Gem"><code>Gem</code></a></li>
     <li><a href="#GemPostParam"><code>GemPostParam</code></a></li>
     <li><a href="#GemPutParam"><code>GemPutParam</code></a></li>
@@ -1675,6 +1945,19 @@
     </div>  <!-- field-items -->
   </div>
   <div class="model">
+    <h3><a name="AccountProfilePostParam"><code>AccountProfilePostParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">first_name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: John</span></div>
+<div class="param">last_name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Wallet</span></div>
+<div class="param">birthday (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+          <div class="param-desc"><span class="param-type">example: Mon Jan 01 09:00:00 JST 1990</span></div>
+<div class="param">gender (optional)</div><div class="param-desc"><span class="param-type"><a href="#Gender">Gender</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
     <h3><a name="AccountStatus"><code>AccountStatus</code></a> <a class="up" href="#__Models">Up</a></h3>
 
     <div class="field-items">
@@ -1750,6 +2033,46 @@
     <div class="field-items">
       <div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Application Version </div>
 <div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Error message </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FAQ"><code>FAQ</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">faq_id </div><div class="param-desc"><span class="param-type"><a href="#UUID">UUID</a></span>  format: uuid</div>
+          <div class="param-desc"><span class="param-type">example: 3fa85f64-5717-4562-b3fc-2c963f66afa6</span></div>
+<div class="param">question </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Can I get refund of my order?</span></div>
+<div class="param">answer </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Yes. We have provided a trustworthy refund system for customers.</span></div>
+<div class="param">is_active </div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+<div class="param">created_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">updated_at </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FAQPostParam"><code>FAQPostParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">question </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Can I get refund of my order?</span></div>
+<div class="param">answer </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Yes. We have provided a trustworthy refund system for customers.</span></div>
+<div class="param">is_active </div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FAQPutParam"><code>FAQPutParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">question </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Can I get refund of my order?</span></div>
+<div class="param">answer </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Yes. We have provided a trustworthy refund system for customers.</span></div>
+<div class="param">is_active </div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">
