@@ -108,6 +108,14 @@ type AccountProfile struct {
 	UpdatedAt time.Time          `json:"updated_at"`
 }
 
+// AccountProfilePostParam defines model for AccountProfilePostParam.
+type AccountProfilePostParam struct {
+	Birthday  *openapi_types.Date `json:"birthday,omitempty"`
+	FirstName string              `json:"first_name"`
+	Gender    *Gender             `json:"gender,omitempty"`
+	LastName  string              `json:"last_name"`
+}
+
 // AccountStatus defines model for AccountStatus.
 type AccountStatus string
 
@@ -159,6 +167,30 @@ type ErrMsg struct {
 
 	// Version Application Version
 	Version *string `json:"version,omitempty"`
+}
+
+// FAQ defines model for FAQ.
+type FAQ struct {
+	Answer    string             `json:"answer"`
+	CreatedAt time.Time          `json:"created_at"`
+	FaqId     openapi_types.UUID `json:"faq_id"`
+	IsActive  bool               `json:"is_active"`
+	Question  string             `json:"question"`
+	UpdatedAt time.Time          `json:"updated_at"`
+}
+
+// FAQPostParam defines model for FAQPostParam.
+type FAQPostParam struct {
+	Answer   string `json:"answer"`
+	IsActive bool   `json:"is_active"`
+	Question string `json:"question"`
+}
+
+// FAQPutParam defines model for FAQPutParam.
+type FAQPutParam struct {
+	Answer   string `json:"answer"`
+	IsActive bool   `json:"is_active"`
+	Question string `json:"question"`
 }
 
 // Gem defines model for Gem.
@@ -274,6 +306,16 @@ type GetApiAuthGoogleCallbackParams struct {
 	Code string `form:"code" json:"code"`
 }
 
+// GetApiFaqParams defines parameters for GetApiFaq.
+type GetApiFaqParams struct {
+	Offset   int     `form:"offset" json:"offset"`
+	Limit    int     `form:"limit" json:"limit"`
+	Id       *ID     `form:"id,omitempty" json:"id,omitempty"`
+	Question *string `form:"question,omitempty" json:"question,omitempty"`
+	Answer   *string `form:"answer,omitempty" json:"answer,omitempty"`
+	IsActive *bool   `form:"is_active,omitempty" json:"is_active,omitempty"`
+}
+
 // GetApiJewelleryParams defines parameters for GetApiJewellery.
 type GetApiJewelleryParams struct {
 	Offset      int     `form:"offset" json:"offset"`
@@ -301,6 +343,12 @@ type PostApiAdminCategoryJSONRequestBody = CategoryPostParam
 // PutApiAdminCategoryCategoryIdJSONRequestBody defines body for PutApiAdminCategoryCategoryId for application/json ContentType.
 type PutApiAdminCategoryCategoryIdJSONRequestBody = CategoryPutParam
 
+// PostApiAdminFaqJSONRequestBody defines body for PostApiAdminFaq for application/json ContentType.
+type PostApiAdminFaqJSONRequestBody = FAQPostParam
+
+// PutApiAdminFaqFaqIdJSONRequestBody defines body for PutApiAdminFaqFaqId for application/json ContentType.
+type PutApiAdminFaqFaqIdJSONRequestBody = FAQPutParam
+
 // PostApiAdminGemJSONRequestBody defines body for PostApiAdminGem for application/json ContentType.
 type PostApiAdminGemJSONRequestBody = GemPostParam
 
@@ -321,3 +369,6 @@ type PostApiAdminMaterialJSONRequestBody = MaterialPostParam
 
 // PutApiAdminMaterialMaterialIdJSONRequestBody defines body for PutApiAdminMaterialMaterialId for application/json ContentType.
 type PutApiAdminMaterialMaterialIdJSONRequestBody = MaterialPutParam
+
+// PostApiProfileJSONRequestBody defines body for PostApiProfile for application/json ContentType.
+type PostApiProfileJSONRequestBody = AccountProfilePostParam

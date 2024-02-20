@@ -243,6 +243,26 @@ AccountProfile:
     - gender
     - created_at
     - updated_at
+AccountProfilePostParam:
+  type: object
+  properties:
+    first_name:
+      type: string
+      maxLength: 255
+      example: John
+    last_name:
+      type: string
+      maxLength: 255
+      example: Wallet
+    birthday:
+      type: string
+      format: date
+      example: 1990-01-01
+    gender:
+      $ref: "#/components/schemas/Gender"
+  required:
+    - first_name
+    - last_name
 
 Jewellery:
   type: object
@@ -556,3 +576,73 @@ MaterialPutParam:
       example: Gold
   required:
     - name
+
+FAQ:
+  type: object
+  properties:
+    faq_id:
+      type: string
+      format: uuid
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    question:
+      type: string
+      maxLength: 255
+      example: Can I get refund of my order?
+    answer:
+      type: string
+      maxLength: 255
+      example: Yes. We have provided a trustworthy refund system for customers.
+    is_active:
+      type: boolean
+      example: true
+    created_at:
+      type: string
+      format: date-time
+      example: 2020-01-01T00:00:00Z
+    updated_at:
+      type: string
+      format: date-time
+      example: 2020-01-01T00:00:00Z
+  required:
+    - faq_id
+    - question
+    - answer
+    - is_active
+    - created_at
+    - updated_at
+FAQPostParam:
+  type: object
+  properties:
+    question:
+      type: string
+      maxLength: 255
+      example: Can I get refund of my order?
+    answer:
+      type: string
+      maxLength: 255
+      example: Yes. We have provided a trustworthy refund system for customers.
+    is_active:
+      type: boolean
+      example: true
+  required:
+    - question
+    - answer
+    - is_active
+FAQPutParam:
+  type: object
+  properties:
+    question:
+      type: string
+      maxLength: 255
+      example: Can I get refund of my order?
+    answer:
+      type: string
+      maxLength: 255
+      example: Yes. We have provided a trustworthy refund system for customers.
+    is_active:
+      type: boolean
+      example: true
+  required:
+    - question
+    - answer
+    - is_active

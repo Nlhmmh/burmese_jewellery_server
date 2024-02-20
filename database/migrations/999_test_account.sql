@@ -27,3 +27,9 @@ INSERT INTO account_profiles (account_id, first_name, last_name, birthday, gende
 VALUES
   ('b106e919-ab73-48f3-a86c-4b38ea22a888', 'John', 'Tester', '1990-11-01', 'male')
 ;
+
+INSERT INTO faqs (faq_id, question, answer, is_active)
+VALUES
+  ('c0979115-2bb3-4c50-a29d-64f3b8784888', 'How can I make returns or exchanges?', 'Products are accepted for credit or exchange in the U.S. within 30 days of purchase. ', true),
+  ('c0979115-2bb3-4c50-a29d-64f3b8784887', 'How do I return an online purchase?', 'Simply visit this page to print a return label.', false)
+;

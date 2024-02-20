@@ -31,7 +31,7 @@ func Auth() gin.HandlerFunc {
 			return
 		}
 		claimsVal := *claims
-		c.Set("userID", claimsVal.UserID)
+		auth.SetUserID(c, claimsVal.UserID)
 
 		if auth.CheckAdminList(fullPath) &&
 			!(claims.Role == orm.AccountAdminRoleAdmin.String() ||

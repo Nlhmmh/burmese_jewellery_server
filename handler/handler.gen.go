@@ -62,6 +62,15 @@ type ServerInterface interface {
 	// (PUT /api/admin/category/{category_id})
 	PutApiAdminCategoryCategoryId(c *gin.Context, categoryId ID)
 
+	// (POST /api/admin/faq)
+	PostApiAdminFaq(c *gin.Context)
+
+	// (DELETE /api/admin/faq/{faq_id})
+	DeleteApiAdminFaqFaqId(c *gin.Context, faqId ID)
+
+	// (PUT /api/admin/faq/{faq_id})
+	PutApiAdminFaqFaqId(c *gin.Context, faqId ID)
+
 	// (POST /api/admin/gem)
 	PostApiAdminGem(c *gin.Context)
 
@@ -101,6 +110,9 @@ type ServerInterface interface {
 	// (GET /api/category)
 	GetApiCategory(c *gin.Context)
 
+	// (GET /api/faq)
+	GetApiFaq(c *gin.Context, params GetApiFaqParams)
+
 	// (GET /api/gem)
 	GetApiGem(c *gin.Context)
 	// Health Check
@@ -115,6 +127,12 @@ type ServerInterface interface {
 
 	// (GET /api/material)
 	GetApiMaterial(c *gin.Context)
+
+	// (GET /api/profile)
+	GetApiProfile(c *gin.Context)
+
+	// (POST /api/profile)
+	PostApiProfile(c *gin.Context)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -493,6 +511,67 @@ func (siw *ServerInterfaceWrapper) PutApiAdminCategoryCategoryId(c *gin.Context)
 	siw.Handler.PutApiAdminCategoryCategoryId(c, categoryId)
 }
 
+// PostApiAdminFaq operation middleware
+func (siw *ServerInterfaceWrapper) PostApiAdminFaq(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiAdminFaq(c)
+}
+
+// DeleteApiAdminFaqFaqId operation middleware
+func (siw *ServerInterfaceWrapper) DeleteApiAdminFaqFaqId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "faq_id" -------------
+	var faqId ID
+
+	err = runtime.BindStyledParameter("simple", false, "faq_id", c.Param("faq_id"), &faqId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter faq_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.DeleteApiAdminFaqFaqId(c, faqId)
+}
+
+// PutApiAdminFaqFaqId operation middleware
+func (siw *ServerInterfaceWrapper) PutApiAdminFaqFaqId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "faq_id" -------------
+	var faqId ID
+
+	err = runtime.BindStyledParameter("simple", false, "faq_id", c.Param("faq_id"), &faqId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter faq_id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PutApiAdminFaqFaqId(c, faqId)
+}
+
 // PostApiAdminGem operation middleware
 func (siw *ServerInterfaceWrapper) PostApiAdminGem(c *gin.Context) {
 
@@ -763,6 +842,86 @@ func (siw *ServerInterfaceWrapper) GetApiCategory(c *gin.Context) {
 	siw.Handler.GetApiCategory(c)
 }
 
+// GetApiFaq operation middleware
+func (siw *ServerInterfaceWrapper) GetApiFaq(c *gin.Context) {
+
+	var err error
+
+	// Parameter object where we will unmarshal all parameters from the context
+	var params GetApiFaqParams
+
+	// ------------- Required query parameter "offset" -------------
+
+	if paramValue := c.Query("offset"); paramValue != "" {
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Query argument offset is required, but not found"), http.StatusBadRequest)
+		return
+	}
+
+	err = runtime.BindQueryParameter("form", true, true, "offset", c.Request.URL.Query(), &params.Offset)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter offset: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Required query parameter "limit" -------------
+
+	if paramValue := c.Query("limit"); paramValue != "" {
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Query argument limit is required, but not found"), http.StatusBadRequest)
+		return
+	}
+
+	err = runtime.BindQueryParameter("form", true, true, "limit", c.Request.URL.Query(), &params.Limit)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter limit: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "id" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "id", c.Request.URL.Query(), &params.Id)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "question" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "question", c.Request.URL.Query(), &params.Question)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter question: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "answer" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "answer", c.Request.URL.Query(), &params.Answer)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter answer: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Optional query parameter "is_active" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "is_active", c.Request.URL.Query(), &params.IsActive)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter is_active: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiFaq(c, params)
+}
+
 // GetApiGem operation middleware
 func (siw *ServerInterfaceWrapper) GetApiGem(c *gin.Context) {
 
@@ -922,6 +1081,32 @@ func (siw *ServerInterfaceWrapper) GetApiMaterial(c *gin.Context) {
 	siw.Handler.GetApiMaterial(c)
 }
 
+// GetApiProfile operation middleware
+func (siw *ServerInterfaceWrapper) GetApiProfile(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiProfile(c)
+}
+
+// PostApiProfile operation middleware
+func (siw *ServerInterfaceWrapper) PostApiProfile(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiProfile(c)
+}
+
 // GinServerOptions provides options for the Gin server.
 type GinServerOptions struct {
 	BaseURL      string
@@ -961,6 +1146,9 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.POST(options.BaseURL+"/api/admin/category", wrapper.PostApiAdminCategory)
 	router.DELETE(options.BaseURL+"/api/admin/category/:category_id", wrapper.DeleteApiAdminCategoryCategoryId)
 	router.PUT(options.BaseURL+"/api/admin/category/:category_id", wrapper.PutApiAdminCategoryCategoryId)
+	router.POST(options.BaseURL+"/api/admin/faq", wrapper.PostApiAdminFaq)
+	router.DELETE(options.BaseURL+"/api/admin/faq/:faq_id", wrapper.DeleteApiAdminFaqFaqId)
+	router.PUT(options.BaseURL+"/api/admin/faq/:faq_id", wrapper.PutApiAdminFaqFaqId)
 	router.POST(options.BaseURL+"/api/admin/gem", wrapper.PostApiAdminGem)
 	router.DELETE(options.BaseURL+"/api/admin/gem/:gem_id", wrapper.DeleteApiAdminGemGemId)
 	router.PUT(options.BaseURL+"/api/admin/gem/:gem_id", wrapper.PutApiAdminGemGemId)
@@ -974,11 +1162,14 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.GET(options.BaseURL+"/api/auth/google/callback", wrapper.GetApiAuthGoogleCallback)
 	router.GET(options.BaseURL+"/api/auth/google/login", wrapper.GetApiAuthGoogleLogin)
 	router.GET(options.BaseURL+"/api/category", wrapper.GetApiCategory)
+	router.GET(options.BaseURL+"/api/faq", wrapper.GetApiFaq)
 	router.GET(options.BaseURL+"/api/gem", wrapper.GetApiGem)
 	router.GET(options.BaseURL+"/api/health_check", wrapper.GetApiHealthCheck)
 	router.GET(options.BaseURL+"/api/jewellery", wrapper.GetApiJewellery)
 	router.GET(options.BaseURL+"/api/jewellery/:jewellery_id", wrapper.GetApiJewelleryJewelleryId)
 	router.GET(options.BaseURL+"/api/material", wrapper.GetApiMaterial)
+	router.GET(options.BaseURL+"/api/profile", wrapper.GetApiProfile)
+	router.POST(options.BaseURL+"/api/profile", wrapper.PostApiProfile)
 }
 
 type GetApiRequestObject struct {
@@ -1175,6 +1366,55 @@ type PutApiAdminCategoryCategoryId200Response struct {
 }
 
 func (response PutApiAdminCategoryCategoryId200Response) VisitPutApiAdminCategoryCategoryIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type PostApiAdminFaqRequestObject struct {
+	Body *PostApiAdminFaqJSONRequestBody
+}
+
+type PostApiAdminFaqResponseObject interface {
+	VisitPostApiAdminFaqResponse(w http.ResponseWriter) error
+}
+
+type PostApiAdminFaq200Response struct {
+}
+
+func (response PostApiAdminFaq200Response) VisitPostApiAdminFaqResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type DeleteApiAdminFaqFaqIdRequestObject struct {
+	FaqId ID `json:"faq_id"`
+}
+
+type DeleteApiAdminFaqFaqIdResponseObject interface {
+	VisitDeleteApiAdminFaqFaqIdResponse(w http.ResponseWriter) error
+}
+
+type DeleteApiAdminFaqFaqId204Response struct {
+}
+
+func (response DeleteApiAdminFaqFaqId204Response) VisitDeleteApiAdminFaqFaqIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(204)
+	return nil
+}
+
+type PutApiAdminFaqFaqIdRequestObject struct {
+	FaqId ID `json:"faq_id"`
+	Body  *PutApiAdminFaqFaqIdJSONRequestBody
+}
+
+type PutApiAdminFaqFaqIdResponseObject interface {
+	VisitPutApiAdminFaqFaqIdResponse(w http.ResponseWriter) error
+}
+
+type PutApiAdminFaqFaqId200Response struct {
+}
+
+func (response PutApiAdminFaqFaqId200Response) VisitPutApiAdminFaqFaqIdResponse(w http.ResponseWriter) error {
 	w.WriteHeader(200)
 	return nil
 }
@@ -1393,6 +1633,23 @@ func (response GetApiCategory200JSONResponse) VisitGetApiCategoryResponse(w http
 	return json.NewEncoder(w).Encode(response)
 }
 
+type GetApiFaqRequestObject struct {
+	Params GetApiFaqParams
+}
+
+type GetApiFaqResponseObject interface {
+	VisitGetApiFaqResponse(w http.ResponseWriter) error
+}
+
+type GetApiFaq200JSONResponse []FAQ
+
+func (response GetApiFaq200JSONResponse) VisitGetApiFaqResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
 type GetApiGemRequestObject struct {
 }
 
@@ -1477,6 +1734,38 @@ func (response GetApiMaterial200JSONResponse) VisitGetApiMaterialResponse(w http
 	return json.NewEncoder(w).Encode(response)
 }
 
+type GetApiProfileRequestObject struct {
+}
+
+type GetApiProfileResponseObject interface {
+	VisitGetApiProfileResponse(w http.ResponseWriter) error
+}
+
+type GetApiProfile200JSONResponse []AccountProfile
+
+func (response GetApiProfile200JSONResponse) VisitGetApiProfileResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostApiProfileRequestObject struct {
+	Body *PostApiProfileJSONRequestBody
+}
+
+type PostApiProfileResponseObject interface {
+	VisitPostApiProfileResponse(w http.ResponseWriter) error
+}
+
+type PostApiProfile200Response struct {
+}
+
+func (response PostApiProfile200Response) VisitPostApiProfileResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
 // StrictServerInterface represents all server handlers.
 type StrictServerInterface interface {
 	// Display the main page
@@ -1515,6 +1804,15 @@ type StrictServerInterface interface {
 
 	// (PUT /api/admin/category/{category_id})
 	PutApiAdminCategoryCategoryId(ctx context.Context, request PutApiAdminCategoryCategoryIdRequestObject) (PutApiAdminCategoryCategoryIdResponseObject, error)
+
+	// (POST /api/admin/faq)
+	PostApiAdminFaq(ctx context.Context, request PostApiAdminFaqRequestObject) (PostApiAdminFaqResponseObject, error)
+
+	// (DELETE /api/admin/faq/{faq_id})
+	DeleteApiAdminFaqFaqId(ctx context.Context, request DeleteApiAdminFaqFaqIdRequestObject) (DeleteApiAdminFaqFaqIdResponseObject, error)
+
+	// (PUT /api/admin/faq/{faq_id})
+	PutApiAdminFaqFaqId(ctx context.Context, request PutApiAdminFaqFaqIdRequestObject) (PutApiAdminFaqFaqIdResponseObject, error)
 
 	// (POST /api/admin/gem)
 	PostApiAdminGem(ctx context.Context, request PostApiAdminGemRequestObject) (PostApiAdminGemResponseObject, error)
@@ -1555,6 +1853,9 @@ type StrictServerInterface interface {
 	// (GET /api/category)
 	GetApiCategory(ctx context.Context, request GetApiCategoryRequestObject) (GetApiCategoryResponseObject, error)
 
+	// (GET /api/faq)
+	GetApiFaq(ctx context.Context, request GetApiFaqRequestObject) (GetApiFaqResponseObject, error)
+
 	// (GET /api/gem)
 	GetApiGem(ctx context.Context, request GetApiGemRequestObject) (GetApiGemResponseObject, error)
 	// Health Check
@@ -1569,6 +1870,12 @@ type StrictServerInterface interface {
 
 	// (GET /api/material)
 	GetApiMaterial(ctx context.Context, request GetApiMaterialRequestObject) (GetApiMaterialResponseObject, error)
+
+	// (GET /api/profile)
+	GetApiProfile(ctx context.Context, request GetApiProfileRequestObject) (GetApiProfileResponseObject, error)
+
+	// (POST /api/profile)
+	PostApiProfile(ctx context.Context, request PostApiProfileRequestObject) (PostApiProfileResponseObject, error)
 }
 
 type StrictHandlerFunc = strictgin.StrictGinHandlerFunc
@@ -1934,6 +2241,101 @@ func (sh *strictHandler) PutApiAdminCategoryCategoryId(ctx *gin.Context, categor
 		ctx.Status(http.StatusInternalServerError)
 	} else if validResponse, ok := response.(PutApiAdminCategoryCategoryIdResponseObject); ok {
 		if err := validResponse.VisitPutApiAdminCategoryCategoryIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// PostApiAdminFaq operation middleware
+func (sh *strictHandler) PostApiAdminFaq(ctx *gin.Context) {
+	var request PostApiAdminFaqRequestObject
+
+	var body PostApiAdminFaqJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiAdminFaq(ctx, request.(PostApiAdminFaqRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiAdminFaq")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiAdminFaqResponseObject); ok {
+		if err := validResponse.VisitPostApiAdminFaqResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// DeleteApiAdminFaqFaqId operation middleware
+func (sh *strictHandler) DeleteApiAdminFaqFaqId(ctx *gin.Context, faqId ID) {
+	var request DeleteApiAdminFaqFaqIdRequestObject
+
+	request.FaqId = faqId
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.DeleteApiAdminFaqFaqId(ctx, request.(DeleteApiAdminFaqFaqIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "DeleteApiAdminFaqFaqId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(DeleteApiAdminFaqFaqIdResponseObject); ok {
+		if err := validResponse.VisitDeleteApiAdminFaqFaqIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// PutApiAdminFaqFaqId operation middleware
+func (sh *strictHandler) PutApiAdminFaqFaqId(ctx *gin.Context, faqId ID) {
+	var request PutApiAdminFaqFaqIdRequestObject
+
+	request.FaqId = faqId
+
+	var body PutApiAdminFaqFaqIdJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PutApiAdminFaqFaqId(ctx, request.(PutApiAdminFaqFaqIdRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PutApiAdminFaqFaqId")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PutApiAdminFaqFaqIdResponseObject); ok {
+		if err := validResponse.VisitPutApiAdminFaqFaqIdResponse(ctx.Writer); err != nil {
 			ctx.Error(err)
 		}
 	} else if response != nil {
@@ -2336,6 +2738,33 @@ func (sh *strictHandler) GetApiCategory(ctx *gin.Context) {
 	}
 }
 
+// GetApiFaq operation middleware
+func (sh *strictHandler) GetApiFaq(ctx *gin.Context, params GetApiFaqParams) {
+	var request GetApiFaqRequestObject
+
+	request.Params = params
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiFaq(ctx, request.(GetApiFaqRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiFaq")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiFaqResponseObject); ok {
+		if err := validResponse.VisitGetApiFaqResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
 // GetApiGem operation middleware
 func (sh *strictHandler) GetApiGem(ctx *gin.Context) {
 	var request GetApiGemRequestObject
@@ -2465,51 +2894,114 @@ func (sh *strictHandler) GetApiMaterial(ctx *gin.Context) {
 	}
 }
 
+// GetApiProfile operation middleware
+func (sh *strictHandler) GetApiProfile(ctx *gin.Context) {
+	var request GetApiProfileRequestObject
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiProfile(ctx, request.(GetApiProfileRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiProfile")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiProfileResponseObject); ok {
+		if err := validResponse.VisitGetApiProfileResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// PostApiProfile operation middleware
+func (sh *strictHandler) PostApiProfile(ctx *gin.Context) {
+	var request PostApiProfileRequestObject
+
+	var body PostApiProfileJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiProfile(ctx, request.(PostApiProfileRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiProfile")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiProfileResponseObject); ok {
+		if err := validResponse.VisitPostApiProfileResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"H4sIAAAAAAAC/+xce2/bOBL/KoKuf93ZluzETmKg2Ms2TZq97m7a3qE43AUGI41ktiKpkFRSI8h3P5B6",
+	"WLJkS0oix8W52GwciY95/PgbejjSg+kwEjIKVApz+mAKZw4E6Y+njsMiKtXHkLMQuMSgb6D4xgy76i/4",
+	"gUgYgDk1Dzx0PPYmh/3x0fCofziejPo3B57THzknkwNvMkEempg902OcIGlOzSjCrtkz5SJUvYXkmPrm",
+	"Yy8bX0gkIz3jGw6eOTX/Yi2FtRJJrUTML3Hjx57pcEAS3BmSRfFG9sju28O+PTRse6r/+5v+f14mF0no",
+	"S0ygSrCA+Ziuqj20h8OjydHB4XhoH41PbP2vZxL04yNQX87N6Wg8XjtYfPnBBBoRc/ofEwjCgdkzwzmj",
+	"SgafMT9QHzzkwA1j383rXk6ntHntbLpdwRwShPy7r64PHEbyNmg8aCxkftRj+/j4+Pjk5OSkQfcodDtx",
+	"1GPP5HAbYQ6uMmkOrgWrl4BWgE5BvOtsDnbzDRyppE9wd+oSTNevEaRud75S4lk4C6DhatFSf1btS6O0",
+	"WnV6nG0svU7wu2UAZlhI1Kn03xp3PB2bHxXirxBHpIzSblgBCXHP+Ark/6r+1XdfMV3KhumQdcpeMSHX",
+	"6Lpra+Wns30buNb6KfpZ3PRci240w+dEvTT6a3HNnikk8rxipI8vNYBAhRr5GRyJ70AHQuc7KKe6oK8p",
+	"OinOmDVtOuUVZx6OFdruhvEGczl30aI4+vDkJGHxVdquGqO70OVhLuSMIlLcKpm/sTltYl0fqAu8Dr0X",
+	"cSu1sUSV031FQQDS3NF9Wc5IeQ1yvs0M8aRQmGBzQ3x4CRD9ZK5eccgaH2ywaplfQqCuGrvXKdPE89YH",
+	"kSd9g1wD0/rI9hXLeR0HNpQlH8PC5ZANeqYCrFHDLI9bqVEk5xf6q+c7FAQ3yPn+GUT4ElphMePgYyFB",
+	"C5aDreQRZKLcMBYAoiU1it2rRH+HJPiML8rCOsmdzuJQdzHEBeFwHErMaHHo99RHPhCg0viMqS+aLCJM",
+	"kA+ziK9sP+dShmJqWQRcjAYSex6iC7UTtbCwdB8ruegSa2SPDmbLydXcs18vZh+As/4ZiO+Shb+8kTiA",
+	"N/+NbHs0ucfu29HJySj+yyPy7T3chFWqlunsKTpuKYblIZWIXnRW3trtAleK4w0ha4+KVjqu+K7GWxt9",
+	"Eu1dsiMuOT/9VBGWqLiP91FL4f4NYmB8BWOO7sAIObvDLrgGMiSPhLxnXM4XBgcvoq4hFkICMTzGDScS",
+	"khHgYtDEYR1+iUC3nYUtLGbJDqw+HPfM2whEGd7vEDUuDR9kakPmGWRhMO4C/2WHCDuxY06NXoqWvCHa",
+	"UfX56adNiadXAuMOuHXF+Jttvs6y0d6wL2/YC6gwaHf05QPpjL7KcegMI8Kou0O0k+ifbRHbsMsFkA3s",
+	"8gztq4LvOgGiV50/zYqkWQaC4jNRSD5EVITgYA+vZhaS+7UwuDxTw9dC7Te4hyCA/5cvl1/BdTH1jXPG",
+	"4Q64galxFSCJaUSMeyznBjI+oMDrO5g7ASgKS3wvesZoMDIIaZb06o4bnr6D/md80XrvMHIpgXwcpZvq",
+	"vheb4wZRt68m6g8n46PDycF4NrQPx+OD49n7s9nvg2+h/0u8i2bhLBLk7XBwNO4NB3ZvMrDjG28czsI/",
+	"3tqDYS/+OVY/8T0XPBQF8lJJ8/YPpn+f3iEcoJsALqkETlEQN23dYdO2HotZGN0EWMwb5Wd65rd0UXTm",
+	"RYIkcIyCLYaQFeg3Onvj2IGV0hBdCpJN7wUMycnhUgJMJfhxKvc2QlRiuVgdINcd6/RdueuWYljBz72V",
+	"1EcW4PK+WpMRyVRNbVZMkhQA2C5UZvy8IWB2TtR7Ot3T6TPodE92G8huY/q1Kw7azDTRnmj2RLMnmj3R",
+	"dEM0vydTbDNb8wrIuGDBLuVrKh3bZieauq1V5qaZEZqmTTIRoteRQDWDHzF9nTGnfDxmnmPqGiySBmEc",
+	"DHSjPn65R76vqUGzv6b8qWWJ+PIAM8111GPl4U6vLg2XOREBKhFmVKd2f404AQFGFrAHyvlYanVLN82e",
+	"eQdcxOMNB/bAVtOxECgKsVoAA3sw0kWRcq4VsvT1B9MHDUhlXaTEuXSVNUGehthU1hIhoyK2+si2y7L/",
+	"jjA1QuSD4WIRBmgBriEixwEhvCgIFtroIiIE8YXOselGhpyDQdKuSjHkC13tEYbmteqi5LN0WaGVq9XY",
+	"IK2uGzzNikVChRyQwNWwSmgdq8yprZxgTs3bKLZaDCWTeZ7QlUdLfMThJ64EUZOWmTY37MGacQNMcPth",
+	"q0bSC3rZbVPVyuXZ+mEKtVIlKZYLpbp3vsCtdefSUwvNtFmtcrquhqXDqIQYJSgMA+xogFjfRLzJXM6F",
+	"JZCmpVX5yqhlTSziHC1iniguhj//sQL3j1hIIxKaFjKI61rZNSC3HpbVhY8tEJ/8unTL0NeuUOu+7AmN",
+	"qfXQrMXYc13RqPSqgZkvYK2Ve2YYVVjwKtohC+pTsF+Zu3hp462UGz4WA6AS9rEJx5fs/S+9h9AmN7LV",
+	"3AjfcWF7G2AnleV7Pq8eJnnY4clkXHgkohW4cs8tNJvkabxfeKxhq+QfQ+/JtK+V3kBLTFTxEhPrVkCH",
+	"PLHyCNIzeaIFESzDnf5TpFHPhQAklM1zpq9XGSj/WbQk8Wzul46Gh2UbxRq4q9tifbUOMm0ocyftYXcC",
+	"3MZbhLoV2XCjsEvm7ZgSXnzn8N7FNX4osoWTL4qvZcyshL4b05QrmztlylR36yGXxWtBj6m46e+GMC2m",
+	"DLfJh+2X5E6o2CHQom3gzEO3zZbXObrtaGUVClG7VtZ6iItpWyylc3R7jm4boisr1d3ttfM6OnWDna2s",
+	"Ez8pPa1dJxdAOlonhZLKrpW1HuLzohbr5ALIBZCGmMpOo3Z7nbyOTt1gZyvr5Fuh2LR2teTPMLrQu6K2",
+	"ajvqWw/5yrMWqyiTOPvQEH0rlW67va52RcsuEbeV9aZfDdVsrel36mwhl5R7d09z1RtLUTwMluw70MrM",
+	"Z9XBbl3mTgluINHmOyrJVzrUuiCri+jGC+Xz+06xl+puPeQqD1pQXSpu+rshBRTLHHab53ZCxQ6B1jXH",
+	"RXJuxW8TtJzknQ5150ell0BUHSAVZFBdRvosC4yspVl9BqRbNTkDyp/BVM7nMLd+OtWo1Wyd5l2r36/R",
+	"hFo/IOoGYMS9jdQCSwetKQHJuT8LdI18v4x1OVsc2KMyAj+Dizk40pBsRTw9Y1yjUlTmkmKJFVgq2q/V",
+	"JZ/M3KBCIYvZ9VlXNlnzc65q5ZIs0ga94vTR/iC3epjco7DtD3PTZ2db98w/OV7qvHyXzVaOXc9PPz0b",
+	"hUmOZgMK0+RM19qoeZ6rzRxQIOczZw61Me+DbvpOt3zR7TUBIRT/TXOLSkldW4ma9LtusA3/khUMGqnk",
+	"q8FDq2ek+qXmYnKuiGRpsULuYYO58kmHPSNVD1M8JXn+eFlu7CWqXvKb4+eP99SSxpVH/l6bQZeofi7z",
+	"bEpiNVlWu5S5sl8+sdPanvkcwQb7FZIDXaMlm+y5YMm96G+Dbmkd7RYruNqX7hYVrKnSymvUWT6t9ALQ",
+	"l/qeHbtQRVngd9Vfiz8yBwUG0DvMGSWgC+sLTzcEqsGcCTk9to+OTLX4kvFLzzgkVWzpjjWprSs1C8Nc",
+	"ozCsaPJnHPOX8Tj++/H68X8BAAD//4plPP8UYgAA",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

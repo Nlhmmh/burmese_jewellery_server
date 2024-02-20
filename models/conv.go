@@ -185,3 +185,18 @@ func ConvAccountWithProfileFromORM(ormm *orm.AccountWithProfile) (*AccountWithPr
 
 	return awp, nil
 }
+
+func ConvFAQFromORM(orm *orm.Faq) (*FAQ, error) {
+	id, err := uuid.Parse(orm.FaqID)
+	if err != nil {
+		return nil, err
+	}
+	faq := &FAQ{}
+	faq.FaqId = id
+	faq.Question = orm.Question
+	faq.Answer = orm.Answer
+	faq.IsActive = orm.IsActive
+	faq.CreatedAt = orm.CreatedAt
+	faq.UpdatedAt = orm.UpdatedAt
+	return faq, nil
+}

@@ -553,3 +553,116 @@
     responses:
       204:
         description: Deleted
+
+/api/faq:
+  get:
+    tags:
+      - app
+    parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+        required: true
+        default: 0
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        required: true
+        default: 30
+      - in: query
+        name: id
+        schema:
+          $ref: "#/components/schemas/ID"
+      - in: query
+        name: question
+        schema:
+          type: string
+      - in: query
+        name: answer
+        schema:
+          type: string
+      - in: query
+        name: is_active
+        schema:
+          type: boolean
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/FAQ"
+/api/admin/faq:
+  post:
+    tags:
+      - admin
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/FAQPostParam"
+    responses:
+      200:
+        description: OK
+/api/admin/faq/{faq_id}:
+  put:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: faq_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/FAQPutParam"
+    responses:
+      200:
+        description: OK
+  delete:
+    tags:
+      - admin
+    parameters:
+      - in: path
+        name: faq_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    responses:
+      204:
+        description: Deleted
+
+/api/profile:
+  get:
+    tags:
+      - app
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountProfile"
+  post:
+    tags:
+      - app
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AccountProfilePostParam"
+    responses:
+      200:
+        description: OK
