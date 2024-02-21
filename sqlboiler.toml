@@ -2,6 +2,11 @@ output   = "orm"
 wipe     = true
 no-tests = true
 pkgname  = "orm"
+add-global-variants = true
+add-enum-types = true
+no-back-referencing = true
+add-soft-deletes = true
+struct-tag-casing = "camel"
 
 [psql]
   dbname = "burmese_jewellery"

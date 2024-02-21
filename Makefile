@@ -52,7 +52,7 @@ gen-swagger: ## Generate html from Swagger
 
 .PHONY: boil
 boil: ## Generate sqlboiler code (mac)
-	sqlboiler --wipe --add-global-variants --add-enum-types --no-tests --no-back-referencing --add-soft-deletes --struct-tag-casing=camel psql
+	sqlboiler psql
 
 .PHONY: copy-env
 copy-env: ## Copy .env.local as .env
