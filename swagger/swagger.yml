@@ -703,6 +703,56 @@ paths:
       responses:
         200:
           description: OK
+  /api/cart:
+    get:
+      tags:
+        - app
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountCartJewellery'
+    post:
+      tags:
+        - app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartPostParam'
+      responses:
+        200:
+          description: OK
+  /api/favourite:
+    get:
+      tags:
+        - app
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountFavourite'
+    post:
+      tags:
+        - app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavouritePostParam'
+      responses:
+        200:
+          description: OK
 components:
   parameters: null
   schemas:
@@ -1351,3 +1401,83 @@ components:
       required:
         - mail
         - password
+    AccountCartJewellery:
+      type: object
+      properties:
+        account_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        jewellery_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        quantity:
+          type: integer
+          format: int
+          example: 100
+        created_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        updated_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+      required:
+        - account_id
+        - jewellery_id
+        - quantity
+        - created_at
+        - updated_at
+    CartPostParam:
+      type: object
+      properties:
+        jewellery_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        quantity:
+          type: integer
+          format: int
+          example: 100
+      required:
+        - jewellery_id
+        - quantity
+    AccountFavourite:
+      type: object
+      properties:
+        account_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        jewellery_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        created_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        updated_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+      required:
+        - account_id
+        - jewellery_id
+        - created_at
+        - updated_at
+    FavouritePostParam:
+      type: object
+      properties:
+        jewellery_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        is_favourite:
+          type: boolean
+          example: true
+      required:
+        - jewellery_id
+        - is_favourite

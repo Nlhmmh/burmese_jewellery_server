@@ -6,7 +6,6 @@ package orm
 var TableNames = struct {
 	AccountAdmins           string
 	AccountCartJewelleries  string
-	AccountCarts            string
 	AccountFavourites       string
 	AccountOrderAddresses   string
 	AccountOrderJewelleries string
@@ -23,7 +22,6 @@ var TableNames = struct {
 }{
 	AccountAdmins:           "account_admins",
 	AccountCartJewelleries:  "account_cart_jewelleries",
-	AccountCarts:            "account_carts",
 	AccountFavourites:       "account_favourites",
 	AccountOrderAddresses:   "account_order_addresses",
 	AccountOrderJewelleries: "account_order_jewelleries",

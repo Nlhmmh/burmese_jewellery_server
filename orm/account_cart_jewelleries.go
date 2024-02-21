@@ -23,7 +23,7 @@ import (
 
 // AccountCartJewellery is an object representing the database table.
 type AccountCartJewellery struct {
-	CartID      string    `boil:"cart_id" json:"cartID" toml:"cartID" yaml:"cartID"`
+	AccountID   string    `boil:"account_id" json:"accountID" toml:"accountID" yaml:"accountID"`
 	JewelleryID string    `boil:"jewellery_id" json:"jewelleryID" toml:"jewelleryID" yaml:"jewelleryID"`
 	Quantity    int       `boil:"quantity" json:"quantity" toml:"quantity" yaml:"quantity"`
 	CreatedAt   time.Time `boil:"created_at" json:"createdAt" toml:"createdAt" yaml:"createdAt"`
@@ -34,13 +34,13 @@ type AccountCartJewellery struct {
 }
 
 var AccountCartJewelleryColumns = struct {
-	CartID      string
+	AccountID   string
 	JewelleryID string
 	Quantity    string
 	CreatedAt   string
 	UpdatedAt   string
 }{
-	CartID:      "cart_id",
+	AccountID:   "account_id",
 	JewelleryID: "jewellery_id",
 	Quantity:    "quantity",
 	CreatedAt:   "created_at",
@@ -48,13 +48,13 @@ var AccountCartJewelleryColumns = struct {
 }
 
 var AccountCartJewelleryTableColumns = struct {
-	CartID      string
+	AccountID   string
 	JewelleryID string
 	Quantity    string
 	CreatedAt   string
 	UpdatedAt   string
 }{
-	CartID:      "account_cart_jewelleries.cart_id",
+	AccountID:   "account_cart_jewelleries.account_id",
 	JewelleryID: "account_cart_jewelleries.jewellery_id",
 	Quantity:    "account_cart_jewelleries.quantity",
 	CreatedAt:   "account_cart_jewelleries.created_at",
@@ -87,13 +87,13 @@ func (w whereHelperint) NIN(slice []int) qm.QueryMod {
 }
 
 var AccountCartJewelleryWhere = struct {
-	CartID      whereHelperstring
+	AccountID   whereHelperstring
 	JewelleryID whereHelperstring
 	Quantity    whereHelperint
 	CreatedAt   whereHelpertime_Time
 	UpdatedAt   whereHelpertime_Time
 }{
-	CartID:      whereHelperstring{field: "\"account_cart_jewelleries\".\"cart_id\""},
+	AccountID:   whereHelperstring{field: "\"account_cart_jewelleries\".\"account_id\""},
 	JewelleryID: whereHelperstring{field: "\"account_cart_jewelleries\".\"jewellery_id\""},
 	Quantity:    whereHelperint{field: "\"account_cart_jewelleries\".\"quantity\""},
 	CreatedAt:   whereHelpertime_Time{field: "\"account_cart_jewelleries\".\"created_at\""},
@@ -102,17 +102,17 @@ var AccountCartJewelleryWhere = struct {
 
 // AccountCartJewelleryRels is where relationship names are stored.
 var AccountCartJewelleryRels = struct {
-	Cart      string
+	Account   string
 	Jewellery string
 }{
-	Cart:      "Cart",
+	Account:   "Account",
 	Jewellery: "Jewellery",
 }
 
 // accountCartJewelleryR is where relationships are stored.
 type accountCartJewelleryR struct {
-	Cart      *AccountCart `boil:"Cart" json:"Cart" toml:"Cart" yaml:"Cart"`
-	Jewellery *Jewellery   `boil:"Jewellery" json:"Jewellery" toml:"Jewellery" yaml:"Jewellery"`
+	Account   *Account   `boil:"Account" json:"Account" toml:"Account" yaml:"Account"`
+	Jewellery *Jewellery `boil:"Jewellery" json:"Jewellery" toml:"Jewellery" yaml:"Jewellery"`
 }
 
 // NewStruct creates a new relationship struct
@@ -120,11 +120,11 @@ func (*accountCartJewelleryR) NewStruct() *accountCartJewelleryR {
 	return &accountCartJewelleryR{}
 }
 
-func (r *accountCartJewelleryR) GetCart() *AccountCart {
+func (r *accountCartJewelleryR) GetAccount() *Account {
 	if r == nil {
 		return nil
 	}
-	return r.Cart
+	return r.Account
 }
 
 func (r *accountCartJewelleryR) GetJewellery() *Jewellery {
@@ -138,10 +138,10 @@ func (r *accountCartJewelleryR) GetJewellery() *Jewellery {
 type accountCartJewelleryL struct{}
 
 var (
-	accountCartJewelleryAllColumns            = []string{"cart_id", "jewellery_id", "quantity", "created_at", "updated_at"}
-	accountCartJewelleryColumnsWithoutDefault = []string{"cart_id", "jewellery_id", "quantity"}
+	accountCartJewelleryAllColumns            = []string{"account_id", "jewellery_id", "quantity", "created_at", "updated_at"}
+	accountCartJewelleryColumnsWithoutDefault = []string{"account_id", "jewellery_id", "quantity"}
 	accountCartJewelleryColumnsWithDefault    = []string{"created_at", "updated_at"}
-	accountCartJewelleryPrimaryKeyColumns     = []string{"cart_id", "jewellery_id"}
+	accountCartJewelleryPrimaryKeyColumns     = []string{"account_id", "jewellery_id"}
 	accountCartJewelleryGeneratedColumns      = []string{}
 )
 
@@ -443,15 +443,15 @@ func (q accountCartJewelleryQuery) Exists(ctx context.Context, exec boil.Context
 	return count > 0, nil
 }
 
-// Cart pointed to by the foreign key.
-func (o *AccountCartJewellery) Cart(mods ...qm.QueryMod) accountCartQuery {
+// Account pointed to by the foreign key.
+func (o *AccountCartJewellery) Account(mods ...qm.QueryMod) accountQuery {
 	queryMods := []qm.QueryMod{
-		qm.Where("\"cart_id\" = ?", o.CartID),
+		qm.Where("\"account_id\" = ?", o.AccountID),
 	}
 
 	queryMods = append(queryMods, mods...)
 
-	return AccountCarts(queryMods...)
+	return Accounts(queryMods...)
 }
 
 // Jewellery pointed to by the foreign key.
@@ -465,9 +465,9 @@ func (o *AccountCartJewellery) Jewellery(mods ...qm.QueryMod) jewelleryQuery {
 	return Jewelleries(queryMods...)
 }
 
-// LoadCart allows an eager lookup of values, cached into the
+// LoadAccount allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for an N-1 relationship.
-func (accountCartJewelleryL) LoadCart(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAccountCartJewellery interface{}, mods queries.Applicator) error {
+func (accountCartJewelleryL) LoadAccount(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAccountCartJewellery interface{}, mods queries.Applicator) error {
 	var slice []*AccountCartJewellery
 	var object *AccountCartJewellery
 
@@ -498,7 +498,7 @@ func (accountCartJewelleryL) LoadCart(ctx context.Context, e boil.ContextExecuto
 		if object.R == nil {
 			object.R = &accountCartJewelleryR{}
 		}
-		args = append(args, object.CartID)
+		args = append(args, object.AccountID)
 
 	} else {
 	Outer:
@@ -508,12 +508,12 @@ func (accountCartJewelleryL) LoadCart(ctx context.Context, e boil.ContextExecuto
 			}
 
 			for _, a := range args {
-				if a == obj.CartID {
+				if a == obj.AccountID {
 					continue Outer
 				}
 			}
 
-			args = append(args, obj.CartID)
+			args = append(args, obj.AccountID)
 
 		}
 	}
@@ -523,8 +523,8 @@ func (accountCartJewelleryL) LoadCart(ctx context.Context, e boil.ContextExecuto
 	}
 
 	query := NewQuery(
-		qm.From(`account_carts`),
-		qm.WhereIn(`account_carts.cart_id in ?`, args...),
+		qm.From(`accounts`),
+		qm.WhereIn(`accounts.account_id in ?`, args...),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -532,22 +532,22 @@ func (accountCartJewelleryL) LoadCart(ctx context.Context, e boil.ContextExecuto
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load AccountCart")
+		return errors.Wrap(err, "failed to eager load Account")
 	}
 
-	var resultSlice []*AccountCart
+	var resultSlice []*Account
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice AccountCart")
+		return errors.Wrap(err, "failed to bind eager loaded slice Account")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results of eager load for account_carts")
+		return errors.Wrap(err, "failed to close results of eager load for accounts")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for account_carts")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for accounts")
 	}
 
-	if len(accountCartAfterSelectHooks) != 0 {
+	if len(accountAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -561,14 +561,14 @@ func (accountCartJewelleryL) LoadCart(ctx context.Context, e boil.ContextExecuto
 
 	if singular {
 		foreign := resultSlice[0]
-		object.R.Cart = foreign
+		object.R.Account = foreign
 		return nil
 	}
 
 	for _, local := range slice {
 		for _, foreign := range resultSlice {
-			if local.CartID == foreign.CartID {
-				local.R.Cart = foreign
+			if local.AccountID == foreign.AccountID {
+				local.R.Account = foreign
 				break
 			}
 		}
@@ -689,16 +689,16 @@ func (accountCartJewelleryL) LoadJewellery(ctx context.Context, e boil.ContextEx
 	return nil
 }
 
-// SetCartG of the accountCartJewellery to the related item.
-// Sets o.R.Cart to related.
+// SetAccountG of the accountCartJewellery to the related item.
+// Sets o.R.Account to related.
 // Uses the global database handle.
-func (o *AccountCartJewellery) SetCartG(ctx context.Context, insert bool, related *AccountCart) error {
-	return o.SetCart(ctx, boil.GetContextDB(), insert, related)
+func (o *AccountCartJewellery) SetAccountG(ctx context.Context, insert bool, related *Account) error {
+	return o.SetAccount(ctx, boil.GetContextDB(), insert, related)
 }
 
-// SetCart of the accountCartJewellery to the related item.
-// Sets o.R.Cart to related.
-func (o *AccountCartJewellery) SetCart(ctx context.Context, exec boil.ContextExecutor, insert bool, related *AccountCart) error {
+// SetAccount of the accountCartJewellery to the related item.
+// Sets o.R.Account to related.
+func (o *AccountCartJewellery) SetAccount(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Account) error {
 	var err error
 	if insert {
 		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
@@ -708,10 +708,10 @@ func (o *AccountCartJewellery) SetCart(ctx context.Context, exec boil.ContextExe
 
 	updateQuery := fmt.Sprintf(
 		"UPDATE \"account_cart_jewelleries\" SET %s WHERE %s",
-		strmangle.SetParamNames("\"", "\"", 1, []string{"cart_id"}),
+		strmangle.SetParamNames("\"", "\"", 1, []string{"account_id"}),
 		strmangle.WhereClause("\"", "\"", 2, accountCartJewelleryPrimaryKeyColumns),
 	)
-	values := []interface{}{related.CartID, o.CartID, o.JewelleryID}
+	values := []interface{}{related.AccountID, o.AccountID, o.JewelleryID}
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -722,13 +722,13 @@ func (o *AccountCartJewellery) SetCart(ctx context.Context, exec boil.ContextExe
 		return errors.Wrap(err, "failed to update local table")
 	}
 
-	o.CartID = related.CartID
+	o.AccountID = related.AccountID
 	if o.R == nil {
 		o.R = &accountCartJewelleryR{
-			Cart: related,
+			Account: related,
 		}
 	} else {
-		o.R.Cart = related
+		o.R.Account = related
 	}
 
 	return nil
@@ -756,7 +756,7 @@ func (o *AccountCartJewellery) SetJewellery(ctx context.Context, exec boil.Conte
 		strmangle.SetParamNames("\"", "\"", 1, []string{"jewellery_id"}),
 		strmangle.WhereClause("\"", "\"", 2, accountCartJewelleryPrimaryKeyColumns),
 	)
-	values := []interface{}{related.JewelleryID, o.CartID, o.JewelleryID}
+	values := []interface{}{related.JewelleryID, o.AccountID, o.JewelleryID}
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -791,13 +791,13 @@ func AccountCartJewelleries(mods ...qm.QueryMod) accountCartJewelleryQuery {
 }
 
 // FindAccountCartJewelleryG retrieves a single record by ID.
-func FindAccountCartJewelleryG(ctx context.Context, cartID string, jewelleryID string, selectCols ...string) (*AccountCartJewellery, error) {
-	return FindAccountCartJewellery(ctx, boil.GetContextDB(), cartID, jewelleryID, selectCols...)
+func FindAccountCartJewelleryG(ctx context.Context, accountID string, jewelleryID string, selectCols ...string) (*AccountCartJewellery, error) {
+	return FindAccountCartJewellery(ctx, boil.GetContextDB(), accountID, jewelleryID, selectCols...)
 }
 
 // FindAccountCartJewellery retrieves a single record by ID with an executor.
 // If selectCols is empty Find will return all columns.
-func FindAccountCartJewellery(ctx context.Context, exec boil.ContextExecutor, cartID string, jewelleryID string, selectCols ...string) (*AccountCartJewellery, error) {
+func FindAccountCartJewellery(ctx context.Context, exec boil.ContextExecutor, accountID string, jewelleryID string, selectCols ...string) (*AccountCartJewellery, error) {
 	accountCartJewelleryObj := &AccountCartJewellery{}
 
 	sel := "*"
@@ -805,10 +805,10 @@ func FindAccountCartJewellery(ctx context.Context, exec boil.ContextExecutor, ca
 		sel = strings.Join(strmangle.IdentQuoteSlice(dialect.LQ, dialect.RQ, selectCols), ",")
 	}
 	query := fmt.Sprintf(
-		"select %s from \"account_cart_jewelleries\" where \"cart_id\"=$1 AND \"jewellery_id\"=$2", sel,
+		"select %s from \"account_cart_jewelleries\" where \"account_id\"=$1 AND \"jewellery_id\"=$2", sel,
 	)
 
-	q := queries.Raw(query, cartID, jewelleryID)
+	q := queries.Raw(query, accountID, jewelleryID)
 
 	err := q.Bind(ctx, exec, accountCartJewelleryObj)
 	if err != nil {
@@ -1216,7 +1216,7 @@ func (o *AccountCartJewellery) Delete(ctx context.Context, exec boil.ContextExec
 	}
 
 	args := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), accountCartJewelleryPrimaryKeyMapping)
-	sql := "DELETE FROM \"account_cart_jewelleries\" WHERE \"cart_id\"=$1 AND \"jewellery_id\"=$2"
+	sql := "DELETE FROM \"account_cart_jewelleries\" WHERE \"account_id\"=$1 AND \"jewellery_id\"=$2"
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -1331,7 +1331,7 @@ func (o *AccountCartJewellery) ReloadG(ctx context.Context) error {
 // Reload refetches the object from the database
 // using the primary keys with an executor.
 func (o *AccountCartJewellery) Reload(ctx context.Context, exec boil.ContextExecutor) error {
-	ret, err := FindAccountCartJewellery(ctx, exec, o.CartID, o.JewelleryID)
+	ret, err := FindAccountCartJewellery(ctx, exec, o.AccountID, o.JewelleryID)
 	if err != nil {
 		return err
 	}
@@ -1380,21 +1380,21 @@ func (o *AccountCartJewellerySlice) ReloadAll(ctx context.Context, exec boil.Con
 }
 
 // AccountCartJewelleryExistsG checks if the AccountCartJewellery row exists.
-func AccountCartJewelleryExistsG(ctx context.Context, cartID string, jewelleryID string) (bool, error) {
-	return AccountCartJewelleryExists(ctx, boil.GetContextDB(), cartID, jewelleryID)
+func AccountCartJewelleryExistsG(ctx context.Context, accountID string, jewelleryID string) (bool, error) {
+	return AccountCartJewelleryExists(ctx, boil.GetContextDB(), accountID, jewelleryID)
 }
 
 // AccountCartJewelleryExists checks if the AccountCartJewellery row exists.
-func AccountCartJewelleryExists(ctx context.Context, exec boil.ContextExecutor, cartID string, jewelleryID string) (bool, error) {
+func AccountCartJewelleryExists(ctx context.Context, exec boil.ContextExecutor, accountID string, jewelleryID string) (bool, error) {
 	var exists bool
-	sql := "select exists(select 1 from \"account_cart_jewelleries\" where \"cart_id\"=$1 AND \"jewellery_id\"=$2 limit 1)"
+	sql := "select exists(select 1 from \"account_cart_jewelleries\" where \"account_id\"=$1 AND \"jewellery_id\"=$2 limit 1)"
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
 		fmt.Fprintln(writer, sql)
-		fmt.Fprintln(writer, cartID, jewelleryID)
+		fmt.Fprintln(writer, accountID, jewelleryID)
 	}
-	row := exec.QueryRowContext(ctx, sql, cartID, jewelleryID)
+	row := exec.QueryRowContext(ctx, sql, accountID, jewelleryID)
 
 	err := row.Scan(&exists)
 	if err != nil {
@@ -1406,5 +1406,5 @@ func AccountCartJewelleryExists(ctx context.Context, exec boil.ContextExecutor, 
 
 // Exists checks if the AccountCartJewellery row exists.
 func (o *AccountCartJewellery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
-	return AccountCartJewelleryExists(ctx, exec, o.CartID, o.JewelleryID)
+	return AccountCartJewelleryExists(ctx, exec, o.AccountID, o.JewelleryID)
 }

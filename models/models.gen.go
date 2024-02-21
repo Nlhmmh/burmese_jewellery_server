@@ -97,6 +97,23 @@ type AccountAdminRole string
 // AccountAdminStatus defines model for AccountAdminStatus.
 type AccountAdminStatus string
 
+// AccountCartJewellery defines model for AccountCartJewellery.
+type AccountCartJewellery struct {
+	AccountId   openapi_types.UUID `json:"account_id"`
+	CreatedAt   time.Time          `json:"created_at"`
+	JewelleryId openapi_types.UUID `json:"jewellery_id"`
+	Quantity    int                `json:"quantity"`
+	UpdatedAt   time.Time          `json:"updated_at"`
+}
+
+// AccountFavourite defines model for AccountFavourite.
+type AccountFavourite struct {
+	AccountId   openapi_types.UUID `json:"account_id"`
+	CreatedAt   time.Time          `json:"created_at"`
+	JewelleryId openapi_types.UUID `json:"jewellery_id"`
+	UpdatedAt   time.Time          `json:"updated_at"`
+}
+
 // AccountProfile defines model for AccountProfile.
 type AccountProfile struct {
 	AccountId openapi_types.UUID `json:"account_id"`
@@ -139,6 +156,12 @@ type AuthEmailParam struct {
 // AuthResp defines model for AuthResp.
 type AuthResp struct {
 	IsRegistered bool `json:"is_registered"`
+}
+
+// CartPostParam defines model for CartPostParam.
+type CartPostParam struct {
+	JewelleryId openapi_types.UUID `json:"jewellery_id"`
+	Quantity    int                `json:"quantity"`
 }
 
 // Category defines model for Category.
@@ -196,6 +219,12 @@ type FAQPutParam struct {
 	Answer   string `json:"answer"`
 	IsActive bool   `json:"is_active"`
 	Question string `json:"question"`
+}
+
+// FavouritePostParam defines model for FavouritePostParam.
+type FavouritePostParam struct {
+	IsFavourite bool               `json:"is_favourite"`
+	JewelleryId openapi_types.UUID `json:"jewellery_id"`
 }
 
 // Gem defines model for Gem.
@@ -380,6 +409,12 @@ type PostApiAuthEmailLoginJSONRequestBody = AuthEmailParam
 
 // PostApiAuthEmailRegisterJSONRequestBody defines body for PostApiAuthEmailRegister for application/json ContentType.
 type PostApiAuthEmailRegisterJSONRequestBody = AuthEmailParam
+
+// PostApiCartJSONRequestBody defines body for PostApiCart for application/json ContentType.
+type PostApiCartJSONRequestBody = CartPostParam
+
+// PostApiFavouriteJSONRequestBody defines body for PostApiFavourite for application/json ContentType.
+type PostApiFavouriteJSONRequestBody = FavouritePostParam
 
 // PostApiProfileJSONRequestBody defines body for PostApiProfile for application/json ContentType.
 type PostApiProfileJSONRequestBody = AccountProfilePostParam

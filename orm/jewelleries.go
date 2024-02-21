@@ -1392,7 +1392,7 @@ func (o *Jewellery) AddAccountCartJewelleries(ctx context.Context, exec boil.Con
 				strmangle.SetParamNames("\"", "\"", 1, []string{"jewellery_id"}),
 				strmangle.WhereClause("\"", "\"", 2, accountCartJewelleryPrimaryKeyColumns),
 			)
-			values := []interface{}{o.JewelleryID, rel.CartID, rel.JewelleryID}
+			values := []interface{}{o.JewelleryID, rel.AccountID, rel.JewelleryID}
 
 			if boil.IsDebug(ctx) {
 				writer := boil.DebugWriterFrom(ctx)

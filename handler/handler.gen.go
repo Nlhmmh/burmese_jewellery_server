@@ -113,11 +113,23 @@ type ServerInterface interface {
 	// (GET /api/auth/google/login)
 	GetApiAuthGoogleLogin(c *gin.Context)
 
+	// (GET /api/cart)
+	GetApiCart(c *gin.Context)
+
+	// (POST /api/cart)
+	PostApiCart(c *gin.Context)
+
 	// (GET /api/category)
 	GetApiCategory(c *gin.Context)
 
 	// (GET /api/faq)
 	GetApiFaq(c *gin.Context, params GetApiFaqParams)
+
+	// (GET /api/favourite)
+	GetApiFavourite(c *gin.Context)
+
+	// (POST /api/favourite)
+	PostApiFavourite(c *gin.Context)
 
 	// (GET /api/gem)
 	GetApiGem(c *gin.Context)
@@ -861,6 +873,32 @@ func (siw *ServerInterfaceWrapper) GetApiAuthGoogleLogin(c *gin.Context) {
 	siw.Handler.GetApiAuthGoogleLogin(c)
 }
 
+// GetApiCart operation middleware
+func (siw *ServerInterfaceWrapper) GetApiCart(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiCart(c)
+}
+
+// PostApiCart operation middleware
+func (siw *ServerInterfaceWrapper) PostApiCart(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiCart(c)
+}
+
 // GetApiCategory operation middleware
 func (siw *ServerInterfaceWrapper) GetApiCategory(c *gin.Context) {
 
@@ -952,6 +990,32 @@ func (siw *ServerInterfaceWrapper) GetApiFaq(c *gin.Context) {
 	}
 
 	siw.Handler.GetApiFaq(c, params)
+}
+
+// GetApiFavourite operation middleware
+func (siw *ServerInterfaceWrapper) GetApiFavourite(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiFavourite(c)
+}
+
+// PostApiFavourite operation middleware
+func (siw *ServerInterfaceWrapper) PostApiFavourite(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiFavourite(c)
 }
 
 // GetApiGem operation middleware
@@ -1195,8 +1259,12 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.POST(options.BaseURL+"/api/auth/email/register", wrapper.PostApiAuthEmailRegister)
 	router.GET(options.BaseURL+"/api/auth/google/callback", wrapper.GetApiAuthGoogleCallback)
 	router.GET(options.BaseURL+"/api/auth/google/login", wrapper.GetApiAuthGoogleLogin)
+	router.GET(options.BaseURL+"/api/cart", wrapper.GetApiCart)
+	router.POST(options.BaseURL+"/api/cart", wrapper.PostApiCart)
 	router.GET(options.BaseURL+"/api/category", wrapper.GetApiCategory)
 	router.GET(options.BaseURL+"/api/faq", wrapper.GetApiFaq)
+	router.GET(options.BaseURL+"/api/favourite", wrapper.GetApiFavourite)
+	router.POST(options.BaseURL+"/api/favourite", wrapper.PostApiFavourite)
 	router.GET(options.BaseURL+"/api/gem", wrapper.GetApiGem)
 	router.GET(options.BaseURL+"/api/health_check", wrapper.GetApiHealthCheck)
 	router.GET(options.BaseURL+"/api/jewellery", wrapper.GetApiJewellery)
@@ -1684,6 +1752,38 @@ func (response GetApiAuthGoogleLogin302Response) VisitGetApiAuthGoogleLoginRespo
 	return nil
 }
 
+type GetApiCartRequestObject struct {
+}
+
+type GetApiCartResponseObject interface {
+	VisitGetApiCartResponse(w http.ResponseWriter) error
+}
+
+type GetApiCart200JSONResponse []AccountCartJewellery
+
+func (response GetApiCart200JSONResponse) VisitGetApiCartResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostApiCartRequestObject struct {
+	Body *PostApiCartJSONRequestBody
+}
+
+type PostApiCartResponseObject interface {
+	VisitPostApiCartResponse(w http.ResponseWriter) error
+}
+
+type PostApiCart200Response struct {
+}
+
+func (response PostApiCart200Response) VisitPostApiCartResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
 type GetApiCategoryRequestObject struct {
 }
 
@@ -1715,6 +1815,38 @@ func (response GetApiFaq200JSONResponse) VisitGetApiFaqResponse(w http.ResponseW
 	w.WriteHeader(200)
 
 	return json.NewEncoder(w).Encode(response)
+}
+
+type GetApiFavouriteRequestObject struct {
+}
+
+type GetApiFavouriteResponseObject interface {
+	VisitGetApiFavouriteResponse(w http.ResponseWriter) error
+}
+
+type GetApiFavourite200JSONResponse []AccountFavourite
+
+func (response GetApiFavourite200JSONResponse) VisitGetApiFavouriteResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostApiFavouriteRequestObject struct {
+	Body *PostApiFavouriteJSONRequestBody
+}
+
+type PostApiFavouriteResponseObject interface {
+	VisitPostApiFavouriteResponse(w http.ResponseWriter) error
+}
+
+type PostApiFavourite200Response struct {
+}
+
+func (response PostApiFavourite200Response) VisitPostApiFavouriteResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
 }
 
 type GetApiGemRequestObject struct {
@@ -1923,11 +2055,23 @@ type StrictServerInterface interface {
 	// (GET /api/auth/google/login)
 	GetApiAuthGoogleLogin(ctx context.Context, request GetApiAuthGoogleLoginRequestObject) (GetApiAuthGoogleLoginResponseObject, error)
 
+	// (GET /api/cart)
+	GetApiCart(ctx context.Context, request GetApiCartRequestObject) (GetApiCartResponseObject, error)
+
+	// (POST /api/cart)
+	PostApiCart(ctx context.Context, request PostApiCartRequestObject) (PostApiCartResponseObject, error)
+
 	// (GET /api/category)
 	GetApiCategory(ctx context.Context, request GetApiCategoryRequestObject) (GetApiCategoryResponseObject, error)
 
 	// (GET /api/faq)
 	GetApiFaq(ctx context.Context, request GetApiFaqRequestObject) (GetApiFaqResponseObject, error)
+
+	// (GET /api/favourite)
+	GetApiFavourite(ctx context.Context, request GetApiFavouriteRequestObject) (GetApiFavouriteResponseObject, error)
+
+	// (POST /api/favourite)
+	PostApiFavourite(ctx context.Context, request PostApiFavouriteRequestObject) (PostApiFavouriteResponseObject, error)
 
 	// (GET /api/gem)
 	GetApiGem(ctx context.Context, request GetApiGemRequestObject) (GetApiGemResponseObject, error)
@@ -2852,6 +2996,64 @@ func (sh *strictHandler) GetApiAuthGoogleLogin(ctx *gin.Context) {
 	}
 }
 
+// GetApiCart operation middleware
+func (sh *strictHandler) GetApiCart(ctx *gin.Context) {
+	var request GetApiCartRequestObject
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiCart(ctx, request.(GetApiCartRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiCart")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiCartResponseObject); ok {
+		if err := validResponse.VisitGetApiCartResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// PostApiCart operation middleware
+func (sh *strictHandler) PostApiCart(ctx *gin.Context) {
+	var request PostApiCartRequestObject
+
+	var body PostApiCartJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiCart(ctx, request.(PostApiCartRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiCart")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiCartResponseObject); ok {
+		if err := validResponse.VisitPostApiCartResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
 // GetApiCategory operation middleware
 func (sh *strictHandler) GetApiCategory(ctx *gin.Context) {
 	var request GetApiCategoryRequestObject
@@ -2897,6 +3099,64 @@ func (sh *strictHandler) GetApiFaq(ctx *gin.Context, params GetApiFaqParams) {
 		ctx.Status(http.StatusInternalServerError)
 	} else if validResponse, ok := response.(GetApiFaqResponseObject); ok {
 		if err := validResponse.VisitGetApiFaqResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// GetApiFavourite operation middleware
+func (sh *strictHandler) GetApiFavourite(ctx *gin.Context) {
+	var request GetApiFavouriteRequestObject
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiFavourite(ctx, request.(GetApiFavouriteRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiFavourite")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiFavouriteResponseObject); ok {
+		if err := validResponse.VisitGetApiFavouriteResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// PostApiFavourite operation middleware
+func (sh *strictHandler) PostApiFavourite(ctx *gin.Context) {
+	var request PostApiFavouriteRequestObject
+
+	var body PostApiFavouriteJSONRequestBody
+	if err := ctx.ShouldBind(&body); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		ctx.Error(err)
+		return
+	}
+	request.Body = &body
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiFavourite(ctx, request.(PostApiFavouriteRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiFavourite")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiFavouriteResponseObject); ok {
+		if err := validResponse.VisitPostApiFavouriteResponse(ctx.Writer); err != nil {
 			ctx.Error(err)
 		}
 	} else if response != nil {
@@ -3094,54 +3354,56 @@ func (sh *strictHandler) PostApiProfile(ctx *gin.Context) {
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
-	"AAD//zBQ5XrfZAAA",
+	"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",
+	"eGlfLrvx3083T/8LAAD//+yxWIxobgAA",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

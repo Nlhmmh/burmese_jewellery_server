@@ -4,6 +4,7 @@ import (
 	"burmese_jewellery/ers"
 	"burmese_jewellery/models"
 	"burmese_jewellery/orm"
+	"burmese_jewellery/orm_custom"
 	"burmese_jewellery/query"
 	"burmese_jewellery/tx"
 	"database/sql"
@@ -33,13 +34,14 @@ func (h *Handler) GetApiAdminAccount(c *gin.Context, params models.GetApiAdminAc
 		),
 		qm.Offset(params.Offset),
 		qm.Limit(params.Limit),
+		qm.OrderBy("accounts.created_at ASC"),
 	}
 	qList = query.EqUUID(qList, params.Id, orm.AccountColumns.AccountID)
 	qList = query.Like(qList, params.FirstName, fmt.Sprintf("%s.%s", orm.TableNames.AccountProfiles, orm.AccountProfileColumns.FirstName))
 	qList = query.Like(qList, params.LastName, fmt.Sprintf("%s.%s", orm.TableNames.AccountProfiles, orm.AccountProfileColumns.LastName))
 	qList = query.Eq(qList, params.AccountStatus, orm.AccountColumns.AccountStatus)
 
-	var list []*orm.AccountWithProfile
+	var list []*orm_custom.AccountWithProfile
 	if err := orm.NewQuery(qList...).BindG(c, &list); err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return

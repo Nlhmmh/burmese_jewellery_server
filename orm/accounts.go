@@ -178,23 +178,23 @@ var AccountWhere = struct {
 
 // AccountRels is where relationship names are stored.
 var AccountRels = struct {
-	AccountProfile    string
-	AccountCarts      string
-	AccountFavourites string
-	AccountOrders     string
+	AccountProfile         string
+	AccountCartJewelleries string
+	AccountFavourites      string
+	AccountOrders          string
 }{
-	AccountProfile:    "AccountProfile",
-	AccountCarts:      "AccountCarts",
-	AccountFavourites: "AccountFavourites",
-	AccountOrders:     "AccountOrders",
+	AccountProfile:         "AccountProfile",
+	AccountCartJewelleries: "AccountCartJewelleries",
+	AccountFavourites:      "AccountFavourites",
+	AccountOrders:          "AccountOrders",
 }
 
 // accountR is where relationships are stored.
 type accountR struct {
-	AccountProfile    *AccountProfile       `boil:"AccountProfile" json:"AccountProfile" toml:"AccountProfile" yaml:"AccountProfile"`
-	AccountCarts      AccountCartSlice      `boil:"AccountCarts" json:"AccountCarts" toml:"AccountCarts" yaml:"AccountCarts"`
-	AccountFavourites AccountFavouriteSlice `boil:"AccountFavourites" json:"AccountFavourites" toml:"AccountFavourites" yaml:"AccountFavourites"`
-	AccountOrders     AccountOrderSlice     `boil:"AccountOrders" json:"AccountOrders" toml:"AccountOrders" yaml:"AccountOrders"`
+	AccountProfile         *AccountProfile           `boil:"AccountProfile" json:"AccountProfile" toml:"AccountProfile" yaml:"AccountProfile"`
+	AccountCartJewelleries AccountCartJewellerySlice `boil:"AccountCartJewelleries" json:"AccountCartJewelleries" toml:"AccountCartJewelleries" yaml:"AccountCartJewelleries"`
+	AccountFavourites      AccountFavouriteSlice     `boil:"AccountFavourites" json:"AccountFavourites" toml:"AccountFavourites" yaml:"AccountFavourites"`
+	AccountOrders          AccountOrderSlice         `boil:"AccountOrders" json:"AccountOrders" toml:"AccountOrders" yaml:"AccountOrders"`
 }
 
 // NewStruct creates a new relationship struct
@@ -209,11 +209,11 @@ func (r *accountR) GetAccountProfile() *AccountProfile {
 	return r.AccountProfile
 }
 
-func (r *accountR) GetAccountCarts() AccountCartSlice {
+func (r *accountR) GetAccountCartJewelleries() AccountCartJewellerySlice {
 	if r == nil {
 		return nil
 	}
-	return r.AccountCarts
+	return r.AccountCartJewelleries
 }
 
 func (r *accountR) GetAccountFavourites() AccountFavouriteSlice {
@@ -550,18 +550,18 @@ func (o *Account) AccountProfile(mods ...qm.QueryMod) accountProfileQuery {
 	return AccountProfiles(queryMods...)
 }
 
-// AccountCarts retrieves all the account_cart's AccountCarts with an executor.
-func (o *Account) AccountCarts(mods ...qm.QueryMod) accountCartQuery {
+// AccountCartJewelleries retrieves all the account_cart_jewellery's AccountCartJewelleries with an executor.
+func (o *Account) AccountCartJewelleries(mods ...qm.QueryMod) accountCartJewelleryQuery {
 	var queryMods []qm.QueryMod
 	if len(mods) != 0 {
 		queryMods = append(queryMods, mods...)
 	}
 
 	queryMods = append(queryMods,
-		qm.Where("\"account_carts\".\"account_id\"=?", o.AccountID),
+		qm.Where("\"account_cart_jewelleries\".\"account_id\"=?", o.AccountID),
 	)
 
-	return AccountCarts(queryMods...)
+	return AccountCartJewelleries(queryMods...)
 }
 
 // AccountFavourites retrieves all the account_favourite's AccountFavourites with an executor.
@@ -701,9 +701,9 @@ func (accountL) LoadAccountProfile(ctx context.Context, e boil.ContextExecutor, 
 	return nil
 }
 
-// LoadAccountCarts allows an eager lookup of values, cached into the
+// LoadAccountCartJewelleries allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (accountL) LoadAccountCarts(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAccount interface{}, mods queries.Applicator) error {
+func (accountL) LoadAccountCartJewelleries(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAccount interface{}, mods queries.Applicator) error {
 	var slice []*Account
 	var object *Account
 
@@ -757,8 +757,8 @@ func (accountL) LoadAccountCarts(ctx context.Context, e boil.ContextExecutor, si
 	}
 
 	query := NewQuery(
-		qm.From(`account_carts`),
-		qm.WhereIn(`account_carts.account_id in ?`, args...),
+		qm.From(`account_cart_jewelleries`),
+		qm.WhereIn(`account_cart_jewelleries.account_id in ?`, args...),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -766,22 +766,22 @@ func (accountL) LoadAccountCarts(ctx context.Context, e boil.ContextExecutor, si
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load account_carts")
+		return errors.Wrap(err, "failed to eager load account_cart_jewelleries")
 	}
 
-	var resultSlice []*AccountCart
+	var resultSlice []*AccountCartJewellery
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice account_carts")
+		return errors.Wrap(err, "failed to bind eager loaded slice account_cart_jewelleries")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on account_carts")
+		return errors.Wrap(err, "failed to close results in eager load on account_cart_jewelleries")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for account_carts")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for account_cart_jewelleries")
 	}
 
-	if len(accountCartAfterSelectHooks) != 0 {
+	if len(accountCartJewelleryAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -789,14 +789,14 @@ func (accountL) LoadAccountCarts(ctx context.Context, e boil.ContextExecutor, si
 		}
 	}
 	if singular {
-		object.R.AccountCarts = resultSlice
+		object.R.AccountCartJewelleries = resultSlice
 		return nil
 	}
 
 	for _, foreign := range resultSlice {
 		for _, local := range slice {
 			if local.AccountID == foreign.AccountID {
-				local.R.AccountCarts = append(local.R.AccountCarts, foreign)
+				local.R.AccountCartJewelleries = append(local.R.AccountCartJewelleries, foreign)
 				break
 			}
 		}
@@ -1062,18 +1062,18 @@ func (o *Account) SetAccountProfile(ctx context.Context, exec boil.ContextExecut
 	return nil
 }
 
-// AddAccountCartsG adds the given related objects to the existing relationships
+// AddAccountCartJewelleriesG adds the given related objects to the existing relationships
 // of the account, optionally inserting them as new records.
-// Appends related to o.R.AccountCarts.
+// Appends related to o.R.AccountCartJewelleries.
 // Uses the global database handle.
-func (o *Account) AddAccountCartsG(ctx context.Context, insert bool, related ...*AccountCart) error {
-	return o.AddAccountCarts(ctx, boil.GetContextDB(), insert, related...)
+func (o *Account) AddAccountCartJewelleriesG(ctx context.Context, insert bool, related ...*AccountCartJewellery) error {
+	return o.AddAccountCartJewelleries(ctx, boil.GetContextDB(), insert, related...)
 }
 
-// AddAccountCarts adds the given related objects to the existing relationships
+// AddAccountCartJewelleries adds the given related objects to the existing relationships
 // of the account, optionally inserting them as new records.
-// Appends related to o.R.AccountCarts.
-func (o *Account) AddAccountCarts(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*AccountCart) error {
+// Appends related to o.R.AccountCartJewelleries.
+func (o *Account) AddAccountCartJewelleries(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*AccountCartJewellery) error {
 	var err error
 	for _, rel := range related {
 		if insert {
@@ -1083,11 +1083,11 @@ func (o *Account) AddAccountCarts(ctx context.Context, exec boil.ContextExecutor
 			}
 		} else {
 			updateQuery := fmt.Sprintf(
-				"UPDATE \"account_carts\" SET %s WHERE %s",
+				"UPDATE \"account_cart_jewelleries\" SET %s WHERE %s",
 				strmangle.SetParamNames("\"", "\"", 1, []string{"account_id"}),
-				strmangle.WhereClause("\"", "\"", 2, accountCartPrimaryKeyColumns),
+				strmangle.WhereClause("\"", "\"", 2, accountCartJewelleryPrimaryKeyColumns),
 			)
-			values := []interface{}{o.AccountID, rel.CartID}
+			values := []interface{}{o.AccountID, rel.AccountID, rel.JewelleryID}
 
 			if boil.IsDebug(ctx) {
 				writer := boil.DebugWriterFrom(ctx)
@@ -1104,10 +1104,10 @@ func (o *Account) AddAccountCarts(ctx context.Context, exec boil.ContextExecutor
 
 	if o.R == nil {
 		o.R = &accountR{
-			AccountCarts: related,
+			AccountCartJewelleries: related,
 		}
 	} else {
-		o.R.AccountCarts = append(o.R.AccountCarts, related...)
+		o.R.AccountCartJewelleries = append(o.R.AccountCartJewelleries, related...)
 	}
 
 	return nil

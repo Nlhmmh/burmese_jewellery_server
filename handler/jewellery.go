@@ -16,6 +16,7 @@ func (h *Handler) GetApiJewellery(c *gin.Context, params models.GetApiJewelleryP
 	qList := []qm.QueryMod{
 		qm.Offset(params.Offset),
 		qm.Limit(params.Limit),
+		qm.OrderBy("created_at ASC"),
 	}
 	qList = query.EqUUID(qList, params.Id, orm.JewelleryColumns.JewelleryID)
 	qList = query.EqUUID(qList, params.CategoryId, orm.JewelleryColumns.CategoryID)

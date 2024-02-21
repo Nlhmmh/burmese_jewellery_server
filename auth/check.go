@@ -17,9 +17,21 @@ var (
 	}
 
 	containWhiteList = []string{
+		"/api", // TODO: remove after google testing
+
 		"/api/file/media",
 		"/api/health_check",
-		"/api", // TODO: remove after google testing
+		"/api/category",
+		"/api/gem",
+		"/api/material",
+		"/api/jewellery",
+		"/api/jewellery/:jewellery_id",
+		"/api/faq",
+		"/api/profile",
+		"/api/auth/email/register",
+		"/api/auth/email/login",
+		"/api/auth/google/login",
+		"/api/auth/google/callback",
 	}
 )
 

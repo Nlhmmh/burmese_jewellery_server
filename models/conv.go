@@ -2,6 +2,7 @@ package models
 
 import (
 	"burmese_jewellery/orm"
+	"burmese_jewellery/orm_custom"
 
 	"github.com/google/uuid"
 	"github.com/oapi-codegen/runtime/types"
@@ -150,7 +151,7 @@ func ConvAccountProfileFromORM(orm *orm.AccountProfile) (*AccountProfile, error)
 	return ap, nil
 }
 
-func ConvAccountWithProfileFromORM(ormm *orm.AccountWithProfile) (*AccountWithProfile, error) {
+func ConvAccountWithProfileFromORM(ormm *orm_custom.AccountWithProfile) (*AccountWithProfile, error) {
 	awp := &AccountWithProfile{}
 
 	a, err := ConvAccountFromORM(&orm.Account{
@@ -199,4 +200,39 @@ func ConvFAQFromORM(orm *orm.Faq) (*FAQ, error) {
 	faq.CreatedAt = orm.CreatedAt
 	faq.UpdatedAt = orm.UpdatedAt
 	return faq, nil
+}
+
+func ConvAccountCartJewelleryFromORM(orm *orm.AccountCartJewellery) (*AccountCartJewellery, error) {
+	id, err := uuid.Parse(orm.AccountID)
+	if err != nil {
+		return nil, err
+	}
+	jID, err := uuid.Parse(orm.JewelleryID)
+	if err != nil {
+		return nil, err
+	}
+	acj := &AccountCartJewellery{}
+	acj.AccountId = id
+	acj.JewelleryId = jID
+	acj.Quantity = orm.Quantity
+	acj.CreatedAt = orm.CreatedAt
+	acj.UpdatedAt = orm.UpdatedAt
+	return acj, nil
+}
+
+func ConvAccountFavouriteFromORM(orm *orm.AccountFavourite) (*AccountFavourite, error) {
+	id, err := uuid.Parse(orm.AccountID)
+	if err != nil {
+		return nil, err
+	}
+	jID, err := uuid.Parse(orm.JewelleryID)
+	if err != nil {
+		return nil, err
+	}
+	af := &AccountFavourite{}
+	af.AccountId = id
+	af.JewelleryId = jID
+	af.CreatedAt = orm.CreatedAt
+	af.UpdatedAt = orm.UpdatedAt
+	return af, nil
 }

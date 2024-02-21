@@ -57,6 +57,7 @@ func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context, params models.GetApiAd
 	qList := []qm.QueryMod{
 		qm.Offset(params.Offset),
 		qm.Limit(params.Limit),
+		qm.OrderBy("created_at ASC"),
 	}
 	qList = query.EqUUID(qList, params.Id, orm.AccountAdminColumns.AccountAdminID)
 	qList = query.Like(qList, params.Mail, orm.AccountAdminColumns.Mail)

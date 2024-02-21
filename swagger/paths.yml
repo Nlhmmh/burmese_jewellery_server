@@ -695,3 +695,55 @@
     responses:
       200:
         description: OK
+
+/api/cart:
+  get:
+    tags:
+      - app
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountCartJewellery"
+  post:
+    tags:
+      - app
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CartPostParam"
+    responses:
+      200:
+        description: OK
+
+/api/favourite:
+  get:
+    tags:
+      - app
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountFavourite"
+  post:
+    tags:
+      - app
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/FavouritePostParam"
+    responses:
+      200:
+        description: OK
