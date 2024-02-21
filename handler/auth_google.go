@@ -54,16 +54,15 @@ func (*Handler) GetApiAuthGoogleCallback(c *gin.Context, params models.GetApiAut
 		return
 	}
 
-	var account *models.Account
 	var isRegistered bool
 
 	if err := tx.Write(c, func(tx *sql.Tx) *ers.ErrResp {
 		a, err := orm.Accounts(
+			orm.AccountWhere.LoginType.EQ(orm.LoginTypeGoogle),
 			orm.AccountWhere.Mail.EQ(null.StringFrom(userInfo.Email)),
 		).OneG(c)
 		if err != nil && !errors.Is(err, sql.ErrNoRows) {
 			return ers.InternalServer.New(err)
-
 		}
 		if err != nil && errors.Is(err, sql.ErrNoRows) {
 			a = &orm.Account{
@@ -75,29 +74,21 @@ func (*Handler) GetApiAuthGoogleCallback(c *gin.Context, params models.GetApiAut
 			}
 			if err := a.InsertG(c, boil.Infer()); err != nil {
 				return ers.InternalServer.New(err)
-
 			}
 		}
 
-		apExists, err := orm.AccountProfileExistsG(c, a.AccountID)
+		apExists, err := orm.AccountProfileExists(c, tx, a.AccountID)
 		if err != nil {
 			return ers.InternalServer.New(err)
 		}
 		isRegistered = apExists
-
-		acc, err := models.ConvAccountFromORM(a)
-		if err != nil {
-			return ers.InternalServer.New(err)
-		}
-		account = acc
 
 		return nil
 	}); err != nil {
 		return
 	}
 
-	c.JSON(http.StatusOK, &models.AuthGoogleCallbackResp{
-		Account:      account,
+	c.JSON(http.StatusOK, &models.AuthResp{
 		IsRegistered: isRegistered,
 	})
 }

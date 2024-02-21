@@ -43,7 +43,7 @@ func (h *Handler) PostApiAdminLogin(c *gin.Context) {
 		return
 	}
 
-	token, err := auth.GenerateToken(aa.AccountAdminID, aa.AccountAdminRole)
+	token, err := auth.GenerateToken(aa.AccountAdminID, auth.Role(aa.AccountAdminRole))
 	if err != nil {
 		ers.InternalServer.New(err).Abort(c)
 		return

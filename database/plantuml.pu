@@ -30,14 +30,14 @@ folder account {
   }
 
   entity accounts TRANSACTION {
-    * account_id: uuid [PK]  
+    * account_id: uuid [PK]
     --
-    * login_type : login_type  
-    login_id : VARCHAR(255)  
-    mail : VARCHAR(255)  
-    password : VARCHAR(255)  
-    phone : VARCHAR(255)  
-    * account_status : account_status  
+    * login_type : login_type
+    login_id : VARCHAR(255)
+    mail : VARCHAR(255)
+    password : VARCHAR(255)
+    phone : VARCHAR(255)
+    * account_status : account_status
   }
   accounts -> login_type
   accounts -> account_status
@@ -49,12 +49,12 @@ folder account {
   }
 
   entity account_profiles TRANSACTION {
-    * account_id: uuid [PK] [FK] 
+    * account_id: uuid [PK] [FK]
     --
-    * first_name : VARCHAR(255)  
-    * last_name : VARCHAR(255)  
-    birthday : date  
-    gender : gender  
+    * first_name : VARCHAR(255)
+    * last_name : VARCHAR(255)
+    birthday : date
+    gender : gender
   }
   account_profiles -> gender
   account_profiles ||--|| accounts
@@ -71,12 +71,12 @@ folder account {
   }
 
   entity account_admins TRANSACTION {
-    * account_admin_id: uuid [PK]  
+    * account_admin_id: uuid [PK]
     --
-    * mail : VARCHAR(255)  
-    * password : VARCHAR(255)  
-    * account_admin_role : account_admin_role  
-    * account_admin_status : account_admin_status  
+    * mail : VARCHAR(255)
+    * password : VARCHAR(255)
+    * account_admin_role : account_admin_role
+    * account_admin_status : account_admin_status
   }
 
   account_admins -> account_admin_role
@@ -88,36 +88,36 @@ folder account {
 folder jewellery {
 
   entity categories TRANSACTION {
-    * category_id: uuid [PK]  
+    * category_id: uuid [PK]
     --
-    * name : VARCHAR(255)  
-    * description : VARCHAR(255)  
-    * image_url : VARCHAR(255)  
+    * name : VARCHAR(255)
+    * description : VARCHAR(255)
+    * image_url : VARCHAR(255)
   }
 
   entity gems TRANSACTION {
-    * gem_id: uuid [PK]  
+    * gem_id: uuid [PK]
     --
-    * name : VARCHAR(255)  
+    * name : VARCHAR(255)
   }
 
   entity materials TRANSACTION {
-    * material_id: uuid [PK]  
+    * material_id: uuid [PK]
     --
-    * name : VARCHAR(255)  
+    * name : VARCHAR(255)
   }
 
   entity jewelleries TRANSACTION {
-    * jewellery_id: uuid [PK]  
+    * jewellery_id: uuid [PK]
     --
-    * category_id : uuid [FK] 
-    * gem_id : uuid [FK] 
-    * material_id : uuid [FK] 
-    * name : VARCHAR(255)  
-    * description : VARCHAR(255)  
-    * quantity : integer  
-    * price : double precision  
-    * image_url : VARCHAR(255)  
+    * category_id : uuid [FK]
+    * gem_id : uuid [FK]
+    * material_id : uuid [FK]
+    * name : VARCHAR(255)
+    * description : VARCHAR(255)
+    * quantity : integer
+    * price : double precision
+    * image_url : VARCHAR(255)
   }
   jewelleries }|--|| categories
   jewelleries }|--|| gems
@@ -128,17 +128,17 @@ folder jewellery {
 folder cart {
 
   entity account_carts TRANSACTION {
-    * cart_id: uuid [PK]  
+    * cart_id: uuid [PK]
     --
-    * account_id : uuid [FK] 
+    * account_id : uuid [FK]
   }
   account_carts }|--|| accounts
 
   entity account_cart_jewelleries TRANSACTION {
-    * cart_id: uuid [PK] [FK] 
-    * jewellery_id: uuid [PK] [FK] 
+    * cart_id: uuid [PK] [FK]
+    * jewellery_id: uuid [PK] [FK]
     --
-    * quantity : integer  
+    * quantity : integer
   }
   account_cart_jewelleries }|--|| account_carts
   account_cart_jewelleries }|--|| jewelleries
@@ -156,33 +156,33 @@ folder order {
   }
 
   entity account_orders TRANSACTION {
-    * order_id: uuid [PK]  
+    * order_id: uuid [PK]
     --
-    * account_id : uuid [FK] 
-    * order_status : order_status  
+    * account_id : uuid [FK]
+    * order_status : order_status
   }
   account_orders -> order_status
   account_orders }|--|| accounts
 
   entity account_order_jewelleries TRANSACTION {
-    * order_id: uuid [PK] [FK] 
-    * jewellery_id: uuid [PK] [FK] 
+    * order_id: uuid [PK] [FK]
+    * jewellery_id: uuid [PK] [FK]
     --
-    * quantity : integer  
-    * price : integer  
+    * quantity : integer
+    * price : integer
   }
   account_order_jewelleries }|--|| account_orders
   account_order_jewelleries }|--|| jewelleries
 
   entity account_order_addresses TRANSACTION {
-    * order_id: uuid [PK] [FK] 
+    * order_id: uuid [PK] [FK]
     --
-    * country_code : character(2)  
-    post_code : text  
+    * country_code : character(2)
+    post_code : text
     state : text   : State, Province, Division
-    * city : text  
-    * address : text  
-    remarks : text  
+    * city : text
+    * address : text
+    remarks : text
   }
   account_order_addresses }|--|| account_orders
 
@@ -191,36 +191,36 @@ folder order {
 folder misc {
 
   entity account_favourites TRANSACTION {
-    * account_id: uuid [PK] [FK] 
-    * jewellery_id: uuid [PK] [FK] 
+    * account_id: uuid [PK] [FK]
+    * jewellery_id: uuid [PK] [FK]
     --
   }
   account_favourites }|--|| accounts
   account_favourites }|--|| jewelleries
 
   entity faqs MASTER {
-    * faq_id: uuid [PK]  
+    * faq_id: uuid [PK]
     --
-    * question : text  
-    * answer : text  
-    * is_active : boolean  
+    * question : text
+    * answer : text
+    * is_active : boolean
   }
 
   entity currencies MASTER {
     * currency_code: character varying(3) [PK]   : ISO 4217
     --
-    * name : text  
-    * decimals : text  
-    * is_active : boolean  
+    * name : text
+    * decimals : text
+    * is_active : boolean
   }
 
   entity countries MASTER {
     * country_code: character varying(2) [PK]   : ISO Alpha-2
     --
-    * currency_code : character varying(3) [FK] 
-    * name : text  
-    * is_active : boolean  
-    * flag_image_url : text  
+    * currency_code : character varying(3) [FK]
+    * name : text
+    * is_active : boolean
+    * flag_image_url : text
   }
   countries ||--|| currencies
 

@@ -2,7 +2,6 @@ package auth
 
 import (
 	"burmese_jewellery/config"
-	"burmese_jewellery/orm"
 	"errors"
 	"strings"
 	"time"
@@ -17,17 +16,25 @@ const (
 
 type claims struct {
 	UserID string
-	Role   string
+	Role   Role
 	jwt.StandardClaims
 }
 
+type Role string
+
+const (
+	RoleAdmin Role = "admin"
+	RoleStaff Role = "staff"
+	RoleUser  Role = "user"
+)
+
 // GenerateToken - Generate Tokens
-func GenerateToken(userID string, role orm.AccountAdminRole) (string, error) {
+func GenerateToken(userID string, role Role) (string, error) {
 	createdToken := jwt.NewWithClaims(
 		jwt.SigningMethodHS256,
 		claims{
 			userID,
-			role.String(),
+			role,
 			jwt.StandardClaims{
 				ExpiresAt: time.Now().Add(time.Hour * time.Duration(config.Get().JWTExpiredHours)).Unix(),
 				IssuedAt:  time.Now().Unix(),

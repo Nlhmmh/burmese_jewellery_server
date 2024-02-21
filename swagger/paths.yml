@@ -57,7 +57,38 @@
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AuthGoogleCallbackResp"
+              $ref: "#/components/schemas/AuthResp"
+
+/api/auth/email/register:
+  post:
+    tags:
+      - app
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthEmailParam"
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthResp"
+/api/auth/email/login:
+  post:
+    tags:
+      - app
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthEmailParam"
+    responses:
+      200:
+        description: OK
 
 /api/admin/login:
   post:

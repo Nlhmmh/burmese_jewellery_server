@@ -130,10 +130,15 @@ type AccountWithProfile struct {
 	AccountProfile AccountProfile `json:"account_profile"`
 }
 
-// AuthGoogleCallbackResp defines model for AuthGoogleCallbackResp.
-type AuthGoogleCallbackResp struct {
-	Account      *Account `json:"account,omitempty"`
-	IsRegistered bool     `json:"is_registered"`
+// AuthEmailParam defines model for AuthEmailParam.
+type AuthEmailParam struct {
+	Mail     openapi_types.Email `json:"mail"`
+	Password string              `json:"password"`
+}
+
+// AuthResp defines model for AuthResp.
+type AuthResp struct {
+	IsRegistered bool `json:"is_registered"`
 }
 
 // Category defines model for Category.
@@ -369,6 +374,12 @@ type PostApiAdminMaterialJSONRequestBody = MaterialPostParam
 
 // PutApiAdminMaterialMaterialIdJSONRequestBody defines body for PutApiAdminMaterialMaterialId for application/json ContentType.
 type PutApiAdminMaterialMaterialIdJSONRequestBody = MaterialPutParam
+
+// PostApiAuthEmailLoginJSONRequestBody defines body for PostApiAuthEmailLogin for application/json ContentType.
+type PostApiAuthEmailLoginJSONRequestBody = AuthEmailParam
+
+// PostApiAuthEmailRegisterJSONRequestBody defines body for PostApiAuthEmailRegister for application/json ContentType.
+type PostApiAuthEmailRegisterJSONRequestBody = AuthEmailParam
 
 // PostApiProfileJSONRequestBody defines body for PostApiProfile for application/json ContentType.
 type PostApiProfileJSONRequestBody = AccountProfilePostParam

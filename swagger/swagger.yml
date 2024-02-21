@@ -75,7 +75,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthGoogleCallbackResp'
+                $ref: '#/components/schemas/AuthResp'
+  /api/auth/email/register:
+    post:
+      tags:
+        - app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthEmailParam'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResp'
+  /api/auth/email/login:
+    post:
+      tags:
+        - app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthEmailParam'
+      responses:
+        200:
+          description: OK
   /api/admin/login:
     post:
       summary: Login as admin user
@@ -676,11 +706,9 @@ paths:
 components:
   parameters: null
   schemas:
-    AuthGoogleCallbackResp:
+    AuthResp:
       type: object
       properties:
-        account:
-          $ref: '#/components/schemas/Account'
         is_registered:
           type: boolean
           example: true
@@ -1308,3 +1336,18 @@ components:
         - question
         - answer
         - is_active
+    AuthEmailParam:
+      type: object
+      properties:
+        mail:
+          type: string
+          maxLength: 255
+          format: email
+          example: test@gmail.com
+        password:
+          type: string
+          maxLength: 255
+          example: '*****'
+      required:
+        - mail
+        - password

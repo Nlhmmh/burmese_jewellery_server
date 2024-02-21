@@ -11,7 +11,7 @@ import (
 
 func Test_GenerateToken(t *testing.T) {
 
-	token, err := GenerateToken("testUserID", orm.AccountAdminRoleStaff)
+	token, err := GenerateToken("testUserID", Role(orm.AccountAdminRoleStaff))
 
 	assert.Nil(t, err)
 	assert.NotEmpty(t, token)
@@ -20,7 +20,7 @@ func Test_GenerateToken(t *testing.T) {
 
 func Test_ValidateToken(t *testing.T) {
 
-	token, err := GenerateToken("testUserID", orm.AccountAdminRoleStaff)
+	token, err := GenerateToken("testUserID", Role(orm.AccountAdminRoleStaff))
 	assert.Nil(t, err)
 
 	t.Run("ok", func(t *testing.T) {

@@ -17,5 +17,5 @@ repos:
       - id: lint
         name: lint
         language: system
-        entry: make lint
-        stages: [commit, manual]
+        entry: sh ./tools/lint.sh
+        stages: [commit]

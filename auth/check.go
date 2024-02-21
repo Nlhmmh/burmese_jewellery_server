@@ -34,7 +34,10 @@ func CheckJWTWhiteList(path string) bool {
 
 func CheckContainWhiteList(path string) bool {
 	for _, p := range containWhiteList {
-		if strings.Contains(path, p) {
+		if p == "/api/file/media" && strings.Contains(path, p) {
+			return true
+		}
+		if path == p {
 			return true
 		}
 	}

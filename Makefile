@@ -14,6 +14,7 @@ init: ## Prepare Environment
 	go install github.com/volatiletech/sqlboiler/v4@latest
 	go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-psql@latest
 	go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql@latest
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
 	brew install swagger-codegen
 
 .PHONY: run
@@ -23,7 +24,6 @@ run: ## Run server
 
 .PHONY: lint
 lint: ## Lint
-	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
 	golangci-lint run
 
 .PHONY: merge

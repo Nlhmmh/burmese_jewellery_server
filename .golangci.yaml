@@ -5,3 +5,6 @@ run:
     - database
     - load_testing
     - swagger
+  allow-parallel-runners: false
+  allow-serial-runners: true
+  print-resources-usage: true

@@ -1,8 +1,6 @@
-AuthGoogleCallbackResp:
+AuthResp:
   type: object
   properties:
-    account:
-      $ref: "#/components/schemas/Account"
     is_registered:
       type: boolean
       example: true
@@ -646,3 +644,19 @@ FAQPutParam:
     - question
     - answer
     - is_active
+
+AuthEmailParam:
+  type: object
+  properties:
+    mail:
+      type: string
+      maxLength: 255
+      format: email
+      example: test@gmail.com
+    password:
+      type: string
+      maxLength: 255
+      example: "*****"
+  required:
+    - mail
+    - password

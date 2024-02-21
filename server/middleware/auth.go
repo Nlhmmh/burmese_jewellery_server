@@ -3,8 +3,8 @@ package middleware
 import (
 	"burmese_jewellery/auth"
 	"burmese_jewellery/ers"
-	"burmese_jewellery/orm"
 	"errors"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -31,16 +31,15 @@ func Auth() gin.HandlerFunc {
 			return
 		}
 		claimsVal := *claims
+		fmt.Println(claimsVal.UserID)
 		auth.SetUserID(c, claimsVal.UserID)
 
-		if auth.CheckAdminList(fullPath) &&
-			!(claims.Role == orm.AccountAdminRoleAdmin.String() ||
-				claims.Role == orm.AccountAdminRoleStaff.String()) {
+		if auth.CheckAdminList(fullPath) && !(claims.Role == auth.RoleAdmin || claims.Role == auth.RoleStaff) {
 			ers.UnAuthorized.New(errors.New("not admin staff")).Abort(c)
 			return
 		}
 
-		if auth.CheckAdminRoleAdminOnlyList(fullPath) && claims.Role != orm.AccountAdminRoleAdmin.String() {
+		if auth.CheckAdminRoleAdminOnlyList(fullPath) && claims.Role != auth.RoleAdmin {
 			ers.UnAuthorized.New(errors.New("not admin")).Abort(c)
 			return
 		}
