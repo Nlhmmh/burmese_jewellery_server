@@ -26,6 +26,10 @@ run: ## Run server
 lint: ## Lint
 	golangci-lint run
 
+.PHONY: precommit
+precommit: ## precommit
+	pre-commit run
+
 .PHONY: merge
 merge: ## Merge swagger into single file
 	cd ./swagger && merger -f index.yml -o swagger.yml
