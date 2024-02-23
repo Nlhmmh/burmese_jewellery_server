@@ -4,38 +4,50 @@ import "strings"
 
 var (
 	whiteList = []string{
-		"/api/admin/login",
-	}
-
-	adminList = []string{
-		"/api/admin/account_admin/:account_admins_id",
-	}
-
-	adminRoleAdminOnlyList = []string{
-		"/api/admin/account_admin",
-		"/api/admin/account_admin/:account_admins_id",
-	}
-
-	containWhiteList = []string{
 		"/api", // TODO: remove after google testing
-
-		"/api/file/media",
 		"/api/health_check",
-		"/api/category",
-		"/api/gem",
-		"/api/material",
-		"/api/jewellery",
-		"/api/jewellery/:jewellery_id",
-		"/api/faq",
-		"/api/profile",
+
+		"/api/admin/login",
 		"/api/auth/email/register",
 		"/api/auth/email/login",
 		"/api/auth/google/login",
 		"/api/auth/google/callback",
+
+		"/api/category",
+		"/api/gem",
+		"/api/material",
+
+		"/api/jewellery",
+		"/api/jewellery/:jewellery_id",
+
+		"/api/faq",
+	}
+
+	containWhiteList = []string{
+		"/api/file/media",
+	}
+
+	adminList = []string{
+		"/api/admin/account_admin/:account_admins_id",
+
+		"/api/admin/account",
+		"/api/admin/account/:account_id",
+	}
+
+	adminRoleAdminOnlyList = []string{
+		"/api/admin/account_admin",
+	}
+
+	userList = []string{
+		"/api/profile",
+		"/api/favourite",
+		"/api/cart",
+		"/api/order",
+		"/api/order/:account_order_id",
 	}
 )
 
-func CheckJWTWhiteList(path string) bool {
+func CheckWhiteList(path string) bool {
 	for _, p := range whiteList {
 		if path == p {
 			return true
@@ -46,10 +58,7 @@ func CheckJWTWhiteList(path string) bool {
 
 func CheckContainWhiteList(path string) bool {
 	for _, p := range containWhiteList {
-		if p == "/api/file/media" && strings.Contains(path, p) {
-			return true
-		}
-		if path == p {
+		if strings.Contains(path, p) {
 			return true
 		}
 	}
@@ -67,6 +76,15 @@ func CheckAdminList(path string) bool {
 
 func CheckAdminRoleAdminOnlyList(path string) bool {
 	for _, p := range adminRoleAdminOnlyList {
+		if path == p {
+			return true
+		}
+	}
+	return false
+}
+
+func CheckUserList(path string) bool {
+	for _, p := range userList {
 		if path == p {
 			return true
 		}

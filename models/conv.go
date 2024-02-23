@@ -20,6 +20,18 @@ func ConvListFromORM[T any, V any](ormList []*T, convFromORMFunc func(*T) (*V, e
 	return list, nil
 }
 
+func ConvListFromORMWithoutPtr[T any, V any](ormList []*T, convFromORMFunc func(*T) (*V, error)) ([]V, error) {
+	list := make([]V, len(ormList))
+	for i, v := range ormList {
+		model, err := convFromORMFunc(v)
+		if err != nil {
+			return nil, err
+		}
+		list[i] = *model
+	}
+	return list, nil
+}
+
 func ConvGemFromORM(orm *orm.Gem) (*Gem, error) {
 	id, err := uuid.Parse(orm.GemID)
 	if err != nil {
@@ -235,4 +247,72 @@ func ConvAccountFavouriteFromORM(orm *orm.AccountFavourite) (*AccountFavourite, 
 	af.CreatedAt = orm.CreatedAt
 	af.UpdatedAt = orm.UpdatedAt
 	return af, nil
+}
+
+func ConvAccountOrderFromORM(orm *orm.AccountOrder) (*AccountOrder, error) {
+	id, err := uuid.Parse(orm.AccountID)
+	if err != nil {
+		return nil, err
+	}
+	oID, err := uuid.Parse(orm.OrderID)
+	if err != nil {
+		return nil, err
+	}
+	ao := &AccountOrder{}
+	ao.OrderId = oID
+	ao.AccountId = id
+	ao.OrderStatus = OrderStatus(orm.OrderStatus)
+	ao.CreatedAt = orm.CreatedAt
+	ao.UpdatedAt = orm.UpdatedAt
+	if v := orm.R.OrderAccountOrderJewelleries; v != nil {
+		resp, err := ConvListFromORMWithoutPtr(v, ConvAccountOrderJewelleryFromORM)
+		if err != nil {
+			return nil, err
+		}
+		ao.AccountOrderJewelleries = resp
+	}
+	if v := orm.R.OrderAccountOrderAddress; v != nil {
+		model, err := ConvAccountOrderAddressFromORM(v)
+		if err != nil {
+			return nil, err
+		}
+		ao.AccountOrderAddress = *model
+	}
+	return ao, nil
+}
+
+func ConvAccountOrderJewelleryFromORM(orm *orm.AccountOrderJewellery) (*AccountOrderJewellery, error) {
+	oID, err := uuid.Parse(orm.OrderID)
+	if err != nil {
+		return nil, err
+	}
+	jID, err := uuid.Parse(orm.JewelleryID)
+	if err != nil {
+		return nil, err
+	}
+	aoj := &AccountOrderJewellery{}
+	aoj.OrderId = oID
+	aoj.JewelleryId = jID
+	aoj.Quantity = orm.Quantity
+	aoj.Price = orm.Price
+	aoj.CreatedAt = orm.CreatedAt
+	aoj.UpdatedAt = orm.UpdatedAt
+	return aoj, nil
+}
+
+func ConvAccountOrderAddressFromORM(orm *orm.AccountOrderAddress) (*AccountOrderAddress, error) {
+	aoa := &AccountOrderAddress{}
+	aoa.CountryCode = orm.CountryCode
+	if v := orm.PostCode; v.Valid {
+		aoa.PostCode = &v.String
+	}
+	if v := orm.State; v.Valid {
+		aoa.State = &v.String
+	}
+	aoa.City = orm.City
+	aoa.Address = orm.Address
+	if v := orm.Remarks; v.Valid {
+		aoa.Remarks = &v.String
+	}
+	return aoa, nil
 }

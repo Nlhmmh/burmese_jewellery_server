@@ -747,3 +747,48 @@
     responses:
       200:
         description: OK
+
+/api/order:
+  get:
+    tags:
+      - app
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountOrder"
+  post:
+    tags:
+      - app
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OrderPostParam"
+    responses:
+      200:
+        description: OK
+/api/order/{account_order_id}:
+  get:
+    tags:
+      - app
+    parameters:
+      - in: path
+        name: account_order_id
+        required: true
+        schema:
+          $ref: "#/components/schemas/ID"
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountOrder"

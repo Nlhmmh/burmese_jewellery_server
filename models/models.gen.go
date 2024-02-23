@@ -45,6 +45,15 @@ const (
 	Unspecified Gender = "unspecified"
 )
 
+// Defines values for OrderStatus.
+const (
+	Cancelled  OrderStatus = "cancelled"
+	Delivered  OrderStatus = "delivered"
+	Proceeding OrderStatus = "proceeding"
+	Returned   OrderStatus = "returned"
+	Shipped    OrderStatus = "shipped"
+)
+
 // Account defines model for Account.
 type Account struct {
 	AccountId     openapi_types.UUID   `json:"account_id"`
@@ -111,6 +120,37 @@ type AccountFavourite struct {
 	AccountId   openapi_types.UUID `json:"account_id"`
 	CreatedAt   time.Time          `json:"created_at"`
 	JewelleryId openapi_types.UUID `json:"jewellery_id"`
+	UpdatedAt   time.Time          `json:"updated_at"`
+}
+
+// AccountOrder defines model for AccountOrder.
+type AccountOrder struct {
+	AccountId               openapi_types.UUID      `json:"account_id"`
+	AccountOrderAddress     AccountOrderAddress     `json:"account_order_address"`
+	AccountOrderJewelleries []AccountOrderJewellery `json:"account_order_jewelleries"`
+	CreatedAt               time.Time               `json:"created_at"`
+	OrderId                 openapi_types.UUID      `json:"order_id"`
+	OrderStatus             OrderStatus             `json:"order_status"`
+	UpdatedAt               time.Time               `json:"updated_at"`
+}
+
+// AccountOrderAddress defines model for AccountOrderAddress.
+type AccountOrderAddress struct {
+	Address     string  `json:"address"`
+	City        string  `json:"city"`
+	CountryCode string  `json:"country_code"`
+	PostCode    *string `json:"post_code,omitempty"`
+	Remarks     *string `json:"remarks,omitempty"`
+	State       *string `json:"state,omitempty"`
+}
+
+// AccountOrderJewellery defines model for AccountOrderJewellery.
+type AccountOrderJewellery struct {
+	CreatedAt   time.Time          `json:"created_at"`
+	JewelleryId openapi_types.UUID `json:"jewellery_id"`
+	OrderId     openapi_types.UUID `json:"order_id"`
+	Price       int                `json:"price"`
+	Quantity    int                `json:"quantity"`
 	UpdatedAt   time.Time          `json:"updated_at"`
 }
 
@@ -311,6 +351,14 @@ type MaterialPutParam struct {
 	Name string `json:"name"`
 }
 
+// OrderPostParam defines model for OrderPostParam.
+type OrderPostParam struct {
+	Address AccountOrderAddress `json:"address"`
+}
+
+// OrderStatus defines model for OrderStatus.
+type OrderStatus string
+
 // GetApiAdminAccountParams defines parameters for GetApiAdminAccount.
 type GetApiAdminAccountParams struct {
 	Offset        int            `form:"offset" json:"offset"`
@@ -415,6 +463,9 @@ type PostApiCartJSONRequestBody = CartPostParam
 
 // PostApiFavouriteJSONRequestBody defines body for PostApiFavourite for application/json ContentType.
 type PostApiFavouriteJSONRequestBody = FavouritePostParam
+
+// PostApiOrderJSONRequestBody defines body for PostApiOrder for application/json ContentType.
+type PostApiOrderJSONRequestBody = OrderPostParam
 
 // PostApiProfileJSONRequestBody defines body for PostApiProfile for application/json ContentType.
 type PostApiProfileJSONRequestBody = AccountProfilePostParam

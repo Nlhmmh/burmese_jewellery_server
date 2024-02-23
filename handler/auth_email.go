@@ -95,12 +95,12 @@ func (*Handler) PostApiAuthEmailLogin(c *gin.Context) {
 		return
 	}
 	if !apExists {
-		ers.UserWithEmailNotExist.New(errors.New("account with email does not exist")).Abort(c)
+		ers.UserWithEmailNotExist.Abort(c)
 		return
 	}
 
 	if v := a.Password; !v.Valid {
-		ers.PasswordWrong.New(errors.New("account password is null")).Abort(c)
+		ers.InternalServer.New(errors.New("account password is null")).Abort(c)
 		return
 	}
 

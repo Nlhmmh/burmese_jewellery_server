@@ -753,6 +753,50 @@ paths:
       responses:
         200:
           description: OK
+  /api/order:
+    get:
+      tags:
+        - app
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountOrder'
+    post:
+      tags:
+        - app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderPostParam'
+      responses:
+        200:
+          description: OK
+  /api/order/{account_order_id}:
+    get:
+      tags:
+        - app
+      parameters:
+        - in: path
+          name: account_order_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountOrder'
 components:
   parameters: null
   schemas:
@@ -1481,3 +1525,116 @@ components:
       required:
         - jewellery_id
         - is_favourite
+    OrderStatus:
+      type: string
+      maxLength: 255
+      example: delivered
+      enum:
+        - proceeding
+        - shipped
+        - delivered
+        - returned
+        - cancelled
+    AccountOrder:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        account_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        order_status:
+          $ref: '#/components/schemas/OrderStatus'
+        created_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        updated_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        account_order_jewelleries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountOrderJewellery'
+        account_order_address:
+          $ref: '#/components/schemas/AccountOrderAddress'
+      required:
+        - order_id
+        - account_id
+        - order_status
+        - created_at
+        - updated_at
+        - account_order_jewelleries
+        - account_order_address
+    AccountOrderJewellery:
+      type: object
+      nullable: true
+      properties:
+        order_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        jewellery_id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        quantity:
+          type: integer
+          format: int
+          example: 100
+        price:
+          type: integer
+          format: int
+          example: 100
+        created_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+        updated_at:
+          type: string
+          format: date-time
+          example: 2020-01-01 00:00:00+00:00
+      required:
+        - order_id
+        - jewellery_id
+        - quantity
+        - price
+        - created_at
+        - updated_at
+    AccountOrderAddress:
+      type: object
+      properties:
+        country_code:
+          type: string
+          maxLength: 2
+          example: JP
+        post_code:
+          type: string
+          example: JP
+        state:
+          type: string
+          example: JP
+        city:
+          type: string
+          example: JP
+        address:
+          type: string
+          example: JP
+        remarks:
+          type: string
+          example: JP
+      required:
+        - country_code
+        - city
+        - address
+    OrderPostParam:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AccountOrderAddress'
+      required:
+        - address

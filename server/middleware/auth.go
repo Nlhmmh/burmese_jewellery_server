@@ -3,8 +3,6 @@ package middleware
 import (
 	"burmese_jewellery/auth"
 	"burmese_jewellery/ers"
-	"errors"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,7 +12,7 @@ func Auth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		fullPath := c.FullPath()
 
-		if auth.CheckJWTWhiteList(fullPath) || auth.CheckContainWhiteList(fullPath) {
+		if auth.CheckWhiteList(fullPath) || auth.CheckContainWhiteList(fullPath) {
 			c.Next()
 			return
 		}
@@ -31,19 +29,33 @@ func Auth() gin.HandlerFunc {
 			return
 		}
 		claimsVal := *claims
-		fmt.Println(claimsVal.UserID)
 		auth.SetUserID(c, claimsVal.UserID)
 
-		if auth.CheckAdminList(fullPath) && !(claims.Role == auth.RoleAdmin || claims.Role == auth.RoleStaff) {
-			ers.UnAuthorized.New(errors.New("not admin staff")).Abort(c)
+		if auth.CheckAdminList(fullPath) {
+			if claims.Role == auth.RoleAdmin || claims.Role == auth.RoleStaff {
+				c.Next()
+				return
+			}
+			ers.UnAuthorizedAdminStaff.Abort(c)
 			return
 		}
 
-		if auth.CheckAdminRoleAdminOnlyList(fullPath) && claims.Role != auth.RoleAdmin {
-			ers.UnAuthorized.New(errors.New("not admin")).Abort(c)
+		if auth.CheckAdminRoleAdminOnlyList(fullPath) {
+			if claims.Role == auth.RoleAdmin {
+				c.Next()
+				return
+			}
+			ers.UnAuthorizedAdmin.Abort(c)
 			return
 		}
 
-		c.Next()
+		if auth.CheckUserList(fullPath) {
+			if claims.Role == auth.RoleUser {
+				c.Next()
+				return
+			}
+		}
+
+		ers.UnAuthorized.Abort(c)
 	}
 }
