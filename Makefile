@@ -30,6 +30,10 @@ lint: ## Lint
 precommit: ## precommit
 	pre-commit run
 
+.PHONY: test
+test: ## test
+	go test ./...
+
 .PHONY: merge
 merge: ## Merge swagger into single file
 	cd ./swagger && merger -f index.yml -o swagger.yml

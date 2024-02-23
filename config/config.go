@@ -29,7 +29,7 @@ type Config struct {
 	OTPExpiredMinutes int64 `yaml:"otpotp_expired_minutes_expired_hours"`
 }
 
-func init() {
+func Init() {
 	configFile, err := os.ReadFile(configFilePath)
 	if err != nil {
 		panic(err)
@@ -38,6 +38,10 @@ func init() {
 	if err := yaml.Unmarshal(configFile, &config); err != nil {
 		panic(err)
 	}
+}
+
+func InitMock() {
+	config.OTPExpiredMinutes = 3
 }
 
 func Get() Config {

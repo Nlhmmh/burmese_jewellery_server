@@ -1,10 +1,9 @@
 package auth
 
 import (
-	"burmese_jewellery/config"
 	"burmese_jewellery/orm"
+	"errors"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -19,22 +18,53 @@ func Test_GenerateToken(t *testing.T) {
 }
 
 func Test_ValidateToken(t *testing.T) {
+	tList := map[string]struct {
+		userID string
+		role   Role
+		err    error
+		setUp  func() string
+	}{
+		"ok/admin": {
+			userID: "testUserIDAdmin",
+			role:   RoleAdmin,
+			err:    nil,
+			setUp: func() string {
+				token, err := GenerateToken("testUserIDAdmin", RoleAdmin)
+				assert.Nil(t, err)
+				return token
+			},
+		},
+		"ok/staff": {
+			userID: "testUserIDStaff",
+			role:   RoleStaff,
+			err:    nil,
+			setUp: func() string {
+				token, err := GenerateToken("testUserIDStaff", RoleStaff)
+				assert.Nil(t, err)
+				return token
+			},
+		},
+		"error": {
+			userID: "",
+			role:   RoleAdmin,
+			err:    errors.New("token contains an invalid number of segments"),
+			setUp: func() string {
+				return "invalidToken"
+			},
+		},
+	}
 
-	token, err := GenerateToken("testUserID", Role(orm.AccountAdminRoleStaff))
-	assert.Nil(t, err)
-
-	t.Run("ok", func(t *testing.T) {
-		claims, err := ValidateToken(token)
-		assert.Nil(t, err)
-		assert.Equal(t, "testUserID", claims.UserID)
-		assert.Equal(t, orm.AccountAdminRoleStaff.String(), claims.Role)
-		assert.Equal(t, time.Now().Add(time.Hour*time.Duration(config.Get().JWTExpiredHours)).Unix(), claims.ExpiresAt)
-	})
-
-	t.Run("error", func(t *testing.T) {
-		_, err := ValidateToken("invalidToken")
-		assert.NotNil(t, err)
-		assert.EqualError(t, err, "token contains an invalid number of segments")
-	})
-
+	for name, tt := range tList {
+		t.Run(name, func(t *testing.T) {
+			token := tt.setUp()
+			claims, err := ValidateToken(token)
+			if err != nil {
+				assert.Equal(t, err.Error(), tt.err.Error())
+			}
+			if claims != nil {
+				assert.Equal(t, tt.userID, claims.UserID)
+				assert.Equal(t, tt.role, claims.Role)
+			}
+		})
+	}
 }

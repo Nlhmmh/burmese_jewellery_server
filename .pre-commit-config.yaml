@@ -19,3 +19,8 @@ repos:
         language: system
         entry: make lint
         stages: [commit]
+      - id: test
+        name: test
+        language: system
+        entry: make test
+        stages: [commit]

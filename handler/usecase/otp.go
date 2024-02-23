@@ -28,8 +28,12 @@ func GenOTP() string {
 }
 
 func IsOTPExpired(otpUpdatedAt time.Time) bool {
-	return time.Now().After(
-		otpUpdatedAt.Add(
+	fmt.Println("now", time.Now())
+	fmt.Println("otpUpdatedAt", otpUpdatedAt.Add(
+		time.Minute*time.Duration(config.Get().OTPExpiredMinutes),
+	))
+	return time.Now().Local().After(
+		otpUpdatedAt.Local().Add(
 			time.Minute * time.Duration(config.Get().OTPExpiredMinutes),
 		),
 	)

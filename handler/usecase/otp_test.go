@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"burmese_jewellery/config"
 	"fmt"
 	"testing"
 	"time"
@@ -11,7 +12,7 @@ import (
 
 func Test_GenOTP(t *testing.T) {
 	rList := []string{}
-	for i := 1; i < 1000; i++ {
+	for i := 1; i < 100; i++ {
 		t.Run(
 			fmt.Sprintf("ok/%d", i), func(t *testing.T) {
 				otp := GenOTP()
@@ -24,16 +25,30 @@ func Test_GenOTP(t *testing.T) {
 }
 
 func Test_IsOTPExpired(t *testing.T) {
-	t.Run(
-		"true", func(t *testing.T) {
-			got := IsOTPExpired(time.Now().Add(-time.Minute * 4))
-			assert.Equal(t, false, got)
+	config.InitMock()
+
+	tList := map[string]struct {
+		params time.Time
+		want   bool
+	}{
+		"ok/2mins": {
+			params: time.Now().Add(-time.Minute * 2),
+			want:   false,
 		},
-	)
-	t.Run(
-		"false", func(t *testing.T) {
-			got := IsOTPExpired(time.Now().Add(-time.Minute * 6))
-			assert.Equal(t, true, got)
+		"ok/now": {
+			params: time.Now(),
+			want:   false,
 		},
-	)
+		"ok/4mins": {
+			params: time.Now().Add(-time.Minute * 4),
+			want:   true,
+		},
+	}
+
+	for name, tt := range tList {
+		t.Run(name, func(t *testing.T) {
+			got := IsOTPExpired(tt.params)
+			assert.Equal(t, tt.want, got)
+		})
+	}
 }

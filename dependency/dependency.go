@@ -1,6 +1,7 @@
 package dependency
 
 import (
+	"burmese_jewellery/config"
 	"burmese_jewellery/env"
 	"fmt"
 
@@ -23,6 +24,8 @@ func NewDependency() error {
 	boil.SetDB(postgresDB)
 	boil.DebugMode = true
 	boil.DebugWriter = log.Logger
+
+	config.Init()
 
 	return nil
 }
