@@ -3,12 +3,13 @@ package handler
 import (
 	"burmese_jewellery/auth"
 	"burmese_jewellery/ers"
+	"burmese_jewellery/handler/usecase"
+	"burmese_jewellery/mail"
 	"burmese_jewellery/models"
 	"burmese_jewellery/orm"
 	"burmese_jewellery/tx"
 	"database/sql"
 	"errors"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -53,10 +54,22 @@ func (*Handler) PostApiAuthEmailRegister(c *gin.Context) {
 		isRegistered = apExists
 
 		if !isRegistered {
-			// TODO: generate otp
-			// TODO: store otp to match in account table
-			// TODO: send otp to user email
-			fmt.Println("todo")
+			// generate otp
+			otp := usecase.GenOTP()
+
+			// store otp to match in account table
+			aOTP := &orm.AccountOtp{
+				AccountID: a.AccountID,
+				Otp:       otp,
+			}
+			if err := aOTP.Insert(c, tx, boil.Infer()); err != nil {
+				return ers.InternalServer.New(err)
+			}
+
+			// send otp to user email
+			if err := mail.NewMail().SendMail(string(req.Mail), otp); err != nil {
+				return ers.InternalServer.New(err)
+			}
 		}
 
 		return nil

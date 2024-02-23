@@ -4,3 +4,6 @@ google:
     client_secret: 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
     redirect_url: api/auth/google/callback
 jwt_expired_hours: 48
+mail:
+  sender_mail: nlh2012.8@gmail.com
+  sender_password: kymy uzuf mxpd wamp # Generated App Password

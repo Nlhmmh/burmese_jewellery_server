@@ -20,6 +20,11 @@ type Config struct {
 	} `yaml:"google"`
 
 	JWTExpiredHours int64 `yaml:"jwt_expired_hours"`
+
+	Mail struct {
+		SenderMail     string `yaml:"sender_mail"`
+		SenderPassword string `yaml:"sender_password"`
+	} `yaml:"mail"`
 }
 
 func init() {

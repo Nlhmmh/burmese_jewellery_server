@@ -10,6 +10,7 @@ var TableNames = struct {
 	AccountOrderAddresses   string
 	AccountOrderJewelleries string
 	AccountOrders           string
+	AccountOtps             string
 	AccountProfiles         string
 	Accounts                string
 	Categories              string
@@ -26,6 +27,7 @@ var TableNames = struct {
 	AccountOrderAddresses:   "account_order_addresses",
 	AccountOrderJewelleries: "account_order_jewelleries",
 	AccountOrders:           "account_orders",
+	AccountOtps:             "account_otps",
 	AccountProfiles:         "account_profiles",
 	Accounts:                "accounts",
 	Categories:              "categories",

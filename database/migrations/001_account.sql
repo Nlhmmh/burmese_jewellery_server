@@ -44,3 +44,12 @@ CREATE TABLE IF NOT EXISTS account_profiles (
 	CONSTRAINT pk_account_profiles PRIMARY KEY (account_id),
 	CONSTRAINT fk_account_profiles_account_id FOREIGN KEY(account_id) REFERENCES accounts(account_id)
 );
+
+CREATE TABLE IF NOT EXISTS account_otps (
+	account_id     UUID NOT NULL,
+	otp            CHAR(6) NOT NULL,
+	created_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT pk_account_otps PRIMARY KEY (account_id),
+	CONSTRAINT fk_account_otps_account_id FOREIGN KEY(account_id) REFERENCES accounts(account_id)
+);

@@ -71,13 +71,4 @@ cp ./planter /Users/naylinhtet/.goenv/shims
 Implement go-migration
 https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
 
-
-
-
-
-10 users
-6 has matched name
-
-offset 0, limit 2 -> 1 user, 2 user
-offset 2, limit 2 -> 3 user, 4 user
-offset 4, limit 2 -> 5 user, 6 user
+Test Coverage

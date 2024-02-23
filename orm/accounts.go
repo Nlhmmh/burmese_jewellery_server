@@ -178,11 +178,13 @@ var AccountWhere = struct {
 
 // AccountRels is where relationship names are stored.
 var AccountRels = struct {
+	AccountOtp             string
 	AccountProfile         string
 	AccountCartJewelleries string
 	AccountFavourites      string
 	AccountOrders          string
 }{
+	AccountOtp:             "AccountOtp",
 	AccountProfile:         "AccountProfile",
 	AccountCartJewelleries: "AccountCartJewelleries",
 	AccountFavourites:      "AccountFavourites",
@@ -191,6 +193,7 @@ var AccountRels = struct {
 
 // accountR is where relationships are stored.
 type accountR struct {
+	AccountOtp             *AccountOtp               `boil:"AccountOtp" json:"AccountOtp" toml:"AccountOtp" yaml:"AccountOtp"`
 	AccountProfile         *AccountProfile           `boil:"AccountProfile" json:"AccountProfile" toml:"AccountProfile" yaml:"AccountProfile"`
 	AccountCartJewelleries AccountCartJewellerySlice `boil:"AccountCartJewelleries" json:"AccountCartJewelleries" toml:"AccountCartJewelleries" yaml:"AccountCartJewelleries"`
 	AccountFavourites      AccountFavouriteSlice     `boil:"AccountFavourites" json:"AccountFavourites" toml:"AccountFavourites" yaml:"AccountFavourites"`
@@ -200,6 +203,13 @@ type accountR struct {
 // NewStruct creates a new relationship struct
 func (*accountR) NewStruct() *accountR {
 	return &accountR{}
+}
+
+func (r *accountR) GetAccountOtp() *AccountOtp {
+	if r == nil {
+		return nil
+	}
+	return r.AccountOtp
 }
 
 func (r *accountR) GetAccountProfile() *AccountProfile {
@@ -539,6 +549,17 @@ func (q accountQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bo
 	return count > 0, nil
 }
 
+// AccountOtp pointed to by the foreign key.
+func (o *Account) AccountOtp(mods ...qm.QueryMod) accountOtpQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"account_id\" = ?", o.AccountID),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	return AccountOtps(queryMods...)
+}
+
 // AccountProfile pointed to by the foreign key.
 func (o *Account) AccountProfile(mods ...qm.QueryMod) accountProfileQuery {
 	queryMods := []qm.QueryMod{
@@ -590,6 +611,115 @@ func (o *Account) AccountOrders(mods ...qm.QueryMod) accountOrderQuery {
 	)
 
 	return AccountOrders(queryMods...)
+}
+
+// LoadAccountOtp allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-1 relationship.
+func (accountL) LoadAccountOtp(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAccount interface{}, mods queries.Applicator) error {
+	var slice []*Account
+	var object *Account
+
+	if singular {
+		var ok bool
+		object, ok = maybeAccount.(*Account)
+		if !ok {
+			object = new(Account)
+			ok = queries.SetFromEmbeddedStruct(&object, &maybeAccount)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", object, maybeAccount))
+			}
+		}
+	} else {
+		s, ok := maybeAccount.(*[]*Account)
+		if ok {
+			slice = *s
+		} else {
+			ok = queries.SetFromEmbeddedStruct(&slice, maybeAccount)
+			if !ok {
+				return errors.New(fmt.Sprintf("failed to set %T from embedded struct %T", slice, maybeAccount))
+			}
+		}
+	}
+
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &accountR{}
+		}
+		args = append(args, object.AccountID)
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &accountR{}
+			}
+
+			for _, a := range args {
+				if a == obj.AccountID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.AccountID)
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`account_otps`),
+		qm.WhereIn(`account_otps.account_id in ?`, args...),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load AccountOtp")
+	}
+
+	var resultSlice []*AccountOtp
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice AccountOtp")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for account_otps")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for account_otps")
+	}
+
+	if len(accountOtpAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.AccountOtp = foreign
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.AccountID == foreign.AccountID {
+				local.R.AccountOtp = foreign
+				break
+			}
+		}
+	}
+
+	return nil
 }
 
 // LoadAccountProfile allows an eager lookup of values, cached into the
@@ -1008,6 +1138,55 @@ func (accountL) LoadAccountOrders(ctx context.Context, e boil.ContextExecutor, s
 				break
 			}
 		}
+	}
+
+	return nil
+}
+
+// SetAccountOtpG of the account to the related item.
+// Sets o.R.AccountOtp to related.
+// Uses the global database handle.
+func (o *Account) SetAccountOtpG(ctx context.Context, insert bool, related *AccountOtp) error {
+	return o.SetAccountOtp(ctx, boil.GetContextDB(), insert, related)
+}
+
+// SetAccountOtp of the account to the related item.
+// Sets o.R.AccountOtp to related.
+func (o *Account) SetAccountOtp(ctx context.Context, exec boil.ContextExecutor, insert bool, related *AccountOtp) error {
+	var err error
+
+	if insert {
+		related.AccountID = o.AccountID
+
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
+	} else {
+		updateQuery := fmt.Sprintf(
+			"UPDATE \"account_otps\" SET %s WHERE %s",
+			strmangle.SetParamNames("\"", "\"", 1, []string{"account_id"}),
+			strmangle.WhereClause("\"", "\"", 2, accountOtpPrimaryKeyColumns),
+		)
+		values := []interface{}{o.AccountID, related.AccountID}
+
+		if boil.IsDebug(ctx) {
+			writer := boil.DebugWriterFrom(ctx)
+			fmt.Fprintln(writer, updateQuery)
+			fmt.Fprintln(writer, values)
+		}
+		if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+			return errors.Wrap(err, "failed to update foreign table")
+		}
+
+		related.AccountID = o.AccountID
+	}
+
+	if o.R == nil {
+		o.R = &accountR{
+			AccountOtp: related,
+		}
+	} else {
+		o.R.AccountOtp = related
 	}
 
 	return nil
