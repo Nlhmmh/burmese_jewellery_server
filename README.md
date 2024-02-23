@@ -4,8 +4,9 @@ Burmese Jewellery Server
 ---
 
 ## Documentation
-https://naylinhtet.atlassian.net/wiki/spaces/BJ1/pages/4980744/Backend
-https://orange-moon-6960.postman.co/workspace/Burmese-Jewellery~fc558fc1-9818-4d2a-8307-4cbfb453797a/overview
+- https://naylinhtet.atlassian.net/wiki/spaces/BJ1/pages/4980744/Backend
+- https://orange-moon-6960.postman.co/workspace/Burmese-Jewellery~fc558fc1-9818-4d2a-8307-4cbfb453797a/overview
+- https://htmlpreview.github.io/?https://github.com/Nlhmmh/burmese_jewellery_server/blob/dev/swagger/static/index.html
 
 ## Development
 - Golang HTTP Server
@@ -62,13 +63,13 @@ cp ./planter /Users/naylinhtet/.goenv/shims
 ---
 
 ## Misc
-[Country Codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
-[Currency Codes](https://en.wikipedia.org/wiki/ISO_4217)
+- [Country Codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+- [Currency Codes](https://en.wikipedia.org/wiki/ISO_4217)
 
 ---
 
 ## TODO
-Implement go-migration
+- Implement go-migration
 https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
 
-Test Coverage
+- Test Coverage
