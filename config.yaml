@@ -7,3 +7,4 @@ jwt_expired_hours: 48
 mail:
   sender_mail: nlh2012.8@gmail.com
   sender_password: kymy uzuf mxpd wamp # Generated App Password
+otp_expired_minutes: 3

@@ -3,6 +3,7 @@ package usecase
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/exp/slices"
@@ -20,4 +21,19 @@ func Test_GenOTP(t *testing.T) {
 			},
 		)
 	}
+}
+
+func Test_IsOTPExpired(t *testing.T) {
+	t.Run(
+		"true", func(t *testing.T) {
+			got := IsOTPExpired(time.Now().Add(-time.Minute * 4))
+			assert.Equal(t, false, got)
+		},
+	)
+	t.Run(
+		"false", func(t *testing.T) {
+			got := IsOTPExpired(time.Now().Add(-time.Minute * 6))
+			assert.Equal(t, true, got)
+		},
+	)
 }

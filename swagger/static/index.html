@@ -223,6 +223,8 @@
   <h4><a href="#App">App</a></h4>
   <ul>
   <li><a href="#apiAuthEmailLoginPost"><code><span class="http-method">post</span> /api/auth/email/login</code></a></li>
+  <li><a href="#apiAuthEmailOtpPost"><code><span class="http-method">post</span> /api/auth/email/otp</code></a></li>
+  <li><a href="#apiAuthEmailOtpResendPost"><code><span class="http-method">post</span> /api/auth/email/otp/resend</code></a></li>
   <li><a href="#apiAuthEmailRegisterPost"><code><span class="http-method">post</span> /api/auth/email/register</code></a></li>
   <li><a href="#apiAuthGoogleCallbackGet"><code><span class="http-method">get</span> /api/auth/google/callback</code></a></li>
   <li><a href="#apiAuthGoogleLoginGet"><code><span class="http-method">get</span> /api/auth/google/login</code></a></li>
@@ -1244,6 +1246,76 @@
     <h3 class="field-label">Request body</h3>
     <div class="field-items">
       <div class="param">body <a href="#AuthEmailParam">AuthEmailParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAuthEmailOtpPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/auth/email/otp</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAuthEmailOtpPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AuthEmailOTPParam">AuthEmailOTPParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAuthEmailOtpResendPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/auth/email/otp/resend</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAuthEmailOtpResendPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AuthEmailOTPResendParam">AuthEmailOTPResendParam</a> (required)</div>
 
             <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
                 </div>  <!-- field-items -->
@@ -2307,6 +2379,8 @@
     <li><a href="#AccountStatus"><code>AccountStatus</code></a></li>
     <li><a href="#AccountStatusPutParam"><code>AccountStatusPutParam</code></a></li>
     <li><a href="#AccountWithProfile"><code>AccountWithProfile</code></a></li>
+    <li><a href="#AuthEmailOTPParam"><code>AuthEmailOTPParam</code></a></li>
+    <li><a href="#AuthEmailOTPResendParam"><code>AuthEmailOTPResendParam</code></a></li>
     <li><a href="#AuthEmailParam"><code>AuthEmailParam</code></a></li>
     <li><a href="#AuthResp"><code>AuthResp</code></a></li>
     <li><a href="#CartPostParam"><code>CartPostParam</code></a></li>
@@ -2538,6 +2612,24 @@
     <div class="field-items">
       <div class="param">account </div><div class="param-desc"><span class="param-type"><a href="#Account">Account</a></span>  </div>
 <div class="param">account_profile </div><div class="param-desc"><span class="param-type"><a href="#AccountProfile">AccountProfile</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AuthEmailOTPParam"><code>AuthEmailOTPParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">mail </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: email</div>
+          <div class="param-desc"><span class="param-type">example: test@gmail.com</span></div>
+<div class="param">otp </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 111111</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AuthEmailOTPResendParam"><code>AuthEmailOTPResendParam</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">mail </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: email</div>
+          <div class="param-desc"><span class="param-type">example: test@gmail.com</span></div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">

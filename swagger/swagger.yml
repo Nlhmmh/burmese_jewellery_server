@@ -106,6 +106,32 @@ paths:
       responses:
         200:
           description: OK
+  /api/auth/email/otp:
+    post:
+      tags:
+        - app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthEmailOTPParam'
+      responses:
+        200:
+          description: OK
+  /api/auth/email/otp/resend:
+    post:
+      tags:
+        - app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthEmailOTPResendParam'
+      responses:
+        200:
+          description: OK
   /api/admin/login:
     post:
       summary: Login as admin user
@@ -1445,6 +1471,31 @@ components:
       required:
         - mail
         - password
+    AuthEmailOTPParam:
+      type: object
+      properties:
+        mail:
+          type: string
+          maxLength: 255
+          format: email
+          example: test@gmail.com
+        otp:
+          type: string
+          maxLength: 6
+          example: '111111'
+      required:
+        - mail
+        - otp
+    AuthEmailOTPResendParam:
+      type: object
+      properties:
+        mail:
+          type: string
+          maxLength: 255
+          format: email
+          example: test@gmail.com
+      required:
+        - mail
     AccountCartJewellery:
       type: object
       properties:

@@ -9,6 +9,8 @@ var (
 
 		"/api/admin/login",
 		"/api/auth/email/register",
+		"/api/auth/email/otp",
+		"/api/auth/email/otp/resend",
 		"/api/auth/email/login",
 		"/api/auth/google/login",
 		"/api/auth/google/callback",

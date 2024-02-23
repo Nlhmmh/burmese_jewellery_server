@@ -89,6 +89,32 @@
     responses:
       200:
         description: OK
+/api/auth/email/otp:
+  post:
+    tags:
+      - app
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthEmailOTPParam"
+    responses:
+      200:
+        description: OK
+/api/auth/email/otp/resend:
+  post:
+    tags:
+      - app
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthEmailOTPResendParam"
+    responses:
+      200:
+        description: OK
 
 /api/admin/login:
   post:

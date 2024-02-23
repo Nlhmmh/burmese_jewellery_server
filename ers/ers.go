@@ -22,6 +22,9 @@ var (
 	UserWithEmailAlreadyExist = &ErrResp{statusCode: http.StatusConflict, Code: 31, Message: "User with email already exists"}
 	PasswordWrong             = &ErrResp{statusCode: http.StatusBadRequest, Code: 32, Message: "Password is wrong"}
 	DisplayNameAlreadyExist   = &ErrResp{statusCode: http.StatusConflict, Code: 33, Message: "Display name already exists"}
+	OTPNotExist               = &ErrResp{statusCode: http.StatusBadRequest, Code: 34, Message: "OTP does not exist"}
+	OTPWrong                  = &ErrResp{statusCode: http.StatusBadRequest, Code: 35, Message: "OTP is wrong"}
+	OTPExpired                = &ErrResp{statusCode: http.StatusBadRequest, Code: 36, Message: "OTP is expried"}
 
 	ContentTitleAlreadyExist = &ErrResp{statusCode: http.StatusConflict, Code: 90, Message: "Content title already exists"}
 	CartEmpty                = &ErrResp{statusCode: http.StatusBadRequest, Code: 91, Message: "Cart is empty"}

@@ -187,6 +187,17 @@ type AccountWithProfile struct {
 	AccountProfile AccountProfile `json:"account_profile"`
 }
 
+// AuthEmailOTPParam defines model for AuthEmailOTPParam.
+type AuthEmailOTPParam struct {
+	Mail openapi_types.Email `json:"mail"`
+	Otp  string              `json:"otp"`
+}
+
+// AuthEmailOTPResendParam defines model for AuthEmailOTPResendParam.
+type AuthEmailOTPResendParam struct {
+	Mail openapi_types.Email `json:"mail"`
+}
+
 // AuthEmailParam defines model for AuthEmailParam.
 type AuthEmailParam struct {
 	Mail     openapi_types.Email `json:"mail"`
@@ -454,6 +465,12 @@ type PutApiAdminMaterialMaterialIdJSONRequestBody = MaterialPutParam
 
 // PostApiAuthEmailLoginJSONRequestBody defines body for PostApiAuthEmailLogin for application/json ContentType.
 type PostApiAuthEmailLoginJSONRequestBody = AuthEmailParam
+
+// PostApiAuthEmailOtpJSONRequestBody defines body for PostApiAuthEmailOtp for application/json ContentType.
+type PostApiAuthEmailOtpJSONRequestBody = AuthEmailOTPParam
+
+// PostApiAuthEmailOtpResendJSONRequestBody defines body for PostApiAuthEmailOtpResend for application/json ContentType.
+type PostApiAuthEmailOtpResendJSONRequestBody = AuthEmailOTPResendParam
 
 // PostApiAuthEmailRegisterJSONRequestBody defines body for PostApiAuthEmailRegister for application/json ContentType.
 type PostApiAuthEmailRegisterJSONRequestBody = AuthEmailParam

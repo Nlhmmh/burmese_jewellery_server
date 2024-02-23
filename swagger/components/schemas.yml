@@ -660,6 +660,31 @@ AuthEmailParam:
   required:
     - mail
     - password
+AuthEmailOTPParam:
+  type: object
+  properties:
+    mail:
+      type: string
+      maxLength: 255
+      format: email
+      example: test@gmail.com
+    otp:
+      type: string
+      maxLength: 6
+      example: "111111"
+  required:
+    - mail
+    - otp
+AuthEmailOTPResendParam:
+  type: object
+  properties:
+    mail:
+      type: string
+      maxLength: 255
+      format: email
+      example: test@gmail.com
+  required:
+    - mail
 
 AccountCartJewellery:
   type: object

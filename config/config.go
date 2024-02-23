@@ -25,6 +25,8 @@ type Config struct {
 		SenderMail     string `yaml:"sender_mail"`
 		SenderPassword string `yaml:"sender_password"`
 	} `yaml:"mail"`
+
+	OTPExpiredMinutes int64 `yaml:"otpotp_expired_minutes_expired_hours"`
 }
 
 func init() {

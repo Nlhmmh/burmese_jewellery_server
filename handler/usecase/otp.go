@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"burmese_jewellery/config"
 	cryptoRand "crypto/rand"
 	"fmt"
 	"math/big"
@@ -24,4 +25,12 @@ func GenSafeOTP() (string, error) {
 func GenOTP() string {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	return fmt.Sprintf("%06d", r.Intn(max-min)+min)
+}
+
+func IsOTPExpired(otpUpdatedAt time.Time) bool {
+	return time.Now().After(
+		otpUpdatedAt.Add(
+			time.Minute * time.Duration(config.Get().OTPExpiredMinutes),
+		),
+	)
 }
