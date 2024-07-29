@@ -23,6 +23,11 @@ make run
 #### API Documentation
 - Swagger
 - https://swagger.io/docs/specification/basic-structure/
+```
+make dk-up-swagger-ui
+```
+http://localhost:8030
+
 #### Database
 - Postgres
 - PlantUML ER Diagram

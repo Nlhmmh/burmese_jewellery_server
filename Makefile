@@ -20,6 +20,7 @@ init: ## Prepare Environment
 .PHONY: run
 run: ## Run server
 	make dk-up-db
+	make dk-up-swagger-ui
 	sh ./tools/server_run.sh
 
 .PHONY: lint
@@ -73,24 +74,24 @@ dk-down: ## Docker Down
 	docker compose down
 
 .PHONY: dk-tail-%
-dk-tail-%: ## Docker tail (server, db, pgadmin)
+dk-tail-%: ## Docker tail (server, db, pgadmin, swagger-ui)
 	docker compose logs ${@:dk-tail-%=%} -f
 
 .PHONY: dk-reload-%
-dk-reload-%: ## Docker Reload (server, db, pgadmin)
+dk-reload-%: ## Docker Reload (server, db, pgadmin, swagger-ui)
 	make dk-down-${@:dk-reload-%=%}
 	make dk-up-${@:dk-reload-%=%}
 
 .PHONY: dk-up-%
-dk-up-%: ## Docker Up (server, db, pgadmin)
+dk-up-%: ## Docker Up (server, db, pgadmin, swagger-ui)
 	docker compose up --build -d ${@:dk-up-%=%}
 
 .PHONY: dk-down-%
-dk-down-%: ## Docker Down (server, db, pgadmin)
+dk-down-%: ## Docker Down (server, db, pgadmin, swagger-ui)
 	docker compose down ${@:dk-down-%=%}
 
 .PHONY: dk-exec-%
-dk-exec-%: ## docker compose exec (server, db, pgadmin) bash
+dk-exec-%: ## docker compose exec (server, db, pgadmin, swagger-ui) bash
 	docker compose exec ${@:dk-exec-%=%} bash
 
 .PHONY: dk-connect-db

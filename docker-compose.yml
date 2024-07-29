@@ -41,3 +41,13 @@ services:
     ports:
       - "8077:8077"
     restart: on-failure
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: swagger-ui
+    ports:
+      - "8030:8080"
+    volumes:
+      - ./swagger/swagger.yml:/swagger.yml
+    environment:
+      SWAGGER_JSON: /swagger.yml
