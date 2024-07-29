@@ -1,6 +1,8 @@
 package env
 
 import (
+	"strings"
+
 	env_v9 "github.com/caarlos0/env/v9"
 )
 
@@ -17,9 +19,9 @@ type Env struct {
 		Domain   string `env:"HTTP_DOMAIN" envDefault:"localhost"`
 		Port     int64  `env:"HTTP_PORT" envDefault:"8077"`
 	}
-	AllowOrigins []string `env:"ALLOW_ORIGINS" envDefault:"[]"`
-	Debug        bool     `env:"DEBUG" envDefault:"false"`
-	UseTLS       bool     `env:"USE_TLS" envDefault:"false"`
+	AllowOrigins string `env:"ALLOW_ORIGINS" envDefault:""`
+	Debug        bool   `env:"DEBUG" envDefault:"false"`
+	UseTLS       bool   `env:"USE_TLS" envDefault:"false"`
 }
 
 var (
@@ -34,4 +36,11 @@ func init() {
 
 func Get() Env {
 	return env
+}
+
+func AllowOrigins() []string {
+	if env.AllowOrigins == "" {
+		return []string{}
+	}
+	return strings.Split(env.AllowOrigins, ";")
 }

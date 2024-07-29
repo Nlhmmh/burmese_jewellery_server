@@ -45,7 +45,7 @@ func NewServer() *server {
 		panic(err)
 	}
 	routerConfig := cors.DefaultConfig()
-	routerConfig.AllowOrigins = env.Get().AllowOrigins
+	routerConfig.AllowOrigins = env.AllowOrigins()
 	// config.AllowHeaders = []string{
 	// 	"Access-Control-Allow-Headers",
 	// 	"Content-Type",
