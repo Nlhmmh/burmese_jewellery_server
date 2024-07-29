@@ -11,11 +11,7 @@ Burmese Jewellery Server
 ## Development
 - Golang HTTP Server
 ```
-make dk-up-db
-make dk-up-pgadmin
 make run
-
-go mod edit -go=1.21
 ```
 
 #### Server
