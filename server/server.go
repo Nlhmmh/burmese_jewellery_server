@@ -39,22 +39,17 @@ func NewServer() *server {
 	router.Use(
 		gin.RecoveryWithWriter(log.Logger),
 		gin.LoggerWithConfig(gin.LoggerConfig{Output: log.Logger}),
-		middleware.Auth(),
 	)
+
+	routerConfig := cors.DefaultConfig()
+	routerConfig.AllowOrigins = env.AllowOrigins()
+	routerConfig.AddAllowHeaders("Access-Control-Allow-Origin")
+	router.Use(cors.New(routerConfig))
+
+	router.Use(middleware.Auth())
 	if err := router.SetTrustedProxies(nil); err != nil {
 		panic(err)
 	}
-	routerConfig := cors.DefaultConfig()
-	routerConfig.AllowOrigins = env.AllowOrigins()
-	// config.AllowHeaders = []string{
-	// 	"Access-Control-Allow-Headers",
-	// 	"Content-Type",
-	// 	"Content-Length",
-	// 	"Accept-Encoding",
-	// 	"X-CSRF-Token",
-	// 	"Authorization",
-	// }
-	router.Use(cors.New(routerConfig))
 
 	// Swagger
 	swagger, err := handler.GetSwagger()

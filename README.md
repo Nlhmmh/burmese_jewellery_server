@@ -4,7 +4,7 @@ Burmese Jewellery Server
 ---
 
 ## Documentation
-- https://naylinhtet.atlassian.net/wiki/spaces/BJ1/pages/4980744/Backend
+- https://naylinhtet.atlassian.net/wiki/spaces/BJ1/overview#Backend-Server
 - https://orange-moon-6960.postman.co/workspace/Burmese-Jewellery~fc558fc1-9818-4d2a-8307-4cbfb453797a/overview
 - https://htmlpreview.github.io/?https://github.com/Nlhmmh/burmese_jewellery_server/blob/dev/swagger/static/index.html
 
