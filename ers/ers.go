@@ -35,7 +35,7 @@ type ErrResp struct {
 	Message    string `json:"message"`
 	Error      string `json:"error"`
 	statusCode int    `json:"-"`
-	error      error  `json:"-"`
+	Err        error  `json:"-"`
 }
 
 func (e *ErrResp) New(err error) *ErrResp {
@@ -43,13 +43,13 @@ func (e *ErrResp) New(err error) *ErrResp {
 		statusCode: e.statusCode,
 		Code:       e.Code,
 		Message:    e.Message,
-		error:      err,
+		Err:        err,
 		Error:      err.Error(),
 	}
 }
 
 func (e *ErrResp) Abort(c *gin.Context) {
-	log.Error().Err(wrap(e.error)).Msg("")
+	log.Error().Err(wrap(e.Err)).Msg("")
 	c.AbortWithStatusJSON(e.statusCode, e)
 }
 
@@ -62,6 +62,6 @@ func (e *ErrResp) Rollback(c *gin.Context, tx *sql.Tx) {
 }
 
 func (e *ErrResp) TmpRedirect(c *gin.Context, redirectURL string) {
-	log.Error().Err(wrap(e.error)).Msg("")
+	log.Error().Err(wrap(e.Err)).Msg("")
 	c.Redirect(http.StatusTemporaryRedirect, "/api")
 }

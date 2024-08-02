@@ -19,6 +19,12 @@ ErrMsg:
 ID:
   type: string
   format: uuid
+Sort:
+  type: string
+  example: asc
+  enum:
+    - asc
+    - desc
 
 AccountAdminRole:
   type: string

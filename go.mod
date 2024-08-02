@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/caarlos0/env/v9 v9.0.0
-	github.com/deepmap/oapi-codegen v1.16.2
+	github.com/deepmap/oapi-codegen v1.16.3
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/friendsofgo/errors v0.9.2
 	github.com/getkin/kin-openapi v0.118.0

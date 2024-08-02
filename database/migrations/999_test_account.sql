@@ -1,7 +1,7 @@
-INSERT INTO account_admins (account_admin_id, mail, password, account_admin_role, account_admin_status)
+INSERT INTO account_admins (account_admin_id, mail, password, account_admin_role, account_admin_status, created_at, updated_at)
 VALUES
-  ('b106e919-ab73-4444-a86c-4b38ea22a0fe', 'admin@gmail.com', '$2a$10$On3UdcaBCZNYOwugRB9zuu5/AV8ywYVboiDqggpe0eaj8xK0Z1eTK', 'admin', 'active'),
-  ('b106e919-ab73-4444-a86c-4b38ea22a0f1', 'staff@gmail.com', '$2a$10$On3UdcaBCZNYOwugRB9zuu5/AV8ywYVboiDqggpe0eaj8xK0Z1eTK', 'staff', 'active')
+  ('b106e919-ab73-4444-a86c-4b38ea22a0fe', 'admin@gmail.com', '$2a$10$On3UdcaBCZNYOwugRB9zuu5/AV8ywYVboiDqggpe0eaj8xK0Z1eTK', 'admin', 'active', NOW(), NOW()),
+  ('b106e919-ab73-4444-a86c-4b38ea22a0f1', 'staff@gmail.com', '$2a$10$On3UdcaBCZNYOwugRB9zuu5/AV8ywYVboiDqggpe0eaj8xK0Z1eTK', 'staff', 'active', NOW() + INTERVAL '1 second', NOW() + INTERVAL '1 second')
 ;
 
 INSERT INTO categories (category_id, name, description, image_url)
@@ -29,10 +29,10 @@ VALUES
   ('b106e919-ab73-48f3-a86c-4b38ea22a888', 'John', 'Tester', '1990-11-01', 'male')
 ;
 
-INSERT INTO faqs (faq_id, question, answer, is_active)
+INSERT INTO faqs (faq_id, question, answer, is_active, created_at, updated_at)
 VALUES
-  ('c0979115-2bb3-4c50-a29d-64f3b8784888', 'How can I make returns or exchanges?', 'Products are accepted for credit or exchange in the U.S. within 30 days of purchase. ', true),
-  ('c0979115-2bb3-4c50-a29d-64f3b8784887', 'How do I return an online purchase?', 'Simply visit this page to print a return label.', false)
+  ('c0979115-2bb3-4c50-a29d-64f3b8784888', 'How can I make returns or exchanges?', 'Products are accepted for credit or exchange in the U.S. within 30 days of purchase. ', true, NOW(), NOW()),
+  ('c0979115-2bb3-4c50-a29d-64f3b8784887', 'How do I return an online purchase?', 'Simply visit this page to print a return label.', false, NOW() + INTERVAL '1 second', NOW() + INTERVAL '1 second')
 ;
 
 INSERT INTO jewelleries (jewellery_id, category_id, gem_id, material_id, name, description, price, image_url, is_published, quantity)

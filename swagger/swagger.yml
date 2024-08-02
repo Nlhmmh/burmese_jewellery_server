@@ -187,6 +187,10 @@ paths:
           name: account_admin_status
           schema:
             $ref: '#/components/schemas/AccountAdminStatus'
+        - in: query
+          name: sort
+          schema:
+            $ref: '#/components/schemas/Sort'
       responses:
         200:
           description: OK
@@ -292,6 +296,10 @@ paths:
           name: account_status
           schema:
             $ref: '#/components/schemas/AccountStatus'
+        - in: query
+          name: sort
+          schema:
+            $ref: '#/components/schemas/Sort'
       responses:
         200:
           description: OK
@@ -846,6 +854,12 @@ components:
     ID:
       type: string
       format: uuid
+    Sort:
+      type: string
+      example: asc
+      enum:
+        - asc
+        - desc
     AccountAdminRole:
       type: string
       maxLength: 255

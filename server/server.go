@@ -43,7 +43,10 @@ func NewServer() *server {
 
 	routerConfig := cors.DefaultConfig()
 	routerConfig.AllowOrigins = env.AllowOrigins()
-	routerConfig.AddAllowHeaders("Access-Control-Allow-Origin")
+	routerConfig.AddAllowHeaders(
+		"Access-Control-Allow-Origin",
+		"Authorization",
+	)
 	router.Use(cors.New(routerConfig))
 
 	router.Use(middleware.Auth())

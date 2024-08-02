@@ -7,6 +7,7 @@ import (
 	"burmese_jewellery/orm"
 	"burmese_jewellery/query"
 	"burmese_jewellery/tx"
+	"fmt"
 
 	"database/sql"
 	"errors"
@@ -54,25 +55,42 @@ func (h *Handler) PostApiAdminLogin(c *gin.Context) {
 
 // (GET /api/admin/account_admin)
 func (h *Handler) GetApiAdminAccountAdmin(c *gin.Context, params models.GetApiAdminAccountAdminParams) {
-	qList := []qm.QueryMod{
-		qm.Offset(params.Offset),
-		qm.Limit(params.Limit),
-		qm.OrderBy("created_at ASC"),
-	}
-	qList = query.EqUUID(qList, params.Id, orm.AccountAdminColumns.AccountAdminID)
-	qList = query.Like(qList, params.Mail, orm.AccountAdminColumns.Mail)
-	qList = query.Eq(qList, params.AccountAdminRole, orm.AccountAdminColumns.AccountAdminRole)
-	qList = query.Eq(qList, params.AccountAdminStatus, orm.AccountAdminColumns.AccountAdminStatus)
+	var resp GetResp
 
-	list, err := orm.AccountAdmins(qList...).AllG(c)
-	if err != nil {
-		ers.InternalServer.New(err).Abort(c)
-		return
-	}
+	if err := tx.Write(c, func(tx *sql.Tx) *ers.ErrResp {
+		qList := []qm.QueryMod{}
+		qList = query.EqUUID(qList, params.Id, orm.AccountAdminColumns.AccountAdminID)
+		qList = query.Like(qList, params.Mail, orm.AccountAdminColumns.Mail)
+		qList = query.Eq(qList, params.AccountAdminRole, orm.AccountAdminColumns.AccountAdminRole)
+		qList = query.Eq(qList, params.AccountAdminStatus, orm.AccountAdminColumns.AccountAdminStatus)
+		count, err := orm.AccountAdmins(qList...).Count(c, tx)
+		if err != nil {
+			return ers.InternalServer.New(err)
+		}
+		resp.Count = count
 
-	resp, err := models.ConvListFromORM(list, models.ConvAccountAdminFromORM)
-	if err != nil {
-		ers.InternalServer.New(err).Abort(c)
+		sort := models.Desc
+		if v := params.Sort; v != nil {
+			sort = *v
+		}
+		qList = append(qList, []qm.QueryMod{
+			qm.Offset(params.Offset),
+			qm.Limit(params.Limit),
+			qm.OrderBy(fmt.Sprintf("%s %s", orm.AccountAdminColumns.CreatedAt, string(sort))),
+		}...)
+		list, err := orm.AccountAdmins(qList...).All(c, tx)
+		if err != nil {
+			return ers.InternalServer.New(err)
+		}
+
+		data, err := models.ConvListFromORM(list, models.ConvAccountAdminFromORM)
+		if err != nil {
+			return ers.InternalServer.New(err)
+		}
+		resp.Data = data
+
+		return nil
+	}); err != nil {
 		return
 	}
 

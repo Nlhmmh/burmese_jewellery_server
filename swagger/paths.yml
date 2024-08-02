@@ -172,6 +172,10 @@
         name: account_admin_status
         schema:
           $ref: "#/components/schemas/AccountAdminStatus"
+      - in: query
+        name: sort
+        schema:
+          $ref: "#/components/schemas/Sort"
     responses:
       200:
         description: OK
@@ -278,6 +282,10 @@
         name: account_status
         schema:
           $ref: "#/components/schemas/AccountStatus"
+      - in: query
+        name: sort
+        schema:
+          $ref: "#/components/schemas/Sort"
     responses:
       200:
         description: OK

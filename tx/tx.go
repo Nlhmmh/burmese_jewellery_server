@@ -40,7 +40,7 @@ func Write(c *gin.Context, innerFunc func(tx *sql.Tx) *ers.ErrResp) error {
 
 	if errResp := innerFunc(tx); errResp != nil {
 		errResp.Rollback(c, tx)
-		return err
+		return errResp.Err
 	}
 
 	if err := tx.Commit(); err != nil {
