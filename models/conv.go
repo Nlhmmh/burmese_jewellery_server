@@ -316,3 +316,10 @@ func ConvAccountOrderAddressFromORM(orm *orm.AccountOrderAddress) (*AccountOrder
 	}
 	return aoa, nil
 }
+
+func ConvEnumFromORM(ormm *orm_custom.Enum) (*EnumsResp, error) {
+	return &EnumsResp{
+		EnumName:  ormm.Name,
+		EnumValue: ormm.Value,
+	}, nil
+}

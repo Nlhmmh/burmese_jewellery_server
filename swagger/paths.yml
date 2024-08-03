@@ -24,6 +24,18 @@
                   default: OK
               required:
                 - message
+/api/enums:
+  get:
+    tags:
+      - others
+    summary: Enums
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnumsResp"
 
 /api/auth/google/login:
   get:

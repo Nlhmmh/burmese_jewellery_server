@@ -6,6 +6,7 @@ var (
 	whiteList = []string{
 		"/api", // TODO: remove after google testing
 		"/api/health_check",
+		"/api/enums",
 
 		"/api/admin/login",
 		"/api/auth/email/register",

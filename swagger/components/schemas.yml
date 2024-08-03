@@ -26,6 +26,17 @@ Sort:
     - asc
     - desc
 
+EnumsResp:
+  type: object
+  properties:
+    enum_name:
+      type: string
+    enum_value:
+      type: string
+  required:
+    - enum_name
+    - enum_value
+
 AccountAdminRole:
   type: string
   maxLength: 255

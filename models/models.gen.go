@@ -245,6 +245,12 @@ type CategoryPutParam struct {
 	Name        string `json:"name"`
 }
 
+// EnumsResp defines model for EnumsResp.
+type EnumsResp struct {
+	EnumName  string `json:"enum_name"`
+	EnumValue string `json:"enum_value"`
+}
+
 // ErrMsg Error Message
 type ErrMsg struct {
 	// Message Error message

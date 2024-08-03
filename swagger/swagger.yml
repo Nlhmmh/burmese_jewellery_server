@@ -43,6 +43,18 @@ paths:
                     default: OK
                 required:
                   - message
+  /api/enums:
+    get:
+      tags:
+        - others
+      summary: Enums
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnumsResp'
   /api/auth/google/login:
     get:
       tags:
@@ -860,6 +872,16 @@ components:
       enum:
         - asc
         - desc
+    EnumsResp:
+      type: object
+      properties:
+        enum_name:
+          type: string
+        enum_value:
+          type: string
+      required:
+        - enum_name
+        - enum_value
     AccountAdminRole:
       type: string
       maxLength: 255
