@@ -1203,6 +1203,14 @@ func (siw *ServerInterfaceWrapper) GetApiJewellery(c *gin.Context) {
 		return
 	}
 
+	// ------------- Optional query parameter "sort" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "sort", c.Request.URL.Query(), &params.Sort)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter sort: %w", err), http.StatusBadRequest)
+		return
+	}
+
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
 		if c.IsAborted() {
@@ -3827,10 +3835,10 @@ var swaggerSpec = []string{
 	"i7rYkRScFCHC58KM5zglOZEGjOJkyLbCqX4Y5caS/lVO6RUnvXuqF/xUOuf3Pq6liOj89PeVNatwPUuj",
 	"LKbt1mj280k1mfwiVhoSR9U7crQY/yRv1MC/NGGkm3NinlVlcg7I4/OpPYfWqPmTbPpBtnzRLT8fGBPx",
 	"1IliGgXUrUegkn43HbYGv2ZHK4wU8nIwKtEzUvyW+pJCPqSBXGoiZOtX6ocpVm6sPl6Wr3uJol51w271",
-	"8Z57+KN018Rr+8HVVwYVPapJrHVRq03Kplkvn2zqTU81b9FAv0LCQre0ZJOtKiwk/Z6tBszi7+JaY8gU",
-	"T6gpXMqxeflQqXTqVUuYJDmWF4SnXzyz6MJElb49q3GVL7h5RQ1fnxSl5Fa+IaKBuuk5Ov2l3Pl3ULyI",
-	"NqiAa8t1V74g5mUVQ0SbQO/rN5g/Ext5BgT3mJLAB3kUt3Ae2hMN5oTxkyPr8NAUIpqMXzkVnZwwSTUj",
-	"OfdSaRaGSqMwrGnyJY5987g0/ntxs/h/AAAA//+6ikRSaH8AAA==",
+	"8Z57+KN010SDH3xrdbmrLzIqKlmTo+uioZuUmLNePm/Vm55qCqSBfoXch25pySZbVVhI+pVdDZjFX+u1",
+	"xugrnlBT5JVj8/JRV+kArZaIS3Isry1Pv8Nm0YWJKn17FvYq35Xzihq+PilKya182UQDddMjefqrwvOv",
+	"s3gRbVAB15Y2r3zXzMsqhghcgd7X71V/JjbyDAjuMSWBD/JUb+FotScazAnjJ0fW4aEpRDQZv3LAOjms",
+	"kmpGcoSm0iwMlUZhWNPkSxxG5yFu/PfiZvH/AAAA//8ynMlUs38AAA==",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

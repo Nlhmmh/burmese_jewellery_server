@@ -5,6 +5,9 @@ import (
 	"burmese_jewellery/models"
 	"burmese_jewellery/orm"
 	"burmese_jewellery/query"
+	"burmese_jewellery/tx"
+	"database/sql"
+	"fmt"
 
 	"net/http"
 
@@ -13,27 +16,44 @@ import (
 )
 
 func (h *Handler) GetApiJewellery(c *gin.Context, params models.GetApiJewelleryParams) {
-	qList := []qm.QueryMod{
-		qm.Offset(params.Offset),
-		qm.Limit(params.Limit),
-		qm.OrderBy("created_at ASC"),
-	}
-	qList = query.EqUUID(qList, params.Id, orm.JewelleryColumns.JewelleryID)
-	qList = query.EqUUID(qList, params.CategoryId, orm.JewelleryColumns.CategoryID)
-	qList = query.EqUUID(qList, params.GemId, orm.JewelleryColumns.GemID)
-	qList = query.EqUUID(qList, params.MaterialId, orm.JewelleryColumns.MaterialID)
-	qList = query.Like(qList, params.Name, orm.JewelleryColumns.Name)
-	qList = query.Eq(qList, params.IsPublished, orm.JewelleryColumns.IsPublished)
+	var resp GetResp
 
-	list, err := orm.Jewelleries(qList...).AllG(c)
-	if err != nil {
-		ers.InternalServer.New(err).Abort(c)
-		return
-	}
+	if err := tx.Write(c, func(tx *sql.Tx) *ers.ErrResp {
+		qList := []qm.QueryMod{}
+		qList = query.EqUUID(qList, params.Id, orm.JewelleryColumns.JewelleryID)
+		qList = query.EqUUID(qList, params.CategoryId, orm.JewelleryColumns.CategoryID)
+		qList = query.EqUUID(qList, params.GemId, orm.JewelleryColumns.GemID)
+		qList = query.EqUUID(qList, params.MaterialId, orm.JewelleryColumns.MaterialID)
+		qList = query.Like(qList, params.Name, orm.JewelleryColumns.Name)
+		qList = query.Eq(qList, params.IsPublished, orm.JewelleryColumns.IsPublished)
+		count, err := orm.Jewelleries(qList...).Count(c, tx)
+		if err != nil {
+			return ers.InternalServer.New(err)
+		}
+		resp.Count = count
 
-	resp, err := models.ConvListFromORM(list, models.ConvJewelleryFromORM)
-	if err != nil {
-		ers.InternalServer.New(err).Abort(c)
+		sort := models.Desc
+		if v := params.Sort; v != nil {
+			sort = *v
+		}
+		qList = append(qList, []qm.QueryMod{
+			qm.Offset(params.Offset),
+			qm.Limit(params.Limit),
+			qm.OrderBy(fmt.Sprintf("%s %s", orm.AccountColumns.CreatedAt, string(sort))),
+		}...)
+		list, err := orm.Jewelleries(qList...).AllG(c)
+		if err != nil {
+			return ers.InternalServer.New(err)
+		}
+
+		data, err := models.ConvListFromORM(list, models.ConvJewelleryFromORM)
+		if err != nil {
+			return ers.InternalServer.New(err)
+		}
+		resp.Data = data
+
+		return nil
+	}); err != nil {
 		return
 	}
 

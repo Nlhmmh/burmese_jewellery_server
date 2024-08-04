@@ -436,6 +436,7 @@ type GetApiJewelleryParams struct {
 	MaterialId  *ID     `form:"material_id,omitempty" json:"material_id,omitempty"`
 	Name        *string `form:"name,omitempty" json:"name,omitempty"`
 	IsPublished *bool   `form:"is_published,omitempty" json:"is_published,omitempty"`
+	Sort        *Sort   `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // PutApiAdminAccountAccountIdJSONRequestBody defines body for PutApiAdminAccountAccountId for application/json ContentType.

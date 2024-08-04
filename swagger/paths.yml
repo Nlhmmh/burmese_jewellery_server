@@ -386,6 +386,10 @@
         name: is_published
         schema:
           type: boolean
+      - in: query
+        name: sort
+        schema:
+          $ref: "#/components/schemas/Sort"
     responses:
       200:
         description: OK
