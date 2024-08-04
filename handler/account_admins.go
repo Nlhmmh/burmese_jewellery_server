@@ -122,15 +122,32 @@ func (h *Handler) PostApiAdminAccountAdmin(c *gin.Context) {
 		return
 	}
 
-	record := &orm.AccountAdmin{
-		AccountAdminID:     uuid.New().String(),
-		Mail:               string(req.Mail),
-		Password:           req.Password,
-		AccountAdminRole:   orm.AccountAdminRole(req.AccountAdminRole),
-		AccountAdminStatus: orm.AccountAdminStatus(req.AccountAdminStatus),
-	}
-	if err := record.InsertG(c, boil.Infer()); err != nil {
-		ers.InternalServer.New(err).Abort(c)
+	if err := tx.Write(c, func(tx *sql.Tx) *ers.ErrResp {
+
+		aaExists, err := orm.AccountAdmins(
+			orm.AccountAdminWhere.Mail.EQ(string(req.Mail)),
+		).Exists(c, tx)
+		if err != nil {
+			return ers.InternalServer.New(err)
+		}
+
+		if aaExists {
+			return ers.UserWithEmailAlreadyExist
+		}
+
+		record := &orm.AccountAdmin{
+			AccountAdminID:     uuid.New().String(),
+			Mail:               string(req.Mail),
+			Password:           req.Password,
+			AccountAdminRole:   orm.AccountAdminRole(req.AccountAdminRole),
+			AccountAdminStatus: orm.AccountAdminStatus(req.AccountAdminStatus),
+		}
+		if err := record.Insert(c, tx, boil.Infer()); err != nil {
+			return ers.InternalServer.New(err)
+		}
+
+		return nil
+	}); err != nil {
 		return
 	}
 
@@ -190,5 +207,5 @@ func (h *Handler) DeleteApiAdminAccountAdminAccountAdminsId(c *gin.Context, acco
 		return
 	}
 
-	c.Status(http.StatusNoContent)
+	c.Status(http.StatusOK)
 }
