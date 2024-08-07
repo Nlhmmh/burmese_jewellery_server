@@ -6,17 +6,24 @@ VALUES
 
 INSERT INTO categories (category_id, name, description, image_url)
 VALUES
-  ('b106e919-ab73-48f3-a86c-4b38ea22a0fe', 'Engagement Rings', 'Engagement Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp')
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0fe', 'Engagement Rings', 'Engagement Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp'),
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0ff', 'Wedding Rings', 'Wedding Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp')
 ;
 
 INSERT INTO gems (gem_id, name)
 VALUES
-  ('46e78b04-955d-4f0c-a751-dd1dcb2d7248', 'Diamond')
+  ('46e78b04-955d-4f0c-a751-dd1dcb2d7248', 'Diamond'),
+  ('46e78b04-955d-4f0c-a751-dd1dcb2d7242', 'Ruby'),
+  ('46e78b04-955d-4f0c-a751-dd1dcb2d7243', 'Sapphire'),
+  ('46e78b04-955d-4f0c-a751-dd1dcb2d7244', 'Emerald'),
+  ('46e78b04-955d-4f0c-a751-dd1dcb2d7245', 'Jade')
 ;
 
 INSERT INTO materials (material_id, name)
 VALUES
-  ('c0979115-2bb3-4c50-a29d-64f3b8784a37', 'Gold')
+  ('c0979115-2bb3-4c50-a29d-64f3b8784a37', 'Gold'),
+  ('c0979115-2bb3-4c50-a29d-64f3b8784a32', 'Platinum'),
+  ('c0979115-2bb3-4c50-a29d-64f3b8784a33', 'Silver')
 ;
 
 INSERT INTO accounts (account_id, login_type, mail, password, phone, account_status)

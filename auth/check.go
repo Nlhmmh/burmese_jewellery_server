@@ -35,6 +35,9 @@ var (
 
 		"/api/admin/account",
 		"/api/admin/account/:account_id",
+
+		"/api/admin/jewellery",
+		"/api/admin/jewellery/:jewellery_id",
 	}
 
 	adminRoleAdminOnlyList = []string{

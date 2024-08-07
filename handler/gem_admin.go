@@ -74,5 +74,5 @@ func (h *Handler) DeleteApiAdminGemGemId(c *gin.Context, gemId models.ID) {
 		return
 	}
 
-	c.Status(http.StatusNoContent)
+	c.Status(http.StatusOK)
 }

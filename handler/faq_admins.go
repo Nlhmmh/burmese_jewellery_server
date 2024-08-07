@@ -78,5 +78,5 @@ func (h *Handler) DeleteApiAdminFaqFaqId(c *gin.Context, faqId models.ID) {
 		return
 	}
 
-	c.Status(http.StatusNoContent)
+	c.Status(http.StatusOK)
 }

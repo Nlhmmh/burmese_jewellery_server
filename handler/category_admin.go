@@ -78,5 +78,5 @@ func (h *Handler) DeleteApiAdminCategoryCategoryId(c *gin.Context, categoryId mo
 		return
 	}
 
-	c.Status(http.StatusNoContent)
+	c.Status(http.StatusOK)
 }

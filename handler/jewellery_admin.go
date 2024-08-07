@@ -91,5 +91,5 @@ func (h *Handler) DeleteApiAdminJewelleryJewelleryId(c *gin.Context, jewelleryId
 		return
 	}
 
-	c.Status(http.StatusNoContent)
+	c.Status(http.StatusOK)
 }

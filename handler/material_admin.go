@@ -74,5 +74,5 @@ func (h *Handler) DeleteApiAdminMaterialMaterialId(c *gin.Context, materialId mo
 		return
 	}
 
-	c.Status(http.StatusNoContent)
+	c.Status(http.StatusOK)
 }
