@@ -7,7 +7,10 @@ VALUES
 INSERT INTO categories (category_id, name, description, image_url)
 VALUES
   ('b106e919-ab73-48f3-a86c-4b38ea22a0fe', 'Engagement Rings', 'Engagement Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp'),
-  ('b106e919-ab73-48f3-a86c-4b38ea22a0ff', 'Wedding Rings', 'Wedding Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp')
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0ff', 'Wedding Rings', 'Wedding Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp'),
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0f1', 'Necklace', 'Wedding Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp'),
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0f2', 'Earrings', 'Wedding Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp'),
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0f3', 'Bracelets', 'Wedding Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp')
 ;
 
 INSERT INTO gems (gem_id, name)
