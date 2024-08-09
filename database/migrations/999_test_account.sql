@@ -6,11 +6,11 @@ VALUES
 
 INSERT INTO categories (category_id, name, description, image_url)
 VALUES
-  ('b106e919-ab73-48f3-a86c-4b38ea22a0fe', 'Engagement Rings', 'Engagement Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp'),
-  ('b106e919-ab73-48f3-a86c-4b38ea22a0ff', 'Wedding Rings', 'Wedding Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp'),
-  ('b106e919-ab73-48f3-a86c-4b38ea22a0f1', 'Necklace', 'Wedding Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp'),
-  ('b106e919-ab73-48f3-a86c-4b38ea22a0f2', 'Earrings', 'Wedding Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp'),
-  ('b106e919-ab73-48f3-a86c-4b38ea22a0f3', 'Bracelets', 'Wedding Rings', 'https://media.tiffany.com/is/image/tiffanydm/2023_EngagementRing_BG_Hero-Desktop?$tile$&wid=2992&fmt=webp')
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0fe', 'Engagement Rings', 'Engagement Rings', 'http://localhost:8077/api/file/engagement-rings.jpg'),
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0ff', 'Wedding Rings', 'Wedding Rings', 'http://localhost:8077/api/file/wedding-rings.jpg'),
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0f1', 'Necklace', 'Necklace', 'http://localhost:8077/api/file/necklace.jpg'),
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0f2', 'Earrings', 'Earrings', 'http://localhost:8077/api/file/earrings.jpg'),
+  ('b106e919-ab73-48f3-a86c-4b38ea22a0f3', 'Bracelets', 'Bracelets', 'http://localhost:8077/api/file/bracelets.jpg')
 ;
 
 INSERT INTO gems (gem_id, name)
@@ -49,13 +49,61 @@ INSERT INTO jewelleries (jewellery_id, category_id, gem_id, material_id, name, d
 VALUES
   (
     'c0979115-2bb3-9999-a29d-64f3b8784888',
-    'b106e919-ab73-48f3-a86c-4b38ea22a0fe',
+    'b106e919-ab73-48f3-a86c-4b38ea22a0ff',
     '46e78b04-955d-4f0c-a751-dd1dcb2d7248',
     'c0979115-2bb3-4c50-a29d-64f3b8784a37',
     'Wedding Forever',
     'Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm',
     '100',
-    'https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-foreverband-ring-16574635_1045538_ED_M.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&&defaultImage=NoImageAvailableInternal&fmt=webp',
+    'http://localhost:8077/api/file/gold-wedding-rings-pairs-1.jpg',
+    true,
+    100
+  ),
+  (
+    'c0979115-2bb3-9999-a29d-64f3b8784811',
+    'b106e919-ab73-48f3-a86c-4b38ea22a0fe',
+    '46e78b04-955d-4f0c-a751-dd1dcb2d7248',
+    'c0979115-2bb3-4c50-a29d-64f3b8784a33',
+    'Lasting Engagement',
+    'Wire Engagment Ring in Yellow Gold, 2.2 mm',
+    '100',
+    'http://localhost:8077/api/file/diamond-wedding-rings-paairs-1.jpg',
+    true,
+    100
+  ),
+  (
+    'c0979115-2bb3-9999-a29d-64f3b8784812',
+    'b106e919-ab73-48f3-a86c-4b38ea22a0f1',
+    '46e78b04-955d-4f0c-a751-dd1dcb2d7248',
+    'c0979115-2bb3-4c50-a29d-64f3b8784a37',
+    'Necklace',
+    'Necklace in Yellow Gold',
+    '100',
+    'http://localhost:8077/api/file/necklace.jpg',
+    true,
+    100
+  ),
+  (
+    'c0979115-2bb3-9999-a29d-64f3b8784813',
+    'b106e919-ab73-48f3-a86c-4b38ea22a0f2',
+    '46e78b04-955d-4f0c-a751-dd1dcb2d7248',
+    'c0979115-2bb3-4c50-a29d-64f3b8784a37',
+    'Lock Small Earrings',
+    'Lock Small Earrings in Yellow Gold',
+    '100',
+    'http://localhost:8077/api/file/gold-earrings-1.jpg',
+    true,
+    100
+  ),
+  (
+    'c0979115-2bb3-9999-a29d-64f3b8784814',
+    'b106e919-ab73-48f3-a86c-4b38ea22a0f3',
+    '46e78b04-955d-4f0c-a751-dd1dcb2d7248',
+    'c0979115-2bb3-4c50-a29d-64f3b8784a37',
+    'T Smile Pendant',
+    'T Smile Pendant in Yellow Gold',
+    '100',
+    'http://localhost:8077/api/file/gold-bracelet-1.jpg',
     true,
     100
   )

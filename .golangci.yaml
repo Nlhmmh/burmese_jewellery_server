@@ -5,3 +5,6 @@ run:
     - database
     - load_testing
     - swagger
+    - file
+    - static
+  allow-parallel-runners: true
