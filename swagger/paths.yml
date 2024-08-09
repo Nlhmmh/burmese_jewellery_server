@@ -257,7 +257,7 @@
         schema:
           $ref: "#/components/schemas/ID"
     responses:
-      204:
+      200:
         description: Deleted
 
 /api/admin/account:
@@ -458,7 +458,7 @@
         schema:
           $ref: "#/components/schemas/ID"
     responses:
-      204:
+      200:
         description: Deleted
 
 /api/category:
@@ -516,7 +516,7 @@
         schema:
           $ref: "#/components/schemas/ID"
     responses:
-      204:
+      200:
         description: Deleted
 
 /api/gem:
@@ -574,7 +574,7 @@
         schema:
           $ref: "#/components/schemas/ID"
     responses:
-      204:
+      200:
         description: Deleted
 
 /api/material:
@@ -632,7 +632,7 @@
         schema:
           $ref: "#/components/schemas/ID"
     responses:
-      204:
+      200:
         description: Deleted
 
 /api/faq:
@@ -719,7 +719,7 @@
         schema:
           $ref: "#/components/schemas/ID"
     responses:
-      204:
+      200:
         description: Deleted
 
 /api/profile:
@@ -842,3 +842,53 @@
               type: array
               items:
                 $ref: "#/components/schemas/AccountOrder"
+
+/api/file/{file_name}:
+  get:
+    tags:
+      - app
+    parameters:
+      - in: path
+        name: file_name
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: OK
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+/api/admin/file/{file_name}:
+  delete:
+    tags:
+      - app
+    parameters:
+      - in: path
+        name: file_name
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: Deleted
+/api/file:
+  post:
+    tags:
+      - app
+    requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: File to upload
+    responses:
+      200:
+        description: OK

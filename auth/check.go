@@ -24,11 +24,10 @@ var (
 		"/api/jewellery/:jewellery_id",
 
 		"/api/faq",
+		"/api/file/:file_name",
 	}
 
-	containWhiteList = []string{
-		"/api/file/media",
-	}
+	containWhiteList = []string{}
 
 	adminList = []string{
 		"/api/admin/account_admin/:account_admins_id",
@@ -42,6 +41,7 @@ var (
 
 	adminRoleAdminOnlyList = []string{
 		"/api/admin/account_admin",
+		"/api/admin/file/:file_name",
 	}
 
 	userList = []string{
@@ -50,6 +50,10 @@ var (
 		"/api/cart",
 		"/api/order",
 		"/api/order/:account_order_id",
+	}
+
+	bothAdminUserList = []string{
+		"/api/file",
 	}
 )
 
@@ -91,6 +95,15 @@ func CheckAdminRoleAdminOnlyList(path string) bool {
 
 func CheckUserList(path string) bool {
 	for _, p := range userList {
+		if path == p {
+			return true
+		}
+	}
+	return false
+}
+
+func CheckBothAdminUserList(path string) bool {
+	for _, p := range bothAdminUserList {
 		if path == p {
 			return true
 		}

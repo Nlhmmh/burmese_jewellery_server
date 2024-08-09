@@ -426,6 +426,12 @@ type GetApiFaqParams struct {
 	IsActive *bool   `form:"is_active,omitempty" json:"is_active,omitempty"`
 }
 
+// PostApiFileMultipartBody defines parameters for PostApiFile.
+type PostApiFileMultipartBody struct {
+	// File File to upload
+	File *openapi_types.File `json:"file,omitempty"`
+}
+
 // GetApiJewelleryParams defines parameters for GetApiJewellery.
 type GetApiJewelleryParams struct {
 	Offset      int     `form:"offset" json:"offset"`
@@ -498,6 +504,9 @@ type PostApiCartJSONRequestBody = CartPostParam
 
 // PostApiFavouriteJSONRequestBody defines body for PostApiFavourite for application/json ContentType.
 type PostApiFavouriteJSONRequestBody = FavouritePostParam
+
+// PostApiFileMultipartRequestBody defines body for PostApiFile for multipart/form-data ContentType.
+type PostApiFileMultipartRequestBody PostApiFileMultipartBody
 
 // PostApiOrderJSONRequestBody defines body for PostApiOrder for application/json ContentType.
 type PostApiOrderJSONRequestBody = OrderPostParam

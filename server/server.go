@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/getkin/kin-openapi/openapi3filter"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
@@ -36,6 +37,7 @@ func NewServer() *server {
 
 	// Set Server
 	router := gin.New()
+	router.MaxMultipartMemory = 8 << 20 // 8 * 1MB(2 power 20) = 8MB
 	router.Use(
 		gin.RecoveryWithWriter(log.Logger),
 		gin.LoggerWithConfig(gin.LoggerConfig{Output: log.Logger}),
@@ -59,6 +61,8 @@ func NewServer() *server {
 	if err != nil {
 		panic(err)
 	}
+	openapi3filter.RegisterBodyDecoder("image/png", openapi3filter.FileBodyDecoder)
+	openapi3filter.RegisterBodyDecoder("image/jpeg", openapi3filter.FileBodyDecoder)
 	router.Use(gin_middleware.OapiRequestValidatorWithOptions(swagger, &gin_middleware.Options{
 		SilenceServersWarning: true,
 	}))

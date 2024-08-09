@@ -10,6 +10,8 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"io"
+	"mime/multipart"
 	"net/http"
 	"net/url"
 	"path"
@@ -70,6 +72,9 @@ type ServerInterface interface {
 
 	// (PUT /api/admin/faq/{faq_id})
 	PutApiAdminFaqFaqId(c *gin.Context, faqId ID)
+
+	// (DELETE /api/admin/file/{file_name})
+	DeleteApiAdminFileFileName(c *gin.Context, fileName string)
 
 	// (POST /api/admin/gem)
 	PostApiAdminGem(c *gin.Context)
@@ -139,6 +144,12 @@ type ServerInterface interface {
 
 	// (POST /api/favourite)
 	PostApiFavourite(c *gin.Context)
+
+	// (POST /api/file)
+	PostApiFile(c *gin.Context)
+
+	// (GET /api/file/{file_name})
+	GetApiFileFileName(c *gin.Context, fileName string)
 
 	// (GET /api/gem)
 	GetApiGem(c *gin.Context)
@@ -624,6 +635,30 @@ func (siw *ServerInterfaceWrapper) PutApiAdminFaqFaqId(c *gin.Context) {
 	siw.Handler.PutApiAdminFaqFaqId(c, faqId)
 }
 
+// DeleteApiAdminFileFileName operation middleware
+func (siw *ServerInterfaceWrapper) DeleteApiAdminFileFileName(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "file_name" -------------
+	var fileName string
+
+	err = runtime.BindStyledParameter("simple", false, "file_name", c.Param("file_name"), &fileName)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter file_name: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.DeleteApiAdminFileFileName(c, fileName)
+}
+
 // PostApiAdminGem operation middleware
 func (siw *ServerInterfaceWrapper) PostApiAdminGem(c *gin.Context) {
 
@@ -1091,6 +1126,43 @@ func (siw *ServerInterfaceWrapper) PostApiFavourite(c *gin.Context) {
 	siw.Handler.PostApiFavourite(c)
 }
 
+// PostApiFile operation middleware
+func (siw *ServerInterfaceWrapper) PostApiFile(c *gin.Context) {
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostApiFile(c)
+}
+
+// GetApiFileFileName operation middleware
+func (siw *ServerInterfaceWrapper) GetApiFileFileName(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "file_name" -------------
+	var fileName string
+
+	err = runtime.BindStyledParameter("simple", false, "file_name", c.Param("file_name"), &fileName)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter file_name: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetApiFileFileName(c, fileName)
+}
+
 // GetApiGem operation middleware
 func (siw *ServerInterfaceWrapper) GetApiGem(c *gin.Context) {
 
@@ -1376,6 +1448,7 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.POST(options.BaseURL+"/api/admin/faq", wrapper.PostApiAdminFaq)
 	router.DELETE(options.BaseURL+"/api/admin/faq/:faq_id", wrapper.DeleteApiAdminFaqFaqId)
 	router.PUT(options.BaseURL+"/api/admin/faq/:faq_id", wrapper.PutApiAdminFaqFaqId)
+	router.DELETE(options.BaseURL+"/api/admin/file/:file_name", wrapper.DeleteApiAdminFileFileName)
 	router.POST(options.BaseURL+"/api/admin/gem", wrapper.PostApiAdminGem)
 	router.DELETE(options.BaseURL+"/api/admin/gem/:gem_id", wrapper.DeleteApiAdminGemGemId)
 	router.PUT(options.BaseURL+"/api/admin/gem/:gem_id", wrapper.PutApiAdminGemGemId)
@@ -1399,6 +1472,8 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.GET(options.BaseURL+"/api/faq", wrapper.GetApiFaq)
 	router.GET(options.BaseURL+"/api/favourite", wrapper.GetApiFavourite)
 	router.POST(options.BaseURL+"/api/favourite", wrapper.PostApiFavourite)
+	router.POST(options.BaseURL+"/api/file", wrapper.PostApiFile)
+	router.GET(options.BaseURL+"/api/file/:file_name", wrapper.GetApiFileFileName)
 	router.GET(options.BaseURL+"/api/gem", wrapper.GetApiGem)
 	router.GET(options.BaseURL+"/api/health_check", wrapper.GetApiHealthCheck)
 	router.GET(options.BaseURL+"/api/jewellery", wrapper.GetApiJewellery)
@@ -1518,11 +1593,11 @@ type DeleteApiAdminAccountAdminAccountAdminsIdResponseObject interface {
 	VisitDeleteApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error
 }
 
-type DeleteApiAdminAccountAdminAccountAdminsId204Response struct {
+type DeleteApiAdminAccountAdminAccountAdminsId200Response struct {
 }
 
-func (response DeleteApiAdminAccountAdminAccountAdminsId204Response) VisitDeleteApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
-	w.WriteHeader(204)
+func (response DeleteApiAdminAccountAdminAccountAdminsId200Response) VisitDeleteApiAdminAccountAdminAccountAdminsIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
 	return nil
 }
 
@@ -1584,11 +1659,11 @@ type DeleteApiAdminCategoryCategoryIdResponseObject interface {
 	VisitDeleteApiAdminCategoryCategoryIdResponse(w http.ResponseWriter) error
 }
 
-type DeleteApiAdminCategoryCategoryId204Response struct {
+type DeleteApiAdminCategoryCategoryId200Response struct {
 }
 
-func (response DeleteApiAdminCategoryCategoryId204Response) VisitDeleteApiAdminCategoryCategoryIdResponse(w http.ResponseWriter) error {
-	w.WriteHeader(204)
+func (response DeleteApiAdminCategoryCategoryId200Response) VisitDeleteApiAdminCategoryCategoryIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
 	return nil
 }
 
@@ -1633,11 +1708,11 @@ type DeleteApiAdminFaqFaqIdResponseObject interface {
 	VisitDeleteApiAdminFaqFaqIdResponse(w http.ResponseWriter) error
 }
 
-type DeleteApiAdminFaqFaqId204Response struct {
+type DeleteApiAdminFaqFaqId200Response struct {
 }
 
-func (response DeleteApiAdminFaqFaqId204Response) VisitDeleteApiAdminFaqFaqIdResponse(w http.ResponseWriter) error {
-	w.WriteHeader(204)
+func (response DeleteApiAdminFaqFaqId200Response) VisitDeleteApiAdminFaqFaqIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
 	return nil
 }
 
@@ -1654,6 +1729,22 @@ type PutApiAdminFaqFaqId200Response struct {
 }
 
 func (response PutApiAdminFaqFaqId200Response) VisitPutApiAdminFaqFaqIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type DeleteApiAdminFileFileNameRequestObject struct {
+	FileName string `json:"file_name"`
+}
+
+type DeleteApiAdminFileFileNameResponseObject interface {
+	VisitDeleteApiAdminFileFileNameResponse(w http.ResponseWriter) error
+}
+
+type DeleteApiAdminFileFileName200Response struct {
+}
+
+func (response DeleteApiAdminFileFileName200Response) VisitDeleteApiAdminFileFileNameResponse(w http.ResponseWriter) error {
 	w.WriteHeader(200)
 	return nil
 }
@@ -1682,11 +1773,11 @@ type DeleteApiAdminGemGemIdResponseObject interface {
 	VisitDeleteApiAdminGemGemIdResponse(w http.ResponseWriter) error
 }
 
-type DeleteApiAdminGemGemId204Response struct {
+type DeleteApiAdminGemGemId200Response struct {
 }
 
-func (response DeleteApiAdminGemGemId204Response) VisitDeleteApiAdminGemGemIdResponse(w http.ResponseWriter) error {
-	w.WriteHeader(204)
+func (response DeleteApiAdminGemGemId200Response) VisitDeleteApiAdminGemGemIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
 	return nil
 }
 
@@ -1731,11 +1822,11 @@ type DeleteApiAdminJewelleryJewelleryIdResponseObject interface {
 	VisitDeleteApiAdminJewelleryJewelleryIdResponse(w http.ResponseWriter) error
 }
 
-type DeleteApiAdminJewelleryJewelleryId204Response struct {
+type DeleteApiAdminJewelleryJewelleryId200Response struct {
 }
 
-func (response DeleteApiAdminJewelleryJewelleryId204Response) VisitDeleteApiAdminJewelleryJewelleryIdResponse(w http.ResponseWriter) error {
-	w.WriteHeader(204)
+func (response DeleteApiAdminJewelleryJewelleryId200Response) VisitDeleteApiAdminJewelleryJewelleryIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
 	return nil
 }
 
@@ -1799,11 +1890,11 @@ type DeleteApiAdminMaterialMaterialIdResponseObject interface {
 	VisitDeleteApiAdminMaterialMaterialIdResponse(w http.ResponseWriter) error
 }
 
-type DeleteApiAdminMaterialMaterialId204Response struct {
+type DeleteApiAdminMaterialMaterialId200Response struct {
 }
 
-func (response DeleteApiAdminMaterialMaterialId204Response) VisitDeleteApiAdminMaterialMaterialIdResponse(w http.ResponseWriter) error {
-	w.WriteHeader(204)
+func (response DeleteApiAdminMaterialMaterialId200Response) VisitDeleteApiAdminMaterialMaterialIdResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
 	return nil
 }
 
@@ -2034,6 +2125,49 @@ func (response PostApiFavourite200Response) VisitPostApiFavouriteResponse(w http
 	return nil
 }
 
+type PostApiFileRequestObject struct {
+	Body *multipart.Reader
+}
+
+type PostApiFileResponseObject interface {
+	VisitPostApiFileResponse(w http.ResponseWriter) error
+}
+
+type PostApiFile200Response struct {
+}
+
+func (response PostApiFile200Response) VisitPostApiFileResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type GetApiFileFileNameRequestObject struct {
+	FileName string `json:"file_name"`
+}
+
+type GetApiFileFileNameResponseObject interface {
+	VisitGetApiFileFileNameResponse(w http.ResponseWriter) error
+}
+
+type GetApiFileFileName200ApplicationoctetStreamResponse struct {
+	Body          io.Reader
+	ContentLength int64
+}
+
+func (response GetApiFileFileName200ApplicationoctetStreamResponse) VisitGetApiFileFileNameResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/octet-stream")
+	if response.ContentLength != 0 {
+		w.Header().Set("Content-Length", fmt.Sprint(response.ContentLength))
+	}
+	w.WriteHeader(200)
+
+	if closer, ok := response.Body.(io.ReadCloser); ok {
+		defer closer.Close()
+	}
+	_, err := io.Copy(w, response.Body)
+	return err
+}
+
 type GetApiGemRequestObject struct {
 }
 
@@ -2247,6 +2381,9 @@ type StrictServerInterface interface {
 	// (PUT /api/admin/faq/{faq_id})
 	PutApiAdminFaqFaqId(ctx context.Context, request PutApiAdminFaqFaqIdRequestObject) (PutApiAdminFaqFaqIdResponseObject, error)
 
+	// (DELETE /api/admin/file/{file_name})
+	DeleteApiAdminFileFileName(ctx context.Context, request DeleteApiAdminFileFileNameRequestObject) (DeleteApiAdminFileFileNameResponseObject, error)
+
 	// (POST /api/admin/gem)
 	PostApiAdminGem(ctx context.Context, request PostApiAdminGemRequestObject) (PostApiAdminGemResponseObject, error)
 
@@ -2315,6 +2452,12 @@ type StrictServerInterface interface {
 
 	// (POST /api/favourite)
 	PostApiFavourite(ctx context.Context, request PostApiFavouriteRequestObject) (PostApiFavouriteResponseObject, error)
+
+	// (POST /api/file)
+	PostApiFile(ctx context.Context, request PostApiFileRequestObject) (PostApiFileResponseObject, error)
+
+	// (GET /api/file/{file_name})
+	GetApiFileFileName(ctx context.Context, request GetApiFileFileNameRequestObject) (GetApiFileFileNameResponseObject, error)
 
 	// (GET /api/gem)
 	GetApiGem(ctx context.Context, request GetApiGemRequestObject) (GetApiGemResponseObject, error)
@@ -2805,6 +2948,33 @@ func (sh *strictHandler) PutApiAdminFaqFaqId(ctx *gin.Context, faqId ID) {
 		ctx.Status(http.StatusInternalServerError)
 	} else if validResponse, ok := response.(PutApiAdminFaqFaqIdResponseObject); ok {
 		if err := validResponse.VisitPutApiAdminFaqFaqIdResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// DeleteApiAdminFileFileName operation middleware
+func (sh *strictHandler) DeleteApiAdminFileFileName(ctx *gin.Context, fileName string) {
+	var request DeleteApiAdminFileFileNameRequestObject
+
+	request.FileName = fileName
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.DeleteApiAdminFileFileName(ctx, request.(DeleteApiAdminFileFileNameRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "DeleteApiAdminFileFileName")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(DeleteApiAdminFileFileNameResponseObject); ok {
+		if err := validResponse.VisitDeleteApiAdminFileFileNameResponse(ctx.Writer); err != nil {
 			ctx.Error(err)
 		}
 	} else if response != nil {
@@ -3507,6 +3677,65 @@ func (sh *strictHandler) PostApiFavourite(ctx *gin.Context) {
 	}
 }
 
+// PostApiFile operation middleware
+func (sh *strictHandler) PostApiFile(ctx *gin.Context) {
+	var request PostApiFileRequestObject
+
+	if reader, err := ctx.Request.MultipartReader(); err == nil {
+		request.Body = reader
+	} else {
+		ctx.Error(err)
+		return
+	}
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostApiFile(ctx, request.(PostApiFileRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostApiFile")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(PostApiFileResponseObject); ok {
+		if err := validResponse.VisitPostApiFileResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
+// GetApiFileFileName operation middleware
+func (sh *strictHandler) GetApiFileFileName(ctx *gin.Context, fileName string) {
+	var request GetApiFileFileNameRequestObject
+
+	request.FileName = fileName
+
+	handler := func(ctx *gin.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetApiFileFileName(ctx, request.(GetApiFileFileNameRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetApiFileFileName")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		ctx.Error(err)
+		ctx.Status(http.StatusInternalServerError)
+	} else if validResponse, ok := response.(GetApiFileFileNameResponseObject); ok {
+		if err := validResponse.VisitGetApiFileFileNameResponse(ctx.Writer); err != nil {
+			ctx.Error(err)
+		}
+	} else if response != nil {
+		ctx.Error(fmt.Errorf("unexpected response type: %T", response))
+	}
+}
+
 // GetApiGem operation middleware
 func (sh *strictHandler) GetApiGem(ctx *gin.Context) {
 	var request GetApiGemRequestObject
@@ -3782,63 +4011,65 @@ func (sh *strictHandler) PostApiProfile(ctx *gin.Context) {
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

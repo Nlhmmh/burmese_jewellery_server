@@ -222,6 +222,7 @@
   </ul>
   <h4><a href="#App">App</a></h4>
   <ul>
+  <li><a href="#apiAdminFileFileNameDelete"><code><span class="http-method">delete</span> /api/admin/file/{file_name}</code></a></li>
   <li><a href="#apiAuthEmailLoginPost"><code><span class="http-method">post</span> /api/auth/email/login</code></a></li>
   <li><a href="#apiAuthEmailOtpPost"><code><span class="http-method">post</span> /api/auth/email/otp</code></a></li>
   <li><a href="#apiAuthEmailOtpResendPost"><code><span class="http-method">post</span> /api/auth/email/otp/resend</code></a></li>
@@ -234,6 +235,8 @@
   <li><a href="#apiFaqGet"><code><span class="http-method">get</span> /api/faq</code></a></li>
   <li><a href="#apiFavouriteGet"><code><span class="http-method">get</span> /api/favourite</code></a></li>
   <li><a href="#apiFavouritePost"><code><span class="http-method">post</span> /api/favourite</code></a></li>
+  <li><a href="#apiFileFileNameGet"><code><span class="http-method">get</span> /api/file/{file_name}</code></a></li>
+  <li><a href="#apiFilePost"><code><span class="http-method">post</span> /api/file</code></a></li>
   <li><a href="#apiGemGet"><code><span class="http-method">get</span> /api/gem</code></a></li>
   <li><a href="#apiGet"><code><span class="http-method">get</span> /api</code></a></li>
   <li><a href="#apiJewelleryGet"><code><span class="http-method">get</span> /api/jewellery</code></a></li>
@@ -368,7 +371,7 @@
 
 
     <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">204</h4>
+    <h4 class="field-label">200</h4>
     Deleted
         <a href="#"></a>
   </div> <!-- method -->
@@ -686,7 +689,7 @@
 
 
     <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">204</h4>
+    <h4 class="field-label">200</h4>
     Deleted
         <a href="#"></a>
   </div> <!-- method -->
@@ -790,7 +793,7 @@
 
 
     <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">204</h4>
+    <h4 class="field-label">200</h4>
     Deleted
         <a href="#"></a>
   </div> <!-- method -->
@@ -894,7 +897,7 @@
 
 
     <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">204</h4>
+    <h4 class="field-label">200</h4>
     Deleted
         <a href="#"></a>
   </div> <!-- method -->
@@ -998,7 +1001,7 @@
 
 
     <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">204</h4>
+    <h4 class="field-label">200</h4>
     Deleted
         <a href="#"></a>
   </div> <!-- method -->
@@ -1153,7 +1156,7 @@
 
 
     <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">204</h4>
+    <h4 class="field-label">200</h4>
     Deleted
         <a href="#"></a>
   </div> <!-- method -->
@@ -1234,6 +1237,35 @@
   </div> <!-- method -->
   <hr/>
   <h1><a name="App">App</a></h1>
+  <div class="method"><a name="apiAdminFileFileNameDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/file/{file_name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiAdminFileFileNameDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">file_name (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
   <div class="method"><a name="apiAuthEmailLoginPost"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
@@ -1736,6 +1768,83 @@
 
 
 
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiFileFileNameGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/file/{file_name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiFileFileNameGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">file_name (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+
+      byte[]
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/octet-stream</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#byte[]">byte[]</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiFilePost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/file</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiFilePost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">file (required)</div>
+
+            <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  format: binary</div>    </div>  <!-- field-items -->
 
 
     <!--Todo: process Response Object and its headers, schema, examples -->
@@ -2455,6 +2564,7 @@
     <li><a href="#OrderPostParam"><code>OrderPostParam</code></a></li>
     <li><a href="#OrderStatus"><code>OrderStatus</code></a></li>
     <li><a href="#Sort"><code>Sort</code></a></li>
+    <li><a href="#api_file_body"><code>api_file_body</code></a></li>
     <li><a href="#inline_response_200"><code>inline_response_200</code></a></li>
     <li><a href="#inline_response_200_1"><code>inline_response_200_1</code></a></li>
   </ol>
@@ -2978,6 +3088,13 @@
 
     <div class="field-items">
           </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="api_file_body"><code>api_file_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+
+    <div class="field-items">
+      <div class="param">file (optional)</div><div class="param-desc"><span class="param-type"><a href="#binary">byte[]</a></span> File to upload format: binary</div>
+    </div>  <!-- field-items -->
   </div>
   <div class="model">
     <h3><a name="inline_response_200"><code>inline_response_200</code></a> <a class="up" href="#__Models">Up</a></h3>

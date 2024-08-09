@@ -31,6 +31,13 @@ func Auth() gin.HandlerFunc {
 		claimsVal := *claims
 		auth.SetUserID(c, claimsVal.UserID)
 
+		if auth.CheckBothAdminUserList(fullPath) {
+			if claims.Role == auth.RoleAdmin || claims.Role == auth.RoleStaff || claims.Role == auth.RoleUser {
+				c.Next()
+				return
+			}
+		}
+
 		if auth.CheckAdminList(fullPath) {
 			if claims.Role == auth.RoleAdmin || claims.Role == auth.RoleStaff {
 				c.Next()

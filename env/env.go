@@ -22,6 +22,7 @@ type Env struct {
 	AllowOrigins string `env:"ALLOW_ORIGINS" envDefault:""`
 	Debug        bool   `env:"DEBUG" envDefault:"false"`
 	UseTLS       bool   `env:"USE_TLS" envDefault:"false"`
+	FilePath     string `env:"FILE_PATH" envDefault:"./file"`
 }
 
 var (
