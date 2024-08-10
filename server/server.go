@@ -63,6 +63,7 @@ func NewServer() *server {
 	}
 	openapi3filter.RegisterBodyDecoder("image/png", openapi3filter.FileBodyDecoder)
 	openapi3filter.RegisterBodyDecoder("image/jpeg", openapi3filter.FileBodyDecoder)
+	openapi3filter.RegisterBodyDecoder("image/webp", openapi3filter.FileBodyDecoder)
 	router.Use(gin_middleware.OapiRequestValidatorWithOptions(swagger, &gin_middleware.Options{
 		SilenceServersWarning: true,
 	}))

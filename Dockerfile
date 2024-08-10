@@ -22,6 +22,8 @@ COPY --from=builder /build/app .
 COPY config.yaml .
 COPY certs/cert.pem /runtime/certs/
 COPY certs/key.pem /runtime/certs/
+COPY static/ /runtime/file/
+USER root
 
 # Run the app
 ENTRYPOINT ["/runtime/app"]

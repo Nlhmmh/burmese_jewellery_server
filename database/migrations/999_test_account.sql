@@ -106,5 +106,65 @@ VALUES
     'http://localhost:8077/api/file/gold-bracelet-1.jpg',
     true,
     100
+  ),
+  (
+    'c0979115-2bb3-9999-a29d-64f3b8784815',
+    'b106e919-ab73-48f3-a86c-4b38ea22a0ff',
+    '46e78b04-955d-4f0c-a751-dd1dcb2d7248',
+    'c0979115-2bb3-4c50-a29d-64f3b8784a37',
+    'Wedding Forever 1',
+    'Wedding Forever in Platinum with a Half-circle of Diamonds, 2.2 mm',
+    '100',
+    'http://localhost:8077/api/file/gold-wedding-rings-pairs-1.jpg',
+    true,
+    100
+  ),
+  (
+    'c0979115-2bb3-9999-a29d-64f3b8784816',
+    'b106e919-ab73-48f3-a86c-4b38ea22a0fe',
+    '46e78b04-955d-4f0c-a751-dd1dcb2d7248',
+    'c0979115-2bb3-4c50-a29d-64f3b8784a33',
+    'Lasting Engagement 1',
+    'Wire Engagment Ring in Yellow Gold, 2.2 mm',
+    '100',
+    'http://localhost:8077/api/file/diamond-wedding-rings-paairs-1.jpg',
+    true,
+    100
+  ),
+  (
+    'c0979115-2bb3-9999-a29d-64f3b8784817',
+    'b106e919-ab73-48f3-a86c-4b38ea22a0f1',
+    '46e78b04-955d-4f0c-a751-dd1dcb2d7248',
+    'c0979115-2bb3-4c50-a29d-64f3b8784a37',
+    'Necklace 1',
+    'Necklace in Yellow Gold',
+    '100',
+    'http://localhost:8077/api/file/necklace.jpg',
+    true,
+    100
+  ),
+  (
+    'c0979115-2bb3-9999-a29d-64f3b8784818',
+    'b106e919-ab73-48f3-a86c-4b38ea22a0f2',
+    '46e78b04-955d-4f0c-a751-dd1dcb2d7248',
+    'c0979115-2bb3-4c50-a29d-64f3b8784a37',
+    'Lock Small Earrings 1',
+    'Lock Small Earrings in Yellow Gold',
+    '100',
+    'http://localhost:8077/api/file/gold-earrings-1.jpg',
+    true,
+    100
+  ),
+  (
+    'c0979115-2bb3-9999-a29d-64f3b8784819',
+    'b106e919-ab73-48f3-a86c-4b38ea22a0f3',
+    '46e78b04-955d-4f0c-a751-dd1dcb2d7248',
+    'c0979115-2bb3-4c50-a29d-64f3b8784a37',
+    'T Smile Pendant 1',
+    'T Smile Pendant in Yellow Gold',
+    '100',
+    'http://localhost:8077/api/file/gold-bracelet-1.jpg',
+    true,
+    100
   )
 ;
