@@ -27,94 +27,94 @@ import (
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
-	// Display the main page
+	// For testing purposes
 	// (GET /api)
 	GetApi(c *gin.Context)
-	// List user
+	// List account
 	// (GET /api/admin/account)
 	GetApiAdminAccount(c *gin.Context, params GetApiAdminAccountParams)
-	// Get user
+	// Get account
 	// (GET /api/admin/account/{account_id})
 	GetApiAdminAccountAccountId(c *gin.Context, accountId ID)
-	// Update user status
+	// Update account status
 	// (PUT /api/admin/account/{account_id})
 	PutApiAdminAccountAccountId(c *gin.Context, accountId ID)
-	// List admin user
+	// List admin account
 	// (GET /api/admin/account_admin)
 	GetApiAdminAccountAdmin(c *gin.Context, params GetApiAdminAccountAdminParams)
-
+	// Create admin account
 	// (POST /api/admin/account_admin)
 	PostApiAdminAccountAdmin(c *gin.Context)
-	// Delete admin user
+	// Delete admin account
 	// (DELETE /api/admin/account_admin/{account_admins_id})
 	DeleteApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId ID)
-	// Get admin user
+	// Get admin account
 	// (GET /api/admin/account_admin/{account_admins_id})
 	GetApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId ID)
-	// Edit admin user
+	// Edit admin account
 	// (PUT /api/admin/account_admin/{account_admins_id})
 	PutApiAdminAccountAdminAccountAdminsId(c *gin.Context, accountAdminsId ID)
-
+	// Create Category
 	// (POST /api/admin/category)
 	PostApiAdminCategory(c *gin.Context)
-
+	// Delete Category
 	// (DELETE /api/admin/category/{category_id})
 	DeleteApiAdminCategoryCategoryId(c *gin.Context, categoryId ID)
-
+	// Edit Category
 	// (PUT /api/admin/category/{category_id})
 	PutApiAdminCategoryCategoryId(c *gin.Context, categoryId ID)
-
+	// Create FAQ
 	// (POST /api/admin/faq)
 	PostApiAdminFaq(c *gin.Context)
-
+	// Delete FAQ
 	// (DELETE /api/admin/faq/{faq_id})
 	DeleteApiAdminFaqFaqId(c *gin.Context, faqId ID)
-
+	// Edit FAQ
 	// (PUT /api/admin/faq/{faq_id})
 	PutApiAdminFaqFaqId(c *gin.Context, faqId ID)
-
+	// Delete File
 	// (DELETE /api/admin/file/{file_name})
 	DeleteApiAdminFileFileName(c *gin.Context, fileName string)
-
+	// Create Gem
 	// (POST /api/admin/gem)
 	PostApiAdminGem(c *gin.Context)
-
+	// Delete Gem
 	// (DELETE /api/admin/gem/{gem_id})
 	DeleteApiAdminGemGemId(c *gin.Context, gemId ID)
-
+	// Edit Gem
 	// (PUT /api/admin/gem/{gem_id})
 	PutApiAdminGemGemId(c *gin.Context, gemId ID)
-
+	// Create Jewellery
 	// (POST /api/admin/jewellery)
 	PostApiAdminJewellery(c *gin.Context)
-
+	// Delete Jewellery
 	// (DELETE /api/admin/jewellery/{jewellery_id})
 	DeleteApiAdminJewelleryJewelleryId(c *gin.Context, jewelleryId ID)
-
+	// Edit Jewellery
 	// (PUT /api/admin/jewellery/{jewellery_id})
 	PutApiAdminJewelleryJewelleryId(c *gin.Context, jewelleryId ID)
-	// Login as admin user
+	// Login as admin account
 	// (POST /api/admin/login)
 	PostApiAdminLogin(c *gin.Context)
-
+	// Create Material
 	// (POST /api/admin/material)
 	PostApiAdminMaterial(c *gin.Context)
-
+	// Delete Material
 	// (DELETE /api/admin/material/{material_id})
 	DeleteApiAdminMaterialMaterialId(c *gin.Context, materialId ID)
-
+	// Edit Material
 	// (PUT /api/admin/material/{material_id})
 	PutApiAdminMaterialMaterialId(c *gin.Context, materialId ID)
-
+	// Login with email
 	// (POST /api/auth/email/login)
 	PostApiAuthEmailLogin(c *gin.Context)
-
+	// Send OTP to email
 	// (POST /api/auth/email/otp)
 	PostApiAuthEmailOtp(c *gin.Context)
-
+	// Resend OTP to email
 	// (POST /api/auth/email/otp/resend)
 	PostApiAuthEmailOtpResend(c *gin.Context)
-
+	// Register with Email
 	// (POST /api/auth/email/register)
 	PostApiAuthEmailRegister(c *gin.Context)
 	// Handle Google OAuth2 callback
@@ -123,61 +123,61 @@ type ServerInterface interface {
 	// Initiate Google OAuth2 login
 	// (GET /api/auth/google/login)
 	GetApiAuthGoogleLogin(c *gin.Context)
-
+	// List Account Cart
 	// (GET /api/cart)
 	GetApiCart(c *gin.Context)
-
+	// Edit Account Cart
 	// (POST /api/cart)
 	PostApiCart(c *gin.Context)
-
+	// List Category
 	// (GET /api/category)
 	GetApiCategory(c *gin.Context)
-	// Enums
+	// Get all enums
 	// (GET /api/enums)
 	GetApiEnums(c *gin.Context)
-
+	// List FAQ
 	// (GET /api/faq)
 	GetApiFaq(c *gin.Context, params GetApiFaqParams)
-
+	// List Account Favourite
 	// (GET /api/favourite)
 	GetApiFavourite(c *gin.Context)
-
+	// Edit Account Favourite
 	// (POST /api/favourite)
 	PostApiFavourite(c *gin.Context)
-
+	// Upload File
 	// (POST /api/file)
 	PostApiFile(c *gin.Context)
-
+	// Get File
 	// (GET /api/file/{file_name})
 	GetApiFileFileName(c *gin.Context, fileName string)
-
+	// List Gem
 	// (GET /api/gem)
 	GetApiGem(c *gin.Context)
 	// Health Check
 	// (GET /api/health_check)
 	GetApiHealthCheck(c *gin.Context)
-
+	// List Jewellery
 	// (GET /api/jewellery)
 	GetApiJewellery(c *gin.Context, params GetApiJewelleryParams)
-
+	// Get Jewellery
 	// (GET /api/jewellery/{jewellery_id})
 	GetApiJewelleryJewelleryId(c *gin.Context, jewelleryId ID)
-
+	// List Material
 	// (GET /api/material)
 	GetApiMaterial(c *gin.Context)
-
+	// List Account Order
 	// (GET /api/order)
 	GetApiOrder(c *gin.Context)
-
+	// Edit Account Order
 	// (POST /api/order)
 	PostApiOrder(c *gin.Context)
-
+	// Get Account Order
 	// (GET /api/order/{account_order_id})
 	GetApiOrderAccountOrderId(c *gin.Context, accountOrderId ID)
-
+	// Get Account Profile
 	// (GET /api/profile)
 	GetApiProfile(c *gin.Context)
-
+	// Edit Account Profile
 	// (POST /api/profile)
 	PostApiProfile(c *gin.Context)
 }
@@ -2335,94 +2335,94 @@ func (response PostApiProfile200Response) VisitPostApiProfileResponse(w http.Res
 
 // StrictServerInterface represents all server handlers.
 type StrictServerInterface interface {
-	// Display the main page
+	// For testing purposes
 	// (GET /api)
 	GetApi(ctx context.Context, request GetApiRequestObject) (GetApiResponseObject, error)
-	// List user
+	// List account
 	// (GET /api/admin/account)
 	GetApiAdminAccount(ctx context.Context, request GetApiAdminAccountRequestObject) (GetApiAdminAccountResponseObject, error)
-	// Get user
+	// Get account
 	// (GET /api/admin/account/{account_id})
 	GetApiAdminAccountAccountId(ctx context.Context, request GetApiAdminAccountAccountIdRequestObject) (GetApiAdminAccountAccountIdResponseObject, error)
-	// Update user status
+	// Update account status
 	// (PUT /api/admin/account/{account_id})
 	PutApiAdminAccountAccountId(ctx context.Context, request PutApiAdminAccountAccountIdRequestObject) (PutApiAdminAccountAccountIdResponseObject, error)
-	// List admin user
+	// List admin account
 	// (GET /api/admin/account_admin)
 	GetApiAdminAccountAdmin(ctx context.Context, request GetApiAdminAccountAdminRequestObject) (GetApiAdminAccountAdminResponseObject, error)
-
+	// Create admin account
 	// (POST /api/admin/account_admin)
 	PostApiAdminAccountAdmin(ctx context.Context, request PostApiAdminAccountAdminRequestObject) (PostApiAdminAccountAdminResponseObject, error)
-	// Delete admin user
+	// Delete admin account
 	// (DELETE /api/admin/account_admin/{account_admins_id})
 	DeleteApiAdminAccountAdminAccountAdminsId(ctx context.Context, request DeleteApiAdminAccountAdminAccountAdminsIdRequestObject) (DeleteApiAdminAccountAdminAccountAdminsIdResponseObject, error)
-	// Get admin user
+	// Get admin account
 	// (GET /api/admin/account_admin/{account_admins_id})
 	GetApiAdminAccountAdminAccountAdminsId(ctx context.Context, request GetApiAdminAccountAdminAccountAdminsIdRequestObject) (GetApiAdminAccountAdminAccountAdminsIdResponseObject, error)
-	// Edit admin user
+	// Edit admin account
 	// (PUT /api/admin/account_admin/{account_admins_id})
 	PutApiAdminAccountAdminAccountAdminsId(ctx context.Context, request PutApiAdminAccountAdminAccountAdminsIdRequestObject) (PutApiAdminAccountAdminAccountAdminsIdResponseObject, error)
-
+	// Create Category
 	// (POST /api/admin/category)
 	PostApiAdminCategory(ctx context.Context, request PostApiAdminCategoryRequestObject) (PostApiAdminCategoryResponseObject, error)
-
+	// Delete Category
 	// (DELETE /api/admin/category/{category_id})
 	DeleteApiAdminCategoryCategoryId(ctx context.Context, request DeleteApiAdminCategoryCategoryIdRequestObject) (DeleteApiAdminCategoryCategoryIdResponseObject, error)
-
+	// Edit Category
 	// (PUT /api/admin/category/{category_id})
 	PutApiAdminCategoryCategoryId(ctx context.Context, request PutApiAdminCategoryCategoryIdRequestObject) (PutApiAdminCategoryCategoryIdResponseObject, error)
-
+	// Create FAQ
 	// (POST /api/admin/faq)
 	PostApiAdminFaq(ctx context.Context, request PostApiAdminFaqRequestObject) (PostApiAdminFaqResponseObject, error)
-
+	// Delete FAQ
 	// (DELETE /api/admin/faq/{faq_id})
 	DeleteApiAdminFaqFaqId(ctx context.Context, request DeleteApiAdminFaqFaqIdRequestObject) (DeleteApiAdminFaqFaqIdResponseObject, error)
-
+	// Edit FAQ
 	// (PUT /api/admin/faq/{faq_id})
 	PutApiAdminFaqFaqId(ctx context.Context, request PutApiAdminFaqFaqIdRequestObject) (PutApiAdminFaqFaqIdResponseObject, error)
-
+	// Delete File
 	// (DELETE /api/admin/file/{file_name})
 	DeleteApiAdminFileFileName(ctx context.Context, request DeleteApiAdminFileFileNameRequestObject) (DeleteApiAdminFileFileNameResponseObject, error)
-
+	// Create Gem
 	// (POST /api/admin/gem)
 	PostApiAdminGem(ctx context.Context, request PostApiAdminGemRequestObject) (PostApiAdminGemResponseObject, error)
-
+	// Delete Gem
 	// (DELETE /api/admin/gem/{gem_id})
 	DeleteApiAdminGemGemId(ctx context.Context, request DeleteApiAdminGemGemIdRequestObject) (DeleteApiAdminGemGemIdResponseObject, error)
-
+	// Edit Gem
 	// (PUT /api/admin/gem/{gem_id})
 	PutApiAdminGemGemId(ctx context.Context, request PutApiAdminGemGemIdRequestObject) (PutApiAdminGemGemIdResponseObject, error)
-
+	// Create Jewellery
 	// (POST /api/admin/jewellery)
 	PostApiAdminJewellery(ctx context.Context, request PostApiAdminJewelleryRequestObject) (PostApiAdminJewelleryResponseObject, error)
-
+	// Delete Jewellery
 	// (DELETE /api/admin/jewellery/{jewellery_id})
 	DeleteApiAdminJewelleryJewelleryId(ctx context.Context, request DeleteApiAdminJewelleryJewelleryIdRequestObject) (DeleteApiAdminJewelleryJewelleryIdResponseObject, error)
-
+	// Edit Jewellery
 	// (PUT /api/admin/jewellery/{jewellery_id})
 	PutApiAdminJewelleryJewelleryId(ctx context.Context, request PutApiAdminJewelleryJewelleryIdRequestObject) (PutApiAdminJewelleryJewelleryIdResponseObject, error)
-	// Login as admin user
+	// Login as admin account
 	// (POST /api/admin/login)
 	PostApiAdminLogin(ctx context.Context, request PostApiAdminLoginRequestObject) (PostApiAdminLoginResponseObject, error)
-
+	// Create Material
 	// (POST /api/admin/material)
 	PostApiAdminMaterial(ctx context.Context, request PostApiAdminMaterialRequestObject) (PostApiAdminMaterialResponseObject, error)
-
+	// Delete Material
 	// (DELETE /api/admin/material/{material_id})
 	DeleteApiAdminMaterialMaterialId(ctx context.Context, request DeleteApiAdminMaterialMaterialIdRequestObject) (DeleteApiAdminMaterialMaterialIdResponseObject, error)
-
+	// Edit Material
 	// (PUT /api/admin/material/{material_id})
 	PutApiAdminMaterialMaterialId(ctx context.Context, request PutApiAdminMaterialMaterialIdRequestObject) (PutApiAdminMaterialMaterialIdResponseObject, error)
-
+	// Login with email
 	// (POST /api/auth/email/login)
 	PostApiAuthEmailLogin(ctx context.Context, request PostApiAuthEmailLoginRequestObject) (PostApiAuthEmailLoginResponseObject, error)
-
+	// Send OTP to email
 	// (POST /api/auth/email/otp)
 	PostApiAuthEmailOtp(ctx context.Context, request PostApiAuthEmailOtpRequestObject) (PostApiAuthEmailOtpResponseObject, error)
-
+	// Resend OTP to email
 	// (POST /api/auth/email/otp/resend)
 	PostApiAuthEmailOtpResend(ctx context.Context, request PostApiAuthEmailOtpResendRequestObject) (PostApiAuthEmailOtpResendResponseObject, error)
-
+	// Register with Email
 	// (POST /api/auth/email/register)
 	PostApiAuthEmailRegister(ctx context.Context, request PostApiAuthEmailRegisterRequestObject) (PostApiAuthEmailRegisterResponseObject, error)
 	// Handle Google OAuth2 callback
@@ -2431,61 +2431,61 @@ type StrictServerInterface interface {
 	// Initiate Google OAuth2 login
 	// (GET /api/auth/google/login)
 	GetApiAuthGoogleLogin(ctx context.Context, request GetApiAuthGoogleLoginRequestObject) (GetApiAuthGoogleLoginResponseObject, error)
-
+	// List Account Cart
 	// (GET /api/cart)
 	GetApiCart(ctx context.Context, request GetApiCartRequestObject) (GetApiCartResponseObject, error)
-
+	// Edit Account Cart
 	// (POST /api/cart)
 	PostApiCart(ctx context.Context, request PostApiCartRequestObject) (PostApiCartResponseObject, error)
-
+	// List Category
 	// (GET /api/category)
 	GetApiCategory(ctx context.Context, request GetApiCategoryRequestObject) (GetApiCategoryResponseObject, error)
-	// Enums
+	// Get all enums
 	// (GET /api/enums)
 	GetApiEnums(ctx context.Context, request GetApiEnumsRequestObject) (GetApiEnumsResponseObject, error)
-
+	// List FAQ
 	// (GET /api/faq)
 	GetApiFaq(ctx context.Context, request GetApiFaqRequestObject) (GetApiFaqResponseObject, error)
-
+	// List Account Favourite
 	// (GET /api/favourite)
 	GetApiFavourite(ctx context.Context, request GetApiFavouriteRequestObject) (GetApiFavouriteResponseObject, error)
-
+	// Edit Account Favourite
 	// (POST /api/favourite)
 	PostApiFavourite(ctx context.Context, request PostApiFavouriteRequestObject) (PostApiFavouriteResponseObject, error)
-
+	// Upload File
 	// (POST /api/file)
 	PostApiFile(ctx context.Context, request PostApiFileRequestObject) (PostApiFileResponseObject, error)
-
+	// Get File
 	// (GET /api/file/{file_name})
 	GetApiFileFileName(ctx context.Context, request GetApiFileFileNameRequestObject) (GetApiFileFileNameResponseObject, error)
-
+	// List Gem
 	// (GET /api/gem)
 	GetApiGem(ctx context.Context, request GetApiGemRequestObject) (GetApiGemResponseObject, error)
 	// Health Check
 	// (GET /api/health_check)
 	GetApiHealthCheck(ctx context.Context, request GetApiHealthCheckRequestObject) (GetApiHealthCheckResponseObject, error)
-
+	// List Jewellery
 	// (GET /api/jewellery)
 	GetApiJewellery(ctx context.Context, request GetApiJewelleryRequestObject) (GetApiJewelleryResponseObject, error)
-
+	// Get Jewellery
 	// (GET /api/jewellery/{jewellery_id})
 	GetApiJewelleryJewelleryId(ctx context.Context, request GetApiJewelleryJewelleryIdRequestObject) (GetApiJewelleryJewelleryIdResponseObject, error)
-
+	// List Material
 	// (GET /api/material)
 	GetApiMaterial(ctx context.Context, request GetApiMaterialRequestObject) (GetApiMaterialResponseObject, error)
-
+	// List Account Order
 	// (GET /api/order)
 	GetApiOrder(ctx context.Context, request GetApiOrderRequestObject) (GetApiOrderResponseObject, error)
-
+	// Edit Account Order
 	// (POST /api/order)
 	PostApiOrder(ctx context.Context, request PostApiOrderRequestObject) (PostApiOrderResponseObject, error)
-
+	// Get Account Order
 	// (GET /api/order/{account_order_id})
 	GetApiOrderAccountOrderId(ctx context.Context, request GetApiOrderAccountOrderIdRequestObject) (GetApiOrderAccountOrderIdResponseObject, error)
-
+	// Get Account Profile
 	// (GET /api/profile)
 	GetApiProfile(ctx context.Context, request GetApiProfileRequestObject) (GetApiProfileResponseObject, error)
-
+	// Edit Account Profile
 	// (POST /api/profile)
 	PostApiProfile(ctx context.Context, request PostApiProfileRequestObject) (PostApiProfileResponseObject, error)
 }
@@ -4011,65 +4011,70 @@ func (sh *strictHandler) PostApiProfile(ctx *gin.Context) {
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

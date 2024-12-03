@@ -19,6 +19,32 @@ tags:
     description: App
   - name: others
     description: Others
+  - name: account_admin
+    description: Admin Account
+  - name: account
+    description: Account
+  - name: jewellery
+    description: Jewellery
+  - name: category
+    description: Category
+  - name: gem
+    description: Gem
+  - name: material
+    description: Material
+  - name: faq
+    description: Frequently Asked Question
+  - name: file
+    description: File
+  - name: auth
+    description: Auth
+  - name: profile
+    description: Account Profile
+  - name: cart
+    description: Cart
+  - name: favourite
+    description: Favourite
+  - name: order
+    description: Order
 
 paths:
   $ref: ./paths.yml

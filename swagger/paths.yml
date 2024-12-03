@@ -1,11 +1,11 @@
 /api:
   get:
     tags:
-      - app
-    summary: Display the main page
+      - others
+    summary: For testing purposes
     responses:
       200:
-        description: Main page displayed successfully
+        description: Successful response
 /api/health_check:
   get:
     tags:
@@ -28,7 +28,7 @@
   get:
     tags:
       - others
-    summary: Enums
+    summary: Get all enums
     responses:
       200:
         description: OK
@@ -40,7 +40,7 @@
 /api/auth/google/login:
   get:
     tags:
-      - app
+      - auth
     summary: Initiate Google OAuth2 login
     responses:
       302:
@@ -48,7 +48,7 @@
 /api/auth/google/callback:
   get:
     tags:
-      - app
+      - auth
     summary: Handle Google OAuth2 callback
     parameters:
       - name: state
@@ -74,7 +74,8 @@
 /api/auth/email/register:
   post:
     tags:
-      - app
+      - auth
+    summary: Register with Email
     requestBody:
       required: true
       content:
@@ -91,7 +92,8 @@
 /api/auth/email/login:
   post:
     tags:
-      - app
+      - auth
+    summary: Login with email
     requestBody:
       required: true
       content:
@@ -104,7 +106,8 @@
 /api/auth/email/otp:
   post:
     tags:
-      - app
+      - auth
+    summary: Send OTP to email
     requestBody:
       required: true
       content:
@@ -117,7 +120,8 @@
 /api/auth/email/otp/resend:
   post:
     tags:
-      - app
+      - auth
+    summary: Resend OTP to email
     requestBody:
       required: true
       content:
@@ -130,9 +134,9 @@
 
 /api/admin/login:
   post:
-    summary: Login as admin user
+    summary: Login as admin account
     tags:
-      - admin
+      - others
     requestBody:
       required: true
       content:
@@ -152,9 +156,9 @@
 
 /api/admin/account_admin:
   get:
-    summary: List admin user
+    summary: List admin account
     tags:
-      - admin
+      - account_admin
     parameters:
       - in: query
         name: offset
@@ -199,7 +203,8 @@
                 $ref: "#/components/schemas/AccountAdmin"
   post:
     tags:
-      - admin
+      - account_admin
+    summary: Create admin account
     requestBody:
       required: true
       content:
@@ -211,9 +216,9 @@
         description: OK
 /api/admin/account_admin/{account_admins_id}:
   get:
-    summary: Get admin user
+    summary: Get admin account
     tags:
-      - admin
+      - account_admin
     parameters:
       - in: path
         name: account_admins_id
@@ -228,9 +233,9 @@
             schema:
               $ref: "#/components/schemas/AccountAdmin"
   put:
-    summary: Edit admin user
+    summary: Edit admin account
     tags:
-      - admin
+      - account_admin
     parameters:
       - in: path
         name: account_admins_id
@@ -247,9 +252,9 @@
       200:
         description: OK
   delete:
-    summary: Delete admin user
+    summary: Delete admin account
     tags:
-      - admin
+      - account_admin
     parameters:
       - in: path
         name: account_admins_id
@@ -262,9 +267,9 @@
 
 /api/admin/account:
   get:
-    summary: List user
+    summary: List account
     tags:
-      - admin
+      - account
     parameters:
       - in: query
         name: offset
@@ -309,9 +314,9 @@
                 $ref: "#/components/schemas/AccountWithProfile"
 /api/admin/account/{account_id}:
   get:
-    summary: Get user
+    summary: Get account
     tags:
-      - admin
+      - account
     parameters:
       - in: path
         name: account_id
@@ -326,9 +331,9 @@
             schema:
               $ref: "#/components/schemas/Account"
   put:
-    summary: Update user status
+    summary: Update account status
     tags:
-      - admin
+      - account
     parameters:
       - in: path
         name: account_id
@@ -348,7 +353,8 @@
 /api/jewellery:
   get:
     tags:
-      - app
+      - jewellery
+    summary: List Jewellery
     parameters:
       - in: query
         name: offset
@@ -402,7 +408,8 @@
 /api/jewellery/{jewellery_id}:
   get:
     tags:
-      - app
+      - jewellery
+    summary: Get Jewellery
     parameters:
       - in: path
         name: jewellery_id
@@ -419,7 +426,8 @@
 /api/admin/jewellery:
   post:
     tags:
-      - admin
+      - jewellery
+    summary: Create Jewellery
     requestBody:
       required: true
       content:
@@ -432,7 +440,8 @@
 /api/admin/jewellery/{jewellery_id}:
   put:
     tags:
-      - admin
+      - jewellery
+    summary: Edit Jewellery
     parameters:
       - in: path
         name: jewellery_id
@@ -450,7 +459,8 @@
         description: OK
   delete:
     tags:
-      - admin
+      - jewellery
+    summary: Delete Jewellery
     parameters:
       - in: path
         name: jewellery_id
@@ -464,7 +474,8 @@
 /api/category:
   get:
     tags:
-      - app
+      - category
+    summary: List Category
     responses:
       200:
         description: OK
@@ -477,7 +488,8 @@
 /api/admin/category:
   post:
     tags:
-      - admin
+      - category
+    summary: Create Category
     requestBody:
       required: true
       content:
@@ -490,7 +502,8 @@
 /api/admin/category/{category_id}:
   put:
     tags:
-      - admin
+      - category
+    summary: Edit Category
     parameters:
       - in: path
         name: category_id
@@ -508,7 +521,8 @@
         description: OK
   delete:
     tags:
-      - admin
+      - category
+    summary: Delete Category
     parameters:
       - in: path
         name: category_id
@@ -522,7 +536,8 @@
 /api/gem:
   get:
     tags:
-      - app
+      - gem
+    summary: List Gem
     responses:
       200:
         description: OK
@@ -535,7 +550,8 @@
 /api/admin/gem:
   post:
     tags:
-      - admin
+      - gem
+    summary: Create Gem
     requestBody:
       required: true
       content:
@@ -548,7 +564,8 @@
 /api/admin/gem/{gem_id}:
   put:
     tags:
-      - admin
+      - gem
+    summary: Edit Gem
     parameters:
       - in: path
         name: gem_id
@@ -566,7 +583,8 @@
         description: OK
   delete:
     tags:
-      - admin
+      - gem
+    summary: Delete Gem
     parameters:
       - in: path
         name: gem_id
@@ -580,7 +598,8 @@
 /api/material:
   get:
     tags:
-      - app
+      - material
+    summary: List Material
     responses:
       200:
         description: OK
@@ -593,7 +612,8 @@
 /api/admin/material:
   post:
     tags:
-      - admin
+      - material
+    summary: Create Material
     requestBody:
       required: true
       content:
@@ -606,7 +626,8 @@
 /api/admin/material/{material_id}:
   put:
     tags:
-      - admin
+      - material
+    summary: Edit Material
     parameters:
       - in: path
         name: material_id
@@ -624,7 +645,8 @@
         description: OK
   delete:
     tags:
-      - admin
+      - material
+    summary: Delete Material
     parameters:
       - in: path
         name: material_id
@@ -638,7 +660,8 @@
 /api/faq:
   get:
     tags:
-      - app
+      - faq
+    summary: List FAQ
     parameters:
       - in: query
         name: offset
@@ -680,7 +703,8 @@
 /api/admin/faq:
   post:
     tags:
-      - admin
+      - faq
+    summary: Create FAQ
     requestBody:
       required: true
       content:
@@ -693,7 +717,8 @@
 /api/admin/faq/{faq_id}:
   put:
     tags:
-      - admin
+      - faq
+    summary: Edit FAQ
     parameters:
       - in: path
         name: faq_id
@@ -711,7 +736,8 @@
         description: OK
   delete:
     tags:
-      - admin
+      - faq
+    summary: Delete FAQ
     parameters:
       - in: path
         name: faq_id
@@ -725,7 +751,8 @@
 /api/profile:
   get:
     tags:
-      - app
+      - profile
+    summary: Get Account Profile
     responses:
       200:
         description: OK
@@ -735,7 +762,8 @@
               $ref: "#/components/schemas/AccountProfile"
   post:
     tags:
-      - app
+      - profile
+    summary: Edit Account Profile
     requestBody:
       required: true
       content:
@@ -749,7 +777,8 @@
 /api/cart:
   get:
     tags:
-      - app
+      - cart
+    summary: List Account Cart
     responses:
       200:
         description: OK
@@ -761,7 +790,8 @@
                 $ref: "#/components/schemas/AccountCartJewellery"
   post:
     tags:
-      - app
+      - cart
+    summary: Edit Account Cart
     requestBody:
       required: true
       content:
@@ -775,7 +805,8 @@
 /api/favourite:
   get:
     tags:
-      - app
+      - favourite
+    summary: List Account Favourite
     responses:
       200:
         description: OK
@@ -787,7 +818,8 @@
                 $ref: "#/components/schemas/AccountFavourite"
   post:
     tags:
-      - app
+      - favourite
+    summary: Edit Account Favourite
     requestBody:
       required: true
       content:
@@ -801,7 +833,8 @@
 /api/order:
   get:
     tags:
-      - app
+      - order
+    summary: List Account Order
     responses:
       200:
         description: OK
@@ -813,7 +846,8 @@
                 $ref: "#/components/schemas/AccountOrder"
   post:
     tags:
-      - app
+      - order
+    summary: Edit Account Order
     requestBody:
       required: true
       content:
@@ -826,7 +860,8 @@
 /api/order/{account_order_id}:
   get:
     tags:
-      - app
+      - order
+    summary: Get Account Order
     parameters:
       - in: path
         name: account_order_id
@@ -846,7 +881,8 @@
 /api/file/{file_name}:
   get:
     tags:
-      - app
+      - file
+    summary: Get File
     parameters:
       - in: path
         name: file_name
@@ -864,7 +900,8 @@
 /api/admin/file/{file_name}:
   delete:
     tags:
-      - app
+      - file
+    summary: Delete File
     parameters:
       - in: path
         name: file_name
@@ -877,7 +914,8 @@
 /api/file:
   post:
     tags:
-      - app
+      - file
+    summary: Upload File
     requestBody:
         content:
           multipart/form-data:

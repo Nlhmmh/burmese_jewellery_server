@@ -193,73 +193,106 @@
 
   <h3>Table of Contents </h3>
   <div class="method-summary"></div>
-  <h4><a href="#Admin">Admin</a></h4>
+  <h4><a href="#Account">Account</a></h4>
   <ul>
   <li><a href="#apiAdminAccountAccountIdGet"><code><span class="http-method">get</span> /api/admin/account/{account_id}</code></a></li>
   <li><a href="#apiAdminAccountAccountIdPut"><code><span class="http-method">put</span> /api/admin/account/{account_id}</code></a></li>
+  <li><a href="#apiAdminAccountGet"><code><span class="http-method">get</span> /api/admin/account</code></a></li>
+  </ul>
+  <h4><a href="#AccountAdmin">AccountAdmin</a></h4>
+  <ul>
   <li><a href="#apiAdminAccountAdminAccountAdminsIdDelete"><code><span class="http-method">delete</span> /api/admin/account_admin/{account_admins_id}</code></a></li>
   <li><a href="#apiAdminAccountAdminAccountAdminsIdGet"><code><span class="http-method">get</span> /api/admin/account_admin/{account_admins_id}</code></a></li>
   <li><a href="#apiAdminAccountAdminAccountAdminsIdPut"><code><span class="http-method">put</span> /api/admin/account_admin/{account_admins_id}</code></a></li>
   <li><a href="#apiAdminAccountAdminGet"><code><span class="http-method">get</span> /api/admin/account_admin</code></a></li>
   <li><a href="#apiAdminAccountAdminPost"><code><span class="http-method">post</span> /api/admin/account_admin</code></a></li>
-  <li><a href="#apiAdminAccountGet"><code><span class="http-method">get</span> /api/admin/account</code></a></li>
-  <li><a href="#apiAdminCategoryCategoryIdDelete"><code><span class="http-method">delete</span> /api/admin/category/{category_id}</code></a></li>
-  <li><a href="#apiAdminCategoryCategoryIdPut"><code><span class="http-method">put</span> /api/admin/category/{category_id}</code></a></li>
-  <li><a href="#apiAdminCategoryPost"><code><span class="http-method">post</span> /api/admin/category</code></a></li>
-  <li><a href="#apiAdminFaqFaqIdDelete"><code><span class="http-method">delete</span> /api/admin/faq/{faq_id}</code></a></li>
-  <li><a href="#apiAdminFaqFaqIdPut"><code><span class="http-method">put</span> /api/admin/faq/{faq_id}</code></a></li>
-  <li><a href="#apiAdminFaqPost"><code><span class="http-method">post</span> /api/admin/faq</code></a></li>
-  <li><a href="#apiAdminGemGemIdDelete"><code><span class="http-method">delete</span> /api/admin/gem/{gem_id}</code></a></li>
-  <li><a href="#apiAdminGemGemIdPut"><code><span class="http-method">put</span> /api/admin/gem/{gem_id}</code></a></li>
-  <li><a href="#apiAdminGemPost"><code><span class="http-method">post</span> /api/admin/gem</code></a></li>
-  <li><a href="#apiAdminJewelleryJewelleryIdDelete"><code><span class="http-method">delete</span> /api/admin/jewellery/{jewellery_id}</code></a></li>
-  <li><a href="#apiAdminJewelleryJewelleryIdPut"><code><span class="http-method">put</span> /api/admin/jewellery/{jewellery_id}</code></a></li>
-  <li><a href="#apiAdminJewelleryPost"><code><span class="http-method">post</span> /api/admin/jewellery</code></a></li>
-  <li><a href="#apiAdminLoginPost"><code><span class="http-method">post</span> /api/admin/login</code></a></li>
-  <li><a href="#apiAdminMaterialMaterialIdDelete"><code><span class="http-method">delete</span> /api/admin/material/{material_id}</code></a></li>
-  <li><a href="#apiAdminMaterialMaterialIdPut"><code><span class="http-method">put</span> /api/admin/material/{material_id}</code></a></li>
-  <li><a href="#apiAdminMaterialPost"><code><span class="http-method">post</span> /api/admin/material</code></a></li>
   </ul>
-  <h4><a href="#App">App</a></h4>
+  <h4><a href="#Auth">Auth</a></h4>
   <ul>
-  <li><a href="#apiAdminFileFileNameDelete"><code><span class="http-method">delete</span> /api/admin/file/{file_name}</code></a></li>
   <li><a href="#apiAuthEmailLoginPost"><code><span class="http-method">post</span> /api/auth/email/login</code></a></li>
   <li><a href="#apiAuthEmailOtpPost"><code><span class="http-method">post</span> /api/auth/email/otp</code></a></li>
   <li><a href="#apiAuthEmailOtpResendPost"><code><span class="http-method">post</span> /api/auth/email/otp/resend</code></a></li>
   <li><a href="#apiAuthEmailRegisterPost"><code><span class="http-method">post</span> /api/auth/email/register</code></a></li>
   <li><a href="#apiAuthGoogleCallbackGet"><code><span class="http-method">get</span> /api/auth/google/callback</code></a></li>
   <li><a href="#apiAuthGoogleLoginGet"><code><span class="http-method">get</span> /api/auth/google/login</code></a></li>
+  </ul>
+  <h4><a href="#Cart">Cart</a></h4>
+  <ul>
   <li><a href="#apiCartGet"><code><span class="http-method">get</span> /api/cart</code></a></li>
   <li><a href="#apiCartPost"><code><span class="http-method">post</span> /api/cart</code></a></li>
+  </ul>
+  <h4><a href="#Category">Category</a></h4>
+  <ul>
+  <li><a href="#apiAdminCategoryCategoryIdDelete"><code><span class="http-method">delete</span> /api/admin/category/{category_id}</code></a></li>
+  <li><a href="#apiAdminCategoryCategoryIdPut"><code><span class="http-method">put</span> /api/admin/category/{category_id}</code></a></li>
+  <li><a href="#apiAdminCategoryPost"><code><span class="http-method">post</span> /api/admin/category</code></a></li>
   <li><a href="#apiCategoryGet"><code><span class="http-method">get</span> /api/category</code></a></li>
+  </ul>
+  <h4><a href="#Faq">Faq</a></h4>
+  <ul>
+  <li><a href="#apiAdminFaqFaqIdDelete"><code><span class="http-method">delete</span> /api/admin/faq/{faq_id}</code></a></li>
+  <li><a href="#apiAdminFaqFaqIdPut"><code><span class="http-method">put</span> /api/admin/faq/{faq_id}</code></a></li>
+  <li><a href="#apiAdminFaqPost"><code><span class="http-method">post</span> /api/admin/faq</code></a></li>
   <li><a href="#apiFaqGet"><code><span class="http-method">get</span> /api/faq</code></a></li>
+  </ul>
+  <h4><a href="#Favourite">Favourite</a></h4>
+  <ul>
   <li><a href="#apiFavouriteGet"><code><span class="http-method">get</span> /api/favourite</code></a></li>
   <li><a href="#apiFavouritePost"><code><span class="http-method">post</span> /api/favourite</code></a></li>
+  </ul>
+  <h4><a href="#File">File</a></h4>
+  <ul>
+  <li><a href="#apiAdminFileFileNameDelete"><code><span class="http-method">delete</span> /api/admin/file/{file_name}</code></a></li>
   <li><a href="#apiFileFileNameGet"><code><span class="http-method">get</span> /api/file/{file_name}</code></a></li>
   <li><a href="#apiFilePost"><code><span class="http-method">post</span> /api/file</code></a></li>
+  </ul>
+  <h4><a href="#Gem">Gem</a></h4>
+  <ul>
+  <li><a href="#apiAdminGemGemIdDelete"><code><span class="http-method">delete</span> /api/admin/gem/{gem_id}</code></a></li>
+  <li><a href="#apiAdminGemGemIdPut"><code><span class="http-method">put</span> /api/admin/gem/{gem_id}</code></a></li>
+  <li><a href="#apiAdminGemPost"><code><span class="http-method">post</span> /api/admin/gem</code></a></li>
   <li><a href="#apiGemGet"><code><span class="http-method">get</span> /api/gem</code></a></li>
-  <li><a href="#apiGet"><code><span class="http-method">get</span> /api</code></a></li>
+  </ul>
+  <h4><a href="#Jewellery">Jewellery</a></h4>
+  <ul>
+  <li><a href="#apiAdminJewelleryJewelleryIdDelete"><code><span class="http-method">delete</span> /api/admin/jewellery/{jewellery_id}</code></a></li>
+  <li><a href="#apiAdminJewelleryJewelleryIdPut"><code><span class="http-method">put</span> /api/admin/jewellery/{jewellery_id}</code></a></li>
+  <li><a href="#apiAdminJewelleryPost"><code><span class="http-method">post</span> /api/admin/jewellery</code></a></li>
   <li><a href="#apiJewelleryGet"><code><span class="http-method">get</span> /api/jewellery</code></a></li>
   <li><a href="#apiJewelleryJewelleryIdGet"><code><span class="http-method">get</span> /api/jewellery/{jewellery_id}</code></a></li>
+  </ul>
+  <h4><a href="#Material">Material</a></h4>
+  <ul>
+  <li><a href="#apiAdminMaterialMaterialIdDelete"><code><span class="http-method">delete</span> /api/admin/material/{material_id}</code></a></li>
+  <li><a href="#apiAdminMaterialMaterialIdPut"><code><span class="http-method">put</span> /api/admin/material/{material_id}</code></a></li>
+  <li><a href="#apiAdminMaterialPost"><code><span class="http-method">post</span> /api/admin/material</code></a></li>
   <li><a href="#apiMaterialGet"><code><span class="http-method">get</span> /api/material</code></a></li>
+  </ul>
+  <h4><a href="#Order">Order</a></h4>
+  <ul>
   <li><a href="#apiOrderAccountOrderIdGet"><code><span class="http-method">get</span> /api/order/{account_order_id}</code></a></li>
   <li><a href="#apiOrderGet"><code><span class="http-method">get</span> /api/order</code></a></li>
   <li><a href="#apiOrderPost"><code><span class="http-method">post</span> /api/order</code></a></li>
-  <li><a href="#apiProfileGet"><code><span class="http-method">get</span> /api/profile</code></a></li>
-  <li><a href="#apiProfilePost"><code><span class="http-method">post</span> /api/profile</code></a></li>
   </ul>
   <h4><a href="#Others">Others</a></h4>
   <ul>
+  <li><a href="#apiAdminLoginPost"><code><span class="http-method">post</span> /api/admin/login</code></a></li>
   <li><a href="#apiEnumsGet"><code><span class="http-method">get</span> /api/enums</code></a></li>
+  <li><a href="#apiGet"><code><span class="http-method">get</span> /api</code></a></li>
   <li><a href="#apiHealthCheckGet"><code><span class="http-method">get</span> /api/health_check</code></a></li>
   </ul>
+  <h4><a href="#Profile">Profile</a></h4>
+  <ul>
+  <li><a href="#apiProfileGet"><code><span class="http-method">get</span> /api/profile</code></a></li>
+  <li><a href="#apiProfilePost"><code><span class="http-method">post</span> /api/profile</code></a></li>
+  </ul>
 
-  <h1><a name="Admin">Admin</a></h1>
+  <h1><a name="Account">Account</a></h1>
   <div class="method"><a name="apiAdminAccountAccountIdGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/admin/account/{account_id}</code></pre></div>
-    <div class="method-summary">Get user (<span class="nickname">apiAdminAccountAccountIdGet</span>)</div>
+    <div class="method-summary">Get account (<span class="nickname">apiAdminAccountAccountIdGet</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
@@ -311,7 +344,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/account/{account_id}</code></pre></div>
-    <div class="method-summary">Update user status (<span class="nickname">apiAdminAccountAccountIdPut</span>)</div>
+    <div class="method-summary">Update account status (<span class="nickname">apiAdminAccountAccountIdPut</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
@@ -347,234 +380,11 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
-  <div class="method"><a name="apiAdminAccountAdminAccountAdminsIdDelete"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/account_admin/{account_admins_id}</code></pre></div>
-    <div class="method-summary">Delete admin user (<span class="nickname">apiAdminAccountAdminAccountAdminsIdDelete</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">account_admins_id (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    Deleted
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminAccountAdminAccountAdminsIdGet"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/admin/account_admin/{account_admins_id}</code></pre></div>
-    <div class="method-summary">Get admin user (<span class="nickname">apiAdminAccountAdminAccountAdminsIdGet</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">account_admins_id (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-
-
-
-
-
-    <h3 class="field-label">Return type</h3>
-    <div class="return-type">
-      <a href="#AccountAdmin">AccountAdmin</a>
-
-    </div>
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-    <h3 class="field-label">Example data</h3>
-    <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>{
-  "mail" : "test@gmail.com",
-  "updated_at" : "2000-01-23T04:56:07.000+00:00",
-  "account_admin_role" : "staff",
-  "account_admin_status" : "active",
-  "created_at" : "2000-01-23T04:56:07.000+00:00",
-  "account_admin_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-}</code></pre>
-
-    <h3 class="field-label">Produces</h3>
-    This API call produces the following media types according to the <span class="header">Accept</span> request header;
-    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#AccountAdmin">AccountAdmin</a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminAccountAdminAccountAdminsIdPut"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/account_admin/{account_admins_id}</code></pre></div>
-    <div class="method-summary">Edit admin user (<span class="nickname">apiAdminAccountAdminAccountAdminsIdPut</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">account_admins_id (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#AccountAdminPutParam">AccountAdminPutParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminAccountAdminGet"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/admin/account_admin</code></pre></div>
-    <div class="method-summary">List admin user (<span class="nickname">apiAdminAccountAdminGet</span>)</div>
-    <div class="method-notes"></div>
-
-
-
-
-
-    <h3 class="field-label">Query parameters</h3>
-    <div class="field-items">
-      <div class="param">offset (required)</div>
-
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">limit (required)</div>
-
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">id (optional)</div>
-
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">mail (optional)</div>
-
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">account_admin_role (optional)</div>
-
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">account_admin_status (optional)</div>
-
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">sort (optional)</div>
-
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-
-    <h3 class="field-label">Return type</h3>
-    <div class="return-type">
-      array[<a href="#AccountAdmin">AccountAdmin</a>]
-
-    </div>
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-    <h3 class="field-label">Example data</h3>
-    <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>[ {
-  "mail" : "test@gmail.com",
-  "updated_at" : "2000-01-23T04:56:07.000+00:00",
-  "account_admin_role" : "staff",
-  "account_admin_status" : "active",
-  "created_at" : "2000-01-23T04:56:07.000+00:00",
-  "account_admin_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-}, {
-  "mail" : "test@gmail.com",
-  "updated_at" : "2000-01-23T04:56:07.000+00:00",
-  "account_admin_role" : "staff",
-  "account_admin_status" : "active",
-  "created_at" : "2000-01-23T04:56:07.000+00:00",
-  "account_admin_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-} ]</code></pre>
-
-    <h3 class="field-label">Produces</h3>
-    This API call produces the following media types according to the <span class="header">Accept</span> request header;
-    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminAccountAdminPost"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/account_admin</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminAccountAdminPost</span>)</div>
-    <div class="method-notes"></div>
-
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#AccountAdminPostParam">AccountAdminPostParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
   <div class="method"><a name="apiAdminAccountGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/admin/account</code></pre></div>
-    <div class="method-summary">List user (<span class="nickname">apiAdminAccountGet</span>)</div>
+    <div class="method-summary">List account (<span class="nickname">apiAdminAccountGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -665,16 +475,17 @@
 
   </div> <!-- method -->
   <hr/>
-  <div class="method"><a name="apiAdminCategoryCategoryIdDelete"></a>
+  <h1><a name="AccountAdmin">AccountAdmin</a></h1>
+  <div class="method"><a name="apiAdminAccountAdminAccountAdminsIdDelete"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
-    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/category/{category_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminCategoryCategoryIdDelete</span>)</div>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/account_admin/{account_admins_id}</code></pre></div>
+    <div class="method-summary">Delete admin account (<span class="nickname">apiAdminAccountAdminAccountAdminsIdDelete</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
     <div class="field-items">
-      <div class="param">category_id (required)</div>
+      <div class="param">account_admins_id (required)</div>
 
             <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
 
@@ -694,420 +505,27 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
-  <div class="method"><a name="apiAdminCategoryCategoryIdPut"></a>
+  <div class="method"><a name="apiAdminAccountAdminAccountAdminsIdGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
-    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/category/{category_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminCategoryCategoryIdPut</span>)</div>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/admin/account_admin/{account_admins_id}</code></pre></div>
+    <div class="method-summary">Get admin account (<span class="nickname">apiAdminAccountAdminAccountAdminsIdGet</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
     <div class="field-items">
-      <div class="param">category_id (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#CategoryPutParam">CategoryPutParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminCategoryPost"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/category</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminCategoryPost</span>)</div>
-    <div class="method-notes"></div>
-
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#CategoryPostParam">CategoryPostParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminFaqFaqIdDelete"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/faq/{faq_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminFaqFaqIdDelete</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">faq_id (required)</div>
+      <div class="param">account_admins_id (required)</div>
 
             <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
 
 
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    Deleted
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminFaqFaqIdPut"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/faq/{faq_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminFaqFaqIdPut</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">faq_id (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#FAQPutParam">FAQPutParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminFaqPost"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/faq</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminFaqPost</span>)</div>
-    <div class="method-notes"></div>
-
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#FAQPostParam">FAQPostParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminGemGemIdDelete"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/gem/{gem_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminGemGemIdDelete</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">gem_id (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    Deleted
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminGemGemIdPut"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/gem/{gem_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminGemGemIdPut</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">gem_id (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#GemPutParam">GemPutParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminGemPost"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/gem</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminGemPost</span>)</div>
-    <div class="method-notes"></div>
-
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#GemPostParam">GemPostParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminJewelleryJewelleryIdDelete"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/jewellery/{jewellery_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminJewelleryJewelleryIdDelete</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">jewellery_id (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    Deleted
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminJewelleryJewelleryIdPut"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/jewellery/{jewellery_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminJewelleryJewelleryIdPut</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">jewellery_id (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#JewelleryPutParam">JewelleryPutParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminJewelleryPost"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/jewellery</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminJewelleryPost</span>)</div>
-    <div class="method-notes"></div>
-
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#JewelleryPostParam">JewelleryPostParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminLoginPost"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/login</code></pre></div>
-    <div class="method-summary">Login as admin user (<span class="nickname">apiAdminLoginPost</span>)</div>
-    <div class="method-notes"></div>
-
-
-    <h3 class="field-label">Consumes</h3>
-    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Request body</h3>
-    <div class="field-items">
-      <div class="param">body <a href="#AccountAdminLoginParam">AccountAdminLoginParam</a> (required)</div>
-
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
-                </div>  <!-- field-items -->
 
 
 
 
     <h3 class="field-label">Return type</h3>
     <div class="return-type">
-      <a href="#inline_response_200_1">inline_response_200_1</a>
+      <a href="#AccountAdmin">AccountAdmin</a>
 
     </div>
 
@@ -1116,7 +534,12 @@
     <h3 class="field-label">Example data</h3>
     <div class="example-data-content-type">Content-Type: application/json</div>
     <pre class="example"><code>{
-  "token" : "token"
+  "mail" : "test@gmail.com",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_role" : "staff",
+  "account_admin_status" : "active",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
 }</code></pre>
 
     <h3 class="field-label">Produces</h3>
@@ -1129,48 +552,19 @@
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
     OK
-        <a href="#inline_response_200_1">inline_response_200_1</a>
+        <a href="#AccountAdmin">AccountAdmin</a>
   </div> <!-- method -->
   <hr/>
-  <div class="method"><a name="apiAdminMaterialMaterialIdDelete"></a>
+  <div class="method"><a name="apiAdminAccountAdminAccountAdminsIdPut"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
-    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/material/{material_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminMaterialMaterialIdDelete</span>)</div>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/account_admin/{account_admins_id}</code></pre></div>
+    <div class="method-summary">Edit admin account (<span class="nickname">apiAdminAccountAdminAccountAdminsIdPut</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
     <div class="field-items">
-      <div class="param">material_id (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    Deleted
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiAdminMaterialMaterialIdPut"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/material/{material_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminMaterialMaterialIdPut</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">material_id (required)</div>
+      <div class="param">account_admins_id (required)</div>
 
             <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
 
@@ -1182,7 +576,7 @@
 
     <h3 class="field-label">Request body</h3>
     <div class="field-items">
-      <div class="param">body <a href="#MaterialPutParam">MaterialPutParam</a> (required)</div>
+      <div class="param">body <a href="#AccountAdminPutParam">AccountAdminPutParam</a> (required)</div>
 
             <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
                 </div>  <!-- field-items -->
@@ -1201,11 +595,80 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
-  <div class="method"><a name="apiAdminMaterialPost"></a>
+  <div class="method"><a name="apiAdminAccountAdminGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
-    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/material</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminMaterialPost</span>)</div>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/admin/account_admin</code></pre></div>
+    <div class="method-summary">List admin account (<span class="nickname">apiAdminAccountAdminGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">offset (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">limit (required)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">id (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">mail (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">account_admin_role (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">account_admin_status (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">sort (optional)</div>
+
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#AccountAdmin">AccountAdmin</a>]
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "mail" : "test@gmail.com",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_role" : "staff",
+  "account_admin_status" : "active",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}, {
+  "mail" : "test@gmail.com",
+  "updated_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_role" : "staff",
+  "account_admin_status" : "active",
+  "created_at" : "2000-01-23T04:56:07.000+00:00",
+  "account_admin_id" : "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminAccountAdminPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/account_admin</code></pre></div>
+    <div class="method-summary">Create admin account (<span class="nickname">apiAdminAccountAdminPost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1217,7 +680,7 @@
 
     <h3 class="field-label">Request body</h3>
     <div class="field-items">
-      <div class="param">body <a href="#MaterialPostParam">MaterialPostParam</a> (required)</div>
+      <div class="param">body <a href="#AccountAdminPostParam">AccountAdminPostParam</a> (required)</div>
 
             <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
                 </div>  <!-- field-items -->
@@ -1236,41 +699,12 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
-  <h1><a name="App">App</a></h1>
-  <div class="method"><a name="apiAdminFileFileNameDelete"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/file/{file_name}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAdminFileFileNameDelete</span>)</div>
-    <div class="method-notes"></div>
-
-    <h3 class="field-label">Path parameters</h3>
-    <div class="field-items">
-      <div class="param">file_name (required)</div>
-
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
-
-
-
-
-
-
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    Deleted
-        <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
+  <h1><a name="Auth">Auth</a></h1>
   <div class="method"><a name="apiAuthEmailLoginPost"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /api/auth/email/login</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAuthEmailLoginPost</span>)</div>
+    <div class="method-summary">Login with email (<span class="nickname">apiAuthEmailLoginPost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1305,7 +739,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /api/auth/email/otp</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAuthEmailOtpPost</span>)</div>
+    <div class="method-summary">Send OTP to email (<span class="nickname">apiAuthEmailOtpPost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1340,7 +774,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /api/auth/email/otp/resend</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAuthEmailOtpResendPost</span>)</div>
+    <div class="method-summary">Resend OTP to email (<span class="nickname">apiAuthEmailOtpResendPost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1375,7 +809,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /api/auth/email/register</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiAuthEmailRegisterPost</span>)</div>
+    <div class="method-summary">Register with Email (<span class="nickname">apiAuthEmailRegisterPost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1493,11 +927,12 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
+  <h1><a name="Cart">Cart</a></h1>
   <div class="method"><a name="apiCartGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/cart</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiCartGet</span>)</div>
+    <div class="method-summary">List Account Cart (<span class="nickname">apiCartGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1547,7 +982,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /api/cart</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiCartPost</span>)</div>
+    <div class="method-summary">Edit Account Cart (<span class="nickname">apiCartPost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1578,11 +1013,116 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
+  <h1><a name="Category">Category</a></h1>
+  <div class="method"><a name="apiAdminCategoryCategoryIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/category/{category_id}</code></pre></div>
+    <div class="method-summary">Delete Category (<span class="nickname">apiAdminCategoryCategoryIdDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">category_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminCategoryCategoryIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/category/{category_id}</code></pre></div>
+    <div class="method-summary">Edit Category (<span class="nickname">apiAdminCategoryCategoryIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">category_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#CategoryPutParam">CategoryPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminCategoryPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/category</code></pre></div>
+    <div class="method-summary">Create Category (<span class="nickname">apiAdminCategoryPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#CategoryPostParam">CategoryPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
   <div class="method"><a name="apiCategoryGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/category</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiCategoryGet</span>)</div>
+    <div class="method-summary">List Category (<span class="nickname">apiCategoryGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1630,11 +1170,116 @@
 
   </div> <!-- method -->
   <hr/>
+  <h1><a name="Faq">Faq</a></h1>
+  <div class="method"><a name="apiAdminFaqFaqIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/faq/{faq_id}</code></pre></div>
+    <div class="method-summary">Delete FAQ (<span class="nickname">apiAdminFaqFaqIdDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">faq_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminFaqFaqIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/faq/{faq_id}</code></pre></div>
+    <div class="method-summary">Edit FAQ (<span class="nickname">apiAdminFaqFaqIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">faq_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#FAQPutParam">FAQPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminFaqPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/faq</code></pre></div>
+    <div class="method-summary">Create FAQ (<span class="nickname">apiAdminFaqPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#FAQPostParam">FAQPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
   <div class="method"><a name="apiFaqGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/faq</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiFaqGet</span>)</div>
+    <div class="method-summary">List FAQ (<span class="nickname">apiFaqGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1697,11 +1342,12 @@
 
   </div> <!-- method -->
   <hr/>
+  <h1><a name="Favourite">Favourite</a></h1>
   <div class="method"><a name="apiFavouriteGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/favourite</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiFavouriteGet</span>)</div>
+    <div class="method-summary">List Account Favourite (<span class="nickname">apiFavouriteGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1749,7 +1395,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /api/favourite</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiFavouritePost</span>)</div>
+    <div class="method-summary">Edit Account Favourite (<span class="nickname">apiFavouritePost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1780,11 +1426,41 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
+  <h1><a name="File">File</a></h1>
+  <div class="method"><a name="apiAdminFileFileNameDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/file/{file_name}</code></pre></div>
+    <div class="method-summary">Delete File (<span class="nickname">apiAdminFileFileNameDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">file_name (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
   <div class="method"><a name="apiFileFileNameGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/file/{file_name}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiFileFileNameGet</span>)</div>
+    <div class="method-summary">Get File (<span class="nickname">apiFileFileNameGet</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
@@ -1827,7 +1503,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /api/file</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiFilePost</span>)</div>
+    <div class="method-summary">Upload File (<span class="nickname">apiFilePost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1857,11 +1533,116 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
+  <h1><a name="Gem">Gem</a></h1>
+  <div class="method"><a name="apiAdminGemGemIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/gem/{gem_id}</code></pre></div>
+    <div class="method-summary">Delete Gem (<span class="nickname">apiAdminGemGemIdDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">gem_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminGemGemIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/gem/{gem_id}</code></pre></div>
+    <div class="method-summary">Edit Gem (<span class="nickname">apiAdminGemGemIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">gem_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#GemPutParam">GemPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminGemPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/gem</code></pre></div>
+    <div class="method-summary">Create Gem (<span class="nickname">apiAdminGemPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#GemPostParam">GemPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
   <div class="method"><a name="apiGemGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/gem</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiGemGet</span>)</div>
+    <div class="method-summary">List Gem (<span class="nickname">apiGemGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -1905,13 +1686,19 @@
 
   </div> <!-- method -->
   <hr/>
-  <div class="method"><a name="apiGet"></a>
+  <h1><a name="Jewellery">Jewellery</a></h1>
+  <div class="method"><a name="apiAdminJewelleryJewelleryIdDelete"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
-    <pre class="get"><code class="huge"><span class="http-method">get</span> /api</code></pre></div>
-    <div class="method-summary">Display the main page (<span class="nickname">apiGet</span>)</div>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/jewellery/{jewellery_id}</code></pre></div>
+    <div class="method-summary">Delete Jewellery (<span class="nickname">apiAdminJewelleryJewelleryIdDelete</span>)</div>
     <div class="method-notes"></div>
 
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">jewellery_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
 
 
 
@@ -1925,7 +1712,82 @@
 
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
-    Main page displayed successfully
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminJewelleryJewelleryIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/jewellery/{jewellery_id}</code></pre></div>
+    <div class="method-summary">Edit Jewellery (<span class="nickname">apiAdminJewelleryJewelleryIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">jewellery_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#JewelleryPutParam">JewelleryPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminJewelleryPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/jewellery</code></pre></div>
+    <div class="method-summary">Create Jewellery (<span class="nickname">apiAdminJewelleryPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#JewelleryPostParam">JewelleryPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -1933,7 +1795,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/jewellery</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiJewelleryGet</span>)</div>
+    <div class="method-summary">List Jewellery (<span class="nickname">apiJewelleryGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -2018,7 +1880,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/jewellery/{jewellery_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiJewelleryJewelleryIdGet</span>)</div>
+    <div class="method-summary">Get Jewellery (<span class="nickname">apiJewelleryJewelleryIdGet</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
@@ -2070,11 +1932,116 @@
         <a href="#Jewellery">Jewellery</a>
   </div> <!-- method -->
   <hr/>
+  <h1><a name="Material">Material</a></h1>
+  <div class="method"><a name="apiAdminMaterialMaterialIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/admin/material/{material_id}</code></pre></div>
+    <div class="method-summary">Delete Material (<span class="nickname">apiAdminMaterialMaterialIdDelete</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">material_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Deleted
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminMaterialMaterialIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/admin/material/{material_id}</code></pre></div>
+    <div class="method-summary">Edit Material (<span class="nickname">apiAdminMaterialMaterialIdPut</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">material_id (required)</div>
+
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#MaterialPutParam">MaterialPutParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiAdminMaterialPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/material</code></pre></div>
+    <div class="method-summary">Create Material (<span class="nickname">apiAdminMaterialPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#MaterialPostParam">MaterialPostParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
   <div class="method"><a name="apiMaterialGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/material</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiMaterialGet</span>)</div>
+    <div class="method-summary">List Material (<span class="nickname">apiMaterialGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -2118,11 +2085,12 @@
 
   </div> <!-- method -->
   <hr/>
+  <h1><a name="Order">Order</a></h1>
   <div class="method"><a name="apiOrderAccountOrderIdGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/order/{account_order_id}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiOrderAccountOrderIdGet</span>)</div>
+    <div class="method-summary">Get Account Order (<span class="nickname">apiOrderAccountOrderIdGet</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
@@ -2223,7 +2191,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/order</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiOrderGet</span>)</div>
+    <div class="method-summary">List Account Order (<span class="nickname">apiOrderGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -2319,7 +2287,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /api/order</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiOrderPost</span>)</div>
+    <div class="method-summary">Edit Account Order (<span class="nickname">apiOrderPost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -2350,11 +2318,169 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
+  <h1><a name="Others">Others</a></h1>
+  <div class="method"><a name="apiAdminLoginPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/admin/login</code></pre></div>
+    <div class="method-summary">Login as admin account (<span class="nickname">apiAdminLoginPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AccountAdminLoginParam">AccountAdminLoginParam</a> (required)</div>
+
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_1">inline_response_200_1</a>
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "token" : "token"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#inline_response_200_1">inline_response_200_1</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiEnumsGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/enums</code></pre></div>
+    <div class="method-summary">Get all enums (<span class="nickname">apiEnumsGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#EnumsResp">EnumsResp</a>
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "enum_name" : "enum_name",
+  "enum_value" : "enum_value"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#EnumsResp">EnumsResp</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api</code></pre></div>
+    <div class="method-summary">For testing purposes (<span class="nickname">apiGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Successful response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiHealthCheckGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/health_check</code></pre></div>
+    <div class="method-summary">Health Check (<span class="nickname">apiHealthCheckGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "OK"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Successful response
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Profile">Profile</a></h1>
   <div class="method"><a name="apiProfileGet"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/profile</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiProfileGet</span>)</div>
+    <div class="method-summary">Get Account Profile (<span class="nickname">apiProfileGet</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -2400,7 +2526,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /api/profile</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">apiProfilePost</span>)</div>
+    <div class="method-summary">Edit Account Profile (<span class="nickname">apiProfilePost</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -2429,88 +2555,6 @@
     <h4 class="field-label">200</h4>
     OK
         <a href="#"></a>
-  </div> <!-- method -->
-  <hr/>
-  <h1><a name="Others">Others</a></h1>
-  <div class="method"><a name="apiEnumsGet"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/enums</code></pre></div>
-    <div class="method-summary">Enums (<span class="nickname">apiEnumsGet</span>)</div>
-    <div class="method-notes"></div>
-
-
-
-
-
-
-
-    <h3 class="field-label">Return type</h3>
-    <div class="return-type">
-      <a href="#EnumsResp">EnumsResp</a>
-
-    </div>
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-    <h3 class="field-label">Example data</h3>
-    <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>{
-  "enum_name" : "enum_name",
-  "enum_value" : "enum_value"
-}</code></pre>
-
-    <h3 class="field-label">Produces</h3>
-    This API call produces the following media types according to the <span class="header">Accept</span> request header;
-    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    OK
-        <a href="#EnumsResp">EnumsResp</a>
-  </div> <!-- method -->
-  <hr/>
-  <div class="method"><a name="apiHealthCheckGet"></a>
-    <div class="method-path">
-    <a class="up" href="#__Methods">Up</a>
-    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/health_check</code></pre></div>
-    <div class="method-summary">Health Check (<span class="nickname">apiHealthCheckGet</span>)</div>
-    <div class="method-notes"></div>
-
-
-
-
-
-
-
-    <h3 class="field-label">Return type</h3>
-    <div class="return-type">
-      <a href="#inline_response_200">inline_response_200</a>
-
-    </div>
-
-    <!--Todo: process Response Object and its headers, schema, examples -->
-
-    <h3 class="field-label">Example data</h3>
-    <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>{
-  "message" : "OK"
-}</code></pre>
-
-    <h3 class="field-label">Produces</h3>
-    This API call produces the following media types according to the <span class="header">Accept</span> request header;
-    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
-    <ul>
-      <li><code>application/json</code></li>
-    </ul>
-
-    <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">200</h4>
-    Successful response
-        <a href="#inline_response_200">inline_response_200</a>
   </div> <!-- method -->
   <hr/>
 
