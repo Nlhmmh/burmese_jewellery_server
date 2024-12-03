@@ -4,9 +4,10 @@ Burmese Jewellery Server
 ---
 
 ## Documentation
-- https://naylinhtet.atlassian.net/wiki/spaces/BJ1/overview#Backend-Server
-- https://orange-moon-6960.postman.co/workspace/Burmese-Jewellery~fc558fc1-9818-4d2a-8307-4cbfb453797a/overview
-- https://htmlpreview.github.io/?https://github.com/Nlhmmh/burmese_jewellery_server/blob/dev/swagger/static/index.html
+- [Confluence](https://naylinhtet.atlassian.net/wiki/spaces/BJ1/overview)
+- [Jira](https://naylinhtet.atlassian.net/jira/software/projects/BJ/boards/4/timeline)
+- [Postman](https://orange-moon-6960.postman.co/workspace/Burmese-Jewellery~fc558fc1-9818-4d2a-8307-4cbfb453797a/overview)
+- [Swagger](https://htmlpreview.github.io/?https://github.com/Nlhmmh/burmese_jewellery_server/blob/dev/swagger/static/index.html)
 
 ## Development
 - Golang HTTP Server
@@ -72,5 +73,4 @@ cp ./planter /Users/naylinhtet/.goenv/shims
 ## TODO
 - Implement go-migration
 https://github.com/golang-migrate/migrate?tab=readme-ov-file#cli-usage
-
 - Test Coverage
