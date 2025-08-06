@@ -67,7 +67,10 @@ func Callback(ctx context.Context, state string, code string) (*UserInfo, error)
 	if err := json.NewDecoder(resp.Body).Decode(&userInfo); err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	// need to use defer
+	if err := resp.Body.Close(); err != nil {
+		return nil, err
+	}
 
 	return userInfo, err
 }
