@@ -28,7 +28,7 @@ jobs:
       - name: Lint
         uses: golangci/golangci-lint-action@v8
         with:
-          version: v1.54
+          version: v2.1.0
       - name: Install dependencies
         run: |
           go get .
