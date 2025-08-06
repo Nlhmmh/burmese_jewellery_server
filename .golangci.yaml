@@ -1,11 +1,15 @@
 version: "2"
 # Options for analysis running.
+exclude-dirs:
+  - certs
+  - database
+  - load_testing
+  - swagger
+  - file
+  - static
+
 run:
-  skip-dirs:
-    - certs
-    - database
-    - load_testing
-    - swagger
-    - file
-    - static
   allow-parallel-runners: true
+  timeout: 5m
+  tests: true
+  modules-download-mode: readonly
