@@ -1,12 +1,4 @@
 version: "2"
-# Options for analysis running.
-exclude-dirs:
-  - certs
-  - database
-  - load_testing
-  - swagger
-  - file
-  - static
 
 run:
   allow-parallel-runners: true
