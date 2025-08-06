@@ -3,9 +3,9 @@ package query
 import (
 	"fmt"
 
+	"github.com/aarondl/sqlboiler/v4/queries/qm"
 	"github.com/google/uuid"
 	"github.com/samber/lo"
-	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
 func Like(qList []qm.QueryMod, param *string, whereName string) []qm.QueryMod {

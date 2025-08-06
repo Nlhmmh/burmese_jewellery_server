@@ -17,9 +17,9 @@ make run
 
 #### Server
 - Framework - Gin Server - https://github.com/gin-gonic/gin
-- ORM - SQL Boiler - https://github.com/volatiletech/sqlboiler
+- ORM - SQL Boiler - https://github.com/aarondl/sqlboiler
 - Swagger OpenAPI generator - https://github.com/deepmap/oapi-codegen
-- Hot Reload - air - https://github.com/cosmtrek/air
+- Hot Reload - air - https://github.com/air-verse/air
 - Load Testing - https://locust.io/
 #### API Documentation
 - Swagger

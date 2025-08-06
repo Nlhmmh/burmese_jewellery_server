@@ -9,11 +9,11 @@ help: ## Help
 
 .PHONY: init
 init: ## Prepare Environment
-	pip install -r requirements.txt
-	go install github.com/cosmtrek/air@latest
-	go install github.com/volatiletech/sqlboiler/v4@latest
-	go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-psql@latest
-	go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql@latest
+	pip3 install -r requirements.txt
+	go install github.com/air-verse/air@v1.62.0
+	go install github.com/aarondl/sqlboiler/v4@v4.19.5
+	go install github.com/aarondl/sqlboiler/v4/drivers/sqlboiler-psql@v4.19.5
+	go install github.com/aarondl/sqlboiler/v4/drivers/sqlboiler-mysql@v4.19.5
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
 	brew install swagger-codegen
 
@@ -42,7 +42,7 @@ merge: ## Merge swagger into single file
 .PHONY: gen
 gen: ## Generate go code from Swagger
 	make merge
-	go get github.com/deepmap/oapi-codegen/cmd/oapi-codegen@latest
+	go get github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.16.3
 	go generate $(GO_GENERATE_FILE)
 	go mod tidy
 	make gen-swagger

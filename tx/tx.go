@@ -4,8 +4,8 @@ import (
 	"burmese_jewellery/ers"
 	"database/sql"
 
+	"github.com/aarondl/sqlboiler/v4/boil"
 	"github.com/gin-gonic/gin"
-	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
 func Read(c *gin.Context, innerFunc func(tx *sql.Tx) *ers.ErrResp) error {

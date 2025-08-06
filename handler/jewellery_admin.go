@@ -9,9 +9,9 @@ import (
 
 	"net/http"
 
+	"github.com/aarondl/sqlboiler/v4/boil"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
 func (h *Handler) PostApiAdminJewellery(c *gin.Context) {

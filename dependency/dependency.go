@@ -5,8 +5,8 @@ import (
 	"burmese_jewellery/env"
 	"fmt"
 
+	"github.com/aarondl/sqlboiler/v4/boil"
 	"github.com/rs/zerolog/log"
-	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
 func NewDependency() error {

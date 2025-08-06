@@ -9,9 +9,9 @@ import (
 	"database/sql"
 	"net/http"
 
+	"github.com/aarondl/sqlboiler/v4/boil"
+	"github.com/aarondl/sqlboiler/v4/queries/qm"
 	"github.com/gin-gonic/gin"
-	"github.com/volatiletech/sqlboiler/v4/boil"
-	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
 func (h *Handler) GetApiFavourite(c *gin.Context) {
