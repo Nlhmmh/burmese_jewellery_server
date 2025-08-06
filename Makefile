@@ -11,6 +11,7 @@ help: ## Help
 init: ## Prepare Environment
 	pip3 install -r requirements.txt
 	pre-commit
+	pre-commit install
 	go install github.com/air-verse/air@v1.62.0
 	go install github.com/aarondl/sqlboiler/v4@v4.19.5
 	go install github.com/aarondl/sqlboiler/v4/drivers/sqlboiler-psql@v4.19.5
