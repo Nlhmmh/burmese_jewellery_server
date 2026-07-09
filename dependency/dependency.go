@@ -9,6 +9,8 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+// NewDependency - Initialize the database connection, set up the SQLBoiler configuration, and load the configuration.
+// Singleton pattern is used to ensure that the database connection is only initialized once.
 func NewDependency() error {
 	if err := newDB(fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",

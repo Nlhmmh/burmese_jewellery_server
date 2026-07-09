@@ -1,6 +1,9 @@
 package auth
 
-import "strings"
+import (
+	"slices"
+	"strings"
+)
 
 var (
 	whiteList = []string{
@@ -58,12 +61,7 @@ var (
 )
 
 func CheckWhiteList(path string) bool {
-	for _, p := range whiteList {
-		if path == p {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(whiteList, path)
 }
 
 func CheckContainWhiteList(path string) bool {
@@ -76,37 +74,17 @@ func CheckContainWhiteList(path string) bool {
 }
 
 func CheckAdminList(path string) bool {
-	for _, p := range adminList {
-		if path == p {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(adminList, path)
 }
 
 func CheckAdminRoleAdminOnlyList(path string) bool {
-	for _, p := range adminRoleAdminOnlyList {
-		if path == p {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(adminRoleAdminOnlyList, path)
 }
 
 func CheckUserList(path string) bool {
-	for _, p := range userList {
-		if path == p {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(userList, path)
 }
 
 func CheckBothAdminUserList(path string) bool {
-	for _, p := range bothAdminUserList {
-		if path == p {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(bothAdminUserList, path)
 }

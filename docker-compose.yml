@@ -35,7 +35,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
     env_file:
-      - .env.local
+      - .env.docker.local
     depends_on:
       - db
     ports:

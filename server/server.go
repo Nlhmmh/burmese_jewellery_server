@@ -28,7 +28,7 @@ type server struct {
 
 func NewServer() *server {
 	// Logging
-	newLog(true)
+	newLog(env.Get().Debug)
 
 	// Dependency
 	if err := dependency.NewDependency(); err != nil {
@@ -37,7 +37,7 @@ func NewServer() *server {
 
 	// Set Server
 	router := gin.New()
-	router.MaxMultipartMemory = 8 << 20 // 8 * 1MB(2 power 20) = 8MB
+	router.MaxMultipartMemory = 8 << 20 // 8MB (20 is the power of 2, so 8 << 20 is 8 * 2^20 bytes, which equals 8 MB)
 	router.Use(
 		gin.RecoveryWithWriter(log.Logger),
 		gin.LoggerWithConfig(gin.LoggerConfig{Output: log.Logger}),

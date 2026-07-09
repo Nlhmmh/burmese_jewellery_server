@@ -31,7 +31,7 @@ const (
 // GenerateToken - Generate Tokens
 func GenerateToken(userID string, role Role) (string, error) {
 	createdToken := jwt.NewWithClaims(
-		jwt.SigningMethodHS256,
+		jwt.SigningMethodHS256, // HS256 is a symmetric algorithm, which means the same key is used for both signing and verification
 		claims{
 			userID,
 			role,
@@ -55,7 +55,7 @@ func ValidateToken(encodedToken string) (*claims, error) {
 	token, err := jwt.ParseWithClaims(
 		encodedToken,
 		&claims{},
-		func(token *jwt.Token) (interface{}, error) {
+		func(token *jwt.Token) (any, error) {
 			return []byte(jwtSecureKey), nil
 		},
 	)
@@ -72,6 +72,7 @@ func ValidateToken(encodedToken string) (*claims, error) {
 
 func GetBearerToken(c *gin.Context) (string, error) {
 	authHeader := c.GetHeader("Authorization")
+
 	splittedTokenList := strings.Split(authHeader, " ")
 	if len(splittedTokenList) < 2 {
 		return "", errors.New("bearer token is wrong" + authHeader)
